@@ -21,7 +21,7 @@ function setupUserAccountSheets() {
 
   if (!users) {
     users = db.insertSheet(SC_USER_SHEET);
-    users.getRange(1,1,1,14).setValues([[
+    users.getRange(1,1,1,15).setValues([[
       "User ID",
       "Name",
       "Mobile",
@@ -29,6 +29,7 @@ function setupUserAccountSheets() {
       "Ward",
       "Address",
       "Landmark",
+      "Profile Image URL",
       "Password Salt",
       "Password Hash",
       "Status",
@@ -241,6 +242,10 @@ function scUserPublic_(user) {
     landmark:
       String(
         user.Landmark || ""
+      ),
+    profileImage:
+      String(
+        user["Profile Image URL"] || ""
       ),
     status:
       String(
@@ -561,6 +566,7 @@ function userSignupApi(data) {
     ward,
     address,
     landmark,
+    "",
     salt,
     hash,
     "Active",
@@ -679,7 +685,7 @@ function userLoginApi(data) {
   usersSheet
     .getRange(
       user.__row,
-      13
+      14
     )
     .setValue(
       new Date()
@@ -769,3 +775,275 @@ function userLogoutApi(data) {
     loggedOut: true
   });
 }
+
+
+/* =========================================================
+   UPDATE USER PROFILE / PROFILE IMAGE
+   ========================================================= */
+
+function userUpdateProfileApi(data) {
+
+  const verified =
+    scUserVerifySession_(
+      data.token
+    );
+
+  const user =
+    verified.user;
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  const headers =
+    sheet
+      .getRange(
+        1,1,1,
+        sheet.getLastColumn()
+      )
+      .getValues()[0];
+
+  const allowed = {
+    "Name":
+      data.name,
+    "Email":
+      data.email,
+    "Ward":
+      data.ward,
+    "Address":
+      data.address,
+    "Landmark":
+      data.landmark
+  };
+
+  Object.keys(allowed)
+    .forEach(function(header) {
+
+      if (
+        allowed[header] ===
+        undefined
+      ) {
+        return;
+      }
+
+      const col =
+        headers.indexOf(
+          header
+        );
+
+      if (col !== -1) {
+
+        sheet
+          .getRange(
+            user.__row,
+            col + 1
+          )
+          .setValue(
+            String(
+              allowed[header] || ""
+            ).trim()
+          );
+      }
+    });
+
+  if (
+    data.imageBase64
+  ) {
+
+    const imageUrl =
+      processIncomingImage(
+        data,
+        "PROFILE"
+      );
+
+    const imageCol =
+      headers.indexOf(
+        "Profile Image URL"
+      );
+
+    if (
+      imageCol !== -1
+    ) {
+
+      sheet
+        .getRange(
+          user.__row,
+          imageCol + 1
+        )
+        .setValue(
+          imageUrl
+        );
+    }
+  }
+
+  const updatedCol =
+    headers.indexOf(
+      "Updated At"
+    );
+
+  if (
+    updatedCol !== -1
+  ) {
+    sheet
+      .getRange(
+        user.__row,
+        updatedCol + 1
+      )
+      .setValue(
+        new Date()
+      );
+  }
+
+  const refreshed =
+    scUserRows_(
+      SC_USER_SHEET
+    ).find(function(item) {
+      return (
+        String(
+          item["User ID"]
+        ) ===
+        String(
+          user["User ID"]
+        )
+      );
+    });
+
+  return jsonResponse(
+    scUserPublic_(
+      refreshed
+    )
+  );
+}
+
+
+/* =========================================================
+   CHANGE USER PASSWORD
+   ========================================================= */
+
+function userChangePasswordApi(data) {
+
+  const verified =
+    scUserVerifySession_(
+      data.token
+    );
+
+  const user =
+    verified.user;
+
+  const current =
+    String(
+      data.currentPassword || ""
+    );
+
+  const next =
+    String(
+      data.newPassword || ""
+    );
+
+  if (
+    next.length < 6
+  ) {
+    throw new Error(
+      "New password must contain at least 6 characters."
+    );
+  }
+
+  const currentHash =
+    scUserHash_(
+      current,
+      String(
+        user["Password Salt"] || ""
+      )
+    );
+
+  if (
+    currentHash !==
+    String(
+      user["Password Hash"] || ""
+    )
+  ) {
+    throw new Error(
+      "Current password is incorrect."
+    );
+  }
+
+  const newSalt =
+    scUserRandomToken_()
+      .substring(
+        0,32
+      );
+
+  const newHash =
+    scUserHash_(
+      next,
+      newSalt
+    );
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  const headers =
+    sheet
+      .getRange(
+        1,1,1,
+        sheet.getLastColumn()
+      )
+      .getValues()[0];
+
+  const saltCol =
+    headers.indexOf(
+      "Password Salt"
+    );
+
+  const hashCol =
+    headers.indexOf(
+      "Password Hash"
+    );
+
+  const updatedCol =
+    headers.indexOf(
+      "Updated At"
+    );
+
+  sheet
+    .getRange(
+      user.__row,
+      saltCol + 1
+    )
+    .setValue(
+      newSalt
+    );
+
+  sheet
+    .getRange(
+      user.__row,
+      hashCol + 1
+    )
+    .setValue(
+      newHash
+    );
+
+  if (
+    updatedCol !== -1
+  ) {
+    sheet
+      .getRange(
+        user.__row,
+        updatedCol + 1
+      )
+      .setValue(
+        new Date()
+      );
+  }
+
+  return jsonResponse({
+    message:
+      "Password updated successfully."
+  });
+}
+

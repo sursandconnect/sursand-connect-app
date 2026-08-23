@@ -20,6 +20,10 @@
 .note{margin-top:13px;padding:11px;background:#fff8e8;border-left:4px solid var(--s);border-radius:10px;color:#667085;font-size:9px;line-height:1.55}
 .sc-bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -5px 18px rgba(15,23,42,.10)}.sc-bottom a{color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;gap:1px}.sc-bottom span{font-size:8px;font-weight:800}
 @media(max-width:600px){.form.active{grid-template-columns:1fr}.field.full,.submit{grid-column:1}}
+
+.pw-wrap{position:relative}.pw-wrap input{padding-right:46px}.pw-toggle{position:absolute;right:5px;top:5px;height:31px;border:0;border-radius:8px;background:#f1f5f3;color:#475569;font-size:9px;font-weight:800;padding:0 8px}
+.profile-photo{width:72px;height:72px;border-radius:20px;object-fit:cover;border:3px solid #fff;box-shadow:0 0 0 1px #dfe5e1;display:none}.profile-photo.show{display:block}.profile-photo-upload{margin-top:10px;display:grid;gap:7px}.danger-link{border:0;background:transparent;color:#b91c1c;font-size:9px;text-decoration:underline;cursor:pointer}
+.change-pass{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #edf0ee}.change-pass.active{display:grid;gap:9px}
 </style>
 </head>
 <body>
@@ -36,7 +40,7 @@
 
 <form class="form active" id="loginForm" onsubmit="return loginUser(event)">
 <div class="field full"><label>Mobile Number or Email *</label><input id="loginId" required autocomplete="username" placeholder="Enter mobile number or email"></div>
-<div class="field full"><label>Password *</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></div>
+<div class="field full"><label>Password *</label><div class="pw-wrap"><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"><button class="pw-toggle" type="button" onclick="togglePw('loginPassword',this)">Show</button></div></div>
 <button class="submit" id="loginButton" type="submit">🔐 Login</button>
 </form>
 
@@ -47,8 +51,8 @@
 <div class="field"><label>Address</label><input id="signupAddress"></div>
 <div class="field"><label>Landmark</label><input id="signupLandmark"></div>
 <div class="field"><label>Ward *</label><select id="signupWard" required><option value="">Select Ward</option></select></div>
-<div class="field"><label>Password *</label><input id="signupPassword" type="password" minlength="6" required autocomplete="new-password"></div>
-<div class="field"><label>Confirm Password *</label><input id="signupConfirm" type="password" minlength="6" required autocomplete="new-password"></div>
+<div class="field"><label>Password *</label><div class="pw-wrap"><input id="signupPassword" type="password" minlength="6" required autocomplete="new-password"><button class="pw-toggle" type="button" onclick="togglePw('signupPassword',this)">Show</button></div></div>
+<div class="field"><label>Confirm Password *</label><div class="pw-wrap"><input id="signupConfirm" type="password" minlength="6" required autocomplete="new-password"><button class="pw-toggle" type="button" onclick="togglePw('signupConfirm',this)">Show</button></div></div>
 <button class="submit secondary" id="signupButton" type="submit">✨ Create Account</button>
 </form>
 <div class="status" id="authStatus"></div>
@@ -56,7 +60,7 @@
 </section>
 
 <section class="card profile" id="profileCard">
-<div class="profile-top"><div class="avatar" id="profileAvatar">SC</div><div><div class="profile-name" id="profileName">User</div><div class="profile-meta" id="profileStatus">Sursand Connect Account</div></div></div>
+<div class="profile-top"><div class="avatar" id="profileAvatar">SC</div><img id="profilePhoto" class="profile-photo" alt="Profile Photo"><div><div class="profile-name" id="profileName">User</div><div class="profile-meta" id="profileStatus">Sursand Connect Account</div></div></div>
 <div class="profile-grid">
 <div class="info"><small>Mobile</small><b id="profileMobile">—</b></div>
 <div class="info"><small>Email</small><b id="profileEmail">—</b></div>
@@ -65,7 +69,15 @@
 <div class="info"><small>Landmark</small><b id="profileLandmark">—</b></div>
 <div class="info"><small>Member Since</small><b id="profileCreated">—</b></div>
 </div>
+<div class="profile-photo-upload"><label>Profile Picture</label><input id="profileImageInput" type="file" accept="image/*"><button class="submit secondary" type="button" onclick="updateProfilePhoto()">Upload Profile Picture</button></div>
 <div class="profile-actions"><a href="../" class="homebtn">⌂ Home</a><button class="logout" onclick="logoutUser()">Logout</button></div>
+<button class="danger-link" type="button" onclick="document.getElementById('changePass').classList.toggle('active')">Reset / Change Password</button>
+<div class="change-pass" id="changePass">
+ <div class="field"><label>Current Password *</label><div class="pw-wrap"><input id="currentPassword" type="password"><button class="pw-toggle" type="button" onclick="togglePw('currentPassword',this)">Show</button></div></div>
+ <div class="field"><label>New Password *</label><div class="pw-wrap"><input id="newPassword" type="password" minlength="6"><button class="pw-toggle" type="button" onclick="togglePw('newPassword',this)">Show</button></div></div>
+ <div class="field"><label>Confirm New Password *</label><div class="pw-wrap"><input id="confirmNewPassword" type="password" minlength="6"><button class="pw-toggle" type="button" onclick="togglePw('confirmNewPassword',this)">Show</button></div></div>
+ <button class="submit" type="button" onclick="changeUserPassword()">Update Password</button>
+</div>
 </section>
 </main>
 
@@ -95,7 +107,7 @@ function loginUser(e){
  .then(r=>{
    const adminToken=r.data&&r.data.token?r.data.token:'';
    if(!adminToken) throw new Error('NO_ADMIN_TOKEN');
-   sessionStorage.setItem('scAdminSessionToken',adminToken);
+   localStorage.setItem('scAdminSessionToken',adminToken);localStorage.setItem('scAdminSessionExpiresAt',String(Date.now()+Number((r.data&&r.data.expiresIn)||21600)*1000));
    loginPassword.value='';
    window.location.href='admin.html';
  })
@@ -115,9 +127,31 @@ function loginUser(e){
  return false;
 }
 function signupUser(e){e.preventDefault();if(signupPassword.value!==signupConfirm.value){status('Passwords do not match.','error');return false}status('Creating account...','loading');signupButton.disabled=true;post({action:'userSignup',name:signupName.value.trim(),mobile:signupMobile.value.trim(),email:signupEmail.value.trim(),ward:signupWard.value,address:signupAddress.value.trim(),landmark:signupLandmark.value.trim(),password:signupPassword.value}).then(r=>{localStorage.setItem(TOKEN_KEY,r.data.token);localStorage.setItem('scUserProfile',JSON.stringify(r.data.user||{}));showProfile(r.data.user);if(window.SCAccountUI)window.SCAccountUI.refresh();}).catch(e=>status(e.message,'error')).finally(()=>signupButton.disabled=false);return false}
-function showProfile(u){authCard.style.display='none';profileCard.classList.add('active');profileName.textContent=u.name||'Sursand Connect User';profileMobile.textContent=u.mobile||'—';profileEmail.textContent=u.email||'—';profileWard.textContent=u.ward?('Ward '+u.ward):'—';profileAddress.textContent=u.address||'—';profileLandmark.textContent=u.landmark||'—';profileCreated.textContent=u.createdAt||'—';localStorage.setItem('scUserProfile',JSON.stringify(u||{}));profileAvatar.textContent=(u.name||'SC').split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();}
+function showProfile(u){authCard.style.display='none';profileCard.classList.add('active');profileName.textContent=u.name||'Sursand Connect User';profileMobile.textContent=u.mobile||'—';profileEmail.textContent=u.email||'—';profileWard.textContent=u.ward?('Ward '+u.ward):'—';profileAddress.textContent=u.address||'—';profileLandmark.textContent=u.landmark||'—';profileCreated.textContent=u.createdAt||'—';localStorage.setItem('scUserProfile',JSON.stringify(u||{}));profileAvatar.textContent=(u.name||'SC').split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();if(u.profileImage){profilePhoto.src=u.profileImage;profilePhoto.classList.add('show');profileAvatar.style.display='none'}else{profilePhoto.classList.remove('show');profileAvatar.style.display='flex'}}
 function logoutUser(){const token=localStorage.getItem(TOKEN_KEY)||'';localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('scUserProfile');if(token)post({action:'userLogout',token}).catch(()=>{});location.reload()}
 function checkSession(){const token=localStorage.getItem(TOKEN_KEY)||'';if(!token)return;post({action:'userMe',token}).then(r=>{localStorage.setItem('scUserProfile',JSON.stringify(r.data||{}));showProfile(r.data);if(window.SCAccountUI)window.SCAccountUI.refresh();}).catch(()=>{localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('scUserProfile')})}
+
+function togglePw(id,btn){const el=document.getElementById(id);if(!el)return;const show=el.type==='password';el.type=show?'text':'password';btn.textContent=show?'Hide':'Show'}
+function fileToData(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+async function updateProfilePhoto(){
+ const file=profileImageInput.files&&profileImageInput.files[0];if(!file){alert('Select a profile picture first.');return}
+ if(file.size>3*1024*1024){alert('Please select an image smaller than 3 MB.');return}
+ try{
+   const base64=await fileToData(file),token=localStorage.getItem(TOKEN_KEY)||'';
+   const r=await post({action:'userUpdateProfile',token,imageBase64:base64,imageName:file.name,imageMimeType:file.type});
+   localStorage.setItem('scUserProfile',JSON.stringify(r.data||{}));showProfile(r.data);if(window.SCAccountUI)window.SCAccountUI.refresh();
+   alert('Profile picture updated.');
+ }catch(e){alert(e.message||'Unable to update profile picture.')}
+}
+function changeUserPassword(){
+ const token=localStorage.getItem(TOKEN_KEY)||'',cur=currentPassword.value,nw=newPassword.value,cf=confirmNewPassword.value;
+ if(!cur||!nw||!cf){alert('Complete all password fields.');return}
+ if(nw.length<6){alert('New password must contain at least 6 characters.');return}
+ if(nw!==cf){alert('New passwords do not match.');return}
+ if(!confirm('Update your account password?'))return;
+ post({action:'userChangePassword',token,currentPassword:cur,newPassword:nw}).then(()=>{currentPassword.value='';newPassword.value='';confirmNewPassword.value='';changePass.classList.remove('active');alert('Password updated successfully.')}).catch(e=>alert(e.message||'Unable to update password.'));
+}
+
 document.addEventListener('DOMContentLoaded',checkSession);
 </script>
 <script src="../app-i18n.js"></script><script src="../app-i18n-extra.js"></script><script src="../offline-data.js"></script>

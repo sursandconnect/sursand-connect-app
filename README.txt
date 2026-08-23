@@ -1,43 +1,38 @@
-SURSAND CONNECT APP v8.2
+SURSAND CONNECT v9
 
-CHANGES
--------
-1. Header Account Button
-- Login button appears immediately to the right of the Notifications icon.
-- After citizen login/signup it automatically becomes a circular profile icon with the user's initials.
-- Tapping it opens My Account.
-- Admin Panel still remains hidden from public menus.
+ADMIN SESSION
+- Admin login stays active while moving through the app until the backend session expires or Admin logs out.
+- Admin Panel appears in the app Menu ONLY while an authenticated admin session exists.
+- Public users never see the Admin Panel option.
 
-2. Automatic Form Filling
-After citizen login, Sursand Connect stores the returned public profile on the device.
-The app automatically fills matching fields in forms:
-- Name
-- Mobile / Phone / WhatsApp number
-- Email
-- Ward
-- Address
-- Landmark
-It also watches forms/modals added later by page scripts and fills them when they appear.
-It NEVER auto-fills passwords, uploaded files, issue descriptions or other private request-specific fields.
+ACCOUNT
+- Login/Signup password fields have Show/Hide.
+- Logged-in citizens can change their password.
+- Profile picture upload is available.
+- User profile data continues to autofill matching public forms.
 
-3. Expanded User Profile
-Signup/profile now includes:
-- Name
-- Mobile
-- Email
-- Ward
-- Address
-- Landmark
+ADMIN PANEL
+- 25 spreadsheet-backed modules are available from one control centre.
+- Add, Edit, Approve, Reject and Delete actions.
+- Approve All / Reject All supports selected rows or all loaded rows.
+- Every modifying action uses a confirmation popup.
+- Admin can change the admin password from the panel.
+- App Users and Local Advertisements are manageable from Admin Panel.
+- App Settings are available from Admin Panel.
+- Content changes are made from Admin Panel without manually opening Sheets.
 
-4. Hero Buttons
-- Shop Now = GREEN
-- Book Services = YELLOW
-- Complaints = RED
-- All three remain equal size with WHITE borders.
+HOME POPUP
+- On app opening, the newest unseen Event or Announcement is shown once per update.
+- If there is no unseen Event/Announcement, an active Local Advertisement is shown.
+- Popup has a close button and automatically closes after 5 seconds.
 
-BACKEND
--------
-AccountAuth.gs.txt has been updated for Address + Landmark.
-Use this v8.2 AccountAuth.gs version (not the older v8/v8.1 copy).
+CLEANUP
+- Removed S Chat references and user-facing "will be added later" placeholder text.
 
-Do not upload the app until the AccountAuth backend setup is completed.
+BACKEND FILES
+- Code_v9.gs.txt: full replacement for Code.gs.
+- AccountAuth.gs.txt: full replacement for AccountAuth.gs.
+- V9_Setup.gs.txt: add as a small temporary setup script and run setupSursandConnectV9() once.
+
+IMPORTANT
+Do backend replacement/setup/redeployment BEFORE uploading v9 frontend.

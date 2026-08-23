@@ -1,0 +1,49 @@
+/* SURSAND CONNECT v9 ONE-TIME MIGRATION
+Run setupSursandConnectV9() once after replacing Code.gs and AccountAuth.gs.
+*/
+function setupSursandConnectV9() {
+
+  setupUserAccountSheets();
+  ensureLocalAdsSheet();
+
+  const users =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  let headers =
+    users
+      .getRange(
+        1,1,1,
+        users.getLastColumn()
+      )
+      .getValues()[0];
+
+  if (
+    headers.indexOf(
+      "Profile Image URL"
+    ) === -1
+  ) {
+
+    const landmarkCol =
+      headers.indexOf(
+        "Landmark"
+      );
+
+    users.insertColumnAfter(
+      landmarkCol + 1
+    );
+
+    users
+      .getRange(
+        1,
+        landmarkCol + 2
+      )
+      .setValue(
+        "Profile Image URL"
+      );
+  }
+
+  return true;
+}

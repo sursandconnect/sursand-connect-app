@@ -1,5 +1,5 @@
 
-const APP_CACHE = 'sursand-connect-app-v82';
+const APP_CACHE = 'sursand-connect-app-v9';
 const DATA_CACHE = 'sursand-connect-data-v1';
 
 const API_BASE =
@@ -12,6 +12,7 @@ const CORE_ASSETS = [
   './app-i18n.js',
   './app-i18n-extra.js',
   './offline-data.js',
+  './home-popup.js',
   './app-account.js',
   './p/businesses.html',
   './p/services.html',

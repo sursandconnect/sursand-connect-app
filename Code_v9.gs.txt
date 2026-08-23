@@ -1,0 +1,6169 @@
+/*************************************************************
+ * SURSAND CONNECT
+ * COMPLETE BACKEND
+ *
+ * FINAL CONSOLIDATED REPLACEMENT
+ *
+ * Compatible with:
+ * - Blogger post pages
+ * - Google Sheets database
+ * - New Admin Panel
+ * - Shop / Business Registration
+ * - Change Makers
+ * - Local Services
+ * - Healthcare
+ * - Transport
+ * - Notifications
+ * - City Connect
+ * - Contact Us
+ *
+ * IMPORTANT:
+ * Keep your existing Script Properties:
+ *
+ * SC_ADMIN_USER
+ * SC_ADMIN_PASSWORD_HASH
+ *
+ *************************************************************/
+
+
+/* ==========================================================
+   CONFIGURATION
+   ========================================================== */
+
+const CONFIG = {
+
+  APP_NAME:
+    "Sursand Connect",
+
+  TIMEZONE:
+    "Asia/Kolkata",
+
+
+  /* --------------------------------------------------------
+     CONTACT DETAILS
+     -------------------------------------------------------- */
+
+  CONTACT: {
+
+    OFFICE:
+      "Sewangan Charitable Trust",
+
+    PHONE:
+      "+916203302027",
+
+    WHATSAPP:
+      "919955570166",
+
+    EMAIL:
+      "sursandconnect@gmail.com"
+
+  },
+
+
+  /* --------------------------------------------------------
+     SHEETS
+
+     Existing sheet names are intentionally retained.
+     -------------------------------------------------------- */
+
+  SHEETS: {
+
+    BUSINESSES:
+      "Businesses",
+
+    BUSINESS_REGISTRATIONS:
+      "Business Registrations",
+
+    LOCAL_SERVICES:
+      "Local Services",
+
+    EVENTS:
+      "Events",
+
+    ANNOUNCEMENTS:
+      "Announcements",
+
+    EMERGENCY:
+      "Emergency",
+
+    COUNCILLORS:
+      "Councillors",
+
+    CONTACTS:
+      "Important Contacts",
+
+    SCHOOLS:
+      "Schools",
+
+    TRANSPORT:
+      "Transport",
+
+    PLACES:
+      "Places",
+
+    GOVERNMENT:
+      "Government Offices",
+
+    /* Physical sheet remains Volunteers.
+       Public terminology = Change Makers. */
+
+    CHANGE_MAKERS:
+      "Volunteers",
+
+    NOTIFICATIONS:
+      "Notifications",
+
+    LOCAL_INFO:
+      "Local Information",
+
+    SETTINGS:
+      "Settings",
+
+    HEALTHCARE:
+      "Healthcare",
+
+    DOCTORS:
+      "Doctors",
+
+    PATHOLOGY_REQUESTS:
+      "Pathology Requests",
+
+    MEDICINE_ORDERS:
+      "Medicine Orders",
+
+    JOBS:
+      "Jobs",
+
+    GOVERNMENT_SERVICES:
+      "Government Services",
+
+    AGRICULTURE:
+      "Agriculture",
+
+    USEFUL_LINKS:
+      "Useful Links",
+
+    CONTACT_MESSAGES:
+      "Contact Messages",
+
+    LOCAL_ADS:
+      "Local Ads"
+
+  }
+
+};
+
+
+
+/* ==========================================================
+   BASIC DATABASE FUNCTIONS
+   ========================================================== */
+
+function getDatabase() {
+
+  return SpreadsheetApp
+    .getActiveSpreadsheet();
+
+}
+
+
+function getSheet(sheetName) {
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        sheetName
+      );
+
+
+  if (!sheet) {
+
+    throw new Error(
+      "Sheet not found: " +
+      sheetName
+    );
+
+  }
+
+
+  return sheet;
+
+}
+
+
+/* ----------------------------------------------------------
+   SAFE SHEET ACCESS
+
+   Useful for optional sheets.
+   ---------------------------------------------------------- */
+
+function getSheetIfExists(sheetName) {
+
+  return getDatabase()
+    .getSheetByName(
+      sheetName
+    );
+
+}
+
+
+
+/* ==========================================================
+   RESPONSE HELPERS
+   ========================================================== */
+
+function jsonResponse(data) {
+
+  return ContentService
+    .createTextOutput(
+
+      JSON.stringify({
+
+        success: true,
+
+        data: data
+
+      })
+
+    )
+    .setMimeType(
+      ContentService.MimeType.JSON
+    );
+
+}
+
+
+function errorResponse(message) {
+
+  return ContentService
+    .createTextOutput(
+
+      JSON.stringify({
+
+        success: false,
+
+        error:
+          String(
+            message || "Unknown error."
+          )
+
+      })
+
+    )
+    .setMimeType(
+      ContentService.MimeType.JSON
+    );
+
+}
+
+
+
+/* ==========================================================
+   SETTINGS
+   ========================================================== */
+
+function getSettings() {
+
+  const sheet =
+    getSheetIfExists(
+      CONFIG.SHEETS.SETTINGS
+    );
+
+
+  if (!sheet) {
+
+    return {};
+
+  }
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  if (values.length < 2) {
+
+    return {};
+
+  }
+
+
+  const settings = {};
+
+
+  /*
+   * Supports:
+   *
+   * ID | KEY | VALUE
+   *
+   * and also:
+   *
+   * KEY | VALUE
+   */
+
+  for (
+    let i = 1;
+    i < values.length;
+    i++
+  ) {
+
+    let key = "";
+    let value = "";
+
+
+    if (values[i].length >= 3) {
+
+      key =
+        String(
+          values[i][1] || ""
+        ).trim();
+
+      value =
+        values[i][2];
+
+    }
+
+    else {
+
+      key =
+        String(
+          values[i][0] || ""
+        ).trim();
+
+      value =
+        values[i][1];
+
+    }
+
+
+    if (key) {
+
+      settings[key] =
+        value;
+
+    }
+
+  }
+
+
+  return settings;
+
+}
+
+
+
+/* ==========================================================
+   SET / UPDATE SETTING
+   ========================================================== */
+
+function setSetting(
+  key,
+  value
+) {
+
+  key =
+    String(
+      key || ""
+    ).trim();
+
+
+  if (!key) {
+
+    throw new Error(
+      "Setting key is required."
+    );
+
+  }
+
+
+  const sheet =
+    getSheet(
+      CONFIG.SHEETS.SETTINGS
+    );
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  /*
+   * Existing setup normally stores:
+   * ID | KEY | VALUE
+   */
+
+  const keyColumn =
+    values[0] &&
+    values[0].length >= 3
+      ? 1
+      : 0;
+
+
+  const valueColumn =
+    keyColumn === 1
+      ? 2
+      : 1;
+
+
+  for (
+    let i = 1;
+    i < values.length;
+    i++
+  ) {
+
+    if (
+      String(
+        values[i][keyColumn] || ""
+      ).trim() === key
+    ) {
+
+      sheet
+        .getRange(
+          i + 1,
+          valueColumn + 1
+        )
+        .setValue(
+          value
+        );
+
+
+      return true;
+
+    }
+
+  }
+
+
+  if (keyColumn === 1) {
+
+    sheet.appendRow([
+      Utilities.getUuid(),
+      key,
+      value
+    ]);
+
+  }
+
+  else {
+
+    sheet.appendRow([
+      key,
+      value
+    ]);
+
+  }
+
+
+  return true;
+
+}
+
+
+
+/* ==========================================================
+   SHEET HEADERS
+   ========================================================== */
+
+function getHeaders(sheetName) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  if (
+    sheet.getLastColumn() < 1
+  ) {
+
+    return [];
+
+  }
+
+
+  return sheet
+    .getRange(
+      1,
+      1,
+      1,
+      sheet.getLastColumn()
+    )
+    .getValues()[0]
+    .map(function(header) {
+
+      return String(
+        header || ""
+      ).trim();
+
+    });
+
+}
+
+
+
+/* ==========================================================
+   SHEET → JSON
+   ========================================================== */
+
+function sheetToJson(sheetName) {
+
+  const sheet =
+    getSheetIfExists(
+      sheetName
+    );
+
+
+  if (!sheet) {
+
+    return [];
+
+  }
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  if (values.length < 2) {
+
+    return [];
+
+  }
+
+
+  const headers =
+    values[0];
+
+
+  return values
+    .slice(1)
+    .map(function(row) {
+
+      const record = {};
+
+
+      headers.forEach(
+        function(header,index) {
+
+          if (
+            String(
+              header || ""
+            ).trim()
+          ) {
+
+            record[header] =
+              normaliseOutputValue(
+                row[index]
+              );
+
+          }
+
+        }
+      );
+
+
+      return record;
+
+    })
+    .filter(
+      function(record) {
+
+        return Object
+          .values(record)
+          .some(
+            function(value) {
+
+              return (
+                value !== "" &&
+                value !== null
+              );
+
+            }
+          );
+
+      }
+    );
+
+}
+
+
+
+/* ==========================================================
+   NORMALISE DATE VALUES
+   ========================================================== */
+
+function normaliseOutputValue(value) {
+
+  if (
+    value instanceof Date
+  ) {
+
+    return Utilities
+      .formatDate(
+        value,
+        CONFIG.TIMEZONE,
+        "yyyy-MM-dd HH:mm:ss"
+      );
+
+  }
+
+
+  return value;
+
+}
+
+
+
+/* ==========================================================
+   PUBLIC RECORD FILTER
+   ========================================================== */
+
+function getActiveRecords(sheetName) {
+
+  return sheetToJson(
+    sheetName
+  )
+  .filter(
+    function(record) {
+
+      const active =
+        String(
+          record.Active || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      const status =
+        String(
+          record.Status || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+      /* Explicitly inactive */
+
+      if (
+        active === "no" ||
+        active === "false" ||
+        active === "inactive" ||
+        active === "disabled"
+      ) {
+
+        return false;
+
+      }
+
+
+      /*
+       * IMPORTANT:
+       * Pending submissions must never
+       * become public automatically.
+       */
+
+      if (
+        status === "pending" ||
+        status === "rejected" ||
+        status === "inactive" ||
+        status === "disabled" ||
+        status === "deleted" ||
+        status === "new"
+      ) {
+
+        return false;
+
+      }
+
+
+      return true;
+
+    }
+  );
+
+}
+
+
+
+/* ==========================================================
+   GENERATE ID
+   ========================================================== */
+
+function generateId(
+  sheetName,
+  prefix
+) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  if (!prefix) {
+
+    prefix =
+      getIdPrefix(
+        sheetName
+      );
+
+  }
+
+
+  let highest = 0;
+
+
+  if (values.length > 1) {
+
+    const headers =
+      values[0];
+
+
+    const idColumn =
+      headers.indexOf(
+        "ID"
+      );
+
+
+    if (idColumn !== -1) {
+
+      const regex =
+        new RegExp(
+
+          "^" +
+
+          escapeRegExp(
+            prefix
+          ) +
+
+          "(\\d+)$",
+
+          "i"
+
+        );
+
+
+      for (
+        let i = 1;
+        i < values.length;
+        i++
+      ) {
+
+        const id =
+          String(
+            values[i][idColumn] || ""
+          )
+          .trim();
+
+
+        const match =
+          id.match(
+            regex
+          );
+
+
+        if (match) {
+
+          const number =
+            parseInt(
+              match[1],
+              10
+            );
+
+
+          if (
+            number > highest
+          ) {
+
+            highest =
+              number;
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+  return (
+
+    prefix +
+
+    String(
+      highest + 1
+    )
+    .padStart(
+      4,
+      "0"
+    )
+
+  );
+
+}
+
+
+
+/* ==========================================================
+   ID PREFIXES
+   ========================================================== */
+
+function getIdPrefix(sheetName) {
+
+  const prefixes = {
+
+    "Businesses":
+      "B",
+
+    "Business Registrations":
+      "BR",
+
+    "Local Services":
+      "LS",
+
+    "Events":
+      "E",
+
+    "Announcements":
+      "A",
+
+    "Emergency":
+      "EM",
+
+    "Councillors":
+      "C",
+
+    "Important Contacts":
+      "IC",
+
+    "Schools":
+      "S",
+
+    "Transport":
+      "T",
+
+    "Places":
+      "P",
+
+    "Government Offices":
+      "GO",
+
+    "Volunteers":
+      "CM",
+
+    "Notifications":
+      "N",
+
+    "Local Information":
+      "LI",
+
+    "Healthcare":
+      "H",
+
+    "Doctors":
+      "DR",
+
+    "Pathology Requests":
+      "PR",
+
+    "Medicine Orders":
+      "MO",
+
+    "Jobs":
+      "J",
+
+    "Government Services":
+      "GS",
+
+    "Agriculture":
+      "AG",
+
+    "Useful Links":
+      "UL",
+
+    "Contact Messages":
+      "MSG",
+
+    "Local Ads":
+      "LA"
+
+  };
+
+
+  return (
+    prefixes[sheetName] ||
+    "ID"
+  );
+
+}
+
+
+
+/* ==========================================================
+   ESCAPE REGEX
+   ========================================================== */
+
+function escapeRegExp(value) {
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
+
+}
+
+
+
+/* ==========================================================
+   GET FIRST AVAILABLE VALUE
+   ========================================================== */
+
+function firstValue(
+  record,
+  keys
+) {
+
+  for (
+    let i = 0;
+    i < keys.length;
+    i++
+  ) {
+
+    const value =
+      record[
+        keys[i]
+      ];
+
+
+    if (
+      value !== undefined &&
+      value !== null &&
+      String(value).trim() !== ""
+    ) {
+
+      return value;
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+
+/* ==========================================================
+   CLEAN PHONE
+   ========================================================== */
+
+function cleanPhoneNumber(phone) {
+
+  return String(
+    phone || ""
+  )
+  .replace(
+    /\D/g,
+    ""
+  );
+
+}
+
+
+
+/* ==========================================================
+   NORMALISE INDIAN WHATSAPP NUMBER
+   ========================================================== */
+
+function normaliseWhatsAppNumber(phone) {
+
+  let number =
+    cleanPhoneNumber(
+      phone
+    );
+
+
+  if (
+    number.length === 10
+  ) {
+
+    number =
+      "91" +
+      number;
+
+  }
+
+
+  return number;
+
+}
+
+
+
+/* ==========================================================
+   GENERIC CONTACT ACTIONS
+   ========================================================== */
+
+function addContactActions(record) {
+
+  const phone =
+    cleanPhoneNumber(
+
+      firstValue(
+        record,
+        [
+          "Phone",
+          "Mobile",
+          "Contact Number",
+          "Contact"
+        ]
+      )
+
+    );
+
+
+  const whatsapp =
+    normaliseWhatsAppNumber(
+
+      firstValue(
+        record,
+        [
+          "WhatsApp",
+          "WhatsApp Number",
+          "Whatsapp Number",
+          "Phone",
+          "Mobile",
+          "Contact Number"
+        ]
+      )
+
+    );
+
+
+  record.callUrl =
+    phone
+      ? "tel:" + phone
+      : "";
+
+
+  record.whatsappUrl =
+    whatsapp
+      ? "https://wa.me/" +
+        whatsapp
+      : "";
+
+
+  return record;
+
+}
+
+
+
+/* ==========================================================
+   PUBLIC BUSINESS RECORD
+   ========================================================== */
+
+function prepareBusinessRecord(record) {
+
+  addContactActions(
+    record
+  );
+
+
+  record.catalogueUrl =
+    firstValue(
+      record,
+      [
+        "WhatsApp Catalogue Link",
+        "Catalogue URL",
+        "Catalogue",
+        "Catalog URL"
+      ]
+    );
+
+
+  record.mapUrl =
+    firstValue(
+      record,
+      [
+        "Google Map Link",
+        "Google Maps Link",
+        "Google Maps URL",
+        "Map URL",
+        "Map"
+      ]
+    );
+
+
+  record.imageUrl =
+    firstValue(
+      record,
+      [
+        "Business Image",
+        "Business Image URL",
+        "Image URL",
+        "Image"
+      ]
+    );
+
+
+  return record;
+
+}
+
+
+
+/* ==========================================================
+   PREPARED PUBLIC RECORDS
+   ========================================================== */
+
+function prepareRecords(
+  sheetName
+) {
+
+  return getActiveRecords(
+    sheetName
+  )
+  .map(
+    function(record) {
+
+      return addContactActions(
+        record
+      );
+
+    }
+  );
+
+}
+
+
+function getBusinessesWithActions() {
+
+  return getActiveRecords(
+    CONFIG.SHEETS.BUSINESSES
+  )
+  .map(
+    function(record) {
+
+      return prepareBusinessRecord(
+        record
+      );
+
+    }
+  );
+
+}
+
+
+function getEvents() {
+
+  return getActiveRecords(
+    CONFIG.SHEETS.EVENTS
+  );
+
+}
+
+
+function getAnnouncements() {
+
+  return getActiveRecords(
+    CONFIG.SHEETS.ANNOUNCEMENTS
+  );
+
+}
+
+
+function getNotifications() {
+
+  return getActiveRecords(
+    CONFIG.SHEETS.NOTIFICATIONS
+  )
+  .sort(
+    function(a,b) {
+
+      return (
+        parseDateSafe(
+          b.Date ||
+          b["Created At"]
+        )
+        -
+        parseDateSafe(
+          a.Date ||
+          a["Created At"]
+        )
+      );
+
+    }
+  );
+
+}
+
+
+function getDoctors() {
+
+  return prepareRecords(
+    CONFIG.SHEETS.DOCTORS
+  );
+
+}
+
+
+function getHealthcareBundle() {
+
+  return {
+
+    facilities:
+      prepareRecords(
+        CONFIG.SHEETS.HEALTHCARE
+      ),
+
+    doctors:
+      getDoctors()
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   SAFE DATE
+   ========================================================== */
+
+function parseDateSafe(value) {
+
+  if (!value) {
+
+    return 0;
+
+  }
+
+
+  const time =
+    new Date(
+      value
+    )
+    .getTime();
+
+
+  return isNaN(time)
+    ? 0
+    : time;
+
+}
+
+
+
+/* ==========================================================
+   CITY CONNECT
+   ========================================================== */
+
+function getCityConnectGroups() {
+
+  const settings =
+    getSettings();
+
+
+  const groups = [];
+
+
+  groups.push({
+
+    ID:
+      "COMMUNITY",
+
+    id:
+      "COMMUNITY",
+
+    Ward:
+      "",
+
+    ward:
+      "",
+
+    "Group Name":
+      "Sursand Connect Community",
+
+    groupName:
+      "Sursand Connect Community",
+
+    Name:
+      "Sursand Connect Community",
+
+    type:
+      "community",
+
+    "WhatsApp Group Link":
+      settings.CITY_CONNECT_COMMUNITY ||
+      "",
+
+    URL:
+      settings.CITY_CONNECT_COMMUNITY ||
+      ""
+
+  });
+
+
+  for (
+    let ward = 1;
+    ward <= 18;
+    ward++
+  ) {
+
+    const url =
+      settings[
+        "CITY_CONNECT_S" +
+        ward
+      ] || "";
+
+
+    groups.push({
+
+      ID:
+        "S" + ward,
+
+      id:
+        "S" + ward,
+
+      Ward:
+        ward,
+
+      ward:
+        ward,
+
+      "Ward Number":
+        ward,
+
+      "Group Name":
+        "S" + ward,
+
+      groupName:
+        "S" + ward,
+
+      Name:
+        "S" + ward,
+
+      type:
+        "ward",
+
+      "WhatsApp Group Link":
+        url,
+
+      URL:
+        url
+
+    });
+
+  }
+
+
+  return groups;
+
+}
+
+
+
+/* ==========================================================
+   CHANGE MAKERS
+   ========================================================== */
+
+function getChangeMakers() {
+
+  return getActiveRecords(
+    CONFIG.SHEETS.CHANGE_MAKERS
+  )
+  .map(
+    function(record) {
+
+      /*
+       * Add aliases so both old and
+       * new frontends work.
+       */
+
+      record["Full Name"] =
+        firstValue(
+          record,
+          [
+            "Full Name",
+            "Name"
+          ]
+        );
+
+
+      record["Area of Interest"] =
+        firstValue(
+          record,
+          [
+            "Area of Interest",
+            "Interest",
+            "Focus Area",
+            "Contribution Area"
+          ]
+        );
+
+
+      return record;
+
+    }
+  );
+
+}
+
+
+
+
+/* ==========================================================
+   LOCAL ADS SHEET
+   ========================================================== */
+
+function ensureLocalAdsSheet() {
+
+  const db =
+    getDatabase();
+
+  let sheet =
+    db.getSheetByName(
+      CONFIG.SHEETS.LOCAL_ADS
+    );
+
+  if (!sheet) {
+
+    sheet =
+      db.insertSheet(
+        CONFIG.SHEETS.LOCAL_ADS
+      );
+
+    sheet
+      .getRange(
+        1,1,1,10
+      )
+      .setValues([[
+        "ID",
+        "Title",
+        "Description",
+        "Image URL",
+        "Link URL",
+        "Active",
+        "Start Date",
+        "End Date",
+        "Priority",
+        "Created At"
+      ]]);
+
+    sheet.setFrozenRows(1);
+  }
+
+  return sheet;
+}
+
+/* ==========================================================
+   ALL PUBLIC DATA
+   ========================================================== */
+
+function getAllPublicData() {
+
+  return {
+
+    businesses:
+      getBusinessesWithActions(),
+
+    events:
+      getEvents(),
+
+    announcements:
+      getAnnouncements(),
+
+    emergency:
+      prepareRecords(
+        CONFIG.SHEETS.EMERGENCY
+      ),
+
+    councillors:
+      prepareRecords(
+        CONFIG.SHEETS.COUNCILLORS
+      ),
+
+    representatives:
+      prepareRecords(
+        CONFIG.SHEETS.COUNCILLORS
+      ),
+
+    wardRepresentatives:
+      prepareRecords(
+        CONFIG.SHEETS.COUNCILLORS
+      ),
+
+    contacts:
+      prepareRecords(
+        CONFIG.SHEETS.CONTACTS
+      ),
+
+    schools:
+      prepareRecords(
+        CONFIG.SHEETS.SCHOOLS
+      ),
+
+    transport:
+      prepareRecords(
+        CONFIG.SHEETS.TRANSPORT
+      ),
+
+    places:
+      prepareRecords(
+        CONFIG.SHEETS.PLACES
+      ),
+
+    government:
+      prepareRecords(
+        CONFIG.SHEETS.GOVERNMENT
+      ),
+
+    governmentOffices:
+      prepareRecords(
+        CONFIG.SHEETS.GOVERNMENT
+      ),
+
+    healthcare:
+      prepareRecords(
+        CONFIG.SHEETS.HEALTHCARE
+      ),
+
+    doctors:
+      getDoctors(),
+
+    localServices:
+      prepareRecords(
+        CONFIG.SHEETS.LOCAL_SERVICES
+      ),
+
+    serviceProviders:
+      prepareRecords(
+        CONFIG.SHEETS.LOCAL_SERVICES
+      ),
+
+    jobs:
+      getActiveRecords(
+        CONFIG.SHEETS.JOBS
+      ),
+
+    governmentServices:
+      getActiveRecords(
+        CONFIG.SHEETS.GOVERNMENT_SERVICES
+      ),
+
+    agriculture:
+      getActiveRecords(
+        CONFIG.SHEETS.AGRICULTURE
+      ),
+
+    usefulLinks:
+      getActiveRecords(
+        CONFIG.SHEETS.USEFUL_LINKS
+      ),
+
+    links:
+      getActiveRecords(
+        CONFIG.SHEETS.USEFUL_LINKS
+      ),
+
+    notifications:
+      getNotifications(),
+
+    localAds:
+      (function(){
+        ensureLocalAdsSheet();
+        return getActiveRecords(
+          CONFIG.SHEETS.LOCAL_ADS
+        );
+      })(),
+
+    updates:
+      getNotifications(),
+
+    notificationsUpdates:
+      getNotifications(),
+
+    local:
+      getActiveRecords(
+        CONFIG.SHEETS.LOCAL_INFO
+      ),
+
+    localInformation:
+      getActiveRecords(
+        CONFIG.SHEETS.LOCAL_INFO
+      ),
+
+    changeMakers:
+      getChangeMakers(),
+
+    changemakers:
+      getChangeMakers(),
+
+    /*
+     * Compatibility only.
+     * No public page needs to display
+     * the word Volunteer.
+     */
+
+    volunteers:
+      getChangeMakers(),
+
+    cityConnect:
+      getCityConnectGroups(),
+
+    whatsappCommunity:
+      getCityConnectGroups(),
+
+    wardGroups:
+      getCityConnectGroups(),
+
+    settings:
+      getPublicSettings()
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   PUBLIC SETTINGS
+   ========================================================== */
+
+function getPublicSettings() {
+
+  const settings =
+    getSettings();
+
+
+  return {
+
+    websiteName:
+      settings.WEBSITE_NAME ||
+      CONFIG.APP_NAME,
+
+    language:
+      settings.WEBSITE_LANGUAGE ||
+      "English",
+
+    community:
+      settings.CITY_CONNECT_COMMUNITY ||
+      "",
+
+    contactEmail:
+      settings.CONTACT_EMAIL ||
+      CONFIG.CONTACT.EMAIL,
+
+    contactPhone:
+      settings.CONTACT_PHONE ||
+      CONFIG.CONTACT.PHONE,
+
+    contactWhatsApp:
+      settings.CONTACT_WHATSAPP ||
+      CONFIG.CONTACT.WHATSAPP,
+
+    office:
+      CONFIG.CONTACT.OFFICE,
+
+    instagram:
+      settings.INSTAGRAM_URL ||
+      "",
+
+    facebook:
+      settings.FACEBOOK_URL ||
+      "",
+
+    youtube:
+      settings.YOUTUBE_URL ||
+      ""
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   GET API
+   ========================================================== */
+
+function doGet(e) {
+
+  try {
+
+    const parameters =
+      e &&
+      e.parameter
+        ? e.parameter
+        : {};
+
+
+    const action =
+      String(
+        parameters.action ||
+        "all"
+      )
+      .trim();
+
+
+    switch(action) {
+
+
+      /* ----------------------------------------------------
+         MAIN
+         ---------------------------------------------------- */
+
+      case "all":
+
+        return jsonResponse(
+          getAllPublicData()
+        );
+
+
+      /* ----------------------------------------------------
+         BUSINESSES
+         ---------------------------------------------------- */
+
+      case "businesses":
+
+        return jsonResponse(
+          getBusinessesWithActions()
+        );
+
+
+      /* ----------------------------------------------------
+         LOCAL SERVICES
+         ---------------------------------------------------- */
+
+      case "localServices":
+
+      case "services":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.LOCAL_SERVICES
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         EVENTS
+         ---------------------------------------------------- */
+
+      case "events":
+
+        return jsonResponse(
+          getEvents()
+        );
+
+
+      case "announcements":
+
+        return jsonResponse(
+          getAnnouncements()
+        );
+
+
+      /* ----------------------------------------------------
+         EMERGENCY
+         ---------------------------------------------------- */
+
+      case "emergency":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.EMERGENCY
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         REPRESENTATIVES
+         ---------------------------------------------------- */
+
+      case "councillors":
+
+      case "representatives":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.COUNCILLORS
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         IMPORTANT CONTACTS
+         ---------------------------------------------------- */
+
+      case "contacts":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.CONTACTS
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         EDUCATION
+         ---------------------------------------------------- */
+
+      case "schools":
+
+      case "education":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.SCHOOLS
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         TRANSPORT
+         ---------------------------------------------------- */
+
+      case "transport":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.TRANSPORT
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         IMPORTANT PLACES
+         ---------------------------------------------------- */
+
+      case "places":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.PLACES
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         GOVERNMENT OFFICES
+         ---------------------------------------------------- */
+
+      case "government":
+
+      case "governmentOffices":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.GOVERNMENT
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         HEALTHCARE
+         ---------------------------------------------------- */
+
+      case "healthcare":
+
+        return jsonResponse(
+          prepareRecords(
+            CONFIG.SHEETS.HEALTHCARE
+          )
+        );
+
+
+      case "doctors":
+
+        return jsonResponse(
+          getDoctors()
+        );
+
+
+      case "healthcareBundle":
+
+        return jsonResponse(
+          getHealthcareBundle()
+        );
+
+
+      /* ----------------------------------------------------
+         GOVERNMENT SERVICES
+         ---------------------------------------------------- */
+
+      case "governmentServices":
+
+        return jsonResponse(
+          getActiveRecords(
+            CONFIG.SHEETS.GOVERNMENT_SERVICES
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         AGRICULTURE
+         ---------------------------------------------------- */
+
+      case "agriculture":
+
+        return jsonResponse(
+          getActiveRecords(
+            CONFIG.SHEETS.AGRICULTURE
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         USEFUL LINKS
+         ---------------------------------------------------- */
+
+      case "usefulLinks":
+
+        return jsonResponse(
+          getActiveRecords(
+            CONFIG.SHEETS.USEFUL_LINKS
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         NOTIFICATIONS
+         ---------------------------------------------------- */
+
+      case "notifications":
+
+        return jsonResponse(
+          getNotifications()
+        );
+
+
+      /* ----------------------------------------------------
+         LOCAL INFORMATION
+         ---------------------------------------------------- */
+
+      case "local":
+
+      case "localInformation":
+
+        return jsonResponse(
+          getActiveRecords(
+            CONFIG.SHEETS.LOCAL_INFO
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         CITY CONNECT
+         ---------------------------------------------------- */
+
+      case "whatsapp":
+
+      case "cityConnect":
+
+        return jsonResponse(
+          getCityConnectGroups()
+        );
+
+
+      /* ----------------------------------------------------
+         CHANGE MAKERS
+
+         changeMakers = preferred.
+         volunteer retained for old frontend compatibility.
+         ---------------------------------------------------- */
+
+      case "changeMakers":
+
+        return jsonResponse(
+          getChangeMakers()
+        );
+
+
+      case "volunteer":
+
+      case "joinCommunity":
+
+        return addChangeMaker(
+          parameters
+        );
+
+
+      /* ----------------------------------------------------
+         BUSINESS REGISTRATION
+         ---------------------------------------------------- */
+
+      case "registerBusiness":
+
+        return addBusinessRegistration(
+          parameters
+        );
+
+
+      /* ----------------------------------------------------
+         CONTACT
+         ---------------------------------------------------- */
+
+      case "contact":
+
+        return addContactMessage(
+          parameters
+        );
+
+
+      /* ----------------------------------------------------
+         SEARCH
+         ---------------------------------------------------- */
+
+      case "search":
+
+        return jsonResponse(
+          searchAll(
+            parameters.q || ""
+          )
+        );
+
+
+      /* ----------------------------------------------------
+         SETTINGS
+         ---------------------------------------------------- */
+
+      case "settings":
+
+        return jsonResponse(
+          getPublicSettings()
+        );
+
+
+      /* ----------------------------------------------------
+         DASHBOARD SUMMARY
+         ---------------------------------------------------- */
+
+      case "dashboard":
+
+        return jsonResponse(
+          getDashboardData()
+        );
+default:
+
+        return errorResponse(
+          "Unknown API action: " +
+          action
+        );
+
+    }
+
+  }
+
+  catch(error) {
+
+    return errorResponse(
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* ==========================================================
+   POST API
+   ========================================================== */
+
+function doPost(e) {
+
+  try {
+
+    if (
+      !e ||
+      !e.postData ||
+      !e.postData.contents
+    ) {
+
+      return errorResponse(
+        "No data received."
+      );
+
+    }
+
+
+    const data =
+      JSON.parse(
+        e.postData.contents
+      );
+
+
+    const action =
+      String(
+        data.action || ""
+      )
+      .trim();
+
+
+    switch(action) {
+
+
+      /* ----------------------------------------------------
+         PUBLIC FORMS
+         ---------------------------------------------------- */
+
+      case "changeMakers":
+
+      case "joinCommunity":
+
+      case "volunteer":
+
+        return addChangeMaker(
+          data
+        );
+
+
+      case "registerBusiness":
+
+        return addBusinessRegistration(
+          data
+        );
+
+
+      case "contact":
+
+        return addContactMessage(
+          data
+        );
+
+
+      case "pathologyRequest":
+
+        return addPathologyRequest(
+          data
+        );
+
+
+      case "medicineOrder":
+
+        return addMedicineOrder(
+          data
+        );
+
+
+      /* ----------------------------------------------------
+         ADMIN
+         ---------------------------------------------------- */
+
+      case "adminLogin":
+
+        return adminLoginApi(
+          data
+        );
+
+
+      case "adminData":
+
+        return adminDataApi(
+          data
+        );
+
+
+      case "adminSave":
+
+        return adminSaveApi(
+          data
+        );
+
+
+      case "adminUpdate":
+
+        return adminUpdateApi(
+          data
+        );
+
+
+      case "adminClearNotifications":
+
+        return adminClearNotificationsApi(
+          data
+        );
+
+
+
+      /* ----------------------------------------------------
+         USER ACCOUNTS
+         ---------------------------------------------------- */
+
+      case "userSignup":
+        return userSignupApi(data);
+
+      case "userLogin":
+        return userLoginApi(data);
+
+      case "userMe":
+        return userMeApi(data);
+
+      case "userLogout":
+        return userLogoutApi(data);
+
+      case "userUpdateProfile":
+        return userUpdateProfileApi(data);
+
+      case "userChangePassword":
+        return userChangePasswordApi(data);
+
+
+      /* ----------------------------------------------------
+         ADVANCED ADMIN
+         ---------------------------------------------------- */
+
+      case "adminBulkUpdate":
+        return adminBulkUpdateApi(data);
+
+      case "adminChangePassword":
+        return adminChangePasswordApi(data);
+
+      default:
+
+        return errorResponse(
+          "Unknown POST action: " +
+          action
+        );
+
+    }
+
+  }
+
+  catch(error) {
+
+    return errorResponse(
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* ==========================================================
+   APPEND RECORD USING SHEET HEADERS
+   ========================================================== */
+
+function appendRecord(
+  sheetName,
+  suppliedData,
+  options
+) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  const headers =
+    getHeaders(
+      sheetName
+    );
+
+
+  options =
+    options || {};
+
+
+  const data =
+    suppliedData || {};
+
+
+  let generatedId =
+    "";
+
+
+  const row =
+    headers.map(
+      function(header) {
+
+        const normal =
+          normaliseHeader(
+            header
+          );
+
+
+        /* ID */
+
+        if (
+          normal === "id"
+        ) {
+
+          generatedId =
+            generateId(
+              sheetName
+            );
+
+
+          return generatedId;
+
+        }
+
+
+        /* Dates */
+
+        if (
+          normal === "timestamp" ||
+          normal === "createdat" ||
+          normal === "submittedat"
+        ) {
+
+          return new Date();
+
+        }
+
+
+        /* Status */
+
+        if (
+          normal === "status" &&
+          options.defaultStatus !== undefined
+        ) {
+
+          return (
+            lookupInputValue(
+              data,
+              header
+            ) ||
+            options.defaultStatus
+          );
+
+        }
+
+
+        /* Active */
+
+        if (
+          normal === "active" &&
+          options.defaultActive !== undefined
+        ) {
+
+          return (
+            lookupInputValue(
+              data,
+              header
+            ) ||
+            options.defaultActive
+          );
+
+        }
+
+
+        return lookupInputValue(
+          data,
+          header
+        );
+
+      }
+    );
+
+
+  sheet.appendRow(
+    row
+  );
+
+
+  return {
+
+    id:
+      generatedId,
+
+    row:
+      row
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   NORMALISE HEADER
+   ========================================================== */
+
+function normaliseHeader(value) {
+
+  return String(
+    value || ""
+  )
+  .toLowerCase()
+  .replace(
+    /[^a-z0-9]/g,
+    ""
+  );
+
+}
+
+
+
+/* ==========================================================
+   LOOKUP INPUT VALUE
+
+   Makes old/new field names compatible.
+   ========================================================== */
+
+function lookupInputValue(
+  data,
+  header
+) {
+
+  if (
+    data[header] !== undefined
+  ) {
+
+    return data[header];
+
+  }
+
+
+  const h =
+    normaliseHeader(
+      header
+    );
+
+
+  const aliases = {
+
+
+    /* ------------------------------------------------------
+       BUSINESSES
+       ------------------------------------------------------ */
+
+    businessname:
+      [
+        "businessName",
+        "shopBusinessName",
+        "shopName",
+        "name"
+      ],
+
+    shopbusinessname:
+      [
+        "businessName",
+        "shopBusinessName",
+        "shopName"
+      ],
+
+    ownername:
+      [
+        "owner",
+        "ownerName",
+        "contactPerson"
+      ],
+
+    ownercontactperson:
+      [
+        "owner",
+        "ownerName",
+        "contactPerson"
+      ],
+
+    category:
+      [
+        "category"
+      ],
+
+    phone:
+      [
+        "phone",
+        "mobile"
+      ],
+
+    mobile:
+      [
+        "mobile",
+        "phone"
+      ],
+
+    whatsapp:
+      [
+        "whatsapp",
+        "whatsApp",
+        "phone"
+      ],
+
+    ward:
+      [
+        "ward"
+      ],
+
+    address:
+      [
+        "address"
+      ],
+
+    area:
+      [
+        "area",
+        "address"
+      ],
+
+    description:
+      [
+        "description",
+        "message",
+        "details"
+      ],
+
+    whatsappcataloguelink:
+      [
+        "catalogue",
+        "catalogueUrl",
+        "whatsappCatalogue"
+      ],
+
+    catalogueurl:
+      [
+        "catalogue",
+        "catalogueUrl",
+        "whatsappCatalogue"
+      ],
+
+    website:
+      [
+        "website",
+        "url"
+      ],
+
+    googlemaplink:
+      [
+        "map",
+        "mapUrl",
+        "googleMapLink"
+      ],
+
+    googlemapslink:
+      [
+        "map",
+        "mapUrl",
+        "googleMapLink"
+      ],
+
+    mapurl:
+      [
+        "map",
+        "mapUrl",
+        "googleMapLink"
+      ],
+
+    latitude:
+      [
+        "latitude",
+        "lat"
+      ],
+
+    longitude:
+      [
+        "longitude",
+        "lng"
+      ],
+
+    businessimage:
+      [
+        "image",
+        "imageUrl"
+      ],
+
+    businessimageurl:
+      [
+        "image",
+        "imageUrl"
+      ],
+
+    imageurl:
+      [
+        "image",
+        "imageUrl"
+      ],
+
+    image:
+      [
+        "image",
+        "imageUrl"
+      ],
+
+
+    /* ------------------------------------------------------
+       CHANGE MAKERS
+       ------------------------------------------------------ */
+
+    name:
+      [
+        "name",
+        "fullName"
+      ],
+
+    fullname:
+      [
+        "name",
+        "fullName"
+      ],
+
+    interest:
+      [
+        "interest",
+        "areaOfInterest"
+      ],
+
+    areaofinterest:
+      [
+        "interest",
+        "areaOfInterest"
+      ],
+
+    focusarea:
+      [
+        "interest",
+        "areaOfInterest"
+      ],
+
+    occupation:
+      [
+        "occupation"
+      ],
+
+    message:
+      [
+        "message",
+        "idea"
+      ],
+
+    ideamessage:
+      [
+        "message",
+        "idea"
+      ],
+
+
+    /* ------------------------------------------------------
+       CONTACT
+       ------------------------------------------------------ */
+
+    email:
+      [
+        "email"
+      ],
+
+    enquirytype:
+      [
+        "type",
+        "enquiryType"
+      ],
+
+    subject:
+      [
+        "subject"
+      ],
+
+
+    /* ------------------------------------------------------
+       LOCAL SERVICES
+       ------------------------------------------------------ */
+
+    maincategory:
+      [
+        "mainCategory"
+      ],
+
+    servicetype:
+      [
+        "serviceType",
+        "service"
+      ],
+
+    servicepersonname:
+      [
+        "servicePersonName",
+        "providerName",
+        "name"
+      ],
+
+    experience:
+      [
+        "experience"
+      ],
+
+    availability:
+      [
+        "availability",
+        "timing"
+      ],
+
+
+    /* ------------------------------------------------------
+       GENERAL
+       ------------------------------------------------------ */
+
+    title:
+      [
+        "title"
+      ],
+
+    date:
+      [
+        "date"
+      ],
+
+    time:
+      [
+        "time"
+      ],
+
+    status:
+      [
+        "status"
+      ],
+
+    active:
+      [
+        "active"
+      ]
+
+  };
+
+
+  const keys =
+    aliases[h] || [];
+
+
+  for (
+    let i = 0;
+    i < keys.length;
+    i++
+  ) {
+
+    if (
+      data[
+        keys[i]
+      ] !== undefined
+    ) {
+
+      return data[
+        keys[i]
+      ];
+
+    }
+
+  }
+
+
+  /*
+   * Last fallback:
+   * compare normalised property names.
+   */
+
+  const dataKeys =
+    Object.keys(
+      data
+    );
+
+
+  for (
+    let i = 0;
+    i < dataKeys.length;
+    i++
+  ) {
+
+    if (
+      normaliseHeader(
+        dataKeys[i]
+      ) === h
+    ) {
+
+      return data[
+        dataKeys[i]
+      ];
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+
+/* ==========================================================
+   CHANGE MAKER SUBMISSION
+   ========================================================== */
+
+function addChangeMaker(data) {
+
+  const result =
+    appendRecord(
+
+      CONFIG.SHEETS.CHANGE_MAKERS,
+
+      data,
+
+      {
+        defaultStatus:
+          "Pending"
+      }
+
+    );
+
+
+  return jsonResponse({
+
+    message:
+      "Your request to join the Change Makers Community has been submitted successfully.",
+
+    id:
+      result.id,
+
+    status:
+      "Pending"
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   BACKWARD-COMPATIBLE FUNCTION NAME
+   ========================================================== */
+
+function addVolunteer(data) {
+
+  return addChangeMaker(
+    data
+  );
+
+}
+
+
+function addVolunteerFromGet(data) {
+
+  return addChangeMaker(
+    data
+  );
+
+}
+
+
+
+/* ==========================================================
+   BUSINESS REGISTRATION
+   ========================================================== */
+
+function addBusinessRegistration(data) {
+
+  const imageUrl =
+    processIncomingImage(
+      data,
+      "BUSINESS"
+    );
+
+
+  if (imageUrl) {
+
+    data.image =
+      imageUrl;
+
+    data.imageUrl =
+      imageUrl;
+
+  }
+
+
+  const result =
+    appendRecord(
+
+      CONFIG.SHEETS.BUSINESS_REGISTRATIONS,
+
+      data,
+
+      {
+        defaultStatus:
+          "Pending"
+      }
+
+    );
+
+
+  return jsonResponse({
+
+    message:
+      "Shop / Business submitted successfully.",
+
+    id:
+      result.id,
+
+    status:
+      "Pending",
+
+    imageUrl:
+      imageUrl
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   CONTACT MESSAGE
+   ========================================================== */
+
+function addContactMessage(data) {
+
+  const result =
+    appendRecord(
+
+      CONFIG.SHEETS.CONTACT_MESSAGES,
+
+      data,
+
+      {
+        defaultStatus:
+          "New"
+      }
+
+    );
+
+
+  return jsonResponse({
+
+    message:
+      "Message submitted successfully.",
+
+    id:
+      result.id
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   IMAGE / FILE UPLOAD
+   ========================================================== */
+
+function processIncomingImage(
+  data,
+  prefix
+) {
+
+  const base64 =
+    data.imageBase64 ||
+    data.fileBase64 ||
+    "";
+
+
+  if (!base64) {
+
+    return (
+      data.image ||
+      data.imageUrl ||
+      ""
+    );
+
+  }
+
+
+  const fileName =
+    data.imageName ||
+    data.fileName ||
+    (
+      prefix +
+      "-" +
+      new Date().getTime() +
+      ".jpg"
+    );
+
+
+  const mimeType =
+    data.imageMimeType ||
+    data.fileMimeType ||
+    "image/jpeg";
+
+
+  return saveBase64File(
+    base64,
+    fileName,
+    mimeType,
+    prefix
+  );
+
+}
+
+
+
+/* ==========================================================
+   SAVE BASE64 FILE TO DRIVE
+   ========================================================== */
+
+function saveBase64File(
+  base64,
+  fileName,
+  mimeType,
+  folderPrefix
+) {
+
+  let cleanBase64 =
+    String(
+      base64 || ""
+    );
+
+
+  if (
+    cleanBase64.indexOf(
+      "base64,"
+    ) !== -1
+  ) {
+
+    cleanBase64 =
+      cleanBase64
+        .split(
+          "base64,"
+        )[1];
+
+  }
+
+
+  const bytes =
+    Utilities
+      .base64Decode(
+        cleanBase64
+      );
+
+
+  const blob =
+    Utilities
+      .newBlob(
+        bytes,
+        mimeType,
+        fileName
+      );
+
+
+  const folder =
+    getUploadFolder(
+      folderPrefix
+    );
+
+
+  const file =
+    folder
+      .createFile(
+        blob
+      );
+
+
+  /*
+   * Public image access is useful for
+   * public business/place cards.
+   *
+   * If Workspace restrictions prevent
+   * public sharing, the file is still saved.
+   */
+
+  try {
+
+    file.setSharing(
+
+      DriveApp.Access.ANYONE_WITH_LINK,
+
+      DriveApp.Permission.VIEW
+
+    );
+
+  }
+
+  catch(error) {
+
+    Logger.log(
+      "Public sharing unavailable: " +
+      error.message
+    );
+
+  }
+
+
+  return createDriveViewUrl(
+    file.getId()
+  );
+
+}
+
+
+
+/* ==========================================================
+   UPLOAD FOLDER
+   ========================================================== */
+
+function getUploadFolder(prefix) {
+
+  const rootName =
+    "Sursand Connect Uploads";
+
+
+  let root;
+
+
+  const folders =
+    DriveApp
+      .getFoldersByName(
+        rootName
+      );
+
+
+  if (
+    folders.hasNext()
+  ) {
+
+    root =
+      folders.next();
+
+  }
+
+  else {
+
+    root =
+      DriveApp
+        .createFolder(
+          rootName
+        );
+
+  }
+
+
+  const childName =
+    String(
+      prefix || "GENERAL"
+    )
+    .toUpperCase();
+
+
+  const children =
+    root
+      .getFoldersByName(
+        childName
+      );
+
+
+  if (
+    children.hasNext()
+  ) {
+
+    return children.next();
+
+  }
+
+
+  return root
+    .createFolder(
+      childName
+    );
+
+}
+
+
+
+/* ==========================================================
+   DRIVE IMAGE URL
+   ========================================================== */
+
+function createDriveViewUrl(fileId) {
+
+  return (
+    "https://drive.google.com/uc?export=view&id=" +
+    encodeURIComponent(
+      fileId
+    )
+  );
+
+}
+
+
+
+/* ==========================================================
+   PATHOLOGY REQUEST
+   ========================================================== */
+
+function addPathologyRequest(data) {
+
+  const imageUrl =
+    processIncomingImage(
+      {
+        imageBase64:
+          data.prescriptionBase64 ||
+          data.imageBase64,
+
+        imageName:
+          data.prescriptionName ||
+          data.imageName,
+
+        imageMimeType:
+          data.prescriptionMimeType ||
+          data.imageMimeType
+      },
+      "PATHOLOGY"
+    );
+
+
+  if (imageUrl) {
+
+    data.image =
+      imageUrl;
+
+    data.imageUrl =
+      imageUrl;
+
+    data.prescriptionUrl =
+      imageUrl;
+
+  }
+
+
+  const result =
+    appendRecord(
+
+      CONFIG.SHEETS.PATHOLOGY_REQUESTS,
+
+      data,
+
+      {
+        defaultStatus:
+          "New"
+      }
+
+    );
+
+
+  return jsonResponse({
+
+    message:
+      "Pathology request submitted successfully.",
+
+    id:
+      result.id,
+
+    imageUrl:
+      imageUrl
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   MEDICINE ORDER
+   ========================================================== */
+
+function addMedicineOrder(data) {
+
+  const imageUrl =
+    processIncomingImage(
+      {
+        imageBase64:
+          data.prescriptionBase64 ||
+          data.imageBase64,
+
+        imageName:
+          data.prescriptionName ||
+          data.imageName,
+
+        imageMimeType:
+          data.prescriptionMimeType ||
+          data.imageMimeType
+      },
+      "MEDICINE"
+    );
+
+
+  if (imageUrl) {
+
+    data.image =
+      imageUrl;
+
+    data.imageUrl =
+      imageUrl;
+
+    data.prescriptionUrl =
+      imageUrl;
+
+  }
+
+
+  const result =
+    appendRecord(
+
+      CONFIG.SHEETS.MEDICINE_ORDERS,
+
+      data,
+
+      {
+        defaultStatus:
+          "New"
+      }
+
+    );
+
+
+  return jsonResponse({
+
+    message:
+      "Medicine request submitted successfully.",
+
+    id:
+      result.id,
+
+    imageUrl:
+      imageUrl
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   UNIVERSAL SEARCH
+   ========================================================== */
+
+function searchAll(query) {
+
+  query =
+    String(
+      query || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if (!query) {
+
+    return [];
+
+  }
+
+
+  const sources = [
+
+    {
+      sheet:
+        CONFIG.SHEETS.BUSINESSES,
+      type:
+        "Business"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.LOCAL_SERVICES,
+      type:
+        "Local Service"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.EVENTS,
+      type:
+        "Event"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.ANNOUNCEMENTS,
+      type:
+        "Announcement"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.EMERGENCY,
+      type:
+        "Emergency"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.SCHOOLS,
+      type:
+        "Education"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.TRANSPORT,
+      type:
+        "Transport"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.PLACES,
+      type:
+        "Important Place"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.GOVERNMENT,
+      type:
+        "Government Office"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.HEALTHCARE,
+      type:
+        "Healthcare"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.DOCTORS,
+      type:
+        "Doctor"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.GOVERNMENT_SERVICES,
+      type:
+        "Government Service"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.AGRICULTURE,
+      type:
+        "Agriculture"
+    },
+
+    {
+      sheet:
+        CONFIG.SHEETS.USEFUL_LINKS,
+      type:
+        "Useful Website"
+    }
+
+  ];
+
+
+  const results = [];
+
+
+  sources.forEach(
+    function(source) {
+
+      const records =
+        getActiveRecords(
+          source.sheet
+        );
+
+
+      records.forEach(
+        function(record) {
+
+          const text =
+            Object
+              .values(record)
+              .join(" ")
+              .toLowerCase();
+
+
+          if (
+            text.indexOf(
+              query
+            ) !== -1
+          ) {
+
+            results.push({
+
+              type:
+                source.type,
+
+              id:
+                record.ID ||
+                "",
+
+              title:
+                getRecordTitle(
+                  record
+                ),
+
+              data:
+                record
+
+            });
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  return results;
+
+}
+
+
+
+/* ==========================================================
+   RECORD TITLE
+   ========================================================== */
+
+function getRecordTitle(record) {
+
+  return firstValue(
+    record,
+    [
+
+      "Shop / Business Name",
+      "Business Name",
+      "Service Person Name",
+      "Title",
+      "Notification Title",
+      "Event Title",
+      "School Name",
+      "Institution Name",
+      "Place Name",
+      "Office Name",
+      "Hospital / Clinic Name",
+      "Hospital Name",
+      "Doctor Name",
+      "Name",
+      "Vehicle / Service Name",
+      "Transport Name"
+
+    ]
+  );
+
+}
+
+
+
+/* ==========================================================
+   DASHBOARD SUMMARY
+   ========================================================== */
+
+function getDashboardData() {
+
+  const sections = {
+
+    businesses:
+      countSafe(
+        CONFIG.SHEETS.BUSINESSES
+      ),
+
+    businessRegistrations:
+      countSafe(
+        CONFIG.SHEETS.BUSINESS_REGISTRATIONS
+      ),
+
+    services:
+      countSafe(
+        CONFIG.SHEETS.LOCAL_SERVICES
+      ),
+
+    events:
+      countSafe(
+        CONFIG.SHEETS.EVENTS
+      ),
+
+    announcements:
+      countSafe(
+        CONFIG.SHEETS.ANNOUNCEMENTS
+      ),
+
+    emergency:
+      countSafe(
+        CONFIG.SHEETS.EMERGENCY
+      ),
+
+    representatives:
+      countSafe(
+        CONFIG.SHEETS.COUNCILLORS
+      ),
+
+    education:
+      countSafe(
+        CONFIG.SHEETS.SCHOOLS
+      ),
+
+    transport:
+      countSafe(
+        CONFIG.SHEETS.TRANSPORT
+      ),
+
+    places:
+      countSafe(
+        CONFIG.SHEETS.PLACES
+      ),
+
+    governmentOffices:
+      countSafe(
+        CONFIG.SHEETS.GOVERNMENT
+      ),
+
+    healthcare:
+      countSafe(
+        CONFIG.SHEETS.HEALTHCARE
+      ),
+
+    doctors:
+      countSafe(
+        CONFIG.SHEETS.DOCTORS
+      ),
+
+    notifications:
+      countSafe(
+        CONFIG.SHEETS.NOTIFICATIONS
+      ),
+
+    changeMakers:
+      countSafe(
+        CONFIG.SHEETS.CHANGE_MAKERS
+      ),
+
+    agriculture:
+      countSafe(
+        CONFIG.SHEETS.AGRICULTURE
+      ),
+
+    usefulLinks:
+      countSafe(
+        CONFIG.SHEETS.USEFUL_LINKS
+      ),
+
+    contacts:
+      countSafe(
+        CONFIG.SHEETS.CONTACT_MESSAGES
+      )
+
+  };
+
+
+  return {
+
+    app:
+      CONFIG.APP_NAME,
+
+    summary:
+      sections,
+
+    settings:
+      getPublicSettings(),
+
+    lastUpdated:
+      Utilities.formatDate(
+        new Date(),
+        CONFIG.TIMEZONE,
+        "yyyy-MM-dd HH:mm:ss"
+      )
+
+  };
+
+}
+
+
+function countSafe(sheetName) {
+
+  const sheet =
+    getSheetIfExists(
+      sheetName
+    );
+
+
+  if (!sheet) {
+
+    return 0;
+
+  }
+
+
+  return Math.max(
+    0,
+    sheet.getLastRow() - 1
+  );
+
+}
+
+
+
+/* ==========================================================
+   ADMIN PASSWORD HASH
+   ========================================================== */
+
+function hashAdminPassword(password) {
+
+  const digest =
+    Utilities.computeDigest(
+
+      Utilities.DigestAlgorithm.SHA_256,
+
+      String(
+        password || ""
+      ),
+
+      Utilities.Charset.UTF_8
+
+    );
+
+
+  return digest
+    .map(
+      function(byte) {
+
+        const value =
+          byte < 0
+            ? byte + 256
+            : byte;
+
+
+        return (
+          "0" +
+          value.toString(16)
+        ).slice(-2);
+
+      }
+    )
+    .join("");
+
+}
+
+
+
+/* ==========================================================
+   VERIFY ADMIN LOGIN
+   ========================================================== */
+
+function verifyAdminLogin(
+  user,
+  password
+) {
+
+  const properties =
+    PropertiesService
+      .getScriptProperties();
+
+
+  const savedUser =
+    properties.getProperty(
+      "SC_ADMIN_USER"
+    );
+
+
+  const savedPasswordHash =
+    properties.getProperty(
+      "SC_ADMIN_PASSWORD_HASH"
+    );
+
+
+  if (
+    !savedUser ||
+    !savedPasswordHash
+  ) {
+
+    throw new Error(
+      "Admin login is not configured in Script Properties."
+    );
+
+  }
+
+
+  const enteredHash =
+    hashAdminPassword(
+      password
+    );
+
+
+  return (
+
+    String(user || "") ===
+      String(savedUser)
+
+    &&
+
+    enteredHash ===
+      savedPasswordHash
+
+  );
+
+}
+
+
+
+/* ==========================================================
+   CREATE ADMIN SESSION
+   ========================================================== */
+
+function createAdminSession() {
+
+  const token =
+
+    Utilities.getUuid() +
+
+    "-" +
+
+    Utilities.getUuid();
+
+
+  /*
+   * Six hours
+   */
+
+  CacheService
+    .getScriptCache()
+    .put(
+
+      "ADMIN_SESSION_" +
+      token,
+
+      "1",
+
+      21600
+
+    );
+
+
+  return token;
+
+}
+
+
+
+/* ==========================================================
+   VERIFY ADMIN SESSION
+   ========================================================== */
+
+function verifyAdminSession(token) {
+
+  token =
+    String(
+      token || ""
+    )
+    .trim();
+
+
+  if (!token) {
+
+    throw new Error(
+      "Admin session required."
+    );
+
+  }
+
+
+  const session =
+    CacheService
+      .getScriptCache()
+      .get(
+
+        "ADMIN_SESSION_" +
+        token
+
+      );
+
+
+  if (!session) {
+
+    throw new Error(
+      "Admin session expired. Please login again."
+    );
+
+  }
+
+
+  return true;
+
+}
+
+
+
+/* ==========================================================
+   ADMIN LOGIN API
+   ========================================================== */
+
+function adminLoginApi(data) {
+
+  if (
+    !verifyAdminLogin(
+      data.user,
+      data.password
+    )
+  ) {
+
+    return errorResponse(
+      "Invalid Admin ID or password."
+    );
+
+  }
+
+
+  const token =
+    createAdminSession();
+
+
+  return jsonResponse({
+
+    token:
+      token,
+
+    expiresIn:
+      21600,
+
+    app:
+      CONFIG.APP_NAME
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   ADMIN SECTION CONFIGURATION
+   ========================================================== */
+
+const ADMIN_SECTION_MAP = {
+
+
+  /* --------------------------------------------------------
+     BUSINESSES
+
+     Special:
+     returns registrations + published businesses.
+     -------------------------------------------------------- */
+
+  businesses: {
+
+    special:
+      "businesses"
+
+  },
+
+
+  services: {
+
+    sheet:
+      CONFIG.SHEETS.LOCAL_SERVICES
+
+  },
+
+
+  emergency: {
+
+    sheet:
+      CONFIG.SHEETS.EMERGENCY
+
+  },
+
+
+  healthcare: {
+
+    sheet:
+      CONFIG.SHEETS.HEALTHCARE
+
+  },
+
+
+  doctors: {
+
+    sheet:
+      CONFIG.SHEETS.DOCTORS
+
+  },
+
+
+  education: {
+
+    sheet:
+      CONFIG.SHEETS.SCHOOLS
+
+  },
+
+
+  transport: {
+
+    sheet:
+      CONFIG.SHEETS.TRANSPORT
+
+  },
+
+
+  places: {
+
+    sheet:
+      CONFIG.SHEETS.PLACES
+
+  },
+
+
+  governmentOffices: {
+
+    sheet:
+      CONFIG.SHEETS.GOVERNMENT
+
+  },
+
+
+  events: {
+
+    special:
+      "events"
+
+  },
+
+
+  notifications: {
+
+    sheet:
+      CONFIG.SHEETS.NOTIFICATIONS
+
+  },
+
+
+  representatives: {
+
+    sheet:
+      CONFIG.SHEETS.COUNCILLORS
+
+  },
+
+
+  cityConnect: {
+
+    special:
+      "cityConnect"
+
+  },
+
+
+  changeMakers: {
+
+    sheet:
+      CONFIG.SHEETS.CHANGE_MAKERS
+
+  },
+
+
+  contacts: {
+
+    sheet:
+      CONFIG.SHEETS.CONTACT_MESSAGES
+
+  },
+
+
+  agriculture: {
+
+    sheet:
+      CONFIG.SHEETS.AGRICULTURE
+
+  },
+
+
+  usefulLinks: {
+
+    sheet:
+      CONFIG.SHEETS.USEFUL_LINKS
+
+  },
+
+
+  governmentServices: {
+
+    sheet:
+      CONFIG.SHEETS.GOVERNMENT_SERVICES
+
+  },
+
+
+  importantContacts: {
+
+    sheet:
+      CONFIG.SHEETS.CONTACTS
+
+  },
+
+
+  pathology: {
+
+    sheet:
+      CONFIG.SHEETS.PATHOLOGY_REQUESTS
+
+  },
+
+
+  medicineOrders: {
+
+    sheet:
+      CONFIG.SHEETS.MEDICINE_ORDERS
+
+  }
+
+  jobs: {
+    sheet:
+      CONFIG.SHEETS.JOBS
+  },
+
+  localAds: {
+    sheet:
+      CONFIG.SHEETS.LOCAL_ADS
+  },
+
+  users: {
+    sheet:
+      SC_USER_SHEET
+  },
+
+  settings: {
+    sheet:
+      CONFIG.SHEETS.SETTINGS
+  },
+
+};
+
+/* ==========================================================
+   ADMIN DATA
+   ========================================================== */
+
+function adminDataApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+
+  const section =
+    String(
+      data.section || ""
+    )
+    .trim();
+
+
+  const config =
+    ADMIN_SECTION_MAP[
+      section
+    ];
+
+  if (
+    section === "localAds"
+  ) {
+    ensureLocalAdsSheet();
+  }
+
+
+
+
+  if (!config) {
+
+    throw new Error(
+      "Unknown Admin Panel section: " +
+      section
+    );
+
+  }
+
+
+  /* --------------------------------------------------------
+     BUSINESSES:
+     registrations + published listings
+     -------------------------------------------------------- */
+
+  if (
+    config.special ===
+    "businesses"
+  ) {
+
+    const registrations =
+      sheetToJson(
+        CONFIG.SHEETS.BUSINESS_REGISTRATIONS
+      )
+      .map(
+        function(record) {
+
+          record._source =
+            "registration";
+
+          return record;
+
+        }
+      );
+
+
+    const published =
+      sheetToJson(
+        CONFIG.SHEETS.BUSINESSES
+      )
+      .map(
+        function(record) {
+
+          record._source =
+            "published";
+
+          return record;
+
+        }
+      );
+
+
+    return jsonResponse(
+      registrations.concat(
+        published
+      )
+    );
+
+  }
+
+
+  /* --------------------------------------------------------
+     EVENTS + ANNOUNCEMENTS
+     -------------------------------------------------------- */
+
+  if (
+    config.special ===
+    "events"
+  ) {
+
+    const events =
+      sheetToJson(
+        CONFIG.SHEETS.EVENTS
+      )
+      .map(
+        function(record) {
+
+          record._source =
+            "event";
+
+          return record;
+
+        }
+      );
+
+
+    const announcements =
+      sheetToJson(
+        CONFIG.SHEETS.ANNOUNCEMENTS
+      )
+      .map(
+        function(record) {
+
+          record._source =
+            "announcement";
+
+          return record;
+
+        }
+      );
+
+
+    return jsonResponse(
+      events.concat(
+        announcements
+      )
+    );
+
+  }
+
+
+  /* --------------------------------------------------------
+     CITY CONNECT
+     -------------------------------------------------------- */
+
+  if (
+    config.special ===
+    "cityConnect"
+  ) {
+
+    return jsonResponse(
+      getCityConnectGroups()
+    );
+
+  }
+
+
+  return jsonResponse(
+    sheetToJson(
+      config.sheet
+    )
+  );
+
+}
+
+
+
+/* ==========================================================
+   ADMIN SAVE
+   Used by new Admin Panel for Add/Edit
+   ========================================================== */
+
+function adminSaveApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+
+  const section =
+    String(
+      data.section || ""
+    )
+    .trim();
+
+
+  const operation =
+    String(
+      data.operation ||
+      "add"
+    )
+    .trim()
+    .toLowerCase();
+
+
+  const record =
+    data.data ||
+    data.record ||
+    {};
+
+
+  const id =
+    String(
+      data.id || ""
+    );
+
+
+
+  /* --------------------------------------------------------
+     APP SETTINGS
+     -------------------------------------------------------- */
+
+  if (
+    section === "settings"
+  ) {
+
+    const key =
+      String(
+        record.KEY ||
+        record.Key ||
+        record.key ||
+        ""
+      ).trim();
+
+    const value =
+      record.VALUE !== undefined
+        ? record.VALUE
+        : (
+            record.Value !== undefined
+              ? record.Value
+              : record.value
+          );
+
+    if (!key) {
+      throw new Error(
+        "Setting KEY is required."
+      );
+    }
+
+    setSetting(
+      key,
+      value
+    );
+
+    return jsonResponse({
+      message:
+        "Setting updated successfully."
+    });
+  }
+
+
+  /* --------------------------------------------------------
+     CITY CONNECT
+     -------------------------------------------------------- */
+
+  if (
+    section ===
+    "cityConnect"
+  ) {
+
+    return adminSaveCityConnect(
+      operation,
+      id,
+      record
+    );
+
+  }
+
+
+  const sheetName =
+    resolveAdminSheetForSave(
+      section,
+      id,
+      record
+    );
+
+
+  if (!sheetName) {
+
+    throw new Error(
+      "Admin section is not configured for saving."
+    );
+
+  }
+
+
+  if (
+    operation === "add"
+  ) {
+
+    const result =
+      appendRecord(
+
+        sheetName,
+
+        record,
+
+        {
+          defaultStatus:
+            defaultAdminStatus(
+              section
+            ),
+
+          defaultActive:
+            "Yes"
+        }
+
+      );
+
+
+    return jsonResponse({
+
+      message:
+        "Record added successfully.",
+
+      id:
+        result.id
+
+    });
+
+  }
+
+
+  if (
+    operation === "edit"
+  ) {
+
+    updateRecordById(
+      sheetName,
+      id,
+      record
+    );
+
+
+    return jsonResponse({
+
+      message:
+        "Record updated successfully.",
+
+      id:
+        id
+
+    });
+
+  }
+
+
+  throw new Error(
+    "Unknown save operation: " +
+    operation
+  );
+
+}
+
+
+
+/* ==========================================================
+   DEFAULT ADMIN STATUS
+   ========================================================== */
+
+function defaultAdminStatus(section) {
+
+  if (
+    section === "changeMakers"
+  ) {
+
+    return "Approved";
+
+  }
+
+
+  return "Active";
+
+}
+
+
+
+/* ==========================================================
+   RESOLVE SHEET FOR ADMIN SAVE
+   ========================================================== */
+
+function resolveAdminSheetForSave(
+  section,
+  id,
+  record
+) {
+
+  /* Businesses */
+
+  if (
+    section === "businesses"
+  ) {
+
+    if (
+      String(id)
+        .toUpperCase()
+        .indexOf("BR") === 0
+    ) {
+
+      return CONFIG
+        .SHEETS
+        .BUSINESS_REGISTRATIONS;
+
+    }
+
+
+    return CONFIG
+      .SHEETS
+      .BUSINESSES;
+
+  }
+
+
+  /* Events / Announcements */
+
+  if (
+    section === "events"
+  ) {
+
+    if (
+      String(id)
+        .toUpperCase()
+        .indexOf("A") === 0
+    ) {
+
+      return CONFIG
+        .SHEETS
+        .ANNOUNCEMENTS;
+
+    }
+
+
+    const category =
+      String(
+
+        record.Type ||
+        record.Category ||
+        ""
+
+      )
+      .toLowerCase();
+
+
+    if (
+      category ===
+      "announcement"
+    ) {
+
+      return CONFIG
+        .SHEETS
+        .ANNOUNCEMENTS;
+
+    }
+
+
+    return CONFIG
+      .SHEETS
+      .EVENTS;
+
+  }
+
+
+  const config =
+    ADMIN_SECTION_MAP[
+      section
+    ];
+
+
+  return (
+    config &&
+    config.sheet
+      ? config.sheet
+      : ""
+  );
+
+}
+
+
+
+/* ==========================================================
+   ADMIN UPDATE
+   Approve / Reject / Delete
+   ========================================================== */
+
+function adminUpdateApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+
+  const section =
+    String(
+      data.section || ""
+    )
+    .trim();
+
+
+  const operation =
+    String(
+      data.operation || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  const id =
+    String(
+      data.id || ""
+    )
+    .trim();
+
+
+  if (!id) {
+
+    throw new Error(
+      "Record ID is required."
+    );
+
+  }
+
+
+  /* --------------------------------------------------------
+     BUSINESS APPROVAL
+
+     BRxxxx → publish to Businesses
+     -------------------------------------------------------- */
+
+  if (
+    section === "businesses" &&
+    operation === "approve" &&
+    id.toUpperCase().indexOf("BR") === 0
+  ) {
+
+    return jsonResponse(
+      approveBusinessRegistration(
+        id
+      )
+    );
+
+  }
+
+
+  const sheetName =
+    resolveAdminSheetForSave(
+      section,
+      id,
+      data.data || {}
+    );
+
+
+  if (!sheetName) {
+
+    throw new Error(
+      "Unable to determine sheet."
+    );
+
+  }
+
+
+  switch(operation) {
+
+
+    case "approve":
+
+      changeRecordStatus(
+        sheetName,
+        id,
+        "Approved"
+      );
+
+
+      return jsonResponse({
+
+        message:
+          "Record approved successfully."
+
+      });
+
+
+    case "reject":
+
+      changeRecordStatus(
+        sheetName,
+        id,
+        "Rejected"
+      );
+
+
+      return jsonResponse({
+
+        message:
+          "Record rejected successfully."
+
+      });
+
+
+    case "activate":
+
+      changeRecordStatus(
+        sheetName,
+        id,
+        "Active"
+      );
+
+
+      return jsonResponse({
+
+        message:
+          "Record activated successfully."
+
+      });
+
+
+    case "deactivate":
+
+      changeRecordStatus(
+        sheetName,
+        id,
+        "Inactive"
+      );
+
+
+      return jsonResponse({
+
+        message:
+          "Record deactivated successfully."
+
+      });
+
+
+    case "delete":
+
+      deleteRecordById(
+        sheetName,
+        id
+      );
+
+
+      return jsonResponse({
+
+        message:
+          "Record deleted successfully."
+
+      });
+
+
+    default:
+
+      throw new Error(
+        "Unknown admin operation: " +
+        operation
+      );
+
+  }
+
+}
+
+
+
+
+/* ==========================================================
+   ADMIN RECORD ID COLUMN
+   ========================================================== */
+
+function findRecordIdColumn_(headers) {
+
+  const candidates = [
+    "ID",
+    "User ID",
+    "Id",
+    "id"
+  ];
+
+  for (
+    let i = 0;
+    i < candidates.length;
+    i++
+  ) {
+
+    const index =
+      headers.indexOf(
+        candidates[i]
+      );
+
+    if (index !== -1) {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
+/* ==========================================================
+   UPDATE RECORD BY ID
+   ========================================================== */
+
+function updateRecordById(
+  sheetName,
+  recordId,
+  data
+) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  if (
+    values.length < 2
+  ) {
+
+    throw new Error(
+      "No records found."
+    );
+
+  }
+
+
+  const headers =
+    values[0];
+
+
+  const idColumn =
+    findRecordIdColumn_(
+      headers
+    );
+
+
+  if (
+    idColumn === -1
+  ) {
+
+    throw new Error(
+      "ID column not found in " +
+      sheetName
+    );
+
+  }
+
+
+  for (
+    let row = 1;
+    row < values.length;
+    row++
+  ) {
+
+    if (
+      String(
+        values[row][idColumn]
+      ) ===
+      String(
+        recordId
+      )
+    ) {
+
+      headers.forEach(
+        function(header,column) {
+
+          if (
+            normaliseHeader(header) === "id" || normaliseHeader(header) === "userid"
+          ) {
+
+            return;
+
+          }
+
+
+          const value =
+            lookupInputValue(
+              data,
+              header
+            );
+
+
+          /*
+           * Only update if Admin Panel
+           * actually supplied this field.
+           */
+
+          const hasDirect =
+            data[header] !== undefined;
+
+
+          const hasNormalised =
+            Object
+              .keys(data)
+              .some(
+                function(key) {
+
+                  return (
+                    normaliseHeader(key) ===
+                    normaliseHeader(header)
+                  );
+
+                }
+              );
+
+
+          if (
+            hasDirect ||
+            hasNormalised
+          ) {
+
+            sheet
+              .getRange(
+                row + 1,
+                column + 1
+              )
+              .setValue(
+                value
+              );
+
+          }
+
+        }
+      );
+
+
+      const updatedColumn =
+        headers.indexOf(
+          "Updated At"
+        );
+
+
+      if (
+        updatedColumn !== -1
+      ) {
+
+        sheet
+          .getRange(
+            row + 1,
+            updatedColumn + 1
+          )
+          .setValue(
+            new Date()
+          );
+
+      }
+
+
+      return true;
+
+    }
+
+  }
+
+
+  throw new Error(
+    "Record not found: " +
+    recordId
+  );
+
+}
+
+
+
+/* ==========================================================
+   CHANGE STATUS
+   ========================================================== */
+
+function changeRecordStatus(
+  sheetName,
+  id,
+  status
+) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  const headers =
+    values[0] || [];
+
+
+  const idColumn =
+    findRecordIdColumn_(
+      headers
+    );
+
+
+  let statusColumn =
+    headers.indexOf(
+      "Status"
+    );
+
+
+  if (
+    idColumn === -1
+  ) {
+
+    throw new Error(
+      "ID column not found."
+    );
+
+  }
+
+
+  /*
+   * If Status column doesn't exist,
+   * create it automatically.
+   */
+
+  if (
+    statusColumn === -1
+  ) {
+
+    statusColumn =
+      headers.length;
+
+
+    sheet
+      .getRange(
+        1,
+        statusColumn + 1
+      )
+      .setValue(
+        "Status"
+      );
+
+  }
+
+
+  for (
+    let i = 1;
+    i < values.length;
+    i++
+  ) {
+
+    if (
+      String(
+        values[i][idColumn]
+      ) ===
+      String(id)
+    ) {
+
+      sheet
+        .getRange(
+          i + 1,
+          statusColumn + 1
+        )
+        .setValue(
+          status
+        );
+
+
+      return true;
+
+    }
+
+  }
+
+
+  throw new Error(
+    "Record not found."
+  );
+
+}
+
+
+
+/* ==========================================================
+   DELETE RECORD
+   ========================================================== */
+
+function deleteRecordById(
+  sheetName,
+  id
+) {
+
+  const sheet =
+    getSheet(
+      sheetName
+    );
+
+
+  const values =
+    sheet
+      .getDataRange()
+      .getValues();
+
+
+  const headers =
+    values[0] || [];
+
+
+  const idColumn =
+    findRecordIdColumn_(
+      headers
+    );
+
+
+  if (
+    idColumn === -1
+  ) {
+
+    throw new Error(
+      "ID column not found."
+    );
+
+  }
+
+
+  for (
+    let i = 1;
+    i < values.length;
+    i++
+  ) {
+
+    if (
+      String(
+        values[i][idColumn]
+      ) ===
+      String(id)
+    ) {
+
+      sheet.deleteRow(
+        i + 1
+      );
+
+
+      return true;
+
+    }
+
+  }
+
+
+  throw new Error(
+    "Record not found."
+  );
+
+}
+
+
+
+/* ==========================================================
+   BUSINESS REGISTRATION APPROVAL
+   ========================================================== */
+
+function approveBusinessRegistration(
+  registrationId
+) {
+
+  const sourceSheet =
+    getSheet(
+      CONFIG.SHEETS.BUSINESS_REGISTRATIONS
+    );
+
+
+  const targetSheet =
+    getSheet(
+      CONFIG.SHEETS.BUSINESSES
+    );
+
+
+  const values =
+    sourceSheet
+      .getDataRange()
+      .getValues();
+
+
+  if (
+    values.length < 2
+  ) {
+
+    throw new Error(
+      "No business registrations found."
+    );
+
+  }
+
+
+  const headers =
+    values[0];
+
+
+  const idColumn =
+    headers.indexOf(
+      "ID"
+    );
+
+
+  if (
+    idColumn === -1
+  ) {
+
+    throw new Error(
+      "ID column not found in Business Registrations."
+    );
+
+  }
+
+
+  for (
+    let row = 1;
+    row < values.length;
+    row++
+  ) {
+
+    if (
+      String(
+        values[row][idColumn]
+      ) !==
+      String(
+        registrationId
+      )
+    ) {
+
+      continue;
+
+    }
+
+
+    const registration = {};
+
+
+    headers.forEach(
+      function(header,index) {
+
+        registration[header] =
+          values[row][index];
+
+      }
+    );
+
+
+    const name =
+      firstValue(
+        registration,
+        [
+          "Shop / Business Name",
+          "Business Name"
+        ]
+      );
+
+
+    const phone =
+      firstValue(
+        registration,
+        [
+          "Phone",
+          "Mobile"
+        ]
+      );
+
+
+    /* Duplicate protection */
+
+    const duplicate =
+      sheetToJson(
+        CONFIG.SHEETS.BUSINESSES
+      )
+      .some(
+        function(item) {
+
+          const existingName =
+            firstValue(
+              item,
+              [
+                "Shop / Business Name",
+                "Business Name"
+              ]
+            );
+
+
+          return (
+
+            String(existingName)
+              .trim()
+              .toLowerCase()
+              ===
+            String(name)
+              .trim()
+              .toLowerCase()
+
+            &&
+
+            cleanPhoneNumber(
+              item.Phone
+            )
+            ===
+            cleanPhoneNumber(
+              phone
+            )
+
+          );
+
+        }
+      );
+
+
+    if (duplicate) {
+
+      throw new Error(
+        "This shop/business is already published."
+      );
+
+    }
+
+
+    /*
+     * Append using target headers.
+     * Existing field names are mapped automatically.
+     */
+
+    const businessData = {
+
+      businessName:
+        name,
+
+      owner:
+        firstValue(
+          registration,
+          [
+            "Owner / Contact Person",
+            "Owner Name",
+            "Owner"
+          ]
+        ),
+
+      category:
+        registration.Category ||
+        "",
+
+      phone:
+        phone,
+
+      whatsapp:
+        registration.WhatsApp ||
+        phone,
+
+      ward:
+        registration.Ward ||
+        "",
+
+      address:
+        registration.Address ||
+        "",
+
+      description:
+        registration.Description ||
+        "",
+
+      catalogue:
+        firstValue(
+          registration,
+          [
+            "WhatsApp Catalogue Link",
+            "Catalogue URL"
+          ]
+        ),
+
+      website:
+        registration.Website ||
+        "",
+
+      map:
+        firstValue(
+          registration,
+          [
+            "Google Maps Link",
+            "Google Map Link",
+            "Map URL"
+          ]
+        ),
+
+      latitude:
+        registration.Latitude ||
+        "",
+
+      longitude:
+        registration.Longitude ||
+        "",
+
+      image:
+        firstValue(
+          registration,
+          [
+            "Business Image",
+            "Business Image URL",
+            "Image URL",
+            "Image"
+          ]
+        ),
+
+      status:
+        "Approved",
+
+      active:
+        "Yes"
+
+    };
+
+
+    const added =
+      appendRecord(
+
+        CONFIG.SHEETS.BUSINESSES,
+
+        businessData,
+
+        {
+          defaultStatus:
+            "Approved",
+
+          defaultActive:
+            "Yes"
+        }
+
+      );
+
+
+    /*
+     * Mark registration approved
+     */
+
+    changeRecordStatus(
+
+      CONFIG.SHEETS.BUSINESS_REGISTRATIONS,
+
+      registrationId,
+
+      "Approved"
+
+    );
+
+
+    return {
+
+      message:
+        "Shop / Business approved and published successfully.",
+
+      businessId:
+        added.id,
+
+      registrationId:
+        registrationId
+
+    };
+
+  }
+
+
+  throw new Error(
+    "Business registration not found."
+  );
+
+}
+
+
+
+/* ==========================================================
+   CITY CONNECT ADMIN SAVE
+   ========================================================== */
+
+function adminSaveCityConnect(
+  operation,
+  id,
+  record
+) {
+
+  const ward =
+    firstValue(
+      record,
+      [
+        "Ward",
+        "Ward Number"
+      ]
+    );
+
+
+  const link =
+    firstValue(
+      record,
+      [
+        "WhatsApp Group Link",
+        "Whatsapp Group Link",
+        "URL",
+        "Link"
+      ]
+    );
+
+
+  let key;
+
+
+  if (
+    String(id)
+      .toUpperCase() ===
+      "COMMUNITY"
+    ||
+    String(ward)
+      .toLowerCase()
+      .indexOf("community") !== -1
+  ) {
+
+    key =
+      "CITY_CONNECT_COMMUNITY";
+
+  }
+
+  else {
+
+    let number =
+      String(
+        ward || id
+      )
+      .match(
+        /\d+/
+      );
+
+
+    number =
+      number
+        ? parseInt(
+            number[0],
+            10
+          )
+        : 0;
+
+
+    if (
+      number < 1 ||
+      number > 18
+    ) {
+
+      throw new Error(
+        "Select Ward 1 to Ward 18."
+      );
+
+    }
+
+
+    key =
+      "CITY_CONNECT_S" +
+      number;
+
+  }
+
+
+  setSetting(
+    key,
+    link
+  );
+
+
+  return jsonResponse({
+
+    message:
+      "City Connect link saved successfully."
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   CLEAR ALL NOTIFICATIONS
+   ========================================================== */
+
+function adminClearNotificationsApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+
+  const sheet =
+    getSheet(
+      CONFIG.SHEETS.NOTIFICATIONS
+    );
+
+
+  if (
+    sheet.getLastRow() > 1
+  ) {
+
+    sheet.deleteRows(
+      2,
+      sheet.getLastRow() - 1
+    );
+
+  }
+
+
+  return jsonResponse({
+
+    message:
+      "All notifications cleared successfully."
+
+  });
+
+}
+
+
+
+/* ==========================================================
+   LEGACY ADMIN FUNCTIONS
+
+   Kept so older calls don't break.
+   ========================================================== */
+
+function adminGetData(sheetName) {
+
+  return sheetToJson(
+    sheetName
+  );
+
+}
+
+
+function adminAddRecord(
+  sheetName,
+  data
+) {
+
+  const result =
+    appendRecord(
+
+      sheetName,
+
+      data,
+
+      {
+        defaultStatus:
+          "Active",
+
+        defaultActive:
+          "Yes"
+      }
+
+    );
+
+
+  return {
+
+    success:
+      true,
+
+    message:
+      "Record added successfully.",
+
+    id:
+      result.id
+
+  };
+
+}
+
+
+function adminUpdateRecord(
+  sheetName,
+  recordId,
+  data
+) {
+
+  updateRecordById(
+    sheetName,
+    recordId,
+    data
+  );
+
+
+  return {
+
+    success:
+      true,
+
+    message:
+      "Record updated successfully.",
+
+    id:
+      recordId
+
+  };
+
+}
+
+
+function adminChangeStatus(
+  sheetName,
+  recordId,
+  status
+) {
+
+  changeRecordStatus(
+    sheetName,
+    recordId,
+    status
+  );
+
+
+  return {
+
+    success:
+      true,
+
+    message:
+      "Status updated successfully."
+
+  };
+
+}
+
+
+function adminDeleteRecord(
+  sheetName,
+  recordId
+) {
+
+  deleteRecordById(
+    sheetName,
+    recordId
+  );
+
+
+  return {
+
+    success:
+      true,
+
+    message:
+      "Record deleted successfully."
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   TEST DATABASE
+   ========================================================== */
+
+function testDatabase() {
+
+  const database =
+    getDatabase();
+
+
+  const sheets =
+    database
+      .getSheets()
+      .map(
+        function(sheet) {
+
+          return {
+
+            name:
+              sheet.getName(),
+
+            rows:
+              Math.max(
+                0,
+                sheet.getLastRow() - 1
+              )
+
+          };
+
+        }
+      );
+
+
+  const result = {
+
+    success:
+      true,
+
+    database:
+      database.getName(),
+
+    sheets:
+      sheets
+
+  };
+
+
+  Logger.log(
+    JSON.stringify(
+      result,
+      null,
+      2
+    )
+  );
+
+
+  return result;
+
+}
+
+
+
+/* ==========================================================
+   TEST FULL SURSAND CONNECT
+   ========================================================== */
+
+function testSursandConnect() {
+
+  const result = {
+
+    app:
+      CONFIG.APP_NAME,
+
+    database:
+      getDatabase().getName(),
+
+    configuredSheets:
+      {},
+
+    status:
+      "OK"
+
+  };
+
+
+  Object
+    .keys(
+      CONFIG.SHEETS
+    )
+    .forEach(
+      function(key) {
+
+        const sheetName =
+          CONFIG.SHEETS[
+            key
+          ];
+
+
+        const sheet =
+          getSheetIfExists(
+            sheetName
+          );
+
+
+        result
+          .configuredSheets[
+            sheetName
+          ] = {
+
+            found:
+              !!sheet,
+
+            rows:
+              sheet
+                ? Math.max(
+                    0,
+                    sheet.getLastRow() - 1
+                  )
+                : 0
+
+          };
+
+
+        if (!sheet) {
+
+          result.status =
+            "CHECK REQUIRED";
+
+        }
+
+      }
+    );
+
+
+  Logger.log(
+    JSON.stringify(
+      result,
+      null,
+      2
+    )
+  );
+
+
+  return result;
+
+}
+
+
+
+/* ==========================================================
+   PASSWORD SETUP HELPER
+
+   OPTIONAL:
+   Run this ONLY when you intentionally want to
+   configure/change admin credentials.
+
+   Example:
+   setupAdminLogin("admin","MyStrongPassword123");
+   ========================================================== */
+
+function setupAdminLogin(
+  adminUser,
+  adminPassword
+) {
+
+  if (
+    !adminUser ||
+    !adminPassword
+  ) {
+
+    throw new Error(
+      "Admin user and password are required."
+    );
+
+  }
+
+
+  const properties =
+    PropertiesService
+      .getScriptProperties();
+
+
+  properties.setProperty(
+
+    "SC_ADMIN_USER",
+
+    String(
+      adminUser
+    )
+
+  );
+
+
+  properties.setProperty(
+
+    "SC_ADMIN_PASSWORD_HASH",
+
+    hashAdminPassword(
+      adminPassword
+    )
+
+  );
+
+
+  return {
+
+    success:
+      true,
+
+    message:
+      "Admin login configured successfully."
+
+  };
+
+}
+
+
+
+/* ==========================================================
+   END OF SURSAND CONNECT BACKEND
+   ========================================================== */
+
+/* ==========================================================
+   ADMIN BULK UPDATE
+   ========================================================== */
+
+function adminBulkUpdateApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+  const section =
+    String(
+      data.section || ""
+    ).trim();
+
+  const operation =
+    String(
+      data.operation || ""
+    ).trim().toLowerCase();
+
+  const ids =
+    Array.isArray(
+      data.ids
+    )
+      ? data.ids
+      : [];
+
+  if (
+    operation !== "approve" &&
+    operation !== "reject"
+  ) {
+    throw new Error(
+      "Bulk operation must be approve or reject."
+    );
+  }
+
+  if (!ids.length) {
+    throw new Error(
+      "No records selected."
+    );
+  }
+
+  let completed = 0;
+  let failed = 0;
+
+  ids.forEach(function(id) {
+
+    try {
+
+      const result =
+        adminUpdateApi({
+          token:
+            data.token,
+          section:
+            section,
+          operation:
+            operation,
+          id:
+            id
+        });
+
+      if (result) {
+        completed++;
+      }
+
+    }
+    catch(error) {
+      failed++;
+    }
+  });
+
+  return jsonResponse({
+    message:
+      completed +
+      " record(s) " +
+      operation +
+      "d successfully" +
+      (
+        failed
+          ? "; " +
+            failed +
+            " failed."
+          : "."
+      ),
+    completed:
+      completed,
+    failed:
+      failed
+  });
+}
+
+
+/* ==========================================================
+   CHANGE ADMIN PASSWORD
+   ========================================================== */
+
+function adminChangePasswordApi(data) {
+
+  verifyAdminSession(
+    data.token
+  );
+
+  const properties =
+    PropertiesService
+      .getScriptProperties();
+
+  const adminUser =
+    properties.getProperty(
+      "SC_ADMIN_USER"
+    );
+
+  if (
+    !verifyAdminLogin(
+      adminUser,
+      data.currentPassword
+    )
+  ) {
+    throw new Error(
+      "Current admin password is incorrect."
+    );
+  }
+
+  const newPassword =
+    String(
+      data.newPassword || ""
+    );
+
+  if (
+    newPassword.length < 6
+  ) {
+    throw new Error(
+      "New password must contain at least 6 characters."
+    );
+  }
+
+  properties.setProperty(
+    "SC_ADMIN_PASSWORD_HASH",
+    hashAdminPassword(
+      newPassword
+    )
+  );
+
+  return jsonResponse({
+    message:
+      "Admin password updated successfully."
+  });
+}
+
