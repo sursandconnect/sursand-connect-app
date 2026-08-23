@@ -1,196 +1,143 @@
 
 (function(){
-  const SC_LANG_KEY='scLanguage';
-  const SC_THEME_KEY='scTheme';
+  const MAP = {"Your Local Digital Community": "आपका स्थानीय डिजिटल समुदाय", "Home": "होम", "Shop": "दुकान", "Services": "सेवाएं", "Events": "कार्यक्रम", "Menu": "मेनू", "All Settings": "सभी सेटिंग्स", "Settings": "सेटिंग्स", "Notifications": "सूचनाएं", "Contact Us": "संपर्क करें", "Share Sursand Connect App": "सुरसंड कनेक्ट ऐप साझा करें", "Language": "भाषा", "Theme": "थीम", "Light": "लाइट", "Dark": "डार्क", "Login / Sign Up": "लॉग इन / साइन अप", "Search": "खोजें", "Call": "कॉल", "Message": "संदेश", "WhatsApp": "व्हाट्सऐप", "Get Directions": "दिशा प्राप्त करें", "Directions": "दिशा", "Know More": "और जानें", "View Info": "जानकारी देखें", "View All": "सभी देखें", "Clear All": "सभी साफ करें", "Submit": "जमा करें", "Send": "भेजें", "Close": "बंद करें", "Cancel": "रद्द करें", "Save": "सहेजें", "Share": "साझा करें", "Loading...": "लोड हो रहा है...", "All": "सभी", "Name": "नाम", "Full Name *": "पूरा नाम *", "Your Name *": "आपका नाम *", "Mobile Number *": "मोबाइल नंबर *", "WhatsApp Number": "व्हाट्सऐप नंबर", "Phone": "फोन", "Mobile": "मोबाइल", "Email": "ईमेल", "Address": "पता", "Address *": "पता *", "Location": "स्थान", "Ward": "वार्ड", "Ward *": "वार्ड *", "Select Ward": "वार्ड चुनें", "Date": "तारीख", "Time": "समय", "Category": "श्रेणी", "Description": "विवरण", "Type": "प्रकार", "Area": "क्षेत्र", "Experience": "अनुभव", "Availability": "उपलब्धता", "Website": "वेबसाइट", "Visit Website": "वेबसाइट देखें", "Open Website": "वेबसाइट खोलें", "Register": "पंजीकरण", "Important:": "महत्वपूर्ण:", "Note:": "नोट:", "Welcome to Sursand": "सुरसंड में आपका स्वागत है", "Sursand,": "सुरसंड,", "Connected in One Place.": "अब सब कुछ एक जगह।", "Quick Services": "त्वरित सेवाएं", "Useful services for everyday life in Sursand": "सुरसंड में रोजमर्रा की उपयोगी सेवाएं", "Join Community": "समुदाय से जुड़ें", "Become a Change Maker for Sursand": "सुरसंड के लिए चेंज मेकर बनें", "Add Business": "व्यवसाय जोड़ें", "Free local shop & business registration": "स्थानीय दुकान व व्यवसाय का निःशुल्क पंजीकरण", "Charity": "चैरिटी", "Donate money or request goods pickup": "राशि दान करें या सामान पिकअप बुक करें", "Businesses": "व्यवसाय", "Find local shops and businesses": "स्थानीय दुकानें और व्यवसाय खोजें", "Local events, notices and announcements": "स्थानीय कार्यक्रम, सूचनाएं और घोषणाएं", "Emergency": "आपातकाल", "Important emergency helplines": "महत्वपूर्ण आपातकालीन हेल्पलाइन", "Healthcare": "स्वास्थ्य सेवा", "Doctors, labs & medicine": "डॉक्टर, जांच और दवा", "Education": "शिक्षा", "Schools & learning": "स्कूल और शिक्षा", "Representatives": "प्रतिनिधि", "Chairman, Vice Chairman & wards": "चेयरमैन, वाइस चेयरमैन और वार्ड", "Important Places": "महत्वपूर्ण स्थान", "Important local locations": "स्थानीय महत्वपूर्ण स्थान", "Transport": "परिवहन", "Routes, timings & fares": "रूट, समय और किराया", "Government Offices": "सरकारी कार्यालय", "Public offices & directions": "सरकारी कार्यालय और दिशा", "Useful Websites": "उपयोगी वेबसाइटें", "Government & useful links": "सरकारी व उपयोगी लिंक", "Jobs": "नौकरियां", "Local & employment updates": "स्थानीय व रोजगार अपडेट", "Weather & Forecast": "मौसम व पूर्वानुमान", "Weather and local information": "मौसम और स्थानीय जानकारी", "News & Updates": "समाचार व अपडेट", "Loading latest updates...": "नवीनतम अपडेट लोड हो रहे हैं...", "Local news and community updates will appear here.": "स्थानीय समाचार और सामुदायिक अपडेट यहां दिखाई देंगे।", "Shop Now": "खरीदारी करें", "Book Services": "सेवा बुक करें", "Complaints": "शिकायतें", "Agriculture & Farmers": "कृषि एवं किसान", "Find agriculture-related services, farmer resources, input suppliers, schemes, advisory contacts and useful information for farmers in and around Sursand.": "सुरसंड और आसपास के किसानों के लिए कृषि सेवाएं, किसान संसाधन, बीज-खाद आपूर्तिकर्ता, योजनाएं, सलाहकार संपर्क और उपयोगी जानकारी प्राप्त करें।", "Loading agriculture information...": "कृषि जानकारी लोड हो रही है...", "Find important public places, landmarks, institutions and useful locations in and around Sursand.": "सुरसंड और आसपास के महत्वपूर्ण सार्वजनिक स्थान, स्थलचिह्न, संस्थान और उपयोगी स्थान खोजें।", "Loading important places...": "महत्वपूर्ण स्थान लोड हो रहे हैं...", "Ward Representatives": "वार्ड प्रतिनिधि", "Find and contact the Chairman, Vice Chairman and all Ward Councillors of Sursand.": "सुरसंड के चेयरमैन, वाइस चेयरमैन और सभी वार्ड पार्षदों की जानकारी व संपर्क प्राप्त करें।", "Chairman & Vice Chairman": "चेयरमैन एवं वाइस चेयरमैन", "Municipal Leadership": "नगर नेतृत्व", "Loading Chairman and Vice Chairman...": "चेयरमैन और वाइस चेयरमैन की जानकारी लोड हो रही है...", "Ward Councillors": "वार्ड पार्षद", "Loading Ward Councillors...": "वार्ड पार्षदों की जानकारी लोड हो रही है...", "Notifications & Updates": "सूचनाएं एवं अपडेट", "Stay informed about important local notices, service updates, public alerts and community information.": "महत्वपूर्ण स्थानीय सूचनाओं, सेवा अपडेट, सार्वजनिक अलर्ट और सामुदायिक जानकारी से अपडेट रहें।", "Loading notifications...": "सूचनाएं लोड हो रही हैं...", "Loading notifications and updates...": "सूचनाएं और अपडेट लोड हो रहे हैं...", "Transport Information": "परिवहन जानकारी", "Find passenger and goods transport, routes, bus departure and arrival timings, stoppages and fares in Sursand.": "सुरसंड में यात्री व माल परिवहन, रूट, बस प्रस्थान और आगमन समय, ठहराव तथा किराया जानकारी प्राप्त करें।", "Service Category": "सेवा श्रेणी", "Vehicle Type": "वाहन प्रकार", "Loading transport information...": "परिवहन जानकारी लोड हो रही है...", "Find important government offices in and around Sursand, view useful office information and get directions quickly.": "सुरसंड और आसपास के महत्वपूर्ण सरकारी कार्यालय खोजें, कार्यालय संबंधी उपयोगी जानकारी देखें और तुरंत दिशा प्राप्त करें।", "Loading government offices...": "सरकारी कार्यालय लोड हो रहे हैं...", "Government Office": "सरकारी कार्यालय", "Join Change Makers Community": "चेंज मेकर्स समुदाय से जुड़ें", "Our Vision for Sursand": "सुरसंड के लिए हमारा विजन", "Clean Sursand": "स्वच्छ सुरसंड", "Green Sursand": "हरित सुरसंड", "Beautiful Sursand": "सुंदर सुरसंड", "Smart Sursand": "स्मार्ट सुरसंड", "Civic Discipline": "नागरिक अनुशासन", "Education & Awareness": "शिक्षा एवं जागरूकता", "Health & Social Action": "स्वास्थ्य एवं सामाजिक पहल", "Ideas & Innovation": "विचार एवं नवाचार", "Change Makers of Sursand": "सुरसंड के चेंज मेकर्स", "People contributing towards the positive transformation of Sursand.": "सुरसंड के सकारात्मक बदलाव में योगदान देने वाले लोग।", "Loading Change Makers...": "चेंज मेकर्स लोड हो रहे हैं...", "Become a Change Maker": "चेंज मेकर बनें", "Area of Interest *": "रुचि का क्षेत्र *", "Select your area of interest": "अपनी रुचि का क्षेत्र चुनें", "Cleanliness & Waste Management": "स्वच्छता एवं कचरा प्रबंधन", "Tree Plantation & Environment": "वृक्षारोपण एवं पर्यावरण", "Town Beautification": "नगर सौंदर्यीकरण", "Traffic & Civic Discipline": "यातायात एवं नागरिक अनुशासन", "Health & Social Welfare": "स्वास्थ्य एवं सामाजिक कल्याण", "Digital & Smart Town Initiatives": "डिजिटल एवं स्मार्ट टाउन पहल", "Public Places Improvement": "सार्वजनिक स्थान सुधार", "Events & Campaigns": "कार्यक्रम एवं अभियान", "Other": "अन्य", "Occupation": "व्यवसाय / पेशा", "Your Idea / Message": "आपका विचार / संदेश", "Join Change Makers": "चेंज मेकर्स से जुड़ें", "Weather & Local Information": "मौसम एवं स्थानीय जानकारी", "Live weather, five-day forecast, temperature trends and useful local information for Sursand.": "सुरसंड का लाइव मौसम, पांच दिन का पूर्वानुमान, तापमान रुझान और उपयोगी स्थानीय जानकारी देखें।", "Sursand Weather": "सुरसंड का मौसम", "LIVE": "लाइव", "Loading current weather...": "वर्तमान मौसम लोड हो रहा है...", "5-Day Temperature Trend": "5-दिन का तापमान रुझान", "Maximum / Minimum": "अधिकतम / न्यूनतम", "Maximum": "अधिकतम", "Minimum": "न्यूनतम", "Weather Snapshot": "मौसम का संक्षिप्त विवरण", "Current": "वर्तमान", "5-Day Forecast": "5-दिन का पूर्वानुमान", "Local Information": "स्थानीय जानकारी", "Useful local facilities and information for Sursand residents.": "सुरसंड निवासियों के लिए उपयोगी स्थानीय सुविधाएं और जानकारी।", "Loading local information...": "स्थानीय जानकारी लोड हो रही है...", "Sursand Local Map": "सुरसंड स्थानीय मानचित्र", "Explore Sursand on the map and quickly find roads, neighbourhoods, landmarks and useful locations.": "मानचित्र पर सुरसंड देखें और सड़कें, मोहल्ले, स्थलचिह्न तथा उपयोगी स्थान तुरंत खोजें।", "Explore Sursand": "सुरसंड देखें", "Navigate Sursand and surrounding areas using the interactive map.": "इंटरैक्टिव मानचित्र की मदद से सुरसंड और आसपास के क्षेत्रों में दिशा देखें।", "Open in Google Maps": "Google Maps में खोलें", "Looking for a specific place?": "किसी खास स्थान की तलाश है?", "Emergency Services": "आपातकालीन सेवाएं", "Important emergency and public-help contacts for residents of Sursand. Tap a button to call directly.": "सुरसंड निवासियों के लिए महत्वपूर्ण आपातकालीन और सार्वजनिक सहायता संपर्क। सीधे कॉल करने के लिए बटन दबाएं।", "Police Emergency": "पुलिस आपातकाल", "For immediate police assistance and emergencies.": "तत्काल पुलिस सहायता और आपात स्थिति के लिए।", "Ambulance": "एम्बुलेंस", "Emergency ambulance and medical assistance.": "आपातकालीन एम्बुलेंस और चिकित्सा सहायता।", "Fire Emergency": "अग्निशमन आपातकाल", "For fire and rescue emergencies.": "आग और बचाव संबंधी आपात स्थिति के लिए।", "Women Helpline": "महिला हेल्पलाइन", "Emergency assistance and support for women.": "महिलाओं के लिए आपातकालीन सहायता और सहयोग।", "Child Helpline": "बाल हेल्पलाइन", "National Emergency": "राष्ट्रीय आपातकाल", "City Connect WhatsApp Community": "सिटी कनेक्ट व्हाट्सऐप कम्युनिटी", "Join City Connect WhatsApp Community": "सिटी कनेक्ट व्हाट्सऐप कम्युनिटी से जुड़ें", "Join Your Ward Group": "अपने वार्ड समूह से जुड़ें", "Book Local Services": "स्थानीय सेवाएं बुक करें", "Select the service you need and view only the available service providers for that service.": "अपनी आवश्यक सेवा चुनें और उसी सेवा के उपलब्ध प्रदाता देखें।", "Service Providers": "सेवा प्रदाता", "Available providers for the selected service": "चयनित सेवा के उपलब्ध प्रदाता", "Back to Services": "सेवाओं पर वापस जाएं", "Send Service Request": "सेवा अनुरोध भेजें", "Send your work requirement directly to the service provider.": "अपनी काम की आवश्यकता सीधे सेवा प्रदाता को भेजें।", "Issue / Work Required *": "समस्या / आवश्यक काम *", "Upload Issue Image": "समस्या की तस्वीर अपलोड करें", "Upload Photo": "फोटो अपलोड करें", "Important Contacts": "महत्वपूर्ण संपर्क", "Find useful local, public-service and emergency contact information for Sursand in one place.": "सुरसंड के उपयोगी स्थानीय, सार्वजनिक सेवा और आपातकालीन संपर्क एक ही स्थान पर प्राप्त करें।", "Loading important contacts...": "महत्वपूर्ण संपर्क लोड हो रहे हैं...", "Healthcare Services": "स्वास्थ्य सेवाएं", "Find hospitals, clinics and doctors in Sursand. Check doctor speciality, qualification and availability, or request doorstep diagnostics and medicine delivery.": "सुरसंड में अस्पताल, क्लिनिक और डॉक्टर खोजें। डॉक्टर की विशेषज्ञता, योग्यता और उपलब्धता देखें या घर पर जांच और दवा डिलीवरी का अनुरोध करें।", "Pathology & Diagnostics": "पैथोलॉजी एवं जांच", "Request the tied-up pathologist for doorstep sample collection for required tests.": "आवश्यक जांच के लिए संबद्ध पैथोलॉजिस्ट से घर पर नमूना संग्रह का अनुरोध करें।", "Doorstep Collection": "घर से नमूना संग्रह", "Call Pathologist": "पैथोलॉजिस्ट को कॉल करें", "Get Medicine": "दवा मंगाएं", "Upload a prescription or enter medicine names and request doorstep delivery.": "प्रिस्क्रिप्शन अपलोड करें या दवाओं के नाम दर्ज कर घर तक डिलीवरी का अनुरोध करें।", "Minimum Purchase ₹300": "न्यूनतम खरीद ₹300", "Facility Type": "सुविधा प्रकार", "Medical System / Doctor Category": "चिकित्सा पद्धति / डॉक्टर श्रेणी", "Loading healthcare services...": "स्वास्थ्य सेवाएं लोड हो रही हैं...", "Schools & Education": "स्कूल एवं शिक्षा", "Find schools, colleges, coaching centres and other educational institutions in and around Sursand.": "सुरसंड और आसपास के स्कूल, कॉलेज, कोचिंग सेंटर और अन्य शैक्षणिक संस्थान खोजें।", "Loading educational institutions...": "शैक्षणिक संस्थान लोड हो रहे हैं...", "Shop / Business Registration": "दुकान / व्यवसाय पंजीकरण", "Register Your Shop / Business": "अपनी दुकान / व्यवसाय पंजीकृत करें", "Complete the details below.": "नीचे दिए गए विवरण भरें।", "Shop / Business Name *": "दुकान / व्यवसाय का नाम *", "Owner / Contact Person *": "मालिक / संपर्क व्यक्ति *", "Business Category *": "व्यवसाय श्रेणी *", "Select Business Category": "व्यवसाय श्रेणी चुनें", "Sursand Connect Office": "सुरसंड कनेक्ट कार्यालय", "Call Us": "हमें कॉल करें", "Call Now": "अभी कॉल करें", "Email Us": "हमें ईमेल करें", "Government Services": "सरकारी सेवाएं", "Find useful government services, official portals, citizen facilities, schemes and public-service information.": "उपयोगी सरकारी सेवाएं, आधिकारिक पोर्टल, नागरिक सुविधाएं, योजनाएं और सार्वजनिक सेवा जानकारी प्राप्त करें।", "Loading government services...": "सरकारी सेवाएं लोड हो रही हैं...", "Jobs & Employment": "नौकरियां एवं रोजगार", "Find local jobs, vacancies, part-time work, apprenticeships and employment opportunities in and around Sursand.": "सुरसंड और आसपास स्थानीय नौकरियां, रिक्तियां, पार्ट-टाइम काम, अप्रेंटिसशिप और रोजगार अवसर खोजें।", "Loading job opportunities...": "रोजगार अवसर लोड हो रहे हैं...", "Citizen Complaint": "नागरिक शिकायत", "Book a Complaint": "शिकायत दर्ज करें", "Issue Category *": "समस्या श्रेणी *", "Select issue": "समस्या चुनें", "Road / Pothole": "सड़क / गड्ढा", "Drainage / Waterlogging": "नाली / जलजमाव", "Garbage / Sanitation": "कचरा / स्वच्छता", "Street Light": "स्ट्रीट लाइट", "Drinking Water": "पेयजल", "Public Toilet": "सार्वजनिक शौचालय", "Encroachment": "अतिक्रमण", "Stray Animals": "आवारा पशु", "Public Safety": "सार्वजनिक सुरक्षा", "Other Civic Issue": "अन्य नागरिक समस्या", "Priority": "प्राथमिकता", "Normal": "सामान्य", "Urgent": "जरूरी", "Very Urgent": "अत्यंत जरूरी", "Issue / Subject *": "समस्या / विषय *", "Description *": "विवरण *", "Landmark": "नजदीकी पहचान", "Use Current Location": "वर्तमान स्थान लें", "Open Maps": "मैप खोलें", "Complaint Prepared": "शिकायत तैयार है", "Chairman": "चेयरमैन", "Vice Chairman": "वाइस चेयरमैन", "Send Complaint": "शिकायत भेजें", "Events & Announcements": "कार्यक्रम एवं घोषणाएं", "Festivals & Fairs": "त्योहार एवं मेले", "Camps & Drives": "शिविर एवं अभियान", "Announcements": "घोषणाएं", "Greetings & Important Days": "शुभकामनाएं एवं महत्वपूर्ण दिवस", "Loading events and announcements...": "कार्यक्रम और घोषणाएं लोड हो रहे हैं...", "Charity & Donations": "चैरिटी एवं दान", "Donate Us": "दान करें", "Donate Goods": "सामान दान करें", "Doorstep Goods Collection": "घर से दान सामग्री संग्रह", "Pickup Address *": "पिकअप पता *", "Goods Category *": "सामान की श्रेणी *", "Select": "चुनें", "Clothes": "कपड़े", "Books / Stationery": "किताबें / स्टेशनरी", "Utensils": "बर्तन", "Furniture": "फर्नीचर", "Preferred Pickup Date": "पसंदीदा पिकअप तारीख", "Preferred Pickup Time": "पसंदीदा पिकअप समय", "Upload Goods Image": "सामान की तस्वीर अपलोड करें", "Local Business Directory": "स्थानीय व्यवसाय निर्देशिका", "All 50 categories are always available.": "सभी 50 श्रेणियां हमेशा उपलब्ध हैं।", "Businesses available in this category": "इस श्रेणी में उपलब्ध व्यवसाय", "Back to Categories": "श्रेणियों पर वापस जाएं", "Personalise your Sursand Connect app experience.": "अपने सुरसंड कनेक्ट ऐप अनुभव को अपनी पसंद के अनुसार सेट करें।", "App navigation language": "ऐप की भाषा", "Appearance": "दिखावट", "Open Notifications & Updates": "सूचनाएं एवं अपडेट खोलें", "Account": "खाता", "Public features do not require an account. Account services can be connected later without changing the public app.": "सार्वजनिक सुविधाओं के लिए खाते की आवश्यकता नहीं है। खाता सेवाएं बाद में जोड़ी जा सकती हैं।", "Share App": "ऐप साझा करें", "Share Sursand Connect": "सुरसंड कनेक्ट साझा करें", "About | Sursand Connect": "हमारे बारे में | Sursand Connect", "About Sursand Connect": "सुरसंड कनेक्ट के बारे में", "A local digital platform designed to bring useful information, local services, community connections and digital facilities of Sursand together in one place.": "सुरसंड की उपयोगी जानकारी, स्थानीय सेवाएं, सामुदायिक संपर्क और डिजिटल सुविधाएं एक ही स्थान पर उपलब्ध कराने के लिए बनाया गया स्थानीय डिजिटल मंच।", "What is Sursand Connect?": "सुरसंड कनेक्ट क्या है?", "Sursand Connect is a community-focused digital platform created for the people of Sursand. Its purpose is to make useful local information and services easier to discover, access and use from a mobile phone or computer.": "सुरसंड कनेक्ट सुरसंड के लोगों के लिए बनाया गया समुदाय-केंद्रित डिजिटल मंच है। इसका उद्देश्य उपयोगी स्थानीय जानकारी और सेवाओं को मोबाइल फोन या कंप्यूटर से आसानी से खोजने, प्राप्त करने और उपयोग करने योग्य बनाना है।", "Instead of searching at many different places, residents can use Sursand Connect to find shops and businesses, local workers, healthcare services, schools, transport, government offices, important places, public contacts, weather, agriculture information, events and many other useful resources from one platform.": "अलग-अलग जगहों पर जानकारी खोजने के बजाय निवासी सुरसंड कनेक्ट पर दुकानों और व्यवसायों, स्थानीय कामगारों, स्वास्थ्य सेवाओं, स्कूलों, परिवहन, सरकारी कार्यालयों, महत्वपूर्ण स्थानों, सार्वजनिक संपर्कों, मौसम, कृषि जानकारी, कार्यक्रमों और कई अन्य उपयोगी संसाधनों को एक ही मंच पर पा सकते हैं।", "Our Purpose": "हमारा उद्देश्य", "Make useful and important information about Sursand easier for residents to find.": "सुरसंड से जुड़ी उपयोगी और महत्वपूर्ण जानकारी निवासियों के लिए आसानी से उपलब्ध कराना।", "Community Connection": "सामुदायिक जुड़ाव", "Help people connect with local businesses, services, representatives and community resources.": "लोगों को स्थानीय व्यवसायों, सेवाओं, प्रतिनिधियों और सामुदायिक संसाधनों से जोड़ने में सहायता करना।", "Smart Digital Access": "सरल डिजिटल पहुंच", "Make everyday local information and services easily accessible through a simple mobile-friendly platform.": "सरल और मोबाइल-अनुकूल मंच के माध्यम से रोजमर्रा की स्थानीय जानकारी और सेवाओं तक आसान पहुंच उपलब्ध कराना।", "What You Can Find on Sursand Connect": "सुरसंड कनेक्ट पर क्या-क्या मिलेगा", "Shops & Businesses": "दुकानें एवं व्यवसाय", "Discover local shops and businesses, call directly, shop through available catalogues and get directions.": "स्थानीय दुकानें और व्यवसाय खोजें, सीधे कॉल करें, उपलब्ध कैटलॉग से खरीदारी करें और दिशा प्राप्त करें।", "Local Service Persons": "स्थानीय सेवा प्रदाता", "Find electricians, plumbers, masons, carpenters, welders and other skilled service persons.": "इलेक्ट्रीशियन, प्लम्बर, मिस्त्री, बढ़ई, वेल्डर और अन्य कुशल सेवा प्रदाता खोजें।", "Find hospitals, clinics, doctors, diagnostic services and medicine-related facilities.": "अस्पताल, क्लिनिक, डॉक्टर, जांच सेवाएं और दवा संबंधी सुविधाएं खोजें।", "Explore schools, educational institutions and useful education-related information.": "स्कूल, शैक्षणिक संस्थान और उपयोगी शिक्षा संबंधी जानकारी देखें।", "Find buses and other transport options, routes, stops, timings and available fare information.": "बस और अन्य परिवहन विकल्प, रूट, स्टॉप, समय और उपलब्ध किराया जानकारी खोजें।", "Emergency & Important Contacts": "आपातकालीन एवं महत्वपूर्ण संपर्क", "Quickly access useful emergency, public-service and important contact numbers.": "उपयोगी आपातकालीन, सार्वजनिक सेवा और महत्वपूर्ण संपर्क नंबर तुरंत प्राप्त करें।", "Find government offices, contact information and directions to important public offices.": "सरकारी कार्यालय, संपर्क जानकारी और महत्वपूर्ण सार्वजनिक कार्यालयों की दिशा प्राप्त करें।", "Access information about government services, schemes, certificates and official portals.": "सरकारी सेवाओं, योजनाओं, प्रमाणपत्रों और आधिकारिक पोर्टलों की जानकारी प्राप्त करें।", "Explore useful places and landmarks with information and Google Maps directions.": "उपयोगी स्थानों और प्रमुख स्थलों की जानकारी तथा Google Maps दिशा देखें।", "Explore Sursand and surrounding areas through the interactive local map.": "इंटरैक्टिव स्थानीय मानचित्र से सुरसंड और आसपास के क्षेत्रों को देखें।", "Stay informed about festivals, fairs, camps, campaigns, programmes and local announcements.": "त्योहारों, मेलों, शिविरों, अभियानों, कार्यक्रमों और स्थानीय घोषणाओं की जानकारी प्राप्त करें।", "Join the main City Connect community and ward-based WhatsApp groups.": "मुख्य सिटी कनेक्ट कम्युनिटी और वार्ड-आधारित व्हाट्सऐप समूहों से जुड़ें।", "Find Chairman, Vice Chairman and all Ward Councillors with direct contact options.": "चेयरमैन, वाइस चेयरमैन और सभी वार्ड पार्षदों की जानकारी तथा सीधे संपर्क विकल्प प्राप्त करें।", "View current Sursand weather, forecast, temperature trends and useful local information.": "सुरसंड का वर्तमान मौसम, पूर्वानुमान, तापमान रुझान और उपयोगी स्थानीय जानकारी देखें।", "Access useful agricultural services, farmer resources and related information.": "उपयोगी कृषि सेवाएं, किसान संसाधन और संबंधित जानकारी प्राप्त करें।", "Quickly open Bihar Government, Government of India, public-service and popular online shopping websites.": "बिहार सरकार, भारत सरकार, सार्वजनिक सेवा और लोकप्रिय ऑनलाइन शॉपिंग वेबसाइटें तुरंत खोलें।", "Access charitable initiatives, donation facilities and available doorstep goods-donation services.": "चैरिटी पहल, दान सुविधाएं और उपलब्ध घर-घर दान सामग्री संग्रह सेवाएं प्राप्त करें।", "Receive and access important local notices, alerts and updates.": "महत्वपूर्ण स्थानीय सूचनाएं, अलर्ट और अपडेट प्राप्त करें।", "For Local Shops & Businesses": "स्थानीय दुकानों एवं व्यवसायों के लिए", "Local shops and businesses can submit their information for registration on Sursand Connect. Business registration is free and listings are published after review and approval.": "स्थानीय दुकानें और व्यवसाय सुरसंड कनेक्ट पर पंजीकरण के लिए अपनी जानकारी जमा कर सकते हैं। व्यवसाय पंजीकरण निःशुल्क है और समीक्षा व स्वीकृति के बाद सूची प्रकाशित की जाती है।", "Business owners can provide their shop/business details, image, contact information, catalogue and exact location so residents can discover them more easily.": "व्यवसाय मालिक अपनी दुकान/व्यवसाय का विवरण, तस्वीर, संपर्क जानकारी, कैटलॉग और सटीक स्थान दे सकते हैं ताकि निवासी उन्हें आसानी से खोज सकें।", "Information": "जानकारी", "Change Makers Community": "चेंज मेकर्स समुदाय", "Together for a Better Sursand": "बेहतर सुरसंड के लिए साथ मिलकर", "The Change Makers Community brings together people who want to contribute their ideas, time, skills and positive efforts towards improving Sursand.": "चेंज मेकर्स समुदाय उन लोगों को जोड़ता है जो सुरसंड को बेहतर बनाने के लिए अपने विचार, समय, कौशल और सकारात्मक प्रयास देना चाहते हैं।", "The vision is to encourage citizen participation and collective action to make Sursand": "हमारा विजन नागरिक भागीदारी और सामूहिक प्रयास को बढ़ावा देकर सुरसंड को", "smart, clean, green, beautiful and a model town.": "स्मार्ट, स्वच्छ, हरित, सुंदर और आदर्श नगर बनाना है।", "Clean": "स्वच्छ", "Green": "हरित", "Beautiful": "सुंदर", "Smart": "स्मार्ट", "Model Town": "आदर्श नगर", "Community Participation": "सामुदायिक भागीदारी", "Sursand Connect is designed to become more useful through responsible community participation. Residents can help by sharing accurate local information, informing us about updates and participating in constructive initiatives for the town.": "सुरसंड कनेक्ट को जिम्मेदार सामुदायिक भागीदारी से और अधिक उपयोगी बनाने के लिए तैयार किया गया है। निवासी सही स्थानीय जानकारी साझा करके, अपडेट की सूचना देकर और नगर के लिए रचनात्मक पहलों में भाग लेकर सहयोग कर सकते हैं।", "People who want to actively contribute towards the improvement of Sursand can join the": "जो लोग सुरसंड के सुधार में सक्रिय रूप से योगदान देना चाहते हैं, वे", "Our Goal:": "हमारा लक्ष्य:", "Bring useful information, local services and community participation together through technology while encouraging collective efforts to make Sursand a smarter, cleaner, greener, more beautiful and model town.": "तकनीक के माध्यम से उपयोगी जानकारी, स्थानीय सेवाएं और सामुदायिक भागीदारी को एक साथ लाना तथा सामूहिक प्रयासों से सुरसंड को अधिक स्मार्ट, स्वच्छ, हरित, सुंदर और आदर्श नगर बनाना।", "Our Approach": "हमारा दृष्टिकोण", "Sursand Connect aims to remain simple, useful and easy to access. The platform focuses on practical information and services that can make everyday life easier for residents while strengthening the connection between citizens, businesses, services and the community.": "सुरसंड कनेक्ट का उद्देश्य सरल, उपयोगी और आसानी से उपलब्ध रहना है। यह मंच ऐसी व्यावहारिक जानकारी और सेवाओं पर केंद्रित है जो निवासियों की रोजमर्रा की जिंदगी को आसान बनाते हुए नागरिकों, व्यवसायों, सेवाओं और समुदाय के बीच जुड़ाव मजबूत कर सके।", "Built for Sursand.": "सुरसंड के लिए बनाया गया।", "Designed to be mobile-friendly today and suitable for expansion into a dedicated mobile application in the future.": "आज मोबाइल-अनुकूल और भविष्य में समर्पित मोबाइल एप्लिकेशन के रूप में विस्तार योग्य बनाया गया है।", "Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.": "स्थानीय व्यवसाय, सेवाएं, कार्यक्रम, घोषणाएं, आपातकालीन संपर्क और समुदाय की उपयोगी जानकारी — सब कुछ सुरसंड कनेक्ट पर पाएं।", "Join the Change Makers community and become part of a citizen-led effort to make Sursand smarter, cleaner, greener, more beautiful and a model town.": "चेंज मेकर्स समुदाय से जुड़ें और सुरसंड को अधिक स्मार्ट, स्वच्छ, हरित, सुंदर और आदर्श नगर बनाने के नागरिक प्रयास का हिस्सा बनें।", "Change Makers are residents and well-wishers who want to contribute their ideas, time, knowledge and positive efforts towards the improvement of Sursand. The goal is to encourage civic responsibility and collective action for a better, smarter and more beautiful town.": "चेंज मेकर्स वे निवासी और शुभचिंतक हैं जो सुरसंड के सुधार के लिए अपने विचार, समय, ज्ञान और सकारात्मक प्रयास देना चाहते हैं। उद्देश्य नागरिक जिम्मेदारी और सामूहिक प्रयास को बढ़ावा देकर बेहतर, स्मार्ट और सुंदर नगर बनाना है।", "Cleanliness, waste awareness and cleaner public spaces": "स्वच्छता, कचरा जागरूकता और साफ सार्वजनिक स्थान", "Plantation, environment protection and greenery": "वृक्षारोपण, पर्यावरण संरक्षण और हरियाली", "Beautification of roads, places and neighbourhoods": "सड़कों, स्थानों और मोहल्लों का सौंदर्यीकरण", "Digital ideas, innovation and smart-town initiatives": "डिजिटल विचार, नवाचार और स्मार्ट-टाउन पहल", "Traffic awareness and responsible civic behaviour": "यातायात जागरूकता और जिम्मेदार नागरिक व्यवहार", "Public awareness, learning and responsible citizenship": "जन-जागरूकता, शिक्षा और जिम्मेदार नागरिकता", "Health awareness and meaningful social initiatives": "स्वास्थ्य जागरूकता और सार्थक सामाजिक पहल", "New ideas and practical solutions for town improvement": "नगर सुधार के लिए नए विचार और व्यावहारिक समाधान", "Fill in your details to join the Change Makers Community and contribute your ideas, time, skills and efforts towards making Sursand a smart, clean, green, beautiful and model town.": "चेंज मेकर्स समुदाय से जुड़ने के लिए अपना विवरण भरें और सुरसंड को स्मार्ट, स्वच्छ, हरित, सुंदर और आदर्श नगर बनाने में अपने विचार, समय, कौशल और प्रयास दें।", "By submitting this form, you are expressing your interest in joining the Change Makers Community and contributing positively towards the improvement and development of Sursand.": "यह फॉर्म जमा करके आप चेंज मेकर्स समुदाय से जुड़ने और सुरसंड के सुधार व विकास में सकारात्मक योगदान देने की इच्छा व्यक्त कर रहे हैं।", "Sursand Connect only provides local job information. Applicants should independently verify the employer, salary, working conditions and job requirements. Avoid paying any fee unless the employer and requirement have been properly verified.": "सुरसंड कनेक्ट केवल स्थानीय नौकरी संबंधी जानकारी उपलब्ध कराता है। आवेदक नियोक्ता, वेतन, कार्य परिस्थितियों और नौकरी की आवश्यकताओं की स्वतंत्र रूप से जांच करें। नियोक्ता और आवश्यकता की उचित पुष्टि के बिना कोई शुल्क न दें।", "Stay updated with festivals, fairs, greetings, important days, public programmes, health camps, blood donation, food distribution, campaigns and community activities in Sursand.": "सुरसंड के त्योहारों, मेलों, शुभकामनाओं, महत्वपूर्ण दिवसों, सार्वजनिक कार्यक्रमों, स्वास्थ्य शिविरों, रक्तदान, भोजन वितरण, अभियानों और सामुदायिक गतिविधियों से अपडेट रहें।", "Event information may change. Please verify important dates, timings, venue and organiser details before attending.": "कार्यक्रम की जानकारी बदल सकती है। शामिल होने से पहले तारीख, समय, स्थान और आयोजक की जानकारी सत्यापित करें।", "Support charitable activities through Sewangan Charitable Trust or request doorstep collection of useful goods for donation.": "सेवांगन चैरिटेबल ट्रस्ट के माध्यम से चैरिटी गतिविधियों में सहयोग करें या उपयोगी दान सामग्री के घर से संग्रह का अनुरोध करें।", "Make a monetary donation through the official donation page.": "आधिकारिक दान पेज के माध्यम से राशि दान करें।", "Request doorstep collection of clothes, books, utensils and other useful goods.": "कपड़े, किताबें, बर्तन और अन्य उपयोगी सामान के घर से संग्रह का अनुरोध करें।", "Fill in the details below. After submission, your formatted pickup request will open in WhatsApp for Sewangan Charitable Trust.": "नीचे विवरण भरें। जमा करने के बाद आपका स्वरूपित पिकअप अनुरोध सेवांगन चैरिटेबल ट्रस्ट के व्हाट्सऐप पर खुलेगा।", "Discover shops and businesses in Sursand. All business categories are shown below, including categories where businesses have not yet been added.": "सुरसंड की दुकानें और व्यवसाय खोजें। नीचे सभी व्यवसाय श्रेणियां दिखाई गई हैं, जिनमें वे श्रेणियां भी शामिल हैं जिनमें अभी व्यवसाय नहीं जोड़े गए हैं।", "Quick access to Bihar Government services, national citizen portals, charitable resources and popular online shopping websites.": "बिहार सरकार की सेवाओं, राष्ट्रीय नागरिक पोर्टलों, चैरिटी संसाधनों और लोकप्रिय ऑनलाइन शॉपिंग वेबसाइटों तक त्वरित पहुंच।", "Important Websites": "महत्वपूर्ण वेबसाइटें", "Useful online resources for residents of Sursand, including Bihar Government services and popular shopping platforms.": "सुरसंड निवासियों के लिए उपयोगी ऑनलाइन संसाधन, जिनमें बिहार सरकार की सेवाएं और लोकप्रिय शॉपिंग प्लेटफॉर्म शामिल हैं।", "Loading useful websites...": "उपयोगी वेबसाइटें लोड हो रही हैं..."};
+  const LANG_KEY = 'scLanguage';
+  const THEME_KEY = 'scTheme';
 
-  const exact = {
-    'Your Local Digital Community':'आपका स्थानीय डिजिटल समुदाय',
-    'Home':'होम',
-    'Shop':'दुकान',
-    'Services':'सेवाएं',
-    'Events':'कार्यक्रम',
-    'Menu':'मेनू',
-    'Search':'खोजें',
-    'Back':'वापस',
-    'Call':'कॉल',
-    'Message':'संदेश',
-    'WhatsApp':'व्हाट्सऐप',
-    'Get Directions':'दिशा प्राप्त करें',
-    'Directions':'दिशा',
-    'Know More':'और जानें',
-    'View Info':'जानकारी देखें',
-    'View All':'सभी देखें',
-    'Loading...':'लोड हो रहा है...',
-    'Loading local businesses...':'स्थानीय व्यवसाय लोड हो रहे हैं...',
-    'Loading local service persons...':'स्थानीय सेवा प्रदाता लोड हो रहे हैं...',
-    'Loading events and announcements...':'कार्यक्रम और घोषणाएं लोड हो रही हैं...',
-    'Unable to load data.':'डेटा लोड नहीं हो सका।',
-    'No results found.':'कोई परिणाम नहीं मिला।',
-    'No matching result found.':'कोई मिलान परिणाम नहीं मिला।',
-    'All':'सभी',
-    'Category':'श्रेणी',
-    'Description':'विवरण',
-    'Address':'पता',
-    'Location':'स्थान',
-    'Phone':'फोन',
-    'Mobile':'मोबाइल',
-    'Email':'ईमेल',
-    'Name':'नाम',
-    'Ward':'वार्ड',
-    'Date':'तारीख',
-    'Time':'समय',
-    'Type':'प्रकार',
-    'Area':'क्षेत्र',
-    'Experience':'अनुभव',
-    'Availability':'उपलब्धता',
-    'Website':'वेबसाइट',
-    'Open Website':'वेबसाइट खोलें',
-    'Visit Website':'वेबसाइट देखें',
-    'Register':'पंजीकरण',
-    'Submit':'जमा करें',
-    'Send':'भेजें',
-    'Close':'बंद करें',
-    'Cancel':'रद्द करें',
-    'Save':'सहेजें',
-    'Share':'साझा करें',
-    'About':'हमारे बारे में',
-    'Contact Us':'संपर्क करें',
-    'Notifications':'सूचनाएं',
-    'Settings':'सेटिंग्स',
-    'Language':'भाषा',
-    'Theme':'थीम',
-    'Light':'लाइट',
-    'Dark':'डार्क',
-    'English':'English',
-    'Hindi':'हिन्दी',
-    'Join Community':'समुदाय से जुड़ें',
-    'Add Business':'व्यवसाय जोड़ें',
-    'Businesses':'व्यवसाय',
-    'Healthcare':'स्वास्थ्य सेवा',
-    'Education':'शिक्षा',
-    'Representatives':'प्रतिनिधि',
-    'Important Places':'महत्वपूर्ण स्थान',
-    'Transport':'परिवहन',
-    'Government Offices':'सरकारी कार्यालय',
-    'Useful Websites':'उपयोगी वेबसाइटें',
-    'Jobs':'नौकरियां',
-    'Weather & Forecast':'मौसम व पूर्वानुमान',
-    'Emergency':'आपातकाल',
-    'Charity':'चैरिटी',
-    'Book Services':'सेवा बुक करें',
-    'Shop Now':'खरीदारी करें',
-    'Complaints':'शिकायतें',
-    'Complaint':'शिकायत',
-    'Book Complaint':'शिकायत दर्ज करें',
-    'Citizen Complaint':'नागरिक शिकायत',
-    'Issue Category':'समस्या श्रेणी',
-    'Issue / Subject':'समस्या / विषय',
-    'Priority':'प्राथमिकता',
-    'Landmark':'नजदीकी पहचान',
-    'Use Current Location':'वर्तमान स्थान लें',
-    'Open Maps':'मैप खोलें',
-    'Upload Issue Image':'समस्या की तस्वीर अपलोड करें',
-    'Complaint Prepared':'शिकायत तैयार है',
-    'Chairman':'चेयरमैन',
-    'Vice Chairman':'वाइस चेयरमैन',
-    'Ward Councillor':'वार्ड पार्षद',
-    'Donate Us':'दान करें',
-    'Donate Goods':'सामान दान करें',
-    'Goods Donation':'सामान दान',
-    'Doorstep Goods Collection':'घर से सामान संग्रह',
-    'Upload Goods Image':'सामान की तस्वीर अपलोड करें',
-    'Preferred Pickup Date':'पसंदीदा पिकअप तारीख',
-    'Preferred Pickup Time':'पसंदीदा पिकअप समय',
-    'About Sursand Connect':'सुरसंड कनेक्ट के बारे में',
-    'Local Business Directory':'स्थानीय व्यवसाय निर्देशिका',
-    'Book Local Services':'स्थानीय सेवाएं बुक करें',
-    'Schools & Education':'स्कूल एवं शिक्षा',
-    'Healthcare Services':'स्वास्थ्य सेवाएं',
-    'Transport Information':'परिवहन जानकारी',
-    'Government Services':'सरकारी सेवाएं',
-    'Ward Representatives':'वार्ड प्रतिनिधि',
-    'City Connect WhatsApp Community':'सिटी कनेक्ट व्हाट्सऐप कम्युनिटी',
-    'Events & Announcements':'कार्यक्रम एवं घोषणाएं',
-    'Agriculture & Farmers':'कृषि एवं किसान',
-    'Important Contacts':'महत्वपूर्ण संपर्क',
-    'Weather & Local Information':'मौसम एवं स्थानीय जानकारी',
-    'Notifications & Updates':'सूचनाएं एवं अपडेट',
-    'Jobs & Employment':'नौकरियां एवं रोजगार',
-    'Emergency Services':'आपातकालीन सेवाएं'
+  function stripIconPrefix(text) {
+    const m = text.match(/^([\u{1F000}-\u{1FAFF}\u2600-\u27BF]+\s*)/u);
+    return m ? [m[1], text.slice(m[1].length)] : ['', text];
+  }
+
+  function translateValue(value) {
+    if (!value) return value;
+    const leading = value.match(/^\s*/)?.[0] || '';
+    const trailing = value.match(/\s*$/)?.[0] || '';
+    const core = value.trim();
+    if (!core) return value;
+
+    if (MAP[core]) return leading + MAP[core] + trailing;
+
+    const [icon, noIcon] = stripIconPrefix(core);
+    if (icon && MAP[noIcon]) return leading + icon + MAP[noIcon] + trailing;
+
+    // Some source pages break a sentence across lines; normalize whitespace.
+    const normalized = core.replace(/\s+/g, ' ');
+    if (MAP[normalized]) return leading + MAP[normalized] + trailing;
+
+    return value;
+  }
+
+  function translateElement(el) {
+    if (!el || el.nodeType !== 1) return;
+    if (['SCRIPT','STYLE','NOSCRIPT'].includes(el.tagName)) return;
+
+    if (el.hasAttribute('placeholder')) {
+      const p = el.getAttribute('placeholder') || '';
+      const tp = translateValue(p);
+      if (tp !== p) el.setAttribute('placeholder', tp);
+    }
+
+    if (el.hasAttribute('title')) {
+      const p = el.getAttribute('title') || '';
+      const tp = translateValue(p);
+      if (tp !== p) el.setAttribute('title', tp);
+    }
+
+    if (el.hasAttribute('aria-label')) {
+      const p = el.getAttribute('aria-label') || '';
+      const tp = translateValue(p);
+      if (tp !== p) el.setAttribute('aria-label', tp);
+    }
+  }
+
+  function translateTree(root) {
+    if ((localStorage.getItem(LANG_KEY) || 'en') !== 'hi') return;
+
+    if (root.nodeType === 1) translateElement(root);
+
+    const walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT
+    );
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+
+      if (node.nodeType === 1) {
+        translateElement(node);
+        continue;
+      }
+
+      const parent = node.parentElement;
+      if (!parent || ['SCRIPT','STYLE','NOSCRIPT'].includes(parent.tagName)) continue;
+
+      const oldText = node.nodeValue || '';
+      const newText = translateValue(oldText);
+      if (newText !== oldText) node.nodeValue = newText;
+    }
+  }
+
+  function applyTheme() {
+    const theme = localStorage.getItem(THEME_KEY) || 'light';
+    document.documentElement.classList.toggle('sc-dark', theme === 'dark');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+
+    const ts = document.getElementById('scThemeSelect') || document.getElementById('theme');
+    if (ts) ts.value = theme;
+  }
+
+  function applyLanguage() {
+    const lang = localStorage.getItem(LANG_KEY) || 'en';
+    document.documentElement.lang = lang;
+
+    if (lang === 'hi') translateTree(document.body);
+
+    const ls = document.getElementById('scLanguageSelect') || document.getElementById('lang');
+    if (ls) ls.value = lang;
+  }
+
+  window.scSetLanguage = function(value) {
+    localStorage.setItem(LANG_KEY, value);
+    // Reload from original HTML to prevent English/Hindi text mixing.
+    location.reload();
   };
 
-  const phrases = [
-    ['Search shop, business, category or location...','दुकान, व्यवसाय, श्रेणी या स्थान खोजें...'],
-    ['Search plumber, milkman, cleaner, mechanic...','प्लम्बर, दूधवाला, सफाईकर्मी, मैकेनिक खोजें...'],
-    ['Search mason, plumber, carpenter, electrician...','मिस्त्री, प्लम्बर, बढ़ई, इलेक्ट्रीशियन खोजें...'],
-    ['Search businesses, services, events...','व्यवसाय, सेवाएं और कार्यक्रम खोजें...'],
-    ['Select the service you need and view only the available service providers for that service.','अपनी आवश्यक सेवा चुनें और उसी सेवा के उपलब्ध प्रदाता देखें।'],
-    ['Discover shops and businesses in Sursand.','सुरसंड की दुकानों और व्यवसायों को खोजें।'],
-    ['Call directly, shop through WhatsApp Catalogue and find the shop location.','सीधे कॉल करें, व्हाट्सऐप कैटलॉग से खरीदारी करें और दुकान का स्थान देखें।'],
-    ['Important emergency and public-help contacts for residents of Sursand. Tap a button to call directly.','सुरसंड के निवासियों के लिए महत्वपूर्ण आपातकालीन और सार्वजनिक सहायता संपर्क। सीधे कॉल करने के लिए बटन दबाएं।'],
-    ['Find local service persons in Sursand','सुरसंड में स्थानीय सेवा प्रदाता खोजें'],
-    ['Event information may change.','कार्यक्रम की जानकारी बदल सकती है।'],
-    ['Please verify important dates, timings, venue and organiser details before attending.','शामिल होने से पहले तारीख, समय, स्थान और आयोजक की जानकारी सत्यापित करें।'],
-    ['Sursand Connect only provides local contact information.','सुरसंड कनेक्ट केवल स्थानीय संपर्क जानकारी उपलब्ध कराता है।'],
-    ['Please discuss charges, work details, availability and responsibility directly with the service person before hiring.','सेवा लेने से पहले शुल्क, काम, उपलब्धता और जिम्मेदारी सीधे सेवा प्रदाता से तय करें।'],
-    ['Your local digital community for Sursand.','सुरसंड के लिए आपका स्थानीय डिजिटल समुदाय।'],
-    ['Connecting Sursand','सुरसंड को जोड़ता डिजिटल मंच']
-  ];
+  window.scSetTheme = function(value) {
+    localStorage.setItem(THEME_KEY, value);
+    applyTheme();
+  };
 
-  function translateText(t){
-    const raw=t.trim();
-    if(!raw) return t;
-    if(exact[raw]) return t.replace(raw, exact[raw]);
-    let out=t;
-    phrases.forEach(([en,hi])=>{ if(out.includes(en)) out=out.replace(en,hi); });
-    return out;
-  }
+  window.scApplyAllPrefs = function() {
+    applyTheme();
+    applyLanguage();
+  };
 
-  function applyLang(){
-    const lang=localStorage.getItem(SC_LANG_KEY)||'en';
-    document.documentElement.lang=lang;
-    document.querySelectorAll('[data-en][data-hi]').forEach(el=>{
-      const val=lang==='hi'?el.getAttribute('data-hi'):el.getAttribute('data-en');
-      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=val;
-      else el.textContent=val;
+  // Translate content added after API data/scripts render the page.
+  const observer = new MutationObserver(function(mutations) {
+    if ((localStorage.getItem(LANG_KEY) || 'en') !== 'hi') return;
+
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1 || node.nodeType === 3) {
+          translateTree(node);
+        }
+      });
     });
-    document.querySelectorAll('[data-k]').forEach(el=>{
-      // homepage may manage its own translations
+  });
+
+  function start() {
+    window.scApplyAllPrefs();
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     });
-    if(lang==='hi'){
-      const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-      const nodes=[];
-      while(walker.nextNode()) nodes.push(walker.currentNode);
-      nodes.forEach(n=>{
-        if(n.parentElement && ['SCRIPT','STYLE'].includes(n.parentElement.tagName)) return;
-        n.nodeValue=translateText(n.nodeValue);
-      });
-      document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
-        el.placeholder=translateText(el.placeholder);
-      });
-      document.querySelectorAll('option').forEach(el=>{
-        el.textContent=translateText(el.textContent);
-      });
-      document.querySelectorAll('button,a,label,h1,h2,h3,h4,p,span,small,strong,b').forEach(el=>{
-        if(el.children.length===0) el.textContent=translateText(el.textContent);
-      });
-    }
-    const ls=document.getElementById('scLanguageSelect')||document.getElementById('lang');
-    if(ls) ls.value=lang;
   }
 
-  function applyTheme(){
-    const th=localStorage.getItem(SC_THEME_KEY)||'light';
-    document.documentElement.classList.toggle('sc-dark',th==='dark');
-    document.documentElement.classList.toggle('dark',th==='dark');
-    const ts=document.getElementById('scThemeSelect')||document.getElementById('theme');
-    if(ts) ts.value=th;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
   }
-
-  window.scSetLanguage=function(v){localStorage.setItem(SC_LANG_KEY,v);location.reload();}
-  window.scSetTheme=function(v){localStorage.setItem(SC_THEME_KEY,v);applyTheme();}
-  window.scApplyAllPrefs=function(){applyTheme();applyLang();}
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>window.scApplyAllPrefs());
-  else window.scApplyAllPrefs();
 })();
