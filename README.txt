@@ -1,25 +1,28 @@
-SURSAND CONNECT APP v6 — FULLER ENGLISH/HINDI INTERFACE
+SURSAND CONNECT APP v7
 
-WHAT CHANGED
-------------
-- About Sursand Connect page is now fully translated when Hindi is selected.
-- Major page headings, introductions, instructions, form labels, buttons, menu text,
-  notifications, complaint text, charity text and common interface text are translated.
-- Translation also watches content added later by page scripts/API rendering, so UI labels
-  created after page load can switch to Hindi.
-- Sursand Connect brand name remains unchanged.
-- Language selection is stored on the device and applies throughout the app.
-- English is restored cleanly by switching to English; the page reloads from its original HTML.
-- Offline support from v5 remains intact.
+FULL CATEGORY/SERVICE HINDI FIX
 
-IMPORTANT ABOUT SPREADSHEET DATA
---------------------------------
-App-owned/interface text is bilingual offline.
-Names, business descriptions, event descriptions and other records coming from Google Sheets
-are displayed exactly as stored in the spreadsheet unless a Hindi version of that data is
-provided. For fully bilingual database content, add Hindi columns to the corresponding Sheets.
+This version specifically adds Hindi mappings for:
+- Every one of the 50 Business Directory category cards.
+- Every Book Local Services group.
+- Every service card, including Pandit Ji / Purohit.
+- Dynamic business counts and service-provider count labels.
+- Common Events categories.
+- Healthcare categories and buttons.
+- Education categories.
+- Transport labels.
+- Government/Important Places labels.
+- Weather labels.
+- Jobs labels.
+- Charity and Complaint categories.
+- Change Makers interest categories.
+- Common dynamic UI labels rendered after Apps Script data arrives.
 
-UPLOAD
-------
-Upload every file in this ZIP to the ROOT of the existing GitHub Pages repository,
-replace existing files, commit, then reopen the app.
+The v5 offline data cache and v6 broader page translation remain active.
+
+IMPORTANT:
+Data typed by administrators/users into Google Sheets (proper names, custom descriptions,
+addresses etc.) remains exactly as entered unless Hindi versions of those records exist.
+All fixed app interface/category/service text is now mapped for English/Hindi.
+
+Upload ALL files to repository root and replace old files.
