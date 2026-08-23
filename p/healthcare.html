@@ -24,6 +24,16 @@ function scApplyPrefs(){
 }
 function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
+
+function scHcGetDoorLocation(targetId){
+ const el=document.getElementById(targetId);
+ if(!navigator.geolocation){alert('Location is not supported on this device.');return}
+ navigator.geolocation.getCurrentPosition(function(p){
+   el.value='https://www.google.com/maps?q='+p.coords.latitude+','+p.coords.longitude;
+   alert('Current location added.');
+ },function(){alert('Unable to access location. Please allow location permission.')},{enableHighAccuracy:true,timeout:12000});
+}
+
 </script>
 <style>
 .sc-pretty-back{
@@ -3984,7 +3994,9 @@ document
       mobile +
 
       "\nDelivery Address: " +
-      address;
+      address +
+      "\nLocation: " +
+      (document.getElementById("scHcMedLocation").value || "Not shared");
 
 
     if(medicineNames){
@@ -4335,4 +4347,5 @@ else{
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
+<script src="../app-notifications.js"></script>
 </body></html>

@@ -860,7 +860,7 @@ main{padding-bottom:54px!important}
 <section class="sc-br-hero">
 
   <h1>
-    🏪 Shop / Business Registration
+    🏪 Business / Service Registration
   </h1>
 
   <p>
@@ -898,7 +898,7 @@ main{padding-bottom:54px!important}
   <div class="sc-br-form-head">
 
     <h2>
-      Register Your Shop / Business
+      Register Business / Service
     </h2>
 
     <p>
@@ -914,9 +914,17 @@ main{padding-bottom:54px!important}
 
 
     <div class="sc-br-field">
+      <label>Registration Type *</label>
+      <select id="scBrRegistrationType" required onchange="scBrTypeChanged()">
+        <option value="Business">Business / Shop</option>
+        <option value="Service">Service Provider</option>
+      </select>
+    </div>
 
-      <label>
-        Shop / Business Name *
+    <div class="sc-br-field">
+
+      <label id="scBrNameLabel">
+        Business / Service Name *
       </label>
 
       <input
@@ -947,7 +955,7 @@ main{padding-bottom:54px!important}
 
     <div class="sc-br-field">
 
-      <label>
+      <label id="scBrCategoryLabel">
         Business Category *
       </label>
 
@@ -1257,7 +1265,7 @@ main{padding-bottom:54px!important}
         <input
           type="file"
           id="scBrImage"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/*" capture="environment"
           onchange="scBrPreviewImage(this)"
           required>
 
@@ -1910,6 +1918,28 @@ function scBrRemoveImage(){
 }
 
 
+
+<script>
+const SC_BR_SERVICE_TYPES=["Mason", "Construction Labour", "Carpenter", "Plumber", "Electrician", "Welder", "Painter", "Tile / Marble Fitter", "POP / False Ceiling Worker", "Aluminium / Glass Worker", "Borewell / Water Pump Mechanic", "Key Maker / Locksmith", "Septic Tank / Toilet Tank Cleaner", "Drain / Sewer Cleaner", "House Cleaner", "Pest Control Service", "Gardener / Mali", "Tree Cutting / Trimming Service", "Domestic Help / Maid", "CCTV Technician", "AC Technician", "Refrigerator Technician", "Washing Machine Technician", "Cooler Technician", "RO / Water Purifier Technician", "TV Technician", "Mobile Repair Technician", "Computer / Laptop Technician", "Printer / Photocopier Technician", "Internet / Wi-Fi Technician", "DTH / Dish TV Technician", "Bike Mechanic", "Car Mechanic", "Auto / E-rickshaw Mechanic", "Tractor Mechanic", "Tyre / Puncture Repair", "Driver", "Cycle Repair", "Rickshaw / Cart Service", "Loader / Goods Labour", "Packers & Movers", "Local Goods Delivery", "Milkman / Milk Delivery", "Newspaper Delivery", "Drinking Water / Water Jar Delivery", "LPG / Gas Delivery Contact", "Cook", "Caterer", "Waiter / Event Helper", "Tent House Service", "Decoration Service", "Lighting Decoration", "DJ / Sound Service", "Band / Music Service", "Photographer", "Videographer", "Makeup Artist", "Mehndi Artist", "Tailor", "Laundry / Dhobi", "Barber / Home Haircut", "Private Tutor / Home Tutor", "Tractor / Rotavator Service", "Harvester / Farm Machinery Service", "Pandit Ji / Purohit"];
+let SC_BR_BUSINESS_OPTIONS=[];
+document.addEventListener('DOMContentLoaded',function(){
+ const sel=document.getElementById('scBrCategory');
+ if(sel)SC_BR_BUSINESS_OPTIONS=[...sel.options].map(o=>({v:o.value,t:o.textContent}));
+});
+function scBrTypeChanged(){
+ const type=document.getElementById('scBrRegistrationType').value;
+ const sel=document.getElementById('scBrCategory');
+ const nameLabel=document.getElementById('scBrNameLabel'),catLabel=document.getElementById('scBrCategoryLabel');
+ if(type==='Service'){
+   nameLabel.textContent='Service Provider / Business Name *';catLabel.textContent='Service Type *';
+   sel.innerHTML='<option value="">Select Service Type</option>'+SC_BR_SERVICE_TYPES.map(x=>'<option>'+x+'</option>').join('');
+ }else{
+   nameLabel.textContent='Business / Service Name *';catLabel.textContent='Business Category *';
+   sel.innerHTML=SC_BR_BUSINESS_OPTIONS.map(o=>'<option value="'+o.v.replace(/"/g,'&quot;')+'">'+o.t+'</option>').join('');
+ }
+}
+</script>
+
 /* =========================================================
    SUBMIT
    ========================================================= */
@@ -1940,7 +1970,12 @@ document
     const payload = {
 
       action:
-        "registerBusiness",
+        document.getElementById("scBrRegistrationType").value === "Service"
+          ? "registerService"
+          : "registerBusiness",
+
+      registrationType:
+        document.getElementById("scBrRegistrationType").value,
 
       businessName:
         document
@@ -2065,7 +2100,7 @@ document
 
 
       status.textContent =
-        "Please select a business category.";
+        "Please select a category / service type.";
 
 
       return;
@@ -2082,7 +2117,7 @@ document
 
 
       status.textContent =
-        "Please upload a business image.";
+        "Please upload an image.";
 
 
       return;
@@ -2095,7 +2130,7 @@ document
 
 
     status.textContent =
-      "Uploading image and submitting business...";
+      "Uploading image and submitting request...";
 
 
     submit.disabled =
@@ -2154,7 +2189,7 @@ document
 
 
       status.textContent =
-        "✅ Shop / Business submitted successfully. It will appear after admin approval.";
+        "✅ Registration request submitted successfully for admin approval.";
 
 
       document.getElementById(
@@ -2207,4 +2242,5 @@ document
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
+<script src="../app-notifications.js"></script>
 </body></html>

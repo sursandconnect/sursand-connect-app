@@ -1,5 +1,5 @@
 
-const APP_CACHE = 'sursand-connect-app-v9';
+const APP_CACHE = 'sursand-connect-app-v10';
 const DATA_CACHE = 'sursand-connect-data-v1';
 
 const API_BASE =
@@ -12,6 +12,7 @@ const CORE_ASSETS = [
   './app-i18n.js',
   './app-i18n-extra.js',
   './offline-data.js',
+  './app-notifications.js',
   './home-popup.js',
   './app-account.js',
   './p/businesses.html',
@@ -217,4 +218,13 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     appCacheFirst(request)
   );
+});
+
+self.addEventListener('notificationclick',event=>{
+  event.notification.close();
+  const url=(event.notification.data&&event.notification.data.url)||'./p/events.html';
+  event.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
+    for(const c of list){if('focus'in c){c.navigate(url);return c.focus()}}
+    if(clients.openWindow)return clients.openWindow(url);
+  }));
 });

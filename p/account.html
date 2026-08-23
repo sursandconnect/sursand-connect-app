@@ -103,11 +103,11 @@ function loginUser(e){
 
  /* First check whether these are authorised administrator credentials.
     Admin access is never shown as a public menu option. */
- post({action:'adminLogin',user:login,password:password})
+ post({action:'staffAdminLogin',login:login,password:password})
  .then(r=>{
    const adminToken=r.data&&r.data.token?r.data.token:'';
    if(!adminToken) throw new Error('NO_ADMIN_TOKEN');
-   localStorage.setItem('scAdminSessionToken',adminToken);localStorage.setItem('scAdminSessionExpiresAt',String(Date.now()+Number((r.data&&r.data.expiresIn)||21600)*1000));
+   localStorage.setItem('scAdminSessionToken',adminToken);localStorage.setItem('scAdminSessionExpiresAt',String(Date.now()+Number((r.data&&r.data.expiresIn)||21600)*1000));localStorage.setItem('scAdminRole','staff');localStorage.setItem('scAdminProfile',JSON.stringify((r.data&&r.data.admin)||{}));
    loginPassword.value='';
    window.location.href='admin.html';
  })
@@ -157,5 +157,6 @@ document.addEventListener('DOMContentLoaded',checkSession);
 <script src="../app-i18n.js"></script><script src="../app-i18n-extra.js"></script><script src="../offline-data.js"></script>
 <script src="../account-admin-i18n.js"></script>
 <script src="../app-account.js"></script>
+<script src="../app-notifications.js"></script>
 </body>
 </html>

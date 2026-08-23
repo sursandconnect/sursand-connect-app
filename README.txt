@@ -1,38 +1,30 @@
-SURSAND CONNECT v9
+SURSAND CONNECT v10 — ROLE SEPARATION
 
-ADMIN SESSION
-- Admin login stays active while moving through the app until the backend session expires or Admin logs out.
-- Admin Panel appears in the app Menu ONLY while an authenticated admin session exists.
-- Public users never see the Admin Panel option.
+SUPER ADMIN / OWNER
+- Removed from the public Sursand Connect login flow.
+- Uses a separate Super Admin app.
+- Keeps complete control over all modules/data.
+- Can create/enable/disable staff admin accounts.
+- Only Super Admin can create staff admins.
 
-ACCOUNT
-- Login/Signup password fields have Show/Hide.
-- Logged-in citizens can change their password.
-- Profile picture upload is available.
-- User profile data continues to autofill matching public forms.
+STAFF ADMIN
+- Logs in from the normal Sursand Connect Login screen using Admin ID, mobile or email + password.
+- Admin Panel is visible in Menu only after a successful staff-admin login.
+- Rights are limited to:
+  1. Approve/reject Business and Service registration requests.
+  2. Add/edit Events and Announcements.
+  3. Add/edit Healthcare and Doctor content.
+  4. Add/edit Education content.
+  5. Change their own password.
+- Staff cannot delete public records.
+- Staff cannot access spreadsheets/modules outside those permissions.
+- Staff cannot create admins.
 
-ADMIN PANEL
-- 25 spreadsheet-backed modules are available from one control centre.
-- Add, Edit, Approve, Reject and Delete actions.
-- Approve All / Reject All supports selected rows or all loaded rows.
-- Every modifying action uses a confirmation popup.
-- Admin can change the admin password from the panel.
-- App Users and Local Advertisements are manageable from Admin Panel.
-- App Settings are available from Admin Panel.
-- Content changes are made from Admin Panel without manually opening Sheets.
-
-HOME POPUP
-- On app opening, the newest unseen Event or Announcement is shown once per update.
-- If there is no unseen Event/Announcement, an active Local Advertisement is shown.
-- Popup has a close button and automatically closes after 5 seconds.
-
-CLEANUP
-- Removed S Chat references and user-facing "will be added later" placeholder text.
-
-BACKEND FILES
-- Code_v9.gs.txt: full replacement for Code.gs.
-- AccountAuth.gs.txt: full replacement for AccountAuth.gs.
-- V9_Setup.gs.txt: add as a small temporary setup script and run setupSursandConnectV9() once.
-
-IMPORTANT
-Do backend replacement/setup/redeployment BEFORE uploading v9 frontend.
+BACKEND
+1. Replace Code.gs with Code_v10.gs.txt.
+2. Keep AccountAuth.gs from v9.2.
+3. Create V10_Setup.gs from V10_Setup.gs.txt.
+4. Run runSursandConnectV10Setup() once.
+5. Redeploy Apps Script.
+6. Upload this main app to the Sursand Connect repo.
+7. Upload the separate Super Admin app to a different repository/site.

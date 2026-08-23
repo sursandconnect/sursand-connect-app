@@ -1,0 +1,1049 @@
+/* =========================================================
+   SURSAND CONNECT — USER ACCOUNT BACKEND ADDON
+   Create a NEW Apps Script file named: AccountAuth.gs
+   ========================================================= */
+
+const SC_USER_SHEET = "AppUsers";
+const SC_USER_SESSION_SHEET = "AppUserSessions";
+const SC_USER_SESSION_DAYS = 30;
+
+
+/* =========================================================
+   ONE-TIME SETUP
+   Run setupUserAccountSheets() once from Apps Script.
+   ========================================================= */
+
+function setupUserAccountSheets() {
+
+  const db = getDatabase();
+
+  let users = db.getSheetByName(SC_USER_SHEET);
+
+  if (!users) {
+    users = db.insertSheet(SC_USER_SHEET);
+    users.getRange(1,1,1,15).setValues([[
+      "User ID",
+      "Name",
+      "Mobile",
+      "Email",
+      "Ward",
+      "Address",
+      "Landmark",
+      "Profile Image URL",
+      "Password Salt",
+      "Password Hash",
+      "Status",
+      "Created At",
+      "Updated At",
+      "Last Login",
+      "Role"
+    ]]);
+    users.setFrozenRows(1);
+  }
+
+  let sessions = db.getSheetByName(SC_USER_SESSION_SHEET);
+
+  if (!sessions) {
+    sessions = db.insertSheet(SC_USER_SESSION_SHEET);
+    sessions.getRange(1,1,1,5).setValues([[
+      "Token",
+      "User ID",
+      "Created At",
+      "Expires At",
+      "Active"
+    ]]);
+    sessions.setFrozenRows(1);
+  }
+
+  return true;
+}
+
+
+/* =========================================================
+   PASSWORD HELPERS
+   ========================================================= */
+
+function scUserRandomToken_() {
+  return Utilities.getUuid().replace(/-/g,"") +
+    Utilities.getUuid().replace(/-/g,"");
+}
+
+function scUserHash_(password, salt) {
+
+  let value =
+    String(salt || "") +
+    "|" +
+    String(password || "");
+
+  /*
+   * Repeated SHA-256 makes a stolen hash more expensive
+   * to brute-force than a single unsalted digest.
+   */
+  for (let i = 0; i < 1500; i++) {
+
+    const bytes =
+      Utilities.computeDigest(
+        Utilities.DigestAlgorithm.SHA_256,
+        value,
+        Utilities.Charset.UTF_8
+      );
+
+    value =
+      bytes.map(function(byte) {
+
+        const n =
+          byte < 0
+            ? byte + 256
+            : byte;
+
+        return (
+          n < 16
+            ? "0"
+            : ""
+        ) + n.toString(16);
+
+      }).join("");
+
+  }
+
+  return value;
+}
+
+function scUserCleanMobile_(value) {
+
+  let digits =
+    String(value || "")
+      .replace(/\D/g,"");
+
+  if (
+    digits.length === 12 &&
+    digits.indexOf("91") === 0
+  ) {
+    digits =
+      digits.substring(2);
+  }
+
+  return digits;
+}
+
+function scUserCleanEmail_(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase();
+}
+
+
+/* =========================================================
+   SHEET HELPERS
+   ========================================================= */
+
+function scUserRows_(sheetName) {
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(sheetName);
+
+  if (!sheet) {
+    throw new Error(
+      sheetName +
+      " sheet is missing. Run setupUserAccountSheets() once."
+    );
+  }
+
+  const values =
+    sheet.getDataRange().getValues();
+
+  if (values.length < 2) {
+    return [];
+  }
+
+  const headers = values[0];
+
+  return values
+    .slice(1)
+    .map(function(row, index) {
+
+      const obj = {
+        __row:
+          index + 2
+      };
+
+      headers.forEach(
+        function(header, col) {
+          obj[header] =
+            row[col];
+        }
+      );
+
+      return obj;
+    });
+}
+
+function scUserFindByLogin_(login) {
+
+  const raw =
+    String(login || "").trim();
+
+  const mobile =
+    scUserCleanMobile_(raw);
+
+  const email =
+    scUserCleanEmail_(raw);
+
+  return scUserRows_(
+    SC_USER_SHEET
+  ).find(function(user) {
+
+    return (
+      (
+        mobile &&
+        scUserCleanMobile_(
+          user.Mobile
+        ) === mobile
+      )
+      ||
+      (
+        email &&
+        scUserCleanEmail_(
+          user.Email
+        ) === email
+      )
+    );
+  });
+}
+
+function scUserPublic_(user) {
+
+  return {
+    id:
+      String(
+        user["User ID"] || ""
+      ),
+    name:
+      String(
+        user.Name || ""
+      ),
+    mobile:
+      String(
+        user.Mobile || ""
+      ),
+    email:
+      String(
+        user.Email || ""
+      ),
+    ward:
+      String(
+        user.Ward || ""
+      ),
+    address:
+      String(
+        user.Address || ""
+      ),
+    landmark:
+      String(
+        user.Landmark || ""
+      ),
+    profileImage:
+      String(
+        user["Profile Image URL"] || ""
+      ),
+    status:
+      String(
+        user.Status || "Active"
+      ),
+    role:
+      String(
+        user.Role || "Citizen"
+      ),
+    createdAt:
+      user["Created At"]
+        ? formatDate(
+            user["Created At"]
+          )
+        : ""
+  };
+}
+
+
+/* =========================================================
+   CREATE SESSION
+   ========================================================= */
+
+function scUserCreateSession_(userId) {
+
+  const token =
+    scUserRandomToken_();
+
+  const now =
+    new Date();
+
+  const expires =
+    new Date(
+      now.getTime() +
+      SC_USER_SESSION_DAYS *
+      24 *
+      60 *
+      60 *
+      1000
+    );
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SESSION_SHEET
+      );
+
+  sheet.appendRow([
+    token,
+    userId,
+    now,
+    expires,
+    "Yes"
+  ]);
+
+  return token;
+}
+
+
+/* =========================================================
+   VERIFY SESSION
+   ========================================================= */
+
+function scUserVerifySession_(token) {
+
+  token =
+    String(token || "").trim();
+
+  if (!token) {
+    throw new Error(
+      "Please login first."
+    );
+  }
+
+  const sessions =
+    scUserRows_(
+      SC_USER_SESSION_SHEET
+    );
+
+  const session =
+    sessions.find(function(item) {
+      return (
+        String(item.Token) === token &&
+        String(item.Active)
+          .toLowerCase() !== "no"
+      );
+    });
+
+  if (!session) {
+    throw new Error(
+      "Your login session is invalid."
+    );
+  }
+
+  const expiry =
+    new Date(
+      session["Expires At"]
+    );
+
+  if (
+    isNaN(expiry.getTime()) ||
+    expiry.getTime() <
+      Date.now()
+  ) {
+
+    const sheet =
+      getDatabase()
+        .getSheetByName(
+          SC_USER_SESSION_SHEET
+        );
+
+    sheet
+      .getRange(
+        session.__row,
+        5
+      )
+      .setValue(
+        "No"
+      );
+
+    throw new Error(
+      "Your login session has expired. Please login again."
+    );
+  }
+
+  const user =
+    scUserRows_(
+      SC_USER_SHEET
+    ).find(function(item) {
+      return (
+        String(
+          item["User ID"]
+        ) ===
+        String(
+          session["User ID"]
+        )
+      );
+    });
+
+  if (!user) {
+    throw new Error(
+      "Account not found."
+    );
+  }
+
+  const status =
+    String(
+      user.Status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+  if (
+    status === "blocked" ||
+    status === "disabled" ||
+    status === "deleted"
+  ) {
+    throw new Error(
+      "This account is currently disabled."
+    );
+  }
+
+  return {
+    session: session,
+    user: user
+  };
+}
+
+
+/* =========================================================
+   SIGN UP
+   ========================================================= */
+
+function userSignupApi(data) {
+
+  setupUserAccountSheets();
+
+  const name =
+    String(
+      data.name || ""
+    ).trim();
+
+  const mobile =
+    scUserCleanMobile_(
+      data.mobile
+    );
+
+  const email =
+    scUserCleanEmail_(
+      data.email
+    );
+
+  const ward =
+    String(
+      data.ward || ""
+    ).replace(/\D/g,"");
+
+  const address =
+    String(
+      data.address || ""
+    ).trim();
+
+  const landmark =
+    String(
+      data.landmark || ""
+    ).trim();
+
+  const password =
+    String(
+      data.password || ""
+    );
+
+  if (!name) {
+    throw new Error(
+      "Enter your full name."
+    );
+  }
+
+  if (
+    !/^[6-9]\d{9}$/.test(
+      mobile
+    )
+  ) {
+    throw new Error(
+      "Enter a valid 10-digit mobile number."
+    );
+  }
+
+  if (
+    email &&
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      email
+    )
+  ) {
+    throw new Error(
+      "Enter a valid email address."
+    );
+  }
+
+  if (
+    !ward ||
+    Number(ward) < 1 ||
+    Number(ward) > 18
+  ) {
+    throw new Error(
+      "Select a valid Ward."
+    );
+  }
+
+  if (
+    password.length < 6
+  ) {
+    throw new Error(
+      "Password must contain at least 6 characters."
+    );
+  }
+
+  const users =
+    scUserRows_(
+      SC_USER_SHEET
+    );
+
+  const duplicate =
+    users.find(function(user) {
+
+      return (
+        scUserCleanMobile_(
+          user.Mobile
+        ) === mobile
+        ||
+        (
+          email &&
+          scUserCleanEmail_(
+            user.Email
+          ) === email
+        )
+      );
+    });
+
+  if (duplicate) {
+    throw new Error(
+      "An account already exists with this mobile number or email."
+    );
+  }
+
+  const userId =
+    "SCU-" +
+    Utilities
+      .getUuid()
+      .replace(/-/g,"")
+      .substring(0,10)
+      .toUpperCase();
+
+  const salt =
+    scUserRandomToken_()
+      .substring(0,32);
+
+  const hash =
+    scUserHash_(
+      password,
+      salt
+    );
+
+  const now =
+    new Date();
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  sheet.appendRow([
+    userId,
+    name,
+    mobile,
+    email,
+    ward,
+    address,
+    landmark,
+    "",
+    salt,
+    hash,
+    "Active",
+    now,
+    now,
+    now,
+    "Citizen"
+  ]);
+
+  const user =
+    scUserRows_(
+      SC_USER_SHEET
+    ).find(function(item) {
+      return (
+        String(
+          item["User ID"]
+        ) === userId
+      );
+    });
+
+  const token =
+    scUserCreateSession_(
+      userId
+    );
+
+  return jsonResponse({
+    token: token,
+    user:
+      scUserPublic_(
+        user
+      )
+  });
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function userLoginApi(data) {
+
+  setupUserAccountSheets();
+
+  const login =
+    String(
+      data.login || ""
+    ).trim();
+
+  const password =
+    String(
+      data.password || ""
+    );
+
+  if (
+    !login ||
+    !password
+  ) {
+    throw new Error(
+      "Enter your mobile/email and password."
+    );
+  }
+
+  const user =
+    scUserFindByLogin_(
+      login
+    );
+
+  if (!user) {
+    throw new Error(
+      "Invalid login details."
+    );
+  }
+
+  const hash =
+    scUserHash_(
+      password,
+      String(
+        user["Password Salt"] || ""
+      )
+    );
+
+  if (
+    hash !==
+    String(
+      user["Password Hash"] || ""
+    )
+  ) {
+    throw new Error(
+      "Invalid login details."
+    );
+  }
+
+  const status =
+    String(
+      user.Status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+  if (
+    status === "blocked" ||
+    status === "disabled" ||
+    status === "deleted"
+  ) {
+    throw new Error(
+      "This account is currently disabled."
+    );
+  }
+
+  const usersSheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  usersSheet
+    .getRange(
+      user.__row,
+      14
+    )
+    .setValue(
+      new Date()
+    );
+
+  const token =
+    scUserCreateSession_(
+      user["User ID"]
+    );
+
+  return jsonResponse({
+    token: token,
+    user:
+      scUserPublic_(
+        user
+      )
+  });
+}
+
+
+/* =========================================================
+   CURRENT USER
+   ========================================================= */
+
+function userMeApi(data) {
+
+  const verified =
+    scUserVerifySession_(
+      data.token
+    );
+
+  return jsonResponse(
+    scUserPublic_(
+      verified.user
+    )
+  );
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function userLogoutApi(data) {
+
+  const token =
+    String(
+      data.token || ""
+    ).trim();
+
+  if (!token) {
+    return jsonResponse({
+      loggedOut: true
+    });
+  }
+
+  const sessions =
+    scUserRows_(
+      SC_USER_SESSION_SHEET
+    );
+
+  const session =
+    sessions.find(function(item) {
+      return (
+        String(
+          item.Token
+        ) === token
+      );
+    });
+
+  if (session) {
+
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SESSION_SHEET
+      )
+      .getRange(
+        session.__row,
+        5
+      )
+      .setValue(
+        "No"
+      );
+  }
+
+  return jsonResponse({
+    loggedOut: true
+  });
+}
+
+
+/* =========================================================
+   UPDATE USER PROFILE / PROFILE IMAGE
+   ========================================================= */
+
+function userUpdateProfileApi(data) {
+
+  const verified =
+    scUserVerifySession_(
+      data.token
+    );
+
+  const user =
+    verified.user;
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  const headers =
+    sheet
+      .getRange(
+        1,1,1,
+        sheet.getLastColumn()
+      )
+      .getValues()[0];
+
+  const allowed = {
+    "Name":
+      data.name,
+    "Email":
+      data.email,
+    "Ward":
+      data.ward,
+    "Address":
+      data.address,
+    "Landmark":
+      data.landmark
+  };
+
+  Object.keys(allowed)
+    .forEach(function(header) {
+
+      if (
+        allowed[header] ===
+        undefined
+      ) {
+        return;
+      }
+
+      const col =
+        headers.indexOf(
+          header
+        );
+
+      if (col !== -1) {
+
+        sheet
+          .getRange(
+            user.__row,
+            col + 1
+          )
+          .setValue(
+            String(
+              allowed[header] || ""
+            ).trim()
+          );
+      }
+    });
+
+  if (
+    data.imageBase64
+  ) {
+
+    const imageUrl =
+      processIncomingImage(
+        data,
+        "PROFILE"
+      );
+
+    const imageCol =
+      headers.indexOf(
+        "Profile Image URL"
+      );
+
+    if (
+      imageCol !== -1
+    ) {
+
+      sheet
+        .getRange(
+          user.__row,
+          imageCol + 1
+        )
+        .setValue(
+          imageUrl
+        );
+    }
+  }
+
+  const updatedCol =
+    headers.indexOf(
+      "Updated At"
+    );
+
+  if (
+    updatedCol !== -1
+  ) {
+    sheet
+      .getRange(
+        user.__row,
+        updatedCol + 1
+      )
+      .setValue(
+        new Date()
+      );
+  }
+
+  const refreshed =
+    scUserRows_(
+      SC_USER_SHEET
+    ).find(function(item) {
+      return (
+        String(
+          item["User ID"]
+        ) ===
+        String(
+          user["User ID"]
+        )
+      );
+    });
+
+  return jsonResponse(
+    scUserPublic_(
+      refreshed
+    )
+  );
+}
+
+
+/* =========================================================
+   CHANGE USER PASSWORD
+   ========================================================= */
+
+function userChangePasswordApi(data) {
+
+  const verified =
+    scUserVerifySession_(
+      data.token
+    );
+
+  const user =
+    verified.user;
+
+  const current =
+    String(
+      data.currentPassword || ""
+    );
+
+  const next =
+    String(
+      data.newPassword || ""
+    );
+
+  if (
+    next.length < 6
+  ) {
+    throw new Error(
+      "New password must contain at least 6 characters."
+    );
+  }
+
+  const currentHash =
+    scUserHash_(
+      current,
+      String(
+        user["Password Salt"] || ""
+      )
+    );
+
+  if (
+    currentHash !==
+    String(
+      user["Password Hash"] || ""
+    )
+  ) {
+    throw new Error(
+      "Current password is incorrect."
+    );
+  }
+
+  const newSalt =
+    scUserRandomToken_()
+      .substring(
+        0,32
+      );
+
+  const newHash =
+    scUserHash_(
+      next,
+      newSalt
+    );
+
+  const sheet =
+    getDatabase()
+      .getSheetByName(
+        SC_USER_SHEET
+      );
+
+  const headers =
+    sheet
+      .getRange(
+        1,1,1,
+        sheet.getLastColumn()
+      )
+      .getValues()[0];
+
+  const saltCol =
+    headers.indexOf(
+      "Password Salt"
+    );
+
+  const hashCol =
+    headers.indexOf(
+      "Password Hash"
+    );
+
+  const updatedCol =
+    headers.indexOf(
+      "Updated At"
+    );
+
+  sheet
+    .getRange(
+      user.__row,
+      saltCol + 1
+    )
+    .setValue(
+      newSalt
+    );
+
+  sheet
+    .getRange(
+      user.__row,
+      hashCol + 1
+    )
+    .setValue(
+      newHash
+    );
+
+  if (
+    updatedCol !== -1
+  ) {
+    sheet
+      .getRange(
+        user.__row,
+        updatedCol + 1
+      )
+      .setValue(
+        new Date()
+      );
+  }
+
+  return jsonResponse({
+    message:
+      "Password updated successfully."
+  });
+}
+

@@ -1,0 +1,5 @@
+/* Run once after replacing Code.gs with v9.2 */
+function runSursandConnectV92Setup() {
+  setupSursandConnectV92();
+  return true;
+}
