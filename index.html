@@ -1,24 +1,1936 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+﻿<!doctype html>
+<html>
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<meta
+  name="theme-color"
+  content="#e97712"
+>
+
+<title>
+  Sursand Connect
+</title>
+
+<link
+  rel="manifest"
+  href="manifest.webmanifest"
+>
+
+
 <style>
-html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+
+html,
+body{
+  margin:0;
+  background:#f8fafc;
+  color:#263238;
+}
+
+body{
+  padding-top:66px;
+  padding-bottom:68px;
+}
+
+
+/* =========================================================
+   APP HEADER
+   ========================================================= */
+
+.sc-appbar{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:58px;
+
+  background:#fff;
+
+  border-bottom:
+    1px solid #eceff1;
+
+  box-shadow:
+    0 4px 16px rgba(15,23,42,.07);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:
+    4px 12px;
+
+  z-index:999999;
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.sc-appbar-brand{
+
+  display:flex;
+
+  gap:9px;
+
+  align-items:center;
+
+  text-decoration:none;
+
+  color:#263238;
+
+  min-width:0;
+}
+
+
+.sc-appbar-brand img{
+
+  width:42px;
+  height:42px;
+
+  object-fit:contain;
+
+  border-radius:11px;
+}
+
+
+.sc-appbar-brand span{
+
+  display:flex;
+
+  flex-direction:column;
+
+  line-height:1.1;
+}
+
+
+.sc-appbar-brand b{
+
+  font-size:14px;
+}
+
+
+.sc-appbar-brand small{
+
+  font-size:9px;
+
+  color:#667085;
+
+  margin-top:3px;
+}
+
+
+.sc-appbar-actions{
+
+  display:flex;
+
+  gap:7px;
+}
+
+
+.sc-appbar-actions button{
+
+  width:36px;
+  height:36px;
+
+  border-radius:11px;
+
+  border:
+    1px solid #f0d7bd;
+
+  background:#fff7ed;
+
+  color:#c86508;
+
+  font-weight:900;
+
+  font-size:18px;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+   ========================================================= */
+
+.sc-bottom{
+
+  position:fixed;
+
+  bottom:0;
+  left:0;
+  right:0;
+
+  height:58px;
+
+  background:#fff;
+
+  border-top:
+    1px solid #e6e9ec;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  z-index:999999;
+
+  box-shadow:
+    0 -4px 16px rgba(15,23,42,.05);
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+.sc-bottom a{
+
+  text-decoration:none;
+
+  color:#475569;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:17px;
+
+  gap:1px;
+}
+
+
+.sc-bottom a span{
+
+  font-size:8px;
+
+  font-weight:700;
+}
+
+
+.sc-bottom a:active{
+
+  color:#f28c28;
+}
+
+
+@media(min-width:900px){
+
+  body{
+    padding-bottom:0;
+  }
+
+  .sc-bottom{
+    display:none;
+  }
+
+}
+
 </style>
+
+
+
 <script>
-function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+
+/* =========================================================
+   SHARE APP
+   ========================================================= */
+
+function shareApp(){
+
+  const appUrl =
+    new URL(
+      './',
+      window.location.href
+    ).href;
+
+
+  const data = {
+
+    title:
+      'Sursand Connect',
+
+    text:
+      'Sursand Connect - Your local digital community for Sursand.',
+
+    url:
+      appUrl
+
+  };
+
+
+  if(
+    navigator.share
+  ){
+
+    navigator
+      .share(data)
+      .catch(
+        function(){}
+      );
+
+  }
+
+  else{
+
+    const whatsappUrl =
+      'https://wa.me/?text=' +
+      encodeURIComponent(
+        data.text +
+        '\n\n' +
+        data.url
+      );
+
+
+    window.open(
+      whatsappUrl,
+      '_blank'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+function appBack(){
+
+  if(
+    window.history.length > 1
+  ){
+
+    window.history.back();
+
+  }
+
+  else{
+
+    window.location.href =
+      './';
+
+  }
+
+}
+
 </script>
+
+
+
 <style>
-.sc-home{max-width:1200px;margin:auto;padding:0 16px 34px;font-family:Arial,sans-serif}.sc-hero{margin:18px 16px 16px;background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);border-radius:24px;padding:42px 28px;color:white;position:relative;overflow:hidden;box-shadow:0 14px 34px rgba(90,60,20,.16)}.sc-hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08);right:-80px;bottom:-110px}.sc-hero-content{position:relative;z-index:1;max-width:720px}.sc-hero-welcome{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;opacity:.9}.sc-hero-title{font-size:clamp(34px,8vw,58px);line-height:1.02;margin:10px 0;color:#fff}.sc-hero-description{font-size:14px;line-height:1.7;max-width:620px}.sc-hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.sc-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:11px;background:white;color:#b95f0c;text-decoration:none;font-weight:800;font-size:12px;box-shadow:0 6px 16px rgba(0,0,0,.12)}.sc-home-search{padding:0 16px 18px}.sc-home-search-box{max-width:760px;margin:auto;background:#fff;border:1px solid #e6e9ec;border-radius:999px;padding:5px;display:flex;box-shadow:0 8px 22px rgba(15,23,42,.07);overflow:hidden}.sc-home-search-box input{flex:1;border:0;outline:0;padding:12px 15px;min-width:0;background:transparent}.sc-home-search-box button{width:46px;border:0;border-radius:999px;background:#238b45;color:white;font-size:17px}.sc-container{max-width:1150px;margin:auto;padding:0 16px}.sc-section-header{display:flex;justify-content:space-between}.sc-section-title{font-size:19px;margin:0;color:#263238}.sc-section-subtitle{font-size:11px;color:#667085;margin:4px 0 13px}.sc-quick-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.sc-quick-card{background:#fff;border:1px solid #e6ebe7;border-radius:15px;padding:14px 8px;text-decoration:none;color:#263238;text-align:center;box-shadow:0 6px 16px rgba(15,23,42,.06)}.sc-quick-icon{font-size:25px}.sc-quick-title{font-size:10px;font-weight:800;margin-top:5px}.sc-app-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:20px 0}.sc-app-grid a{min-height:98px;border-radius:16px;padding:13px;background:#fff;border:1px solid #e6ebe7;text-decoration:none;color:#263238;box-shadow:0 6px 16px rgba(15,23,42,.06);display:flex;flex-direction:column;justify-content:center}.sc-app-grid b{font-size:11px}.sc-app-grid span{font-size:8.5px;color:#667085;margin-top:4px;line-height:1.35}.sc-dashboard-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:20px}.sc-dashboard-panel{background:#fff;border-radius:18px;border:1px solid #e6ebe7;box-shadow:0 7px 20px rgba(15,23,42,.06);overflow:hidden}.sc-panel-header{padding:14px 16px;border-bottom:1px solid #edf0ee;display:flex;justify-content:space-between;align-items:center}.sc-panel-title{font-size:13px;margin:0}.sc-panel-link{font-size:9px;color:#c86508;text-decoration:none;font-weight:800}.sc-panel-body{padding:14px}.sc-announcement{display:flex;gap:10px}.sc-announcement-icon{width:36px;height:36px;border-radius:11px;background:#fff0dd;display:flex;align-items:center;justify-content:center}.sc-announcement-title{font-size:11px;margin:0}.sc-announcement-meta{font-size:9px;color:#667085;margin-top:3px}.sc-city-connect{margin-top:18px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(18,140,126,.17)}.sc-city-connect-title{color:white;margin:0 0 6px;font-size:16px}.sc-city-connect-text{font-size:10px;line-height:1.55}.sc-emergency-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #edf0ee}.sc-emergency-item:last-child{border-bottom:0}.sc-emergency-name{font-size:11px;font-weight:800}.sc-emergency-number{font-size:8.5px;color:#667085}.sc-emergency-call{width:34px;height:34px;border-radius:10px;background:#dc2626;color:white;display:flex;align-items:center;justify-content:center;text-decoration:none}.sc-section-small{margin:18px 0}.sc-alert{padding:13px 15px;border-radius:13px;background:#eef5ff;color:#475569;font-size:10px;display:flex;gap:8px}.sc-bottom+*{}@media(max-width:800px){.sc-quick-grid{grid-template-columns:repeat(3,1fr)}.sc-app-grid{grid-template-columns:repeat(2,1fr)}.sc-dashboard-grid{grid-template-columns:1fr}.sc-hero{margin:12px 12px 14px;padding:30px 20px}.sc-hero-title{font-size:36px}}</style></head><body>
-<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.sc-home{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:
+    0 16px 34px;
+
+  font-family:
+    Arial,
+    sans-serif;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-hero{
+
+  margin:
+    18px 16px 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7a13f,
+      #f28c28 52%,
+      #e97812
+    );
+
+  border-radius:24px;
+
+  padding:
+    42px 28px;
+
+  color:white;
+
+  position:relative;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 14px 34px rgba(90,60,20,.16);
+}
+
+
+.sc-hero:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+  right:-80px;
+
+  bottom:-110px;
+}
+
+
+.sc-hero-content{
+
+  position:relative;
+
+  z-index:1;
+
+  max-width:720px;
+}
+
+
+.sc-hero-welcome{
+
+  font-size:12px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.12em;
+
+  opacity:.9;
+}
+
+
+.sc-hero-title{
+
+  font-size:
+    clamp(
+      34px,
+      8vw,
+      58px
+    );
+
+  line-height:1.02;
+
+  margin:
+    10px 0;
+
+  color:#fff;
+}
+
+
+.sc-hero-description{
+
+  font-size:14px;
+
+  line-height:1.7;
+
+  max-width:620px;
+}
+
+
+.sc-hero-actions{
+
+  display:flex;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin-top:18px;
+}
+
+
+.sc-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:
+    11px 14px;
+
+  border-radius:11px;
+
+  background:white;
+
+  color:#b95f0c;
+
+  text-decoration:none;
+
+  font-weight:800;
+
+  font-size:12px;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.12);
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.sc-home-search{
+
+  padding:
+    0 16px 18px;
+}
+
+
+.sc-home-search-box{
+
+  max-width:760px;
+
+  margin:auto;
+
+  background:#fff;
+
+  border:
+    1px solid #e6e9ec;
+
+  border-radius:999px;
+
+  padding:5px;
+
+  display:flex;
+
+  box-shadow:
+    0 8px 22px rgba(15,23,42,.07);
+
+  overflow:hidden;
+}
+
+
+.sc-home-search-box input{
+
+  flex:1;
+
+  border:0;
+
+  outline:0;
+
+  padding:
+    12px 15px;
+
+  min-width:0;
+
+  background:transparent;
+}
+
+
+.sc-home-search-box button{
+
+  width:46px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:#238b45;
+
+  color:white;
+
+  font-size:17px;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.sc-container{
+
+  max-width:1150px;
+
+  margin:auto;
+
+  padding:
+    0 16px;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
+
+.sc-section-header{
+
+  display:flex;
+
+  justify-content:space-between;
+}
+
+
+.sc-section-title{
+
+  font-size:19px;
+
+  margin:0;
+
+  color:#263238;
+}
+
+
+.sc-section-subtitle{
+
+  font-size:11px;
+
+  color:#667085;
+
+  margin:
+    4px 0 13px;
+}
+
+
+/* =========================================================
+   QUICK SERVICES
+   ========================================================= */
+
+.sc-quick-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:10px;
+}
+
+
+.sc-quick-card{
+
+  background:#fff;
+
+  border:
+    1px solid #e6ebe7;
+
+  border-radius:15px;
+
+  padding:
+    14px 8px;
+
+  text-decoration:none;
+
+  color:#263238;
+
+  text-align:center;
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.06);
+}
+
+
+.sc-quick-icon{
+
+  font-size:25px;
+}
+
+
+.sc-quick-title{
+
+  font-size:10px;
+
+  font-weight:800;
+
+  margin-top:5px;
+}
+
+
+/* =========================================================
+   APP SECTION GRID
+   ========================================================= */
+
+.sc-app-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,1fr);
+
+  gap:10px;
+
+  margin:
+    20px 0;
+}
+
+
+.sc-app-grid a{
+
+  min-height:98px;
+
+  border-radius:16px;
+
+  padding:13px;
+
+  background:#fff;
+
+  border:
+    1px solid #e6ebe7;
+
+  text-decoration:none;
+
+  color:#263238;
+
+  box-shadow:
+    0 6px 16px rgba(15,23,42,.06);
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+
+.sc-app-grid b{
+
+  font-size:11px;
+}
+
+
+.sc-app-grid span{
+
+  font-size:8.5px;
+
+  color:#667085;
+
+  margin-top:4px;
+
+  line-height:1.35;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.sc-dashboard-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1.3fr .7fr;
+
+  gap:18px;
+
+  margin-top:20px;
+}
+
+
+.sc-dashboard-panel{
+
+  background:#fff;
+
+  border-radius:18px;
+
+  border:
+    1px solid #e6ebe7;
+
+  box-shadow:
+    0 7px 20px rgba(15,23,42,.06);
+
+  overflow:hidden;
+}
+
+
+.sc-panel-header{
+
+  padding:
+    14px 16px;
+
+  border-bottom:
+    1px solid #edf0ee;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+}
+
+
+.sc-panel-title{
+
+  font-size:13px;
+
+  margin:0;
+}
+
+
+.sc-panel-link{
+
+  font-size:9px;
+
+  color:#c86508;
+
+  text-decoration:none;
+
+  font-weight:800;
+}
+
+
+.sc-panel-body{
+
+  padding:14px;
+}
+
+
+.sc-announcement{
+
+  display:flex;
+
+  gap:10px;
+}
+
+
+.sc-announcement-icon{
+
+  width:36px;
+  height:36px;
+
+  border-radius:11px;
+
+  background:#fff0dd;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+
+.sc-announcement-title{
+
+  font-size:11px;
+
+  margin:0;
+}
+
+
+.sc-announcement-meta{
+
+  font-size:9px;
+
+  color:#667085;
+
+  margin-top:3px;
+}
+
+
+/* =========================================================
+   CITY CONNECT
+   ========================================================= */
+
+.sc-city-connect{
+
+  margin-top:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #25d366,
+      #128c7e
+    );
+
+  color:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:
+    0 8px 18px rgba(18,140,126,.17);
+}
+
+
+.sc-city-connect-title{
+
+  color:white;
+
+  margin:
+    0 0 6px;
+
+  font-size:16px;
+}
+
+
+.sc-city-connect-text{
+
+  font-size:10px;
+
+  line-height:1.55;
+}
+
+
+/* =========================================================
+   EMERGENCY
+   ========================================================= */
+
+.sc-emergency-item{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:
+    10px 0;
+
+  border-bottom:
+    1px solid #edf0ee;
+}
+
+
+.sc-emergency-item:last-child{
+
+  border-bottom:0;
+}
+
+
+.sc-emergency-name{
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+
+.sc-emergency-number{
+
+  font-size:8.5px;
+
+  color:#667085;
+}
+
+
+.sc-emergency-call{
+
+  width:34px;
+  height:34px;
+
+  border-radius:10px;
+
+  background:#dc2626;
+
+  color:white;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-decoration:none;
+}
+
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.sc-section-small{
+
+  margin:
+    18px 0;
+}
+
+
+.sc-alert{
+
+  padding:
+    13px 15px;
+
+  border-radius:13px;
+
+  background:#eef5ff;
+
+  color:#475569;
+
+  font-size:10px;
+
+  display:flex;
+
+  gap:8px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .sc-quick-grid{
+
+    grid-template-columns:
+      repeat(3,1fr);
+
+  }
+
+
+  .sc-app-grid{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+
+  .sc-dashboard-grid{
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .sc-hero{
+
+    margin:
+      12px 12px 14px;
+
+    padding:
+      30px 20px;
+
+  }
+
+
+  .sc-hero-title{
+
+    font-size:36px;
+
+  }
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     APP HEADER
+     ========================================================= -->
+
+<div class="sc-appbar">
+
+
+  <a
+    href="./"
+    class="sc-appbar-brand"
+  >
+
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"
+      alt="Sursand Connect"
+    >
+
+
+    <span>
+
+      <b>
+        Sursand Connect
+      </b>
+
+      <small>
+        Your Local Digital Community
+      </small>
+
+    </span>
+
+
+  </a>
+
+
+  <div class="sc-appbar-actions">
+
+
+    <button
+      type="button"
+      onclick="appBack()"
+      aria-label="Back"
+      title="Back"
+    >
+      ←
+    </button>
+
+
+    <button
+      type="button"
+      onclick="shareApp()"
+      aria-label="Share App"
+      title="Share App"
+    >
+      ↗
+    </button>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     HOME
+     ========================================================= -->
+
 <main class="sc-home">
-<section class="sc-hero"><div class="sc-hero-content"><div class="sc-hero-welcome">Welcome to Sursand</div><h1 class="sc-hero-title">Sursand,<br>Connected in One Place.</h1><p class="sc-hero-description">Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.</p><div class="sc-hero-actions"><a href="/p/businesses.html" class="sc-btn">🏪 Explore Businesses</a><a href="/p/city-connect.html" class="sc-btn">📱 City Connect</a></div></div></section>
-<section class="sc-home-search"><form class="sc-home-search-box" onsubmit="return homeSearch(event)"><input id="homeSearch" type="search" placeholder="Search businesses, services, events..." autocomplete="off"><button>🔍</button></form></section>
-<div class="sc-container"><section class="sc-quick-section"><div class="sc-section-header"><div><h2 class="sc-section-title">Quick Services</h2><p class="sc-section-subtitle">Useful services for everyday life in Sursand</p></div></div><div class="sc-quick-grid">
-<a href="/p/businesses.html" class="sc-quick-card"><div class="sc-quick-icon">🏪</div><div class="sc-quick-title">Businesses</div></a>
-<a href="/p/services.html" class="sc-quick-card"><div class="sc-quick-icon">🛠️</div><div class="sc-quick-title">Services</div></a>
-<a href="/p/healthcare.html" class="sc-quick-card"><div class="sc-quick-icon">🏥</div><div class="sc-quick-title">Healthcare</div></a>
-<a href="/p/education.html" class="sc-quick-card"><div class="sc-quick-icon">🎓</div><div class="sc-quick-title">Education</div></a>
-<a href="/p/events.html" class="sc-quick-card"><div class="sc-quick-icon">📅</div><div class="sc-quick-title">Events</div></a>
-<a href="/p/emergency.html" class="sc-quick-card"><div class="sc-quick-icon">🚨</div><div class="sc-quick-title">Emergency</div></a></div></section>
-<section class="sc-app-grid">
-<a href="/p/important-places.html"><b>📍 Important Places</b><span>Discover important locations</span></a><a href="/p/transport.html"><b>🚌 Transport</b><span>Routes, timing & fares</span></a><a href="/p/government-offices.html"><b>🏛️ Government Offices</b><span>Public offices & directions</span></a><a href="/p/representatives.html"><b>👥 Ward Representatives</b><span>Chairman, Vice Chairman & wards</span></a><a href="/p/agriculture.html"><b>🌾 Agriculture & Farmers</b><span>Useful farming information</span></a><a href="/p/useful-websites.html"><b>🌐 Useful Websites</b><span>Government, trust & shopping links</span></a><a href="/p/change-makers.html"><b>✨ Change Makers</b><span>Help make Sursand a model town</span></a><a href="/p/business-registration.html"><b>➕ Add Business</b><span>Free local business registration</span></a><a href="/p/notifications.html"><b>🔔 Notifications</b><span>Latest updates</span></a><a href="/p/contact.html"><b>✉️ Contact Us</b><span>Phone, WhatsApp & email</span></a></section>
-<div class="sc-dashboard-grid"><div><div class="sc-dashboard-panel"><div class="sc-panel-header"><h2 class="sc-panel-title">📢 Latest Announcements</h2><a href="/p/events.html" class="sc-panel-link">View All</a></div><div class="sc-panel-body"><div class="sc-announcement"><div class="sc-announcement-icon">📢</div><div class="sc-announcement-content"><h3 class="sc-announcement-title">Welcome to Sursand Connect</h3><div class="sc-announcement-meta">Official community updates will appear here.</div></div></div></div></div><div class="sc-city-connect"><h2 class="sc-city-connect-title">📱 City Connect</h2><p class="sc-city-connect-text">Join your ward's official WhatsApp community group for local updates and community information.</p><a href="/p/city-connect.html" class="sc-btn sc-btn-primary">Join City Connect</a></div></div><div><div class="sc-dashboard-panel sc-emergency-panel"><div class="sc-panel-header"><h2 class="sc-panel-title">🚨 Emergency</h2><a href="/p/emergency.html" class="sc-panel-link">More</a></div><div class="sc-panel-body"><div class="sc-emergency-item"><div><div class="sc-emergency-name">Police</div><span class="sc-emergency-number">Emergency contact</span></div><a href="tel:112" class="sc-emergency-call">☎</a></div><div class="sc-emergency-item"><div><div class="sc-emergency-name">Ambulance</div><span class="sc-emergency-number">Emergency medical assistance</span></div><a href="tel:108" class="sc-emergency-call">☎</a></div><div class="sc-emergency-item"><div><div class="sc-emergency-name">Fire Service</div><span class="sc-emergency-number">Fire emergency</span></div><a href="tel:101" class="sc-emergency-call">☎</a></div></div></div></div></div>
-<section class="sc-section-small"><div class="sc-alert sc-alert-info">💡 <span>Sursand Connect is being built as a simple digital platform to connect citizens, local businesses, services and community information.</span></div></section></div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>function homeSearch(e){e.preventDefault();let q=document.getElementById('homeSearch').value.trim();if(!q)return false;location.href='/p/businesses.html?q='+encodeURIComponent(q);return false;}if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>
+
+
+  <!-- HERO -->
+
+  <section class="sc-hero">
+
+
+    <div class="sc-hero-content">
+
+
+      <div class="sc-hero-welcome">
+
+        Welcome to Sursand
+
+      </div>
+
+
+      <h1 class="sc-hero-title">
+
+        Sursand,
+        <br>
+        Connected in One Place.
+
+      </h1>
+
+
+      <p class="sc-hero-description">
+
+        Discover local businesses, services, events,
+        announcements, emergency contacts and your local
+        community — all from Sursand Connect.
+
+      </p>
+
+
+      <div class="sc-hero-actions">
+
+
+        <a
+          href="p/businesses.html"
+          class="sc-btn"
+        >
+
+          🏪 Explore Businesses
+
+        </a>
+
+
+        <a
+          href="p/city-connect.html"
+          class="sc-btn"
+        >
+
+          📱 City Connect
+
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- SEARCH -->
+
+  <section class="sc-home-search">
+
+
+    <form
+      class="sc-home-search-box"
+      onsubmit="return homeSearch(event)"
+    >
+
+
+      <input
+        id="homeSearch"
+        type="search"
+        placeholder="Search businesses, services, events..."
+        autocomplete="off"
+      >
+
+
+      <button
+        type="submit"
+        aria-label="Search"
+      >
+
+        🔍
+
+      </button>
+
+
+    </form>
+
+
+  </section>
+
+
+
+  <div class="sc-container">
+
+
+    <!-- =====================================================
+         QUICK SERVICES
+         ===================================================== -->
+
+    <section class="sc-quick-section">
+
+
+      <div class="sc-section-header">
+
+
+        <div>
+
+
+          <h2 class="sc-section-title">
+
+            Quick Services
+
+          </h2>
+
+
+          <p class="sc-section-subtitle">
+
+            Useful services for everyday life in Sursand
+
+          </p>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="sc-quick-grid">
+
+
+        <a
+          href="p/businesses.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            🏪
+          </div>
+
+          <div class="sc-quick-title">
+            Businesses
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="p/services.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            🛠️
+          </div>
+
+          <div class="sc-quick-title">
+            Services
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="p/healthcare.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            🏥
+          </div>
+
+          <div class="sc-quick-title">
+            Healthcare
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="p/education.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            🎓
+          </div>
+
+          <div class="sc-quick-title">
+            Education
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="p/events.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            📅
+          </div>
+
+          <div class="sc-quick-title">
+            Events
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="p/emergency.html"
+          class="sc-quick-card"
+        >
+
+          <div class="sc-quick-icon">
+            🚨
+          </div>
+
+          <div class="sc-quick-title">
+            Emergency
+          </div>
+
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         APP MODULE GRID
+         ===================================================== -->
+
+    <section class="sc-app-grid">
+
+
+      <a href="p/important-places.html">
+
+        <b>
+          📍 Important Places
+        </b>
+
+        <span>
+          Discover important locations
+        </span>
+
+      </a>
+
+
+      <a href="p/transport.html">
+
+        <b>
+          🚌 Transport
+        </b>
+
+        <span>
+          Routes, timing & fares
+        </span>
+
+      </a>
+
+
+      <a href="p/government-offices.html">
+
+        <b>
+          🏛️ Government Offices
+        </b>
+
+        <span>
+          Public offices & directions
+        </span>
+
+      </a>
+
+
+      <a href="p/representatives.html">
+
+        <b>
+          👥 Ward Representatives
+        </b>
+
+        <span>
+          Chairman, Vice Chairman & wards
+        </span>
+
+      </a>
+
+
+      <a href="p/agriculture.html">
+
+        <b>
+          🌾 Agriculture & Farmers
+        </b>
+
+        <span>
+          Useful farming information
+        </span>
+
+      </a>
+
+
+      <a href="p/useful-websites.html">
+
+        <b>
+          🌐 Useful Websites
+        </b>
+
+        <span>
+          Government, trust & shopping links
+        </span>
+
+      </a>
+
+
+      <a href="p/change-makers.html">
+
+        <b>
+          ✨ Change Makers
+        </b>
+
+        <span>
+          Help make Sursand a model town
+        </span>
+
+      </a>
+
+
+      <a href="p/business-registration.html">
+
+        <b>
+          ➕ Add Business
+        </b>
+
+        <span>
+          Free local business registration
+        </span>
+
+      </a>
+
+
+      <a href="p/notifications.html">
+
+        <b>
+          🔔 Notifications
+        </b>
+
+        <span>
+          Latest updates
+        </span>
+
+      </a>
+
+
+      <a href="p/contact.html">
+
+        <b>
+          ✉️ Contact Us
+        </b>
+
+        <span>
+          Phone, WhatsApp & email
+        </span>
+
+      </a>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DASHBOARD
+         ===================================================== -->
+
+    <div class="sc-dashboard-grid">
+
+
+      <div>
+
+
+        <!-- ANNOUNCEMENT -->
+
+        <div class="sc-dashboard-panel">
+
+
+          <div class="sc-panel-header">
+
+
+            <h2 class="sc-panel-title">
+
+              📢 Latest Announcements
+
+            </h2>
+
+
+            <a
+              href="p/events.html"
+              class="sc-panel-link"
+            >
+
+              View All
+
+            </a>
+
+
+          </div>
+
+
+          <div class="sc-panel-body">
+
+
+            <div class="sc-announcement">
+
+
+              <div class="sc-announcement-icon">
+
+                📢
+
+              </div>
+
+
+              <div class="sc-announcement-content">
+
+
+                <h3 class="sc-announcement-title">
+
+                  Welcome to Sursand Connect
+
+                </h3>
+
+
+                <div class="sc-announcement-meta">
+
+                  Official community updates will appear here.
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- CITY CONNECT -->
+
+        <div class="sc-city-connect">
+
+
+          <h2 class="sc-city-connect-title">
+
+            📱 City Connect
+
+          </h2>
+
+
+          <p class="sc-city-connect-text">
+
+            Join your ward's official WhatsApp community group
+            for local updates and community information.
+
+          </p>
+
+
+          <a
+            href="p/city-connect.html"
+            class="sc-btn"
+          >
+
+            Join City Connect
+
+          </a>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- EMERGENCY -->
+
+      <div>
+
+
+        <div class="sc-dashboard-panel sc-emergency-panel">
+
+
+          <div class="sc-panel-header">
+
+
+            <h2 class="sc-panel-title">
+
+              🚨 Emergency
+
+            </h2>
+
+
+            <a
+              href="p/emergency.html"
+              class="sc-panel-link"
+            >
+
+              More
+
+            </a>
+
+
+          </div>
+
+
+          <div class="sc-panel-body">
+
+
+            <div class="sc-emergency-item">
+
+
+              <div>
+
+                <div class="sc-emergency-name">
+                  Police
+                </div>
+
+                <span class="sc-emergency-number">
+                  Emergency contact
+                </span>
+
+              </div>
+
+
+              <a
+                href="tel:112"
+                class="sc-emergency-call"
+              >
+                ☎
+              </a>
+
+
+            </div>
+
+
+
+            <div class="sc-emergency-item">
+
+
+              <div>
+
+                <div class="sc-emergency-name">
+                  Ambulance
+                </div>
+
+                <span class="sc-emergency-number">
+                  Emergency medical assistance
+                </span>
+
+              </div>
+
+
+              <a
+                href="tel:108"
+                class="sc-emergency-call"
+              >
+                ☎
+              </a>
+
+
+            </div>
+
+
+
+            <div class="sc-emergency-item">
+
+
+              <div>
+
+                <div class="sc-emergency-name">
+                  Fire Service
+                </div>
+
+                <span class="sc-emergency-number">
+                  Fire emergency
+                </span>
+
+              </div>
+
+
+              <a
+                href="tel:101"
+                class="sc-emergency-call"
+              >
+                ☎
+              </a>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- INFO -->
+
+    <section class="sc-section-small">
+
+
+      <div class="sc-alert sc-alert-info">
+
+        💡
+
+        <span>
+
+          Sursand Connect is being built as a simple digital
+          platform to connect citizens, local businesses,
+          services and community information.
+
+        </span>
+
+      </div>
+
+
+    </section>
+
+
+  </div>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     BOTTOM NAVIGATION
+     ========================================================= -->
+
+<nav class="sc-bottom">
+
+
+  <a href="./">
+
+    ⌂
+
+    <span>
+      Home
+    </span>
+
+  </a>
+
+
+  <a href="p/businesses.html">
+
+    🏪
+
+    <span>
+      Business
+    </span>
+
+  </a>
+
+
+  <a href="p/services.html">
+
+    🛠️
+
+    <span>
+      Services
+    </span>
+
+  </a>
+
+
+  <a href="p/events.html">
+
+    📅
+
+    <span>
+      Events
+    </span>
+
+  </a>
+
+
+  <a href="p/city-connect.html">
+
+    💬
+
+    <span>
+      Connect
+    </span>
+
+  </a>
+
+
+</nav>
+
+
+
+<script>
+
+/* =========================================================
+   HOME SEARCH
+   ========================================================= */
+
+function homeSearch(event){
+
+  event.preventDefault();
+
+
+  const query =
+    document
+      .getElementById(
+        'homeSearch'
+      )
+      .value
+      .trim();
+
+
+  if(
+    !query
+  ){
+
+    return false;
+
+  }
+
+
+  window.location.href =
+    'p/businesses.html?q=' +
+    encodeURIComponent(
+      query
+    );
+
+
+  return false;
+
+}
+
+
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
+
+if(
+  'serviceWorker' in navigator
+){
+
+  window.addEventListener(
+    'load',
+    function(){
+
+      navigator
+        .serviceWorker
+        .register(
+          'sw.js'
+        )
+        .catch(
+          function(error){
+
+            console.log(
+              'Service Worker registration failed:',
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+</script>
+
+
+</body>
+</html>
