@@ -1,0 +1,2018 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Businesses | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 6 — LOCAL BUSINESS DIRECTORY
+     SURSAND CONNECT
+     FULL REPLACEMENT
+     ALL 50 CATEGORIES ALWAYS VISIBLE
+     ========================================================= -->
+
+<div id="sc-business-directory">
+
+<style>
+
+#sc-business-directory{
+  --green:#238b45;
+  --green-dark:#176b35;
+
+  --saffron:#f28c28;
+  --saffron-soft:#fff0dd;
+
+  --blue:#1976d2;
+  --blue-dark:#125ca8;
+
+  --purple:#6d28d9;
+
+  --yellow:#f4c430;
+  --yellow-dark:#d7a900;
+  --yellow-text:#3b2d00;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e6ebe7;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-business-directory *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-biz-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #f7a13f 0%,
+    #f28c28 50%,
+    #e97812 100%
+  );
+
+  color:#fff;
+  padding:38px 24px 40px;
+  border-radius:22px;
+  margin-bottom:22px;
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(39,77,52,.16);
+}
+
+.sc-biz-hero::before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  left:-70px;
+  top:-85px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+
+.sc-biz-hero::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-65px;
+  bottom:-85px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.sc-biz-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 10px;
+
+  color:#fff;
+
+  font-size:clamp(29px,5vw,42px);
+  line-height:1.18;
+  font-weight:800;
+}
+
+.sc-biz-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:790px;
+  margin:0 auto;
+
+  color:rgba(255,255,255,.94);
+
+  font-size:14px;
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.sc-biz-search{
+  position:relative;
+  z-index:2;
+
+  max-width:700px;
+  margin:23px auto 0;
+
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+
+  background:#fff;
+
+  border-radius:40px;
+
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.12);
+}
+
+.sc-biz-search input{
+  flex:1;
+  min-width:0;
+  min-height:49px;
+
+  border:0;
+  outline:0;
+
+  padding:0 17px;
+
+  background:#fff;
+  color:var(--text);
+
+  font-size:13px;
+}
+
+.sc-biz-search button{
+  min-width:105px;
+  min-height:49px;
+
+  padding:0 18px;
+
+  border:0;
+
+  background:var(--green);
+  color:#fff;
+
+  font-size:11px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   VIEWS
+   ========================================================= */
+
+#scBizCategoryView{
+  display:block;
+}
+
+#scBizBusinessView{
+  display:none;
+}
+
+
+/* =========================================================
+   SECTION HEAD
+   ========================================================= */
+
+.sc-biz-section-head{
+  margin:24px 0 15px;
+}
+
+.sc-biz-section-head h2{
+  margin:0 0 4px;
+
+  font-size:22px;
+  font-weight:800;
+}
+
+.sc-biz-section-head p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   CATEGORY GRID
+   ========================================================= */
+
+.sc-biz-category-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:14px;
+}
+
+
+/* =========================================================
+   3D CATEGORY CARD
+   ========================================================= */
+
+.sc-biz-category-card{
+  position:relative;
+  overflow:hidden;
+
+  min-height:145px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  padding:17px;
+
+  border:0;
+  border-radius:19px;
+
+  text-align:left;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  box-shadow:
+    0 12px 23px rgba(0,0,0,.13),
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -2px 0 rgba(0,0,0,.06);
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.sc-biz-category-card:hover{
+  transform:translateY(-5px) scale(1.01);
+
+  box-shadow:
+    0 18px 30px rgba(0,0,0,.17),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.sc-biz-category-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  right:-38px;
+  top:-45px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+}
+
+.sc-biz-category-card::after{
+  content:"";
+
+  position:absolute;
+
+  width:75px;
+  height:75px;
+
+  left:-30px;
+  bottom:-32px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.10);
+}
+
+.sc-biz-cat-icon{
+  position:relative;
+  z-index:2;
+
+  width:52px;
+  height:52px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.28);
+
+  font-size:27px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.sc-biz-cat-name{
+  position:relative;
+  z-index:2;
+
+  margin-top:13px;
+
+  color:#fff;
+
+  font-size:12px;
+  font-weight:800;
+  line-height:1.35;
+}
+
+.sc-biz-cat-count{
+  position:relative;
+  z-index:2;
+
+  margin-top:4px;
+
+  color:rgba(255,255,255,.88);
+
+  font-size:8px;
+}
+
+
+/* =========================================================
+   COLOURS
+   ========================================================= */
+
+.sc-biz-c1{
+  background:linear-gradient(145deg,#f59e0b,#ea580c);
+}
+
+.sc-biz-c2{
+  background:linear-gradient(145deg,#22c55e,#15803d);
+}
+
+.sc-biz-c3{
+  background:linear-gradient(145deg,#3b82f6,#1d4ed8);
+}
+
+.sc-biz-c4{
+  background:linear-gradient(145deg,#8b5cf6,#6d28d9);
+}
+
+.sc-biz-c5{
+  background:linear-gradient(145deg,#ec4899,#be185d);
+}
+
+.sc-biz-c6{
+  background:linear-gradient(145deg,#06b6d4,#0e7490);
+}
+
+.sc-biz-c7{
+  background:linear-gradient(145deg,#14b8a6,#0f766e);
+}
+
+.sc-biz-c8{
+  background:linear-gradient(145deg,#ef4444,#b91c1c);
+}
+
+.sc-biz-c9{
+  background:linear-gradient(145deg,#6366f1,#4338ca);
+}
+
+.sc-biz-c10{
+  background:linear-gradient(145deg,#84cc16,#4d7c0f);
+}
+
+
+/* =========================================================
+   BUSINESS VIEW HEADER
+   ========================================================= */
+
+.sc-biz-business-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:15px;
+}
+
+.sc-biz-business-title{
+  display:flex;
+  align-items:center;
+
+  gap:11px;
+}
+
+.sc-biz-business-title-icon{
+  width:52px;
+  height:52px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:15px;
+
+  background:var(--saffron-soft);
+
+  font-size:26px;
+}
+
+.sc-biz-business-title h2{
+  margin:0 0 3px;
+
+  font-size:21px;
+}
+
+.sc-biz-business-title p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-biz-back{
+  min-height:42px;
+
+  border:0;
+  border-radius:9px;
+
+  background:#eef4ff;
+  color:var(--blue-dark);
+
+  padding:9px 13px;
+
+  font-family:inherit;
+  font-size:10px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   COUNT
+   ========================================================= */
+
+.sc-biz-count{
+  margin-bottom:14px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   BUSINESS GRID
+   ========================================================= */
+
+.sc-biz-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:18px;
+}
+
+
+/* =========================================================
+   BUSINESS CARD
+   ========================================================= */
+
+.sc-biz-card{
+  display:flex;
+  flex-direction:column;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-top:4px solid var(--saffron);
+
+  border-radius:19px;
+
+  box-shadow:
+    0 8px 25px rgba(31,55,42,.08);
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.sc-biz-card:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 15px 34px rgba(31,55,42,.13);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.sc-biz-image{
+  position:relative;
+
+  width:100%;
+  height:175px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #fff5e8,
+    #eef8f1
+  );
+}
+
+.sc-biz-image img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+.sc-biz-placeholder{
+  font-size:50px;
+}
+
+
+/* =========================================================
+   VERIFIED
+   ========================================================= */
+
+.sc-biz-verified{
+  position:absolute;
+
+  top:10px;
+  right:10px;
+
+  padding:6px 9px;
+
+  border-radius:20px;
+
+  background:#fff;
+  color:var(--green-dark);
+
+  font-size:9px;
+  font-weight:800;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.12);
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.sc-biz-body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+
+  padding:18px;
+}
+
+.sc-biz-category{
+  display:inline-block;
+  align-self:flex-start;
+
+  margin-bottom:8px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
+  background:var(--saffron-soft);
+  color:#b85c00;
+
+  font-size:10px;
+  font-weight:700;
+}
+
+.sc-biz-card h3{
+  margin:0 0 8px;
+
+  font-size:19px;
+  font-weight:800;
+}
+
+.sc-biz-description{
+  color:var(--muted);
+
+  font-size:13px;
+  line-height:1.65;
+}
+
+.sc-biz-address{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.sc-biz-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:8px;
+
+  margin-top:auto;
+  padding-top:16px;
+}
+
+.sc-biz-actions a,
+.sc-biz-actions button{
+  min-height:42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:9px 5px;
+
+  border:0;
+  border-radius:9px;
+
+  text-decoration:none;
+
+  font-family:inherit;
+
+  font-size:10px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* CALL */
+
+.sc-biz-call{
+  background:var(--green);
+  color:#fff !important;
+}
+
+
+/* SHOP NOW */
+
+.sc-biz-shop{
+  background:var(--purple);
+  color:#fff !important;
+}
+
+
+/* GET DIRECTIONS */
+
+.sc-biz-location{
+  background:var(--yellow) !important;
+  color:var(--yellow-text) !important;
+}
+
+.sc-biz-location:hover{
+  background:var(--yellow-dark) !important;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.sc-biz-empty{
+  grid-column:1/-1;
+
+  background:#fff;
+
+  padding:42px 15px;
+
+  border:1px solid var(--border);
+  border-top:4px solid var(--saffron);
+
+  border-radius:18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13px;
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:950px){
+
+  .sc-biz-category-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+  .sc-biz-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media(max-width:700px){
+
+  .sc-biz-category-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media(max-width:560px){
+
+  #sc-business-directory{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .sc-biz-business-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .sc-biz-back{
+    width:100%;
+  }
+
+  .sc-biz-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:420px){
+
+  .sc-biz-category-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap:10px;
+  }
+
+  .sc-biz-category-card{
+    min-height:132px;
+    padding:14px;
+  }
+
+  .sc-biz-cat-name{
+    font-size:10px;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-biz-hero">
+
+  <h1>
+    🏪 Local Business Directory
+  </h1>
+
+  <p>
+    Discover shops and businesses in Sursand.
+    All business categories are shown below,
+    including categories where businesses have not yet been added.
+  </p>
+
+
+  <div class="sc-biz-search">
+
+    <input
+      id="scBizSearch"
+      type="search"
+      placeholder="Search category..."
+      oninput="scBizSearch()">
+
+    <button
+      type="button"
+      onclick="scBizSearch()">
+
+      🔍 Search
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     CATEGORY VIEW
+     ========================================================= -->
+
+<div id="scBizCategoryView">
+
+
+  <div class="sc-biz-section-head">
+
+    <h2>
+      🛍️ Select Business Category
+    </h2>
+
+    <p>
+      All 50 categories are always available.
+    </p>
+
+  </div>
+
+
+  <div
+    class="sc-biz-category-grid"
+    id="scBizCategoryGrid">
+
+  </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     BUSINESS VIEW
+     ========================================================= -->
+
+<div id="scBizBusinessView">
+
+
+  <div class="sc-biz-business-head">
+
+
+    <div class="sc-biz-business-title">
+
+
+      <div
+        class="sc-biz-business-title-icon"
+        id="scBizBusinessIcon">
+
+        🏪
+
+      </div>
+
+
+      <div>
+
+        <h2 id="scBizBusinessTitle">
+          Businesses
+        </h2>
+
+        <p>
+          Businesses available in this category
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      type="button"
+      class="sc-biz-back"
+      onclick="scBizBackToCategories()">
+
+      ← Back to Categories
+
+    </button>
+
+
+  </div>
+
+
+  <div
+    class="sc-biz-count"
+    id="scBizCount">
+  </div>
+
+
+  <div
+    class="sc-biz-grid"
+    id="scBizGrid">
+  </div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_BIZ_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scBizData = [];
+
+let scBizSelectedCategory = "";
+
+
+/* =========================================================
+   FIXED MASTER LIST
+   ========================================================= */
+
+const SC_BUSINESS_CATEGORIES = [
+
+  {name:"Grocery & General Store",icon:"🛒"},
+  {name:"Clothing & Garments",icon:"👕"},
+  {name:"Footwear",icon:"👟"},
+  {name:"Jewellery",icon:"💍"},
+  {name:"Cosmetics & Beauty Products",icon:"💄"},
+  {name:"Mobile & Accessories",icon:"📱"},
+  {name:"Computer & IT",icon:"💻"},
+  {name:"Electronics & Appliances",icon:"📺"},
+  {name:"Electrical Shop",icon:"💡"},
+  {name:"Hardware & Sanitary",icon:"🔩"},
+  {name:"Building Materials",icon:"🧱"},
+  {name:"Paint & Decoration",icon:"🎨"},
+  {name:"Furniture & Furnishing",icon:"🪑"},
+  {name:"Restaurant & Food",icon:"🍽️"},
+  {name:"Sweets & Bakery",icon:"🍰"},
+  {name:"Tea, Snacks & Refreshments",icon:"☕"},
+  {name:"Dairy & Milk Products",icon:"🥛"},
+  {name:"Fruits & Vegetables",icon:"🥬"},
+  {name:"Medical Store & Pharmacy",icon:"💊"},
+  {name:"Books & Stationery",icon:"📚"},
+  {name:"Gifts & Toys",icon:"🎁"},
+  {name:"Home & Kitchen",icon:"🍳"},
+  {name:"Agriculture & Farm Supplies",icon:"🌾"},
+  {name:"Animal Feed & Veterinary Supplies",icon:"🐄"},
+  {name:"Cycle & Accessories",icon:"🚲"},
+  {name:"Automobile & Spare Parts",icon:"🏍️"},
+  {name:"Fuel & Lubricants",icon:"⛽"},
+  {name:"Automobile Repair & Workshop",icon:"🔧"},
+  {name:"Photography & Studio",icon:"📷"},
+  {name:"Printing & Digital Services",icon:"🖨️"},
+  {name:"Salon & Grooming",icon:"✂️"},
+  {name:"Gym & Fitness",icon:"🏋️"},
+  {name:"Hotel & Lodge",icon:"🏨"},
+  {name:"Transport & Logistics",icon:"🚚"},
+  {name:"Travel & Ticketing",icon:"🧳"},
+  {name:"Banking & Financial Services",icon:"🏦"},
+  {name:"Insurance Services",icon:"🛡️"},
+  {name:"Real Estate & Property",icon:"🏢"},
+  {name:"Flowers & Decoration",icon:"💐"},
+  {name:"Wedding & Event Services",icon:"💒"},
+  {name:"Tailoring & Boutique",icon:"🧵"},
+  {name:"Optical Store",icon:"👓"},
+  {name:"Watches & Accessories",icon:"⌚"},
+  {name:"Bags & Luggage",icon:"👜"},
+  {name:"Mattress & Bedding",icon:"🛏️"},
+  {name:"Water & RO",icon:"🚰"},
+  {name:"Battery & Inverter",icon:"🔋"},
+  {name:"Solar Products",icon:"☀️"},
+  {name:"Religious & Puja Items",icon:"🛕"},
+  {name:"Other Shops & Businesses",icon:"🏪"}
+
+];
+
+
+/* =========================================================
+   LOAD
+   ========================================================= */
+
+async function scBizLoad(){
+
+  /*
+   * VERY IMPORTANT:
+   * Render all 50 category cards FIRST.
+   *
+   * This means they remain visible even if:
+   * - API fails
+   * - Sheet is empty
+   * - no businesses exist
+   */
+
+  scBizCreateCategoryCards();
+
+
+  try{
+
+    const response =
+      await fetch(
+        SC_BIZ_API +
+        "?action=all"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        "API data unavailable"
+      );
+
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    scBizData =
+
+      data.businesses ||
+
+      data.businessDirectory ||
+
+      data.localBusinesses ||
+
+      [];
+
+
+    if(
+      !Array.isArray(
+        scBizData
+      )
+    ){
+
+      scBizData = [];
+
+    }
+
+
+    /*
+     * Re-render only to update counts.
+     * All cards still remain.
+     */
+
+    scBizCreateCategoryCards();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Business Directory:",
+      error
+    );
+
+
+    scBizData = [];
+
+
+    /*
+     * DO NOT hide categories.
+     */
+
+    scBizCreateCategoryCards();
+
+  }
+
+}
+
+
+/* =========================================================
+   GET CATEGORY FROM BUSINESS
+   ========================================================= */
+
+function scBizGetCategory(item){
+
+  return String(
+
+    item.category ||
+
+    item.Category ||
+
+    item[
+      "Business Category"
+    ] ||
+
+    item[
+      "Business Type"
+    ] ||
+
+    "Other Shops & Businesses"
+
+  ).trim();
+
+}
+
+
+/* =========================================================
+   CATEGORY COUNT
+   ========================================================= */
+
+function scBizCategoryCount(category){
+
+  return scBizData.filter(
+    function(item){
+
+      return (
+
+        scBizGetCategory(item)
+        .toLowerCase()
+
+        ===
+
+        String(category)
+        .toLowerCase()
+
+      );
+
+    }
+  ).length;
+
+}
+
+
+/* =========================================================
+   ALWAYS CREATE ALL 50 CARDS
+   ========================================================= */
+
+function scBizCreateCategoryCards(){
+
+  const holder =
+    document.getElementById(
+      "scBizCategoryGrid"
+    );
+
+
+  holder.innerHTML =
+
+    SC_BUSINESS_CATEGORIES
+
+    .map(
+      function(category,index){
+
+
+        const count =
+          scBizCategoryCount(
+            category.name
+          );
+
+
+        const colourClass =
+
+          "sc-biz-c" +
+
+          (
+            (
+              index % 10
+            ) + 1
+          );
+
+
+        return `
+
+          <button
+            type="button"
+            class="sc-biz-category-card ${colourClass}"
+            data-category="${scBizEsc(category.name)}"
+            onclick="scBizSelectCategory('${scBizJs(category.name)}')">
+
+
+            <div class="sc-biz-cat-icon">
+
+              ${category.icon}
+
+            </div>
+
+
+            <div>
+
+
+              <div class="sc-biz-cat-name">
+
+                ${scBizEsc(category.name)}
+
+              </div>
+
+
+              <div class="sc-biz-cat-count">
+
+                ${count}
+
+                ${
+                  count === 1
+                  ? "business"
+                  : "businesses"
+                }
+
+                · View →
+
+              </div>
+
+
+            </div>
+
+
+          </button>
+
+        `;
+
+      }
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   SELECT CATEGORY
+   ========================================================= */
+
+function scBizSelectCategory(category){
+
+  scBizSelectedCategory =
+    category;
+
+
+  document.getElementById(
+    "scBizCategoryView"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "scBizBusinessView"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "scBizBusinessTitle"
+  ).textContent =
+    category;
+
+
+  document.getElementById(
+    "scBizBusinessIcon"
+  ).textContent =
+    scBizCategoryIcon(
+      category
+    );
+
+
+  document.getElementById(
+    "scBizSearch"
+  ).value =
+    "";
+
+
+  scBizRenderBusinesses();
+
+
+  document.getElementById(
+    "sc-business-directory"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   BACK
+   ========================================================= */
+
+function scBizBackToCategories(){
+
+  scBizSelectedCategory =
+    "";
+
+
+  document.getElementById(
+    "scBizBusinessView"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "scBizCategoryView"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "scBizSearch"
+  ).value =
+    "";
+
+
+  scBizCreateCategoryCards();
+
+}
+
+
+/* =========================================================
+   SEARCH CATEGORIES
+   ========================================================= */
+
+function scBizSearch(){
+
+  const search =
+    document
+    .getElementById(
+      "scBizSearch"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const categoryView =
+    document.getElementById(
+      "scBizCategoryView"
+    );
+
+
+  if(
+    categoryView.style.display !==
+    "none"
+  ){
+
+    document
+    .querySelectorAll(
+      ".sc-biz-category-card"
+    )
+    .forEach(
+      function(card){
+
+        const category =
+          String(
+            card.getAttribute(
+              "data-category"
+            ) || ""
+          )
+          .toLowerCase();
+
+
+        card.style.display =
+
+          !search ||
+          category.includes(search)
+
+          ? ""
+
+          : "none";
+
+      }
+    );
+
+
+    return;
+
+  }
+
+
+  scBizRenderBusinesses();
+
+}
+
+
+/* =========================================================
+   RENDER BUSINESSES
+   ========================================================= */
+
+function scBizRenderBusinesses(){
+
+  const grid =
+    document.getElementById(
+      "scBizGrid"
+    );
+
+
+  const count =
+    document.getElementById(
+      "scBizCount"
+    );
+
+
+  const search =
+    document
+    .getElementById(
+      "scBizSearch"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const filtered =
+    scBizData.filter(
+      function(item){
+
+
+        const category =
+          scBizGetCategory(
+            item
+          );
+
+
+        const searchable =
+          Object.values(item)
+          .join(" ")
+          .toLowerCase();
+
+
+        return (
+
+          category.toLowerCase()
+          ===
+          scBizSelectedCategory.toLowerCase()
+
+          &&
+
+          (
+            !search ||
+            searchable.includes(search)
+          )
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+
+    filtered.length +
+
+    (
+      filtered.length === 1
+      ? " business found"
+      : " businesses found"
+    );
+
+
+  /*
+   * EMPTY CATEGORY STILL OPENS
+   */
+
+  if(
+    !filtered.length
+  ){
+
+    grid.innerHTML = `
+
+      <div class="sc-biz-empty">
+
+        <div style="font-size:40px;margin-bottom:8px;">
+          🏪
+        </div>
+
+        <strong>
+          No business has been added yet under
+          ${scBizEsc(scBizSelectedCategory)}.
+        </strong>
+
+        <br><br>
+
+        Businesses registered and approved in this
+        category will automatically appear here.
+
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+
+    filtered
+
+    .map(
+      function(item){
+
+
+        const name =
+
+          item[
+            "Shop / Business Name"
+          ] ||
+
+          item[
+            "Business Name"
+          ] ||
+
+          item.Name ||
+
+          "Local Business";
+
+
+        const category =
+          scBizGetCategory(
+            item
+          );
+
+
+        const address =
+
+          item.Address ||
+
+          item.address ||
+
+          item.Location ||
+
+          "";
+
+
+        const description =
+
+          item.Description ||
+
+          item.description ||
+
+          "";
+
+
+        const phone =
+
+          item.Phone ||
+
+          item.phone ||
+
+          item.Mobile ||
+
+          "";
+
+
+        const catalogue =
+
+          item[
+            "WhatsApp Catalogue Link"
+          ] ||
+
+          item.catalogueUrl ||
+
+          item.catalogue ||
+
+          "";
+
+
+        const map =
+
+          item[
+            "Google Maps Link"
+          ] ||
+
+          item[
+            "Google Map Link"
+          ] ||
+
+          item.mapUrl ||
+
+          item.map ||
+
+          "";
+
+
+        const image =
+
+          item[
+            "Business Image"
+          ] ||
+
+          item[
+            "Business Image URL"
+          ] ||
+
+          item[
+            "Image URL"
+          ] ||
+
+          item.imageUrl ||
+
+          item.image ||
+
+          "";
+
+
+        const verified =
+
+          String(
+            item.Verified ||
+            item.verified ||
+            ""
+          )
+          .toLowerCase() ===
+          "yes";
+
+
+        /* =================================================
+           DIRECTIONS
+           ================================================= */
+
+        let directions;
+
+
+        if(
+          scBizValidUrl(map)
+        ){
+
+          directions =
+            String(map).trim();
+
+        }
+
+        else{
+
+          directions =
+
+            "https://www.google.com/maps/search/?api=1&query=" +
+
+            encodeURIComponent(
+
+              name +
+
+              ", " +
+
+              (
+                address ||
+                "Sursand, Bihar"
+              )
+
+            );
+
+        }
+
+
+        /* =================================================
+           IMAGE
+           ================================================= */
+
+        const imageHTML =
+
+          scBizValidUrl(image)
+
+          ? `
+
+            <img
+              src="${scBizUrl(image)}"
+              alt="${scBizEsc(name)}"
+              loading="lazy">
+
+          `
+
+          : `
+
+            <div class="sc-biz-placeholder">
+
+              ${scBizCategoryIcon(category)}
+
+            </div>
+
+          `;
+
+
+        /* =================================================
+           SHOP NOW
+           ================================================= */
+
+        const shopButton =
+
+          scBizValidUrl(catalogue)
+
+          ? `
+
+            <a
+              class="sc-biz-shop"
+              href="${scBizUrl(catalogue)}"
+              target="_blank"
+              rel="noopener">
+
+              🧺 Shop Now
+
+            </a>
+
+          `
+
+          : `
+
+            <button
+              type="button"
+              class="sc-biz-shop"
+              onclick="scBizCatalogueUnavailable()">
+
+              🧺 Shop Now
+
+            </button>
+
+          `;
+
+
+        return `
+
+          <article class="sc-biz-card">
+
+
+            <div class="sc-biz-image">
+
+
+              ${imageHTML}
+
+
+              ${
+                verified
+                ? `
+                  <span class="sc-biz-verified">
+                    ✓ Verified
+                  </span>
+                `
+                : ""
+              }
+
+
+            </div>
+
+
+            <div class="sc-biz-body">
+
+
+              <span class="sc-biz-category">
+
+                ${scBizEsc(category)}
+
+              </span>
+
+
+              <h3>
+
+                ${scBizEsc(name)}
+
+              </h3>
+
+
+              ${
+                description
+                ? `
+                  <div class="sc-biz-description">
+                    ${scBizEsc(description)}
+                  </div>
+                `
+                : ""
+              }
+
+
+              ${
+                address
+                ? `
+                  <div class="sc-biz-address">
+                    📍 ${scBizEsc(address)}
+                  </div>
+                `
+                : ""
+              }
+
+
+              <div class="sc-biz-actions">
+
+
+                ${
+                  phone
+
+                  ? `
+
+                    <a
+                      class="sc-biz-call"
+                      href="tel:${scBizPhone(phone)}">
+
+                      📞 Call
+
+                    </a>
+
+                  `
+
+                  : `
+
+                    <button
+                      type="button"
+                      class="sc-biz-call"
+                      onclick="scBizPhoneUnavailable()">
+
+                      📞 Call
+
+                    </button>
+
+                  `
+                }
+
+
+                ${shopButton}
+
+
+                <a
+                  class="sc-biz-location"
+                  href="${scBizUrl(directions)}"
+                  target="_blank"
+                  rel="noopener noreferrer">
+
+                  📍 Get Directions
+
+                </a>
+
+
+              </div>
+
+
+            </div>
+
+
+          </article>
+
+        `;
+
+      }
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   CATEGORY ICON
+   ========================================================= */
+
+function scBizCategoryIcon(category){
+
+  const found =
+    SC_BUSINESS_CATEGORIES.find(
+      function(item){
+
+        return (
+          item.name.toLowerCase()
+          ===
+          String(category)
+          .toLowerCase()
+        );
+
+      }
+    );
+
+
+  return found
+    ? found.icon
+    : "🏪";
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function scBizCatalogueUnavailable(){
+
+  alert(
+    "WhatsApp Catalogue for this business will be available soon."
+  );
+
+}
+
+
+function scBizPhoneUnavailable(){
+
+  alert(
+    "Contact number for this business will be available soon."
+  );
+
+}
+
+
+function scBizPhone(value){
+
+  return String(value || "")
+    .replace(/[^0-9+]/g,"");
+
+}
+
+
+function scBizValidUrl(value){
+
+  const url =
+    String(value || "")
+    .trim();
+
+
+  return (
+    url.startsWith("https://") ||
+    url.startsWith("http://")
+  );
+
+}
+
+
+function scBizUrl(value){
+
+  return scBizEsc(
+    String(value || "").trim()
+  );
+
+}
+
+
+function scBizEsc(value){
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function scBizJs(value){
+
+  return String(value || "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/\r/g," ")
+    .replace(/\n/g," ");
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    scBizLoad
+  );
+
+}
+
+else{
+
+  scBizLoad();
+
+}
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

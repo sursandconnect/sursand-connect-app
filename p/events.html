@@ -1,0 +1,2356 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Events | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 9 — EVENTS & ANNOUNCEMENTS
+     SURSAND CONNECT
+     FULL REPLACEMENT CODE
+     CATEGORY GRID FIXED
+     ========================================================= -->
+
+<div id="sc-events-page">
+
+<style>
+
+#sc-events-page{
+  --green:#238b45;
+  --green-dark:#176b35;
+
+  --saffron:#f28c28;
+  --saffron-dark:#c86508;
+  --saffron-soft:#fff0dd;
+
+  --blue:#1976d2;
+  --blue-dark:#125ca8;
+
+  --yellow:#f4c430;
+  --yellow-dark:#d7a900;
+  --yellow-text:#3b2d00;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e6ebe7;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-events-page *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-ev-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #f7a13f 0%,
+    #f28c28 48%,
+    #e97812 100%
+  );
+
+  color:#fff;
+  padding:38px 24px 40px;
+  border-radius:22px;
+  margin-bottom:22px;
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(39,77,52,.16);
+}
+
+.sc-ev-hero::after{
+  content:"";
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  right:-65px;
+  bottom:-85px;
+
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.sc-ev-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 10px;
+  color:#fff;
+
+  font-size:clamp(29px,5vw,42px);
+  line-height:1.18;
+  font-weight:800;
+}
+
+.sc-ev-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:780px;
+  margin:0 auto;
+
+  color:rgba(255,255,255,.94);
+
+  font-size:14px;
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.sc-ev-search{
+  position:relative;
+  z-index:2;
+
+  max-width:700px;
+  margin:23px auto 0;
+
+  display:flex;
+  align-items:center;
+
+  padding:6px;
+  background:#fff;
+
+  border-radius:40px;
+
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.12);
+}
+
+.sc-ev-search input{
+  flex:1;
+  min-width:0;
+
+  border:0;
+  outline:0;
+
+  padding:13px 16px;
+
+  background:transparent;
+  color:var(--text);
+
+  font-size:14px;
+}
+
+.sc-ev-search button{
+  min-width:105px;
+  min-height:42px;
+
+  padding:0 18px;
+
+  border:0;
+  border-radius:35px;
+
+  background:var(--green);
+  color:#fff;
+
+  font-size:12px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.sc-ev-search button:hover{
+  background:var(--green-dark);
+}
+
+
+/* =========================================================
+   QUICK CATEGORY CARDS
+   ========================================================= */
+
+.sc-ev-quick{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:22px;
+}
+
+.sc-ev-quick-card{
+  min-height:92px;
+
+  padding:14px 10px;
+
+  border:0;
+  border-radius:16px;
+
+  cursor:pointer;
+  text-align:center;
+
+  transition:.2s ease;
+
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.08);
+}
+
+.sc-ev-quick-card:hover{
+  transform:translateY(-3px);
+}
+
+.sc-ev-quick-card span{
+  display:block;
+
+  font-size:27px;
+
+  margin-bottom:5px;
+}
+
+.sc-ev-quick-card strong{
+  font-size:11px;
+}
+
+
+/* FESTIVALS */
+
+.sc-ev-q1{
+  background:linear-gradient(
+    145deg,
+    #fff0dd,
+    #ffd8a8
+  );
+
+  color:#9b4d00;
+}
+
+
+/* CAMPS */
+
+.sc-ev-q2{
+  background:linear-gradient(
+    145deg,
+    #eaf7ed,
+    #ccebd4
+  );
+
+  color:#176b35;
+}
+
+
+/* ANNOUNCEMENTS */
+
+.sc-ev-q3{
+  background:linear-gradient(
+    145deg,
+    #eef4ff,
+    #d3e3ff
+  );
+
+  color:#174ea6;
+}
+
+
+/* GREETINGS */
+
+.sc-ev-q4{
+  background:linear-gradient(
+    145deg,
+    #fff8d6,
+    #ffe98d
+  );
+
+  color:#705800;
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+   MAXIMUM 10 BUTTONS PER ROW ON DESKTOP
+   ========================================================= */
+
+.sc-ev-filter{
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(10,minmax(0,1fr));
+
+  gap:8px;
+
+  padding:4px 0 20px;
+
+  overflow:visible;
+}
+
+.sc-ev-filter button{
+  width:100%;
+  min-width:0;
+
+  border:1px solid var(--border);
+
+  background:#fff;
+  color:var(--green-dark);
+
+  padding:9px 5px;
+
+  border-radius:25px;
+
+  font-size:10px;
+  line-height:1.25;
+  font-weight:700;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  white-space:normal;
+  overflow-wrap:anywhere;
+
+  transition:.18s ease;
+}
+
+.sc-ev-filter button:hover{
+  border-color:var(--saffron);
+  color:var(--saffron-dark);
+}
+
+.sc-ev-filter button.active{
+  background:var(--saffron);
+  border-color:var(--saffron);
+  color:#fff;
+
+  box-shadow:
+    0 5px 14px rgba(242,140,40,.22);
+}
+
+
+/* =========================================================
+   COUNT
+   ========================================================= */
+
+.sc-ev-count{
+  margin-bottom:14px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   EVENT GRID
+   ========================================================= */
+
+.sc-ev-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:18px;
+}
+
+
+/* =========================================================
+   EVENT CARD
+   ========================================================= */
+
+.sc-ev-card{
+  display:flex;
+  flex-direction:column;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:19px;
+
+  box-shadow:
+    0 8px 25px rgba(31,55,42,.08);
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.sc-ev-card:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 15px 34px rgba(31,55,42,.13);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.sc-ev-image{
+  width:100%;
+  height:170px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #fff5e8,
+    #eef8f1
+  );
+}
+
+.sc-ev-image img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+.sc-ev-placeholder{
+  font-size:50px;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.sc-ev-body{
+  display:flex;
+  flex-direction:column;
+
+  flex:1;
+
+  padding:18px;
+}
+
+
+/* CATEGORY BADGE */
+
+.sc-ev-badge{
+  display:inline-block;
+
+  align-self:flex-start;
+
+  margin-bottom:8px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
+  background:var(--saffron-soft);
+  color:#b85c00;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+
+/* TITLE */
+
+.sc-ev-card h3{
+  margin:0 0 9px;
+
+  color:var(--text);
+
+  font-size:19px;
+  line-height:1.4;
+
+  font-weight:800;
+}
+
+
+/* INFO */
+
+.sc-ev-info{
+  color:var(--muted);
+
+  font-size:12px;
+  line-height:1.75;
+}
+
+.sc-ev-info strong{
+  color:var(--text);
+}
+
+
+/* DESCRIPTION */
+
+.sc-ev-description{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:12px;
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.sc-ev-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:8px;
+
+  margin-top:auto;
+
+  padding-top:16px;
+}
+
+.sc-ev-actions a,
+.sc-ev-actions button{
+  min-height:42px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:5px;
+
+  padding:8px 6px;
+
+  border:0;
+  border-radius:9px;
+
+  text-align:center;
+  text-decoration:none;
+
+  font-size:10px;
+
+  font-family:inherit;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* CALL */
+
+.sc-ev-call{
+  background:var(--green);
+  color:#fff !important;
+}
+
+
+/* MORE DETAILS */
+
+.sc-ev-details{
+  background:var(--blue);
+  color:#fff !important;
+}
+
+
+/* LOCATION */
+
+.sc-ev-location{
+  background:var(--saffron);
+  color:#fff !important;
+}
+
+
+/* THIRD BUTTON YELLOW */
+
+.sc-ev-actions.three-actions
+> :nth-child(3){
+
+  background:var(--yellow) !important;
+
+  color:var(--yellow-text) !important;
+}
+
+.sc-ev-actions.three-actions
+> :nth-child(3):hover{
+
+  background:var(--yellow-dark) !important;
+
+  color:var(--yellow-text) !important;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.sc-ev-empty{
+  grid-column:1/-1;
+
+  padding:42px 15px;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.sc-ev-note{
+  margin-top:24px;
+
+  padding:16px;
+
+  background:#fff8e8;
+
+  border-left:
+    5px solid var(--saffron);
+
+  border-radius:10px;
+
+  color:var(--muted);
+
+  font-size:11px;
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   TABLET
+   5 CATEGORY BUTTONS PER ROW
+   ========================================================= */
+
+@media(max-width:900px){
+
+  .sc-ev-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .sc-ev-quick{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .sc-ev-filter{
+    grid-template-columns:
+      repeat(5,minmax(0,1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   2 CATEGORY BUTTONS PER ROW
+   ========================================================= */
+
+@media(max-width:560px){
+
+  #sc-events-page{
+    margin-top:18px;
+
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+
+  .sc-ev-hero{
+    padding:29px 17px 31px;
+
+    border-radius:18px;
+  }
+
+
+  .sc-ev-hero p{
+    font-size:12px;
+  }
+
+
+  .sc-ev-search{
+    flex-direction:column;
+
+    gap:5px;
+
+    border-radius:14px;
+  }
+
+
+  .sc-ev-search input{
+    width:100%;
+  }
+
+
+  .sc-ev-search button{
+    width:100%;
+
+    padding:11px;
+
+    border-radius:10px;
+  }
+
+
+  .sc-ev-filter{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap:7px;
+  }
+
+
+  .sc-ev-filter button{
+    padding:9px 6px;
+
+    font-size:10px;
+  }
+
+
+  .sc-ev-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-ev-hero">
+
+  <h1>
+    📅 Events &amp; Announcements
+  </h1>
+
+  <p>
+    Stay updated with festivals, fairs, greetings,
+    important days, public programmes, health camps,
+    blood donation, food distribution, campaigns
+    and community activities in Sursand.
+  </p>
+
+
+  <div class="sc-ev-search">
+
+    <input
+      id="scEvSearch"
+      type="search"
+      placeholder="Search event, festival, camp or announcement..."
+      oninput="scEvRender()">
+
+
+    <button
+      type="button"
+      onclick="scEvRender()">
+
+      🔍 Search
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUICK CATEGORY CARDS
+     ========================================================= -->
+
+<div class="sc-ev-quick">
+
+
+  <button
+    type="button"
+    class="sc-ev-quick-card sc-ev-q1"
+    onclick="scEvQuickFilter('Festival')">
+
+    <span>🎉</span>
+
+    <strong>
+      Festivals &amp; Fairs
+    </strong>
+
+  </button>
+
+
+  <button
+    type="button"
+    class="sc-ev-quick-card sc-ev-q2"
+    onclick="scEvQuickFilter('Camp')">
+
+    <span>🏥</span>
+
+    <strong>
+      Camps &amp; Drives
+    </strong>
+
+  </button>
+
+
+  <button
+    type="button"
+    class="sc-ev-quick-card sc-ev-q3"
+    onclick="scEvQuickFilter('Announcement')">
+
+    <span>📢</span>
+
+    <strong>
+      Announcements
+    </strong>
+
+  </button>
+
+
+  <button
+    type="button"
+    class="sc-ev-quick-card sc-ev-q4"
+    onclick="scEvQuickFilter('Greeting')">
+
+    <span>🌼</span>
+
+    <strong>
+      Greetings &amp; Important Days
+    </strong>
+
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     CATEGORY FILTER
+     ========================================================= -->
+
+<div
+  class="sc-ev-filter"
+  id="scEvCategories">
+</div>
+
+
+<!-- =========================================================
+     COUNT
+     ========================================================= -->
+
+<div
+  class="sc-ev-count"
+  id="scEvCount">
+
+  Loading events and announcements...
+
+</div>
+
+
+<!-- =========================================================
+     EVENT GRID
+     ========================================================= -->
+
+<div
+  class="sc-ev-grid"
+  id="scEvGrid">
+
+  <div class="sc-ev-empty">
+
+    Loading events and announcements...
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     NOTE
+     ========================================================= -->
+
+<div class="sc-ev-note">
+
+  <strong>Note:</strong>
+  Event information may change.
+  Please verify important dates, timings, venue and organiser
+  details before attending.
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_EV_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scEvData = [];
+
+let scEvCategory =
+  "All";
+
+
+/* =========================================================
+   LOAD DATA
+   ========================================================= */
+
+async function scEvLoad(){
+
+  try{
+
+    const response =
+      await fetch(
+        SC_EV_API +
+        "?action=all"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        "API data unavailable"
+      );
+
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    const events =
+      Array.isArray(
+        data.events
+      )
+      ? data.events
+      : [];
+
+
+    const announcements =
+      Array.isArray(
+        data.announcements
+      )
+      ? data.announcements
+      : [];
+
+
+    const greetings =
+      Array.isArray(
+        data.greetings
+      )
+      ? data.greetings
+      : [];
+
+
+    const calendarContent =
+      Array.isArray(
+        data.calendarContent
+      )
+      ? data.calendarContent
+      : [];
+
+
+    /* COMBINE ALL DATA */
+
+    scEvData = [
+
+      ...events,
+
+      ...announcements,
+
+      ...greetings,
+
+      ...calendarContent
+
+    ];
+
+
+    scEvCreateCategories();
+
+    scEvRender();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Events & Announcements:",
+      error
+    );
+
+
+    document.getElementById(
+      "scEvGrid"
+    ).innerHTML = `
+
+      <div class="sc-ev-empty">
+
+        Unable to load events and announcements.
+
+      </div>
+
+    `;
+
+
+    document.getElementById(
+      "scEvCount"
+    ).textContent =
+      "Unable to load data.";
+
+  }
+
+}
+
+
+/* =========================================================
+   GET CATEGORY
+   ========================================================= */
+
+function scEvCategoryValue(item){
+
+  return (
+
+    item.Category ||
+
+    item.category ||
+
+    item[
+      "Event Category"
+    ] ||
+
+    item[
+      "Announcement Type"
+    ] ||
+
+    item[
+      "Content Type"
+    ] ||
+
+    item.Type ||
+
+    "Update"
+
+  );
+
+}
+
+
+/* =========================================================
+   CREATE CATEGORY BUTTONS
+   ========================================================= */
+
+function scEvCreateCategories(){
+
+  const holder =
+    document.getElementById(
+      "scEvCategories"
+    );
+
+
+  const preferred = [
+
+    "All",
+
+    "Announcement",
+
+    "Festival",
+
+    "Fair",
+
+    "Greeting",
+
+    "Important Day",
+
+    "Health Camp",
+
+    "Blood Donation",
+
+    "Food Distribution",
+
+    "Campaign",
+
+    "Public Camp",
+
+    "Community Event"
+
+  ];
+
+
+  const existing =
+    scEvData
+
+    .map(
+      function(item){
+
+        return scEvCategoryValue(
+          item
+        );
+
+      }
+    )
+
+    .filter(Boolean);
+
+
+  const categories = [
+
+    ...new Set(
+
+      preferred.concat(
+        existing
+      )
+
+    )
+
+  ];
+
+
+  holder.innerHTML =
+    "";
+
+
+  categories.forEach(
+    function(category){
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.textContent =
+        category;
+
+
+      if(
+        category ===
+        scEvCategory
+      ){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          holder
+
+          .querySelectorAll(
+            "button"
+          )
+
+          .forEach(
+            function(btn){
+
+              btn.classList.remove(
+                "active"
+              );
+
+            }
+          );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          scEvCategory =
+            category;
+
+
+          scEvRender();
+
+        }
+      );
+
+
+      holder.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   QUICK FILTER
+   ========================================================= */
+
+function scEvQuickFilter(type){
+
+  scEvCategory =
+    type;
+
+
+  document
+
+  .querySelectorAll(
+    "#scEvCategories button"
+  )
+
+  .forEach(
+    function(button){
+
+      button.classList.remove(
+        "active"
+      );
+
+
+      if(
+        button.textContent ===
+        type
+      ){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+  );
+
+
+  scEvRender();
+
+}
+
+
+/* =========================================================
+   CATEGORY GROUP MATCH
+   ========================================================= */
+
+function scEvCategoryMatch(category){
+
+  const selected =
+    String(
+      scEvCategory
+    )
+    .toLowerCase();
+
+
+  const value =
+    String(
+      category
+    )
+    .toLowerCase();
+
+
+  if(
+    selected === "all"
+  ){
+
+    return true;
+
+  }
+
+
+  /* FESTIVALS AND FAIRS */
+
+  if(
+    selected === "festival"
+  ){
+
+    return (
+
+      value.includes(
+        "festival"
+      )
+
+      ||
+
+      value.includes(
+        "fair"
+      )
+
+    );
+
+  }
+
+
+  /* CAMPS AND DRIVES */
+
+  if(
+    selected === "camp"
+  ){
+
+    return (
+
+      value.includes(
+        "camp"
+      )
+
+      ||
+
+      value.includes(
+        "health"
+      )
+
+      ||
+
+      value.includes(
+        "blood"
+      )
+
+      ||
+
+      value.includes(
+        "food"
+      )
+
+      ||
+
+      value.includes(
+        "campaign"
+      )
+
+      ||
+
+      value.includes(
+        "drive"
+      )
+
+    );
+
+  }
+
+
+  /* GREETINGS AND IMPORTANT DAYS */
+
+  if(
+    selected === "greeting"
+  ){
+
+    return (
+
+      value.includes(
+        "greeting"
+      )
+
+      ||
+
+      value.includes(
+        "important day"
+      )
+
+    );
+
+  }
+
+
+  return (
+    value === selected
+  );
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function scEvRender(){
+
+  const grid =
+    document.getElementById(
+      "scEvGrid"
+    );
+
+
+  const count =
+    document.getElementById(
+      "scEvCount"
+    );
+
+
+  const search =
+    document
+
+    .getElementById(
+      "scEvSearch"
+    )
+
+    .value
+
+    .trim()
+
+    .toLowerCase();
+
+
+  const filtered =
+    scEvData.filter(
+      function(item){
+
+        const category =
+          scEvCategoryValue(
+            item
+          );
+
+
+        const searchable =
+          Object.values(item)
+
+          .join(" ")
+
+          .toLowerCase();
+
+
+        return (
+
+          scEvCategoryMatch(
+            category
+          )
+
+          &&
+
+          (
+            !search
+
+            ||
+
+            searchable.includes(
+              search
+            )
+          )
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+
+    filtered.length +
+
+    (
+      filtered.length === 1
+
+      ? " update found"
+
+      : " updates found"
+    );
+
+
+  if(
+    !filtered.length
+  ){
+
+    grid.innerHTML = `
+
+      <div class="sc-ev-empty">
+
+        No matching event or announcement found.
+
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    "";
+
+
+  filtered.forEach(
+    function(item){
+
+      grid.appendChild(
+        scEvCreateCard(
+          item
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CREATE EVENT CARD
+   ========================================================= */
+
+function scEvCreateCard(item){
+
+  const title =
+
+    item[
+      "Event Title"
+    ] ||
+
+    item[
+      "Announcement Title"
+    ] ||
+
+    item[
+      "Greeting Title"
+    ] ||
+
+    item.Title ||
+
+    item.Name ||
+
+    "Community Update";
+
+
+  const category =
+    scEvCategoryValue(
+      item
+    );
+
+
+  const date =
+
+    item.Date ||
+
+    item[
+      "Event Date"
+    ] ||
+
+    item[
+      "Published Date"
+    ] ||
+
+    "";
+
+
+  const time =
+
+    item.Time ||
+
+    item.Timing ||
+
+    item[
+      "Event Time"
+    ] ||
+
+    "";
+
+
+  const venue =
+
+    item.Venue ||
+
+    item.Location ||
+
+    item.Address ||
+
+    "";
+
+
+  const description =
+
+    item.Description ||
+
+    item.Details ||
+
+    item.Message ||
+
+    "";
+
+
+  const phone =
+
+    item.Phone ||
+
+    item.Mobile ||
+
+    item[
+      "Contact Number"
+    ] ||
+
+    "";
+
+
+  const link =
+
+    item.Link ||
+
+    item.URL ||
+
+    item[
+      "More Info Link"
+    ] ||
+
+    item[
+      "Registration Link"
+    ] ||
+
+    "";
+
+
+  const map =
+
+    item[
+      "Google Map Link"
+    ] ||
+
+    item[
+      "Google Maps Link"
+    ] ||
+
+    item[
+      "Map URL"
+    ] ||
+
+    item.Map ||
+
+    "";
+
+
+  const image =
+
+    item[
+      "Image URL"
+    ] ||
+
+    item.Image ||
+
+    item[
+      "Greeting Image"
+    ] ||
+
+    "";
+
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+
+  card.className =
+    "sc-ev-card";
+
+
+  /* =====================================================
+     IMAGE
+     ===================================================== */
+
+  const imageBox =
+    document.createElement(
+      "div"
+    );
+
+
+  imageBox.className =
+    "sc-ev-image";
+
+
+  if(
+    scEvValidUrl(
+      image
+    )
+  ){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+
+    img.src =
+      image;
+
+
+    img.alt =
+      title;
+
+
+    img.loading =
+      "lazy";
+
+
+    img.onerror =
+      function(){
+
+        imageBox.innerHTML = `
+
+          <div class="sc-ev-placeholder">
+
+            ${scEvIcon(category)}
+
+          </div>
+
+        `;
+
+      };
+
+
+    imageBox.appendChild(
+      img
+    );
+
+  }
+
+  else{
+
+    imageBox.innerHTML = `
+
+      <div class="sc-ev-placeholder">
+
+        ${scEvIcon(category)}
+
+      </div>
+
+    `;
+
+  }
+
+
+  card.appendChild(
+    imageBox
+  );
+
+
+  /* =====================================================
+     BODY
+     ===================================================== */
+
+  const body =
+    document.createElement(
+      "div"
+    );
+
+
+  body.className =
+    "sc-ev-body";
+
+
+  /* CATEGORY BADGE */
+
+  const badge =
+    document.createElement(
+      "span"
+    );
+
+
+  badge.className =
+    "sc-ev-badge";
+
+
+  badge.textContent =
+
+    scEvIcon(category) +
+
+    " " +
+
+    category;
+
+
+  body.appendChild(
+    badge
+  );
+
+
+  /* TITLE */
+
+  const heading =
+    document.createElement(
+      "h3"
+    );
+
+
+  heading.textContent =
+    title;
+
+
+  body.appendChild(
+    heading
+  );
+
+
+  /* =====================================================
+     INFO
+     ===================================================== */
+
+  const info =
+    document.createElement(
+      "div"
+    );
+
+
+  info.className =
+    "sc-ev-info";
+
+
+  let infoHtml =
+    "";
+
+
+  if(date){
+
+    infoHtml +=
+
+      "📅 <strong>Date:</strong> " +
+
+      scEvEsc(
+        date
+      );
+
+  }
+
+
+  if(time){
+
+    if(infoHtml){
+      infoHtml += "<br>";
+    }
+
+
+    infoHtml +=
+
+      "🕒 <strong>Time:</strong> " +
+
+      scEvEsc(
+        time
+      );
+
+  }
+
+
+  if(venue){
+
+    if(infoHtml){
+      infoHtml += "<br>";
+    }
+
+
+    infoHtml +=
+
+      "📍 <strong>Venue:</strong> " +
+
+      scEvEsc(
+        venue
+      );
+
+  }
+
+
+  info.innerHTML =
+    infoHtml;
+
+
+  body.appendChild(
+    info
+  );
+
+
+  /* DESCRIPTION */
+
+  if(description){
+
+    const desc =
+      document.createElement(
+        "div"
+      );
+
+
+    desc.className =
+      "sc-ev-description";
+
+
+    desc.textContent =
+      description;
+
+
+    body.appendChild(
+      desc
+    );
+
+  }
+
+
+  /* =====================================================
+     ACTIONS
+     ===================================================== */
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "sc-ev-actions";
+
+
+  /* CALL */
+
+  if(phone){
+
+    const call =
+      document.createElement(
+        "a"
+      );
+
+
+    call.className =
+      "sc-ev-call";
+
+
+    call.href =
+      "tel:" +
+      scEvPhone(
+        phone
+      );
+
+
+    call.textContent =
+      "📞 Call";
+
+
+    actions.appendChild(
+      call
+    );
+
+  }
+
+
+  /* MORE DETAILS */
+
+  if(
+    scEvValidUrl(
+      link
+    )
+  ){
+
+    const details =
+      document.createElement(
+        "a"
+      );
+
+
+    details.className =
+      "sc-ev-details";
+
+
+    details.href =
+      link;
+
+
+    details.target =
+      "_blank";
+
+
+    details.rel =
+      "noopener";
+
+
+    details.textContent =
+      "🔗 More Details";
+
+
+    actions.appendChild(
+      details
+    );
+
+  }
+
+
+  /* LOCATION */
+
+  if(
+    map ||
+    venue
+  ){
+
+    let locationUrl =
+      "";
+
+
+    if(
+      scEvValidUrl(
+        map
+      )
+    ){
+
+      locationUrl =
+        map;
+
+    }
+
+    else{
+
+      locationUrl =
+
+        "https://www.google.com/maps/search/?api=1&query=" +
+
+        encodeURIComponent(
+
+          venue +
+
+          ", Sursand, Bihar"
+
+        );
+
+    }
+
+
+    const location =
+      document.createElement(
+        "a"
+      );
+
+
+    location.className =
+      "sc-ev-location";
+
+
+    location.href =
+      locationUrl;
+
+
+    location.target =
+      "_blank";
+
+
+    location.rel =
+      "noopener noreferrer";
+
+
+    location.textContent =
+      "📍 Location";
+
+
+    actions.appendChild(
+      location
+    );
+
+  }
+
+
+  /* IF THERE ARE EXACTLY 3 BUTTONS,
+     THIRD BUTTON BECOMES YELLOW */
+
+  if(
+    actions.children.length ===
+    3
+  ){
+
+    actions.classList.add(
+      "three-actions"
+    );
+
+  }
+
+
+  if(
+    actions.children.length
+  ){
+
+    body.appendChild(
+      actions
+    );
+
+  }
+
+
+  card.appendChild(
+    body
+  );
+
+
+  return card;
+
+}
+
+
+/* =========================================================
+   CATEGORY ICON
+   ========================================================= */
+
+function scEvIcon(category){
+
+  const value =
+    String(
+      category || ""
+    )
+    .toLowerCase();
+
+
+  if(
+    value.includes(
+      "festival"
+    )
+  ){
+    return "🎉";
+  }
+
+
+  if(
+    value.includes(
+      "fair"
+    )
+  ){
+    return "🎡";
+  }
+
+
+  if(
+    value.includes(
+      "greeting"
+    )
+  ){
+    return "🌼";
+  }
+
+
+  if(
+    value.includes(
+      "important"
+    )
+  ){
+    return "🌟";
+  }
+
+
+  if(
+    value.includes(
+      "health"
+    )
+  ){
+    return "🏥";
+  }
+
+
+  if(
+    value.includes(
+      "blood"
+    )
+  ){
+    return "🩸";
+  }
+
+
+  if(
+    value.includes(
+      "food"
+    )
+  ){
+    return "🍲";
+  }
+
+
+  if(
+    value.includes(
+      "campaign"
+    )
+  ){
+    return "📣";
+  }
+
+
+  if(
+    value.includes(
+      "camp"
+    )
+  ){
+    return "⛺";
+  }
+
+
+  if(
+    value.includes(
+      "announcement"
+    )
+  ){
+    return "📢";
+  }
+
+
+  if(
+    value.includes(
+      "government"
+    )
+  ){
+    return "🏛️";
+  }
+
+
+  if(
+    value.includes(
+      "education"
+    )
+  ){
+    return "🎓";
+  }
+
+
+  if(
+    value.includes(
+      "sports"
+    )
+  ){
+    return "🏆";
+  }
+
+
+  if(
+    value.includes(
+      "environment"
+    )
+  ){
+    return "🌱";
+  }
+
+
+  return "📅";
+
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+function scEvPhone(value){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /[^0-9+]/g,
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   VALID URL
+   ========================================================= */
+
+function scEvValidUrl(value){
+
+  const url =
+    String(
+      value || ""
+    )
+    .trim();
+
+
+  return (
+
+    url.startsWith(
+      "https://"
+    )
+
+    ||
+
+    url.startsWith(
+      "http://"
+    )
+
+  );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function scEvEsc(value){
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+
+  .replace(/&/g,"&amp;")
+
+  .replace(/</g,"&lt;")
+
+  .replace(/>/g,"&gt;")
+
+  .replace(/"/g,"&quot;")
+
+  .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    scEvLoad
+  );
+
+}
+
+else{
+
+  scEvLoad();
+
+}
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

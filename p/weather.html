@@ -1,0 +1,3602 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Weather | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 16 — WEATHER & LOCAL INFORMATION
+     SURSAND CONNECT
+     FULL REPLACEMENT
+     WEATHER DASHBOARD + GRAPHS
+     ========================================================= -->
+
+<div id="sc-weather-page">
+
+<style>
+
+#sc-weather-page{
+  --green:#238b45;
+  --green-dark:#176b35;
+  --green-soft:#eaf7ed;
+
+  --saffron:#f28c28;
+  --saffron-dark:#d66e0b;
+  --saffron-soft:#fff0dd;
+
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --blue-soft:#eef4ff;
+
+  --yellow:#f4c430;
+  --yellow-soft:#fff8d8;
+
+  --purple:#7c3aed;
+  --cyan:#0891b2;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e5e9e7;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-weather-page *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-wt-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #f7a13f 0%,
+    #f28c28 50%,
+    #e97812 100%
+  );
+
+  color:#fff;
+
+  padding:40px 24px;
+
+  margin-bottom:23px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(90,60,20,.16);
+}
+
+.sc-wt-hero::before{
+  content:"";
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  left:-75px;
+  top:-85px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.07);
+}
+
+.sc-wt-hero::after{
+  content:"";
+  position:absolute;
+
+  width:210px;
+  height:210px;
+
+  right:-80px;
+  bottom:-105px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+.sc-wt-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 9px;
+
+  color:#fff;
+
+  font-size:
+    clamp(29px,5vw,42px);
+
+  font-weight:800;
+}
+
+.sc-wt-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:760px;
+
+  margin:auto;
+
+  color:
+    rgba(255,255,255,.94);
+
+  font-size:14px;
+
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   WEATHER DASHBOARD
+   ========================================================= */
+
+.sc-wt-weather-box{
+  position:relative;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-top:
+    5px solid var(--saffron);
+
+  border-radius:22px;
+
+  padding:23px;
+
+  margin-bottom:25px;
+
+  box-shadow:
+    0 10px 30px rgba(31,55,42,.09);
+}
+
+
+.sc-wt-weather-title{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:19px;
+}
+
+.sc-wt-weather-title h2{
+  margin:0;
+
+  color:var(--text);
+
+  font-size:22px;
+}
+
+.sc-wt-live{
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  padding:6px 11px;
+
+  border-radius:20px;
+
+  background:#eaf7ed;
+
+  color:var(--green-dark);
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.sc-wt-live-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 0 4px rgba(34,197,94,.12);
+}
+
+
+/* =========================================================
+   MAIN WEATHER ROW
+   ========================================================= */
+
+.sc-wt-current{
+  display:grid;
+
+  grid-template-columns:
+    230px 1fr;
+
+  gap:18px;
+}
+
+
+/* CURRENT TEMPERATURE CARD */
+
+.sc-wt-main-temp{
+  position:relative;
+
+  overflow:hidden;
+
+  min-height:225px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:20px;
+
+  border-radius:19px;
+
+  background:linear-gradient(
+    145deg,
+    #fff4e5,
+    #ffe1ba
+  );
+
+  border:
+    1px solid #f6d4aa;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    0 8px 20px rgba(242,140,40,.10);
+}
+
+.sc-wt-main-temp::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-36px;
+  top:-35px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.32);
+}
+
+.sc-wt-weather-icon{
+  font-size:55px;
+
+  line-height:1;
+
+  margin-bottom:6px;
+}
+
+.sc-wt-temp{
+  color:#9b4d00;
+
+  font-size:43px;
+
+  line-height:1.1;
+
+  font-weight:900;
+}
+
+.sc-wt-condition{
+  margin-top:5px;
+
+  color:#85521f;
+
+  font-size:13px;
+
+  font-weight:700;
+}
+
+.sc-wt-location{
+  margin-top:11px;
+
+  padding:5px 10px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.55);
+
+  color:#7c4d1e;
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================================================
+   DETAIL CARDS
+   ========================================================= */
+
+.sc-wt-right{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:13px;
+}
+
+.sc-wt-details{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:11px;
+}
+
+.sc-wt-detail{
+  min-height:92px;
+
+  padding:13px 9px;
+
+  border-radius:14px;
+
+  text-align:center;
+
+  background:#f8faf9;
+
+  border:1px solid #edf0ee;
+}
+
+.sc-wt-detail:nth-child(1){
+  background:#fff8e8;
+}
+
+.sc-wt-detail:nth-child(2){
+  background:#eef7ff;
+}
+
+.sc-wt-detail:nth-child(3){
+  background:#effbf5;
+}
+
+.sc-wt-detail-icon{
+  display:block;
+
+  margin-bottom:5px;
+
+  font-size:22px;
+}
+
+.sc-wt-detail strong{
+  display:block;
+
+  color:var(--text);
+
+  font-size:16px;
+}
+
+.sc-wt-detail span{
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+
+/* =========================================================
+   METERS
+   ========================================================= */
+
+.sc-wt-meters{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:11px;
+}
+
+.sc-wt-meter-card{
+  padding:13px;
+
+  border-radius:14px;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+}
+
+.sc-wt-meter-top{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:8px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-wt-meter-top strong{
+  color:var(--text);
+
+  font-size:12px;
+}
+
+.sc-wt-meter-track{
+  height:9px;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:#eef1ef;
+}
+
+.sc-wt-meter-fill{
+  height:100%;
+
+  border-radius:20px;
+
+  transition:
+    width .8s ease;
+}
+
+.sc-wt-humidity-fill{
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #2563eb
+    );
+}
+
+.sc-wt-wind-fill{
+  background:
+    linear-gradient(
+      90deg,
+      #86efac,
+      #238b45
+    );
+}
+
+
+/* =========================================================
+   GRAPH SECTION
+   ========================================================= */
+
+.sc-wt-graph-section{
+  display:grid;
+
+  grid-template-columns:
+    1.35fr .65fr;
+
+  gap:16px;
+
+  margin-top:20px;
+}
+
+.sc-wt-chart-card{
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #fbfcfb
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:
+    0 7px 20px rgba(31,55,42,.06);
+}
+
+.sc-wt-chart-title{
+  display:flex;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:10px;
+}
+
+.sc-wt-chart-title h3{
+  margin:0;
+
+  color:var(--text);
+
+  font-size:15px;
+}
+
+.sc-wt-chart-title span{
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   SVG TEMPERATURE GRAPH
+   ========================================================= */
+
+.sc-wt-chart-wrap{
+  width:100%;
+
+  overflow:hidden;
+}
+
+.sc-wt-chart-svg{
+  width:100%;
+
+  height:210px;
+
+  display:block;
+}
+
+.sc-wt-chart-grid{
+  stroke:#e8ece9;
+
+  stroke-width:1;
+}
+
+.sc-wt-chart-area{
+  fill:
+    rgba(242,140,40,.10);
+}
+
+.sc-wt-chart-line-max{
+  fill:none;
+
+  stroke:#f28c28;
+
+  stroke-width:4;
+
+  stroke-linecap:round;
+
+  stroke-linejoin:round;
+}
+
+.sc-wt-chart-line-min{
+  fill:none;
+
+  stroke:#2563eb;
+
+  stroke-width:3;
+
+  stroke-linecap:round;
+
+  stroke-linejoin:round;
+}
+
+.sc-wt-chart-dot-max{
+  fill:#f28c28;
+
+  stroke:#fff;
+
+  stroke-width:3;
+}
+
+.sc-wt-chart-dot-min{
+  fill:#2563eb;
+
+  stroke:#fff;
+
+  stroke-width:3;
+}
+
+.sc-wt-chart-label{
+  fill:#667085;
+
+  font-size:10px;
+
+  text-anchor:middle;
+}
+
+.sc-wt-chart-value-max{
+  fill:#b85c00;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  text-anchor:middle;
+}
+
+.sc-wt-chart-value-min{
+  fill:#1d4ed8;
+
+  font-size:9px;
+
+  font-weight:700;
+
+  text-anchor:middle;
+}
+
+.sc-wt-chart-legend{
+  display:flex;
+
+  justify-content:center;
+
+  gap:18px;
+
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-wt-legend-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:5px;
+}
+
+.sc-wt-legend-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+}
+
+.sc-wt-max-dot{
+  background:var(--saffron);
+}
+
+.sc-wt-min-dot{
+  background:var(--blue);
+}
+
+
+/* =========================================================
+   WEATHER SNAPSHOT GRAPH
+   ========================================================= */
+
+.sc-wt-snapshot{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:13px;
+}
+
+.sc-wt-snapshot-row{
+  display:grid;
+
+  grid-template-columns:
+    80px 1fr 45px;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+.sc-wt-snapshot-label{
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-wt-snapshot-track{
+  height:12px;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:#eef1ef;
+}
+
+.sc-wt-snapshot-fill{
+  height:100%;
+
+  border-radius:20px;
+}
+
+.sc-wt-snapshot-temp{
+  background:
+    linear-gradient(
+      90deg,
+      #ffd59f,
+      #f28c28
+    );
+}
+
+.sc-wt-snapshot-humidity{
+  background:
+    linear-gradient(
+      90deg,
+      #bae6fd,
+      #2563eb
+    );
+}
+
+.sc-wt-snapshot-wind{
+  background:
+    linear-gradient(
+      90deg,
+      #bbf7d0,
+      #238b45
+    );
+}
+
+.sc-wt-snapshot-feels{
+  background:
+    linear-gradient(
+      90deg,
+      #ddd6fe,
+      #7c3aed
+    );
+}
+
+.sc-wt-snapshot-value{
+  color:var(--text);
+
+  text-align:right;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+
+/* =========================================================
+   5 DAY FORECAST
+   ========================================================= */
+
+.sc-wt-forecast-heading{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-top:22px;
+
+  margin-bottom:11px;
+}
+
+.sc-wt-forecast-heading h3{
+  margin:0;
+
+  color:var(--text);
+
+  font-size:16px;
+}
+
+.sc-wt-forecast-heading span{
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.sc-wt-forecast{
+  display:grid;
+
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+
+  gap:10px;
+}
+
+.sc-wt-day{
+  position:relative;
+
+  overflow:hidden;
+
+  padding:13px 8px;
+
+  border:1px solid var(--border);
+
+  border-radius:14px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #fafcfb
+    );
+
+  transition:.18s ease;
+}
+
+.sc-wt-day:hover{
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 9px 20px rgba(31,55,42,.09);
+}
+
+.sc-wt-day:first-child{
+  border-color:#f2bb80;
+
+  background:#fff8ee;
+}
+
+.sc-wt-day-name{
+  color:var(--text);
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.sc-wt-day-icon{
+  margin:6px 0;
+
+  font-size:27px;
+}
+
+.sc-wt-day-temp{
+  color:#b85c00;
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+.sc-wt-day-min{
+  color:var(--blue);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.sc-wt-section-title{
+  margin:
+    31px 0 15px;
+}
+
+.sc-wt-section-title h2{
+  margin:0 0 5px;
+
+  color:var(--text);
+
+  font-size:22px;
+}
+
+.sc-wt-section-title p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+.sc-wt-search{
+  max-width:700px;
+
+  margin:18px 0;
+
+  display:flex;
+
+  align-items:stretch;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:30px;
+
+  box-shadow:
+    0 5px 16px rgba(0,0,0,.07);
+}
+
+.sc-wt-search input{
+  flex:1;
+
+  min-width:0;
+
+  height:48px;
+
+  padding:0 17px;
+
+  border:0;
+
+  outline:0;
+
+  border-radius:0;
+
+  background:#fff;
+
+  font-size:13px;
+
+  -webkit-appearance:none;
+
+  appearance:none;
+}
+
+.sc-wt-search input::-webkit-search-decoration,
+.sc-wt-search input::-webkit-search-cancel-button,
+.sc-wt-search input::-webkit-search-results-button,
+.sc-wt-search input::-webkit-search-results-decoration{
+  -webkit-appearance:none;
+}
+
+.sc-wt-search button{
+  min-width:105px;
+
+  height:48px;
+
+  border:0;
+
+  border-radius:0;
+
+  background:var(--green);
+
+  color:#fff;
+
+  padding:0 17px;
+
+  font-family:inherit;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.sc-wt-filter{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-bottom:18px;
+}
+
+.sc-wt-filter button{
+  border:
+    1px solid var(--border);
+
+  background:#fff;
+
+  color:var(--green-dark);
+
+  padding:9px 15px;
+
+  border-radius:25px;
+
+  white-space:nowrap;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.sc-wt-filter button.active{
+  background:var(--saffron);
+
+  border-color:var(--saffron);
+
+  color:#fff;
+}
+
+
+/* =========================================================
+   COUNT
+   ========================================================= */
+
+.sc-wt-count{
+  margin-bottom:13px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   LOCAL INFORMATION GRID
+   ========================================================= */
+
+.sc-wt-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:18px;
+}
+
+.sc-wt-card{
+  display:flex;
+
+  flex-direction:column;
+
+  background:#fff;
+
+  padding:20px;
+
+  border:
+    1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:19px;
+
+  box-shadow:
+    0 8px 25px rgba(31,55,42,.08);
+
+  transition:.22s ease;
+}
+
+.sc-wt-card:hover{
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 15px 34px rgba(31,55,42,.13);
+}
+
+.sc-wt-card-icon{
+  width:55px;
+  height:55px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--saffron-soft);
+
+  border-radius:15px;
+
+  font-size:27px;
+
+  margin-bottom:12px;
+}
+
+.sc-wt-category{
+  display:inline-block;
+
+  align-self:flex-start;
+
+  background:var(--saffron-soft);
+
+  color:#b85c00;
+
+  padding:5px 10px;
+
+  border-radius:20px;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  margin-bottom:8px;
+}
+
+.sc-wt-card h3{
+  margin:0 0 8px;
+
+  color:var(--text);
+
+  font-size:18px;
+
+  line-height:1.35;
+
+  font-weight:800;
+}
+
+.sc-wt-card-info{
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.7;
+}
+
+.sc-wt-card-info strong{
+  color:var(--text);
+}
+
+
+/* =========================================================
+   LOCAL ACTIONS
+   ========================================================= */
+
+.sc-wt-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:8px;
+
+  margin-top:auto;
+
+  padding-top:15px;
+}
+
+.sc-wt-actions a{
+  min-height:42px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:9px 6px;
+
+  border-radius:9px;
+
+  text-decoration:none;
+
+  text-align:center;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.sc-wt-call{
+  background:var(--green);
+
+  color:#fff !important;
+}
+
+.sc-wt-link{
+  background:var(--blue);
+
+  color:#fff !important;
+}
+
+.sc-wt-map{
+  background:var(--saffron);
+
+  color:#fff !important;
+}
+
+.sc-wt-actions.three-actions
+> :nth-child(3){
+  background:var(--yellow) !important;
+
+  color:#3b2d00 !important;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.sc-wt-empty{
+  grid-column:1/-1;
+
+  background:#fff;
+
+  padding:35px 15px;
+
+  border:
+    1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:900px){
+
+  .sc-wt-current{
+    grid-template-columns:
+      190px 1fr;
+  }
+
+  .sc-wt-details{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+  .sc-wt-graph-section{
+    grid-template-columns:1fr;
+  }
+
+  .sc-wt-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:650px){
+
+  #sc-weather-page{
+    margin-top:18px;
+
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+
+  .sc-wt-hero{
+    padding:29px 17px 31px;
+
+    border-radius:18px;
+  }
+
+
+  .sc-wt-hero p{
+    font-size:12px;
+  }
+
+
+  .sc-wt-weather-box{
+    padding:15px;
+  }
+
+
+  .sc-wt-current{
+    grid-template-columns:1fr;
+  }
+
+
+  .sc-wt-main-temp{
+    min-height:190px;
+  }
+
+
+  .sc-wt-details{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+
+  .sc-wt-meters{
+    grid-template-columns:1fr;
+  }
+
+
+  .sc-wt-forecast{
+    grid-template-columns:
+      repeat(5,115px);
+
+    overflow-x:auto;
+
+    padding-bottom:5px;
+  }
+
+
+  .sc-wt-grid{
+    grid-template-columns:1fr;
+  }
+
+
+  .sc-wt-search{
+    width:100%;
+
+    flex-direction:row;
+
+    border-radius:28px;
+  }
+
+
+  .sc-wt-search input{
+    height:47px;
+
+    padding:0 13px;
+
+    font-size:12px;
+  }
+
+
+  .sc-wt-search button{
+    min-width:91px;
+
+    height:47px;
+
+    padding:0 11px;
+  }
+
+}
+
+
+@media(max-width:420px){
+
+  .sc-wt-details{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-wt-hero">
+
+  <h1>
+    🌤️ Weather &amp; Local Information
+  </h1>
+
+  <p>
+    Live weather, five-day forecast, temperature trends
+    and useful local information for Sursand.
+  </p>
+
+</section>
+
+
+<!-- =========================================================
+     LIVE WEATHER DASHBOARD
+     ========================================================= -->
+
+<section class="sc-wt-weather-box">
+
+  <div class="sc-wt-weather-title">
+
+    <h2>
+      🌤️ Sursand Weather
+    </h2>
+
+
+    <span class="sc-wt-live">
+
+      <span class="sc-wt-live-dot"></span>
+
+      LIVE
+
+    </span>
+
+  </div>
+
+
+  <div id="scWtWeather">
+
+    <div class="sc-wt-empty">
+      Loading current weather...
+    </div>
+
+  </div>
+
+
+  <!-- GRAPH AREA -->
+
+  <div
+    class="sc-wt-graph-section"
+    id="scWtGraphSection"
+    style="display:none;">
+
+
+    <div class="sc-wt-chart-card">
+
+      <div class="sc-wt-chart-title">
+
+        <h3>
+          📈 5-Day Temperature Trend
+        </h3>
+
+        <span>
+          Maximum / Minimum
+        </span>
+
+      </div>
+
+
+      <div
+        class="sc-wt-chart-wrap"
+        id="scWtTempChart">
+      </div>
+
+
+      <div class="sc-wt-chart-legend">
+
+        <span class="sc-wt-legend-item">
+
+          <span class="sc-wt-legend-dot sc-wt-max-dot"></span>
+
+          Maximum
+
+        </span>
+
+
+        <span class="sc-wt-legend-item">
+
+          <span class="sc-wt-legend-dot sc-wt-min-dot"></span>
+
+          Minimum
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="sc-wt-chart-card">
+
+      <div class="sc-wt-chart-title">
+
+        <h3>
+          📊 Weather Snapshot
+        </h3>
+
+        <span>
+          Current
+        </span>
+
+      </div>
+
+
+      <div
+        class="sc-wt-snapshot"
+        id="scWtSnapshot">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FORECAST -->
+
+  <div class="sc-wt-forecast-heading">
+
+    <h3>
+      🗓️ 5-Day Forecast
+    </h3>
+
+    <span>
+      Sursand, Bihar
+    </span>
+
+  </div>
+
+
+  <div
+    class="sc-wt-forecast"
+    id="scWtForecast">
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCAL INFORMATION
+     ========================================================= -->
+
+<section class="sc-wt-section-title">
+
+  <h2>
+    📍 Local Information
+  </h2>
+
+  <p>
+    Useful local facilities and information for Sursand residents.
+  </p>
+
+</section>
+
+
+<!-- =========================================================
+     SEARCH
+     ========================================================= -->
+
+<div class="sc-wt-search">
+
+  <input
+    id="scWtSearch"
+    type="search"
+    placeholder="Search local information..."
+    oninput="scWtRenderLocal()">
+
+
+  <button
+    type="button"
+    onclick="scWtRenderLocal()">
+
+    🔍 Search
+
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     FILTER
+     ========================================================= -->
+
+<div
+  class="sc-wt-filter"
+  id="scWtCategories">
+</div>
+
+
+<div
+  class="sc-wt-count"
+  id="scWtCount">
+
+  Loading local information...
+
+</div>
+
+
+<!-- =========================================================
+     LOCAL GRID
+     ========================================================= -->
+
+<div
+  class="sc-wt-grid"
+  id="scWtGrid">
+
+  <div class="sc-wt-empty">
+    Loading local information...
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_WT_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scWtLocalData = [];
+
+let scWtCategory =
+  "All";
+
+
+/* =========================================================
+   LIVE WEATHER
+   ========================================================= */
+
+async function scWtLoadWeather(){
+
+  try{
+
+    const geoResponse =
+      await fetch(
+        "https://geocoding-api.open-meteo.com/v1/search?name=Sursand&count=5&language=en&format=json"
+      );
+
+
+    const geoData =
+      await geoResponse.json();
+
+
+    if(
+      !geoData ||
+      !Array.isArray(
+        geoData.results
+      ) ||
+      !geoData.results.length
+    ){
+
+      throw new Error(
+        "Sursand location not found"
+      );
+
+    }
+
+
+    const place =
+      geoData.results.find(
+        function(item){
+
+          return String(
+            item.country || ""
+          )
+          .toLowerCase()
+          .includes(
+            "india"
+          );
+
+        }
+      ) ||
+      geoData.results[0];
+
+
+    const latitude =
+      place.latitude;
+
+
+    const longitude =
+      place.longitude;
+
+
+    const weatherURL =
+
+      "https://api.open-meteo.com/v1/forecast" +
+
+      "?latitude=" +
+      encodeURIComponent(
+        latitude
+      ) +
+
+      "&longitude=" +
+      encodeURIComponent(
+        longitude
+      ) +
+
+      "&current=" +
+      "temperature_2m," +
+      "relative_humidity_2m," +
+      "apparent_temperature," +
+      "weather_code," +
+      "wind_speed_10m" +
+
+      "&daily=" +
+      "weather_code," +
+      "temperature_2m_max," +
+      "temperature_2m_min" +
+
+      "&timezone=Asia%2FKolkata" +
+
+      "&forecast_days=5";
+
+
+    const weatherResponse =
+      await fetch(
+        weatherURL
+      );
+
+
+    const weather =
+      await weatherResponse.json();
+
+
+    if(
+      !weather.current
+    ){
+
+      throw new Error(
+        "Weather unavailable"
+      );
+
+    }
+
+
+    scWtRenderWeather(
+      weather
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Sursand Weather:",
+      error
+    );
+
+
+    document.getElementById(
+      "scWtWeather"
+    ).innerHTML = `
+
+      <div class="sc-wt-empty">
+
+        Current weather is temporarily unavailable.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER CURRENT WEATHER
+   ========================================================= */
+
+function scWtRenderWeather(data){
+
+  const current =
+    data.current || {};
+
+
+  const temperature =
+    scWtNumber(
+      current.temperature_2m
+    );
+
+
+  const humidity =
+    scWtNumber(
+      current.relative_humidity_2m
+    );
+
+
+  const feels =
+    scWtNumber(
+      current.apparent_temperature
+    );
+
+
+  const wind =
+    scWtNumber(
+      current.wind_speed_10m
+    );
+
+
+  const weatherInfo =
+    scWtWeatherCode(
+      current.weather_code
+    );
+
+
+  const humidityWidth =
+    scWtClamp(
+      humidity,
+      0,
+      100
+    );
+
+
+  const windWidth =
+    scWtClamp(
+      wind * 2.5,
+      0,
+      100
+    );
+
+
+  document.getElementById(
+    "scWtWeather"
+  ).innerHTML = `
+
+    <div class="sc-wt-current">
+
+
+      <div class="sc-wt-main-temp">
+
+        <div class="sc-wt-weather-icon">
+
+          ${weatherInfo.icon}
+
+        </div>
+
+
+        <div class="sc-wt-temp">
+
+          ${temperature}°C
+
+        </div>
+
+
+        <div class="sc-wt-condition">
+
+          ${weatherInfo.text}
+
+        </div>
+
+
+        <div class="sc-wt-location">
+
+          📍 Sursand, Bihar
+
+        </div>
+
+      </div>
+
+
+      <div class="sc-wt-right">
+
+
+        <div class="sc-wt-details">
+
+
+          <div class="sc-wt-detail">
+
+            <span class="sc-wt-detail-icon">
+              🌡️
+            </span>
+
+            <strong>
+              ${feels}°C
+            </strong>
+
+            <span>
+              Feels Like
+            </span>
+
+          </div>
+
+
+          <div class="sc-wt-detail">
+
+            <span class="sc-wt-detail-icon">
+              💧
+            </span>
+
+            <strong>
+              ${humidity}%
+            </strong>
+
+            <span>
+              Humidity
+            </span>
+
+          </div>
+
+
+          <div class="sc-wt-detail">
+
+            <span class="sc-wt-detail-icon">
+              💨
+            </span>
+
+            <strong>
+              ${wind} km/h
+            </strong>
+
+            <span>
+              Wind Speed
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="sc-wt-meters">
+
+
+          <div class="sc-wt-meter-card">
+
+            <div class="sc-wt-meter-top">
+
+              <span>
+                💧 Humidity Level
+              </span>
+
+              <strong>
+                ${humidity}%
+              </strong>
+
+            </div>
+
+
+            <div class="sc-wt-meter-track">
+
+              <div
+                class="sc-wt-meter-fill sc-wt-humidity-fill"
+                style="width:${humidityWidth}%;">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="sc-wt-meter-card">
+
+            <div class="sc-wt-meter-top">
+
+              <span>
+                💨 Wind Activity
+              </span>
+
+              <strong>
+                ${wind} km/h
+              </strong>
+
+            </div>
+
+
+            <div class="sc-wt-meter-track">
+
+              <div
+                class="sc-wt-meter-fill sc-wt-wind-fill"
+                style="width:${windWidth}%;">
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  `;
+
+
+  scWtRenderForecast(
+    data.daily || {}
+  );
+
+
+  scWtRenderTempChart(
+    data.daily || {}
+  );
+
+
+  scWtRenderSnapshot(
+    temperature,
+    feels,
+    humidity,
+    wind
+  );
+
+
+  document.getElementById(
+    "scWtGraphSection"
+  ).style.display =
+    "grid";
+
+}
+
+
+/* =========================================================
+   TEMPERATURE GRAPH
+   ========================================================= */
+
+function scWtRenderTempChart(daily){
+
+  const holder =
+    document.getElementById(
+      "scWtTempChart"
+    );
+
+
+  const dates =
+    daily.time || [];
+
+
+  const maxValues =
+    daily.temperature_2m_max || [];
+
+
+  const minValues =
+    daily.temperature_2m_min || [];
+
+
+  if(
+    !dates.length
+  ){
+
+    holder.innerHTML =
+      "";
+
+    return;
+
+  }
+
+
+  const allValues =
+    maxValues
+    .concat(
+      minValues
+    )
+    .map(Number)
+    .filter(
+      Number.isFinite
+    );
+
+
+  const minValue =
+    Math.min.apply(
+      null,
+      allValues
+    ) - 2;
+
+
+  const maxValue =
+    Math.max.apply(
+      null,
+      allValues
+    ) + 2;
+
+
+  const width =
+    600;
+
+
+  const height =
+    210;
+
+
+  const padLeft =
+    35;
+
+
+  const padRight =
+    25;
+
+
+  const padTop =
+    25;
+
+
+  const padBottom =
+    35;
+
+
+  const graphWidth =
+    width -
+    padLeft -
+    padRight;
+
+
+  const graphHeight =
+    height -
+    padTop -
+    padBottom;
+
+
+  function x(index){
+
+    if(
+      dates.length === 1
+    ){
+
+      return (
+        padLeft +
+        graphWidth / 2
+      );
+
+    }
+
+
+    return (
+
+      padLeft +
+
+      (
+        graphWidth /
+        (
+          dates.length - 1
+        )
+      ) *
+
+      index
+
+    );
+
+  }
+
+
+  function y(value){
+
+    const range =
+      maxValue -
+      minValue ||
+      1;
+
+
+    return (
+
+      padTop +
+
+      graphHeight -
+
+      (
+        (
+          Number(value) -
+          minValue
+        ) /
+        range
+      ) *
+
+      graphHeight
+
+    );
+
+  }
+
+
+  const maxPoints =
+    maxValues
+    .map(
+      function(value,index){
+
+        return (
+          x(index) +
+          "," +
+          y(value)
+        );
+
+      }
+    )
+    .join(" ");
+
+
+  const minPoints =
+    minValues
+    .map(
+      function(value,index){
+
+        return (
+          x(index) +
+          "," +
+          y(value)
+        );
+
+      }
+    )
+    .join(" ");
+
+
+  const areaPoints =
+
+    padLeft +
+    "," +
+    (
+      padTop +
+      graphHeight
+    ) +
+
+    " " +
+
+    maxPoints +
+
+    " " +
+
+    (
+      padLeft +
+      graphWidth
+    ) +
+    "," +
+    (
+      padTop +
+      graphHeight
+    );
+
+
+  let gridLines =
+    "";
+
+
+  for(
+    let i = 0;
+    i < 4;
+    i++
+  ){
+
+    const gy =
+
+      padTop +
+
+      (
+        graphHeight /
+        3
+      ) *
+
+      i;
+
+
+    gridLines += `
+
+      <line
+        class="sc-wt-chart-grid"
+        x1="${padLeft}"
+        y1="${gy}"
+        x2="${width-padRight}"
+        y2="${gy}">
+      </line>
+
+    `;
+
+  }
+
+
+  let labels =
+    "";
+
+
+  dates.forEach(
+    function(date,index){
+
+      labels += `
+
+        <text
+          class="sc-wt-chart-label"
+          x="${x(index)}"
+          y="${height-8}">
+
+          ${scWtDayName(date)}
+
+        </text>
+
+
+        <text
+          class="sc-wt-chart-value-max"
+          x="${x(index)}"
+          y="${y(maxValues[index])-10}">
+
+          ${Math.round(
+            maxValues[index]
+          )}°
+
+        </text>
+
+
+        <circle
+          class="sc-wt-chart-dot-max"
+          cx="${x(index)}"
+          cy="${y(maxValues[index])}"
+          r="5">
+        </circle>
+
+
+        <text
+          class="sc-wt-chart-value-min"
+          x="${x(index)}"
+          y="${y(minValues[index])+18}">
+
+          ${Math.round(
+            minValues[index]
+          )}°
+
+        </text>
+
+
+        <circle
+          class="sc-wt-chart-dot-min"
+          cx="${x(index)}"
+          cy="${y(minValues[index])}"
+          r="4">
+        </circle>
+
+      `;
+
+    }
+  );
+
+
+  holder.innerHTML = `
+
+    <svg
+      class="sc-wt-chart-svg"
+      viewBox="0 0 ${width} ${height}"
+      preserveAspectRatio="none">
+
+      ${gridLines}
+
+
+      <polygon
+        class="sc-wt-chart-area"
+        points="${areaPoints}">
+      </polygon>
+
+
+      <polyline
+        class="sc-wt-chart-line-max"
+        points="${maxPoints}">
+      </polyline>
+
+
+      <polyline
+        class="sc-wt-chart-line-min"
+        points="${minPoints}">
+      </polyline>
+
+
+      ${labels}
+
+    </svg>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SNAPSHOT GRAPH
+   ========================================================= */
+
+function scWtRenderSnapshot(
+  temperature,
+  feels,
+  humidity,
+  wind
+){
+
+  const tempWidth =
+    scWtClamp(
+      temperature * 2.5,
+      0,
+      100
+    );
+
+
+  const feelsWidth =
+    scWtClamp(
+      feels * 2.5,
+      0,
+      100
+    );
+
+
+  const humidityWidth =
+    scWtClamp(
+      humidity,
+      0,
+      100
+    );
+
+
+  const windWidth =
+    scWtClamp(
+      wind * 2.5,
+      0,
+      100
+    );
+
+
+  document.getElementById(
+    "scWtSnapshot"
+  ).innerHTML = `
+
+
+    <div class="sc-wt-snapshot-row">
+
+      <div class="sc-wt-snapshot-label">
+        🌡 Temp
+      </div>
+
+      <div class="sc-wt-snapshot-track">
+
+        <div
+          class="sc-wt-snapshot-fill sc-wt-snapshot-temp"
+          style="width:${tempWidth}%;">
+        </div>
+
+      </div>
+
+      <div class="sc-wt-snapshot-value">
+        ${temperature}°
+      </div>
+
+    </div>
+
+
+    <div class="sc-wt-snapshot-row">
+
+      <div class="sc-wt-snapshot-label">
+        ☀️ Feels
+      </div>
+
+      <div class="sc-wt-snapshot-track">
+
+        <div
+          class="sc-wt-snapshot-fill sc-wt-snapshot-feels"
+          style="width:${feelsWidth}%;">
+        </div>
+
+      </div>
+
+      <div class="sc-wt-snapshot-value">
+        ${feels}°
+      </div>
+
+    </div>
+
+
+    <div class="sc-wt-snapshot-row">
+
+      <div class="sc-wt-snapshot-label">
+        💧 Humidity
+      </div>
+
+      <div class="sc-wt-snapshot-track">
+
+        <div
+          class="sc-wt-snapshot-fill sc-wt-snapshot-humidity"
+          style="width:${humidityWidth}%;">
+        </div>
+
+      </div>
+
+      <div class="sc-wt-snapshot-value">
+        ${humidity}%
+      </div>
+
+    </div>
+
+
+    <div class="sc-wt-snapshot-row">
+
+      <div class="sc-wt-snapshot-label">
+        💨 Wind
+      </div>
+
+      <div class="sc-wt-snapshot-track">
+
+        <div
+          class="sc-wt-snapshot-fill sc-wt-snapshot-wind"
+          style="width:${windWidth}%;">
+        </div>
+
+      </div>
+
+      <div class="sc-wt-snapshot-value">
+        ${wind}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   FORECAST
+   ========================================================= */
+
+function scWtRenderForecast(daily){
+
+  const holder =
+    document.getElementById(
+      "scWtForecast"
+    );
+
+
+  const dates =
+    daily.time || [];
+
+
+  holder.innerHTML =
+    dates.map(
+      function(date,index){
+
+        const weatherInfo =
+          scWtWeatherCode(
+
+            daily.weather_code
+
+            ? daily.weather_code[index]
+
+            : null
+
+          );
+
+
+        const max =
+          daily.temperature_2m_max
+
+          ? daily.temperature_2m_max[index]
+
+          : "--";
+
+
+        const min =
+          daily.temperature_2m_min
+
+          ? daily.temperature_2m_min[index]
+
+          : "--";
+
+
+        return `
+
+          <div class="sc-wt-day">
+
+
+            <div class="sc-wt-day-name">
+
+              ${
+                index === 0
+                ? "Today"
+                : scWtDayName(date)
+              }
+
+            </div>
+
+
+            <div class="sc-wt-day-icon">
+
+              ${weatherInfo.icon}
+
+            </div>
+
+
+            <div class="sc-wt-day-temp">
+
+              ${max}°C
+
+            </div>
+
+
+            <div class="sc-wt-day-min">
+
+              ${min}°C min
+
+            </div>
+
+
+          </div>
+
+        `;
+
+      }
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   WEATHER CODE
+   ========================================================= */
+
+function scWtWeatherCode(code){
+
+  code =
+    Number(code);
+
+
+  if(
+    code === 0
+  ){
+
+    return {
+      icon:"☀️",
+      text:"Clear"
+    };
+
+  }
+
+
+  if(
+    code === 1 ||
+    code === 2
+  ){
+
+    return {
+      icon:"🌤️",
+      text:"Partly Cloudy"
+    };
+
+  }
+
+
+  if(
+    code === 3
+  ){
+
+    return {
+      icon:"☁️",
+      text:"Cloudy"
+    };
+
+  }
+
+
+  if(
+    code === 45 ||
+    code === 48
+  ){
+
+    return {
+      icon:"🌫️",
+      text:"Fog"
+    };
+
+  }
+
+
+  if(
+    code >= 51 &&
+    code <= 67
+  ){
+
+    return {
+      icon:"🌧️",
+      text:"Rain"
+    };
+
+  }
+
+
+  if(
+    code >= 71 &&
+    code <= 77
+  ){
+
+    return {
+      icon:"🌨️",
+      text:"Snow"
+    };
+
+  }
+
+
+  if(
+    code >= 80 &&
+    code <= 82
+  ){
+
+    return {
+      icon:"🌦️",
+      text:"Rain Showers"
+    };
+
+  }
+
+
+  if(
+    code >= 95
+  ){
+
+    return {
+      icon:"⛈️",
+      text:"Thunderstorm"
+    };
+
+  }
+
+
+  return {
+    icon:"🌤️",
+    text:"Weather"
+  };
+
+}
+
+
+/* =========================================================
+   DAY NAME
+   ========================================================= */
+
+function scWtDayName(value){
+
+  try{
+
+    return new Date(
+      value +
+      "T12:00:00"
+    )
+    .toLocaleDateString(
+      "en-IN",
+      {
+        weekday:"short"
+      }
+    );
+
+  }
+
+  catch(error){
+
+    return value;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOCAL INFORMATION LOAD
+   ========================================================= */
+
+async function scWtLoadLocal(){
+
+  try{
+
+    const response =
+      await fetch(
+        SC_WT_API +
+        "?action=all"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        "API data unavailable"
+      );
+
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    scWtLocalData =
+
+      data.localInformation ||
+
+      data.localInfo ||
+
+      data.weatherLocalInfo ||
+
+      data.usefulLocalInfo ||
+
+      [];
+
+
+    if(
+      !Array.isArray(
+        scWtLocalData
+      )
+    ){
+
+      scWtLocalData =
+        [];
+
+    }
+
+
+    scWtCreateCategories();
+
+    scWtRenderLocal();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Local Information:",
+      error
+    );
+
+
+    document.getElementById(
+      "scWtGrid"
+    ).innerHTML = `
+
+      <div class="sc-wt-empty">
+
+        Unable to load local information.
+
+      </div>
+
+    `;
+
+
+    document.getElementById(
+      "scWtCount"
+    ).textContent =
+      "Unable to load data.";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOCAL CATEGORIES
+   ========================================================= */
+
+function scWtCreateCategories(){
+
+  const holder =
+    document.getElementById(
+      "scWtCategories"
+    );
+
+
+  const categories = [
+
+    "All",
+
+    ...new Set(
+
+      scWtLocalData
+
+      .map(
+        function(item){
+
+          return (
+
+            item.Category ||
+
+            item.category ||
+
+            item.Type ||
+
+            ""
+
+          );
+
+        }
+      )
+
+      .filter(Boolean)
+
+    )
+
+  ];
+
+
+  holder.innerHTML =
+    "";
+
+
+  categories.forEach(
+    function(category){
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.textContent =
+        category;
+
+
+      if(
+        category === "All"
+      ){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      button.onclick =
+        function(){
+
+          holder
+
+          .querySelectorAll(
+            "button"
+          )
+
+          .forEach(
+            function(btn){
+
+              btn.classList.remove(
+                "active"
+              );
+
+            }
+          );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          scWtCategory =
+            category;
+
+
+          scWtRenderLocal();
+
+        };
+
+
+      holder.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOCAL RENDER
+   ========================================================= */
+
+function scWtRenderLocal(){
+
+  const grid =
+    document.getElementById(
+      "scWtGrid"
+    );
+
+
+  const count =
+    document.getElementById(
+      "scWtCount"
+    );
+
+
+  const search =
+    document.getElementById(
+      "scWtSearch"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const filtered =
+    scWtLocalData.filter(
+      function(item){
+
+        const category =
+          String(
+
+            item.Category ||
+
+            item.category ||
+
+            item.Type ||
+
+            ""
+
+          );
+
+
+        const searchable =
+          Object.values(item)
+
+          .join(" ")
+
+          .toLowerCase();
+
+
+        return (
+
+          (
+            scWtCategory === "All"
+
+            ||
+
+            category ===
+              scWtCategory
+          )
+
+          &&
+
+          (
+            !search
+
+            ||
+
+            searchable.includes(
+              search
+            )
+          )
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+
+    filtered.length +
+
+    (
+      filtered.length === 1
+
+      ? " item found"
+
+      : " items found"
+    );
+
+
+  if(
+    !filtered.length
+  ){
+
+    grid.innerHTML = `
+
+      <div class="sc-wt-empty">
+
+        No local information found.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    filtered.map(
+      function(item){
+
+
+        const name =
+
+          item[
+            "Information Name"
+          ] ||
+
+          item[
+            "Place Name"
+          ] ||
+
+          item.Name ||
+
+          item.Title ||
+
+          "Local Information";
+
+
+        const category =
+
+          item.Category ||
+
+          item.category ||
+
+          item.Type ||
+
+          "Local Information";
+
+
+        const description =
+
+          item.Description ||
+
+          item.Details ||
+
+          "";
+
+
+        const address =
+
+          item.Address ||
+
+          item.Location ||
+
+          item.Area ||
+
+          "";
+
+
+        const phone =
+
+          item.Phone ||
+
+          item.Mobile ||
+
+          item[
+            "Contact Number"
+          ] ||
+
+          "";
+
+
+        const link =
+
+          item.Website ||
+
+          item.URL ||
+
+          item.Link ||
+
+          "";
+
+
+        const map =
+
+          item[
+            "Google Map Link"
+          ] ||
+
+          item[
+            "Google Maps Link"
+          ] ||
+
+          item[
+            "Map URL"
+          ] ||
+
+          item.Map ||
+
+          "";
+
+
+        let actions =
+          "";
+
+
+        if(phone){
+
+          actions += `
+
+            <a
+              class="sc-wt-call"
+              href="tel:${scWtPhone(phone)}">
+
+              📞 Call
+
+            </a>
+
+          `;
+
+        }
+
+
+        if(
+          scWtValidUrl(
+            link
+          )
+        ){
+
+          actions += `
+
+            <a
+              class="sc-wt-link"
+              href="${scWtUrl(link)}"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              🔗 More Info
+
+            </a>
+
+          `;
+
+        }
+
+
+        if(
+          scWtValidUrl(
+            map
+          )
+        ){
+
+          actions += `
+
+            <a
+              class="sc-wt-map"
+              href="${scWtUrl(map)}"
+              target="_blank"
+              rel="noopener noreferrer">
+
+              🧭 Get Directions
+
+            </a>
+
+          `;
+
+        }
+
+
+        const actionCount =
+          (
+            actions.match(
+              /class="sc-wt-/g
+            ) || []
+          ).length;
+
+
+        return `
+
+          <article class="sc-wt-card">
+
+
+            <div class="sc-wt-card-icon">
+
+              ${scWtLocalIcon(category)}
+
+            </div>
+
+
+            <span class="sc-wt-category">
+
+              ${scWtEsc(category)}
+
+            </span>
+
+
+            <h3>
+
+              ${scWtEsc(name)}
+
+            </h3>
+
+
+            <div class="sc-wt-card-info">
+
+
+              ${
+                address
+
+                ? `
+
+                  📍
+
+                  <strong>
+                    Location:
+                  </strong>
+
+                  ${scWtEsc(address)}
+
+                  <br>
+
+                `
+
+                : ""
+              }
+
+
+              ${
+                description
+
+                ? `
+
+                  📝
+
+                  ${scWtEsc(description)}
+
+                `
+
+                : ""
+              }
+
+
+            </div>
+
+
+            ${
+              actions
+
+              ? `
+
+                <div
+                  class="sc-wt-actions ${
+                    actionCount === 3
+                    ? "three-actions"
+                    : ""
+                  }">
+
+                  ${actions}
+
+                </div>
+
+              `
+
+              : ""
+            }
+
+
+          </article>
+
+        `;
+
+      }
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   LOCAL ICON
+   ========================================================= */
+
+function scWtLocalIcon(category){
+
+  const value =
+    String(
+      category || ""
+    )
+    .toLowerCase();
+
+
+  if(
+    value.includes("market")
+  )
+    return "🛒";
+
+
+  if(
+    value.includes("bank")
+  )
+    return "🏦";
+
+
+  if(
+    value.includes("atm")
+  )
+    return "🏧";
+
+
+  if(
+    value.includes("petrol")
+  )
+    return "⛽";
+
+
+  if(
+    value.includes("bus")
+  )
+    return "🚌";
+
+
+  if(
+    value.includes("electric")
+  )
+    return "⚡";
+
+
+  if(
+    value.includes("water")
+  )
+    return "💧";
+
+
+  if(
+    value.includes("police")
+  )
+    return "👮";
+
+
+  if(
+    value.includes("hospital")
+  )
+    return "🏥";
+
+
+  return "📍";
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function scWtNumber(value){
+
+  const number =
+    Number(value);
+
+
+  if(
+    !Number.isFinite(
+      number
+    )
+  ){
+
+    return "--";
+
+  }
+
+
+  return Math.round(
+    number * 10
+  ) / 10;
+
+}
+
+
+function scWtClamp(
+  value,
+  min,
+  max
+){
+
+  const number =
+    Number(value);
+
+
+  if(
+    !Number.isFinite(
+      number
+    )
+  ){
+
+    return 0;
+
+  }
+
+
+  return Math.min(
+    max,
+    Math.max(
+      min,
+      number
+    )
+  );
+
+}
+
+
+function scWtPhone(value){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /[^0-9+]/g,
+    ""
+  );
+
+}
+
+
+function scWtValidUrl(value){
+
+  const url =
+    String(
+      value || ""
+    )
+    .trim();
+
+
+  return (
+
+    url.startsWith(
+      "https://"
+    )
+
+    ||
+
+    url.startsWith(
+      "http://"
+    )
+
+  );
+
+}
+
+
+function scWtUrl(value){
+
+  return scWtEsc(
+    String(
+      value || ""
+    )
+    .trim()
+  );
+
+}
+
+
+function scWtEsc(value){
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+
+  .replace(/&/g,"&amp;")
+
+  .replace(/</g,"&lt;")
+
+  .replace(/>/g,"&gt;")
+
+  .replace(/"/g,"&quot;")
+
+  .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+      scWtLoadWeather();
+
+      scWtLoadLocal();
+
+    }
+  );
+
+}
+
+else{
+
+  scWtLoadWeather();
+
+  scWtLoadLocal();
+
+}
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

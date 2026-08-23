@@ -1,0 +1,2155 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Business Registration | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 21 — SHOP / BUSINESS REGISTRATION
+     SURSAND CONNECT
+     FULL REPLACEMENT
+
+     FEATURES
+     ---------------------------------------------------------
+     ✓ Fixed dropdown of same 50 business categories
+     ✓ Shop / Business Name
+     ✓ Owner / Contact Person
+     ✓ Image Upload
+     ✓ Image Preview
+     ✓ Base64 upload to Apps Script / Google Drive
+     ✓ Current GPS Location
+     ✓ Select Location on Map
+     ✓ Google Maps Link
+     ✓ WhatsApp Catalogue
+     ✓ Free Registration
+     ✓ Pending Admin Approval
+     ========================================================= -->
+
+<div id="sc-business-registration">
+
+<style>
+
+#sc-business-registration{
+  --green:#238b45;
+  --green-dark:#176b35;
+
+  --saffron:#f28c28;
+  --saffron-dark:#d86f0d;
+  --saffron-soft:#fff0dd;
+
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e4e8e5;
+
+  max-width:1050px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-business-registration *{
+  box-sizing:border-box;
+}
+
+
+/* HERO */
+
+.sc-br-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7a13f,
+      #f28c28,
+      #e97812
+    );
+
+  color:#fff;
+
+  padding:40px 24px;
+
+  border-radius:22px;
+
+  margin-bottom:22px;
+
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(90,60,20,.16);
+}
+
+.sc-br-hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  left:-75px;
+  top:-85px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.07);
+}
+
+.sc-br-hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:210px;
+  height:210px;
+
+  right:-80px;
+  bottom:-105px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+.sc-br-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 9px;
+
+  font-size:
+    clamp(29px,5vw,42px);
+}
+
+.sc-br-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:770px;
+
+  margin:auto;
+
+  line-height:1.65;
+
+  font-size:14px;
+}
+
+
+/* NOTE */
+
+.sc-br-note{
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:10px;
+
+  background:#fff8e8;
+
+  border-left:
+    5px solid var(--saffron);
+
+  border-radius:11px;
+
+  padding:15px 16px;
+
+  margin-bottom:22px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.7;
+}
+
+.sc-br-note strong{
+  color:var(--text);
+}
+
+
+/* FORM WRAP */
+
+.sc-br-form-wrap{
+  background:#fff;
+
+  border:
+    1px solid var(--border);
+
+  border-top:
+    5px solid var(--saffron);
+
+  border-radius:21px;
+
+  padding:23px;
+
+  box-shadow:
+    0 9px 28px rgba(31,55,42,.08);
+}
+
+.sc-br-form-head{
+  margin-bottom:20px;
+}
+
+.sc-br-form-head h2{
+  margin:0 0 6px;
+
+  font-size:24px;
+}
+
+.sc-br-form-head p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.6;
+}
+
+
+/* FORM */
+
+.sc-br-form{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:14px;
+}
+
+.sc-br-field{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:6px;
+}
+
+.sc-br-field.full{
+  grid-column:1/-1;
+}
+
+.sc-br-field label{
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.sc-br-field input,
+.sc-br-field select,
+.sc-br-field textarea{
+  width:100%;
+
+  min-height:44px;
+
+  padding:11px 12px;
+
+  border:
+    1px solid #dcdfe3;
+
+  border-radius:10px;
+
+  outline:0;
+
+  background:#fff;
+
+  color:var(--text);
+
+  font-family:inherit;
+
+  font-size:12px;
+}
+
+.sc-br-field select{
+  cursor:pointer;
+}
+
+.sc-br-field textarea{
+  min-height:105px;
+
+  resize:vertical;
+}
+
+.sc-br-field input:focus,
+.sc-br-field select:focus,
+.sc-br-field textarea:focus{
+  border-color:var(--saffron);
+
+  box-shadow:
+    0 0 0 3px rgba(242,140,40,.08);
+}
+
+.sc-br-help{
+  color:var(--muted);
+
+  font-size:9px;
+
+  line-height:1.45;
+}
+
+
+/* CATEGORY SELECT */
+
+.sc-br-category-select{
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #fffaf3
+    ) !important;
+
+  border-color:#e8c89f !important;
+
+  font-weight:700;
+}
+
+
+/* LOCATION */
+
+.sc-br-location-box{
+  padding:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fbff,
+      #eef5ff
+    );
+
+  border:
+    1px solid #d9e5ff;
+
+  border-radius:15px;
+}
+
+.sc-br-location-title{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.sc-br-location-icon{
+  width:42px;
+  height:42px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  flex-shrink:0;
+
+  background:#dbeafe;
+
+  border-radius:12px;
+
+  font-size:21px;
+}
+
+.sc-br-location-title strong{
+  display:block;
+
+  font-size:12px;
+}
+
+.sc-br-location-title span{
+  display:block;
+
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.sc-br-location-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:9px;
+
+  margin-top:13px;
+}
+
+.sc-br-location-btn{
+  min-height:46px;
+
+  border:0;
+
+  border-radius:10px;
+
+  color:#fff;
+
+  font-family:inherit;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.sc-br-current-location{
+  background:var(--green);
+}
+
+.sc-br-select-location{
+  background:var(--blue);
+}
+
+.sc-br-location-result{
+  display:none;
+
+  margin-top:11px;
+
+  padding:11px;
+
+  background:#fff;
+
+  border-radius:10px;
+
+  font-size:10px;
+
+  color:var(--muted);
+
+  line-height:1.6;
+}
+
+.sc-br-location-result.active{
+  display:block;
+}
+
+
+/* IMAGE */
+
+.sc-br-upload-box{
+  position:relative;
+
+  padding:16px;
+
+  border:
+    2px dashed #e1c09c;
+
+  border-radius:14px;
+
+  background:#fffaf3;
+}
+
+.sc-br-upload-label{
+  min-height:120px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:6px;
+
+  cursor:pointer;
+
+  text-align:center;
+}
+
+.sc-br-upload-icon{
+  font-size:37px;
+}
+
+.sc-br-upload-label strong{
+  font-size:12px;
+}
+
+.sc-br-upload-label span{
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+#scBrImage{
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  opacity:0;
+}
+
+.sc-br-preview{
+  display:none;
+
+  margin-top:12px;
+
+  padding:10px;
+
+  background:#fff;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:12px;
+}
+
+.sc-br-preview.active{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.sc-br-preview-image{
+  width:110px;
+  height:85px;
+
+  object-fit:cover;
+
+  border-radius:10px;
+}
+
+.sc-br-preview-info{
+  flex:1;
+
+  min-width:0;
+
+  font-size:9px;
+
+  color:var(--muted);
+}
+
+.sc-br-preview-info strong{
+  display:block;
+
+  margin-bottom:4px;
+
+  color:var(--text);
+}
+
+.sc-br-remove-image{
+  margin-top:7px;
+
+  border:0;
+
+  background:#fff0ee;
+
+  color:#b3261e;
+
+  padding:6px 9px;
+
+  border-radius:7px;
+
+  font-size:9px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+/* CHECK */
+
+.sc-br-check{
+  grid-column:1/-1;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:8px;
+
+  padding:12px;
+
+  background:#f8faf9;
+
+  border-radius:10px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+
+/* SUBMIT */
+
+.sc-br-submit{
+  grid-column:1/-1;
+
+  min-height:49px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:var(--green);
+
+  color:#fff;
+
+  font-family:inherit;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.sc-br-submit:disabled{
+  opacity:.6;
+}
+
+
+/* STATUS */
+
+.sc-br-status{
+  grid-column:1/-1;
+
+  display:none;
+
+  padding:11px;
+
+  border-radius:9px;
+
+  font-size:11px;
+}
+
+.sc-br-status.loading{
+  display:block;
+
+  background:#eef4ff;
+
+  color:#1d4ed8;
+}
+
+.sc-br-status.ok{
+  display:block;
+
+  background:#eaf7ed;
+
+  color:var(--green-dark);
+}
+
+.sc-br-status.error{
+  display:block;
+
+  background:#fff0ee;
+
+  color:#b3261e;
+}
+
+
+/* MAP MODAL */
+
+.sc-br-map-modal{
+  position:fixed;
+
+  inset:0;
+
+  z-index:999999;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:16px;
+
+  background:
+    rgba(20,30,25,.68);
+}
+
+.sc-br-map-modal.active{
+  display:flex;
+}
+
+.sc-br-map-dialog{
+  width:min(760px,100%);
+
+  background:#fff;
+
+  border-top:
+    5px solid var(--saffron);
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+.sc-br-map-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:18px;
+}
+
+.sc-br-map-head h3{
+  margin:0 0 4px;
+
+  font-size:18px;
+}
+
+.sc-br-map-head p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-br-map-close{
+  width:36px;
+  height:36px;
+
+  border:0;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  font-size:19px;
+}
+
+#scBrPickerMap{
+  width:100%;
+
+  height:420px;
+}
+
+.sc-br-map-bottom{
+  padding:15px 18px 18px;
+}
+
+.sc-br-map-selection{
+  margin-bottom:11px;
+
+  padding:10px;
+
+  background:#f8faf9;
+
+  border-radius:9px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.sc-br-confirm-location{
+  width:100%;
+
+  min-height:45px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:var(--green);
+
+  color:#fff;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+  .sc-br-form{
+    grid-template-columns:1fr;
+  }
+
+  .sc-br-field.full,
+  .sc-br-check,
+  .sc-br-submit,
+  .sc-br-status{
+    grid-column:1;
+  }
+
+  .sc-br-location-actions{
+    grid-template-columns:1fr;
+  }
+
+  #scBrPickerMap{
+    height:360px;
+  }
+
+}
+
+</style>
+
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<section class="sc-br-hero">
+
+  <h1>
+    🏪 Shop / Business Registration
+  </h1>
+
+  <p>
+    Register your local shop or business on Sursand Connect.
+    Registration is free and listings are published after
+    verification and admin approval.
+  </p>
+
+</section>
+
+
+<div class="sc-br-note">
+
+  <div>
+    ℹ️
+  </div>
+
+  <div>
+
+    <strong>
+      Select the correct category.
+    </strong>
+
+    Your business will automatically appear under that category
+    after approval.
+
+  </div>
+
+</div>
+
+
+<section class="sc-br-form-wrap">
+
+
+  <div class="sc-br-form-head">
+
+    <h2>
+      Register Your Shop / Business
+    </h2>
+
+    <p>
+      Complete the details below.
+    </p>
+
+  </div>
+
+
+  <form
+    class="sc-br-form"
+    id="scBrForm">
+
+
+    <div class="sc-br-field">
+
+      <label>
+        Shop / Business Name *
+      </label>
+
+      <input
+        type="text"
+        id="scBrBusinessName"
+        required>
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        Owner / Contact Person *
+      </label>
+
+      <input
+        type="text"
+        id="scBrOwner"
+        required>
+
+    </div>
+
+
+    <!-- =====================================================
+         FIXED CATEGORY DROPDOWN
+         ===================================================== -->
+
+    <div class="sc-br-field">
+
+      <label>
+        Business Category *
+      </label>
+
+      <select
+        id="scBrCategory"
+        class="sc-br-category-select"
+        required>
+
+        <option value="">
+          Select Business Category
+        </option>
+
+        <option>Grocery &amp; General Store</option>
+        <option>Clothing &amp; Garments</option>
+        <option>Footwear</option>
+        <option>Jewellery</option>
+        <option>Cosmetics &amp; Beauty Products</option>
+        <option>Mobile &amp; Accessories</option>
+        <option>Computer &amp; IT</option>
+        <option>Electronics &amp; Appliances</option>
+        <option>Electrical Shop</option>
+        <option>Hardware &amp; Sanitary</option>
+        <option>Building Materials</option>
+        <option>Paint &amp; Decoration</option>
+        <option>Furniture &amp; Furnishing</option>
+        <option>Restaurant &amp; Food</option>
+        <option>Sweets &amp; Bakery</option>
+        <option>Tea, Snacks &amp; Refreshments</option>
+        <option>Dairy &amp; Milk Products</option>
+        <option>Fruits &amp; Vegetables</option>
+        <option>Medical Store &amp; Pharmacy</option>
+        <option>Books &amp; Stationery</option>
+        <option>Gifts &amp; Toys</option>
+        <option>Home &amp; Kitchen</option>
+        <option>Agriculture &amp; Farm Supplies</option>
+        <option>Animal Feed &amp; Veterinary Supplies</option>
+        <option>Cycle &amp; Accessories</option>
+        <option>Automobile &amp; Spare Parts</option>
+        <option>Fuel &amp; Lubricants</option>
+        <option>Automobile Repair &amp; Workshop</option>
+        <option>Photography &amp; Studio</option>
+        <option>Printing &amp; Digital Services</option>
+        <option>Salon &amp; Grooming</option>
+        <option>Gym &amp; Fitness</option>
+        <option>Hotel &amp; Lodge</option>
+        <option>Transport &amp; Logistics</option>
+        <option>Travel &amp; Ticketing</option>
+        <option>Banking &amp; Financial Services</option>
+        <option>Insurance Services</option>
+        <option>Real Estate &amp; Property</option>
+        <option>Flowers &amp; Decoration</option>
+        <option>Wedding &amp; Event Services</option>
+        <option>Tailoring &amp; Boutique</option>
+        <option>Optical Store</option>
+        <option>Watches &amp; Accessories</option>
+        <option>Bags &amp; Luggage</option>
+        <option>Mattress &amp; Bedding</option>
+        <option>Water &amp; RO</option>
+        <option>Battery &amp; Inverter</option>
+        <option>Solar Products</option>
+        <option>Religious &amp; Puja Items</option>
+        <option>Other Shops &amp; Businesses</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        Mobile Number *
+      </label>
+
+      <input
+        type="tel"
+        id="scBrPhone"
+        required>
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        WhatsApp Number
+      </label>
+
+      <input
+        type="tel"
+        id="scBrWhatsapp">
+
+      <span class="sc-br-help">
+        Leave blank if same as mobile number.
+      </span>
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        Ward
+      </label>
+
+      <select id="scBrWard">
+
+        <option value="">
+          Select Ward
+        </option>
+
+        <option>Ward 1</option>
+        <option>Ward 2</option>
+        <option>Ward 3</option>
+        <option>Ward 4</option>
+        <option>Ward 5</option>
+        <option>Ward 6</option>
+        <option>Ward 7</option>
+        <option>Ward 8</option>
+        <option>Ward 9</option>
+        <option>Ward 10</option>
+        <option>Ward 11</option>
+        <option>Ward 12</option>
+        <option>Ward 13</option>
+        <option>Ward 14</option>
+        <option>Ward 15</option>
+        <option>Ward 16</option>
+        <option>Ward 17</option>
+        <option>Ward 18</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="sc-br-field full">
+
+      <label>
+        Shop / Business Address *
+      </label>
+
+      <input
+        type="text"
+        id="scBrAddress"
+        required>
+
+    </div>
+
+
+    <div class="sc-br-field full">
+
+      <label>
+        Shop / Business Description
+      </label>
+
+      <textarea
+        id="scBrDescription"
+        placeholder="Products, services, speciality, opening hours etc."></textarea>
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        WhatsApp Catalogue Link
+      </label>
+
+      <input
+        type="url"
+        id="scBrCatalogue"
+        placeholder="Optional">
+
+    </div>
+
+
+    <div class="sc-br-field">
+
+      <label>
+        Website / Social Page
+      </label>
+
+      <input
+        type="url"
+        id="scBrWebsite"
+        placeholder="Optional">
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="sc-br-field full">
+
+      <label>
+        Shop / Business Location
+      </label>
+
+
+      <div class="sc-br-location-box">
+
+
+        <div class="sc-br-location-title">
+
+          <div class="sc-br-location-icon">
+            📍
+          </div>
+
+          <div>
+
+            <strong>
+              Choose Exact Location
+            </strong>
+
+            <span>
+              Use current location or select manually on map.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="sc-br-location-actions">
+
+
+          <button
+            type="button"
+            class="sc-br-location-btn sc-br-current-location"
+            onclick="scBrUseCurrentLocation()">
+
+            📍 Use My Current Location
+
+          </button>
+
+
+          <button
+            type="button"
+            class="sc-br-location-btn sc-br-select-location"
+            onclick="scBrOpenMapPicker()">
+
+            🗺️ Select Location on Map
+
+          </button>
+
+
+        </div>
+
+
+        <input
+          type="hidden"
+          id="scBrMap">
+
+
+        <input
+          type="hidden"
+          id="scBrLatitude">
+
+
+        <input
+          type="hidden"
+          id="scBrLongitude">
+
+
+        <div
+          id="scBrLocationResult"
+          class="sc-br-location-result">
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- IMAGE -->
+
+    <div class="sc-br-field full">
+
+      <label>
+        Shop / Business Image *
+      </label>
+
+
+      <div class="sc-br-upload-box">
+
+
+        <label
+          class="sc-br-upload-label"
+          for="scBrImage">
+
+          <div class="sc-br-upload-icon">
+            📷
+          </div>
+
+          <strong>
+            Upload Shop / Business Image
+          </strong>
+
+          <span>
+            JPG, PNG or WEBP — maximum 4 MB
+          </span>
+
+        </label>
+
+
+        <input
+          type="file"
+          id="scBrImage"
+          accept="image/jpeg,image/png,image/webp"
+          onchange="scBrPreviewImage(this)"
+          required>
+
+
+        <div
+          class="sc-br-preview"
+          id="scBrPreview">
+
+
+          <img
+            class="sc-br-preview-image"
+            id="scBrPreviewImage">
+
+
+          <div class="sc-br-preview-info">
+
+            <strong id="scBrImageName">
+            </strong>
+
+            <span id="scBrImageSize">
+            </span>
+
+            <br>
+
+            <button
+              type="button"
+              class="sc-br-remove-image"
+              onclick="scBrRemoveImage()">
+
+              ✕ Remove Image
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="sc-br-check">
+
+      <input
+        type="checkbox"
+        id="scBrConsent"
+        required>
+
+      <label for="scBrConsent">
+
+        I confirm that the information provided is correct
+        and may be displayed publicly after approval.
+
+      </label>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="sc-br-submit"
+      id="scBrSubmit">
+
+      ✅ Submit Shop / Business for Approval
+
+    </button>
+
+
+    <div
+      id="scBrStatus"
+      class="sc-br-status">
+    </div>
+
+
+  </form>
+
+</section>
+
+
+<!-- MAP MODAL -->
+
+<div
+  class="sc-br-map-modal"
+  id="scBrMapModal">
+
+
+  <div class="sc-br-map-dialog">
+
+
+    <div class="sc-br-map-head">
+
+      <div>
+
+        <h3>
+          📍 Select Shop Location
+        </h3>
+
+        <p>
+          Tap/click the exact shop location.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="sc-br-map-close"
+        onclick="scBrCloseMapPicker()">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div id="scBrPickerMap">
+    </div>
+
+
+    <div class="sc-br-map-bottom">
+
+
+      <div
+        id="scBrMapSelection"
+        class="sc-br-map-selection">
+
+        Select a location on the map.
+
+      </div>
+
+
+      <button
+        type="button"
+        class="sc-br-confirm-location"
+        onclick="scBrConfirmMapLocation()">
+
+        ✅ Use This Location
+
+      </button>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_BR_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scBrImageBase64 = "";
+
+let scBrImageName = "";
+
+let scBrImageMimeType = "";
+
+let scBrPickerMap = null;
+
+let scBrPickerMarker = null;
+
+let scBrSelectedLat = null;
+
+let scBrSelectedLng = null;
+
+
+const SC_BR_SURSAND_LAT =
+  26.65;
+
+const SC_BR_SURSAND_LNG =
+  85.72;
+
+
+/* =========================================================
+   CURRENT LOCATION
+   ========================================================= */
+
+function scBrUseCurrentLocation(){
+
+  const result =
+    document.getElementById(
+      "scBrLocationResult"
+    );
+
+
+  result.className =
+    "sc-br-location-result active";
+
+
+  if(
+    !navigator.geolocation
+  ){
+
+    result.textContent =
+      "Location service is not supported.";
+
+    return;
+
+  }
+
+
+  result.textContent =
+    "📡 Detecting location...";
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      scBrSetLocation(
+
+        position.coords.latitude,
+
+        position.coords.longitude
+
+      );
+
+    },
+
+
+    function(){
+
+      result.textContent =
+        "Unable to detect location. Please select manually on map.";
+
+    },
+
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000
+    }
+
+  );
+
+}
+
+
+/* =========================================================
+   SET LOCATION
+   ========================================================= */
+
+function scBrSetLocation(
+  lat,
+  lng
+){
+
+  lat =
+    Number(lat);
+
+  lng =
+    Number(lng);
+
+
+  const link =
+    scBrCreateGoogleMapLink(
+      lat,
+      lng
+    );
+
+
+  document.getElementById(
+    "scBrLatitude"
+  ).value =
+    lat.toFixed(7);
+
+
+  document.getElementById(
+    "scBrLongitude"
+  ).value =
+    lng.toFixed(7);
+
+
+  document.getElementById(
+    "scBrMap"
+  ).value =
+    link;
+
+
+  const result =
+    document.getElementById(
+      "scBrLocationResult"
+    );
+
+
+  result.className =
+    "sc-br-location-result active";
+
+
+  result.innerHTML = `
+
+    ✅ <strong>Location selected</strong>
+
+    <br>
+
+    <a
+      href="${link}"
+      target="_blank">
+
+      🗺️ View Location
+
+    </a>
+
+  `;
+
+}
+
+
+/* =========================================================
+   MAP LINK
+   ========================================================= */
+
+function scBrCreateGoogleMapLink(
+  lat,
+  lng
+){
+
+  return (
+
+    "https://www.google.com/maps/search/?api=1&query=" +
+
+    encodeURIComponent(
+      Number(lat).toFixed(7) +
+      "," +
+      Number(lng).toFixed(7)
+    )
+
+  );
+
+}
+
+
+/* =========================================================
+   MAP PICKER
+   ========================================================= */
+
+function scBrOpenMapPicker(){
+
+  document
+  .getElementById(
+    "scBrMapModal"
+  )
+  .classList.add(
+    "active"
+  );
+
+
+  setTimeout(
+    scBrInitMap,
+    120
+  );
+
+}
+
+
+function scBrInitMap(){
+
+  if(
+    typeof L ===
+    "undefined"
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !scBrPickerMap
+  ){
+
+    scBrPickerMap =
+      L.map(
+        "scBrPickerMap"
+      )
+      .setView(
+        [
+          SC_BR_SURSAND_LAT,
+          SC_BR_SURSAND_LNG
+        ],
+        15
+      );
+
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom:19
+      }
+    )
+    .addTo(
+      scBrPickerMap
+    );
+
+
+    scBrPickerMap.on(
+      "click",
+      function(event){
+
+        scBrSelectedLat =
+          event.latlng.lat;
+
+
+        scBrSelectedLng =
+          event.latlng.lng;
+
+
+        if(
+          scBrPickerMarker
+        ){
+
+          scBrPickerMarker
+          .setLatLng(
+            event.latlng
+          );
+
+        }
+
+        else{
+
+          scBrPickerMarker =
+            L.marker(
+              event.latlng
+            )
+            .addTo(
+              scBrPickerMap
+            );
+
+        }
+
+
+        document.getElementById(
+          "scBrMapSelection"
+        ).textContent =
+
+          "Selected: " +
+
+          scBrSelectedLat.toFixed(6) +
+
+          ", " +
+
+          scBrSelectedLng.toFixed(6);
+
+      }
+    );
+
+  }
+
+
+  setTimeout(
+    function(){
+
+      scBrPickerMap
+      .invalidateSize();
+
+    },
+    100
+  );
+
+}
+
+
+function scBrConfirmMapLocation(){
+
+  if(
+    scBrSelectedLat === null ||
+    scBrSelectedLng === null
+  ){
+
+    alert(
+      "Select a location first."
+    );
+
+    return;
+
+  }
+
+
+  scBrSetLocation(
+    scBrSelectedLat,
+    scBrSelectedLng
+  );
+
+
+  scBrCloseMapPicker();
+
+}
+
+
+function scBrCloseMapPicker(){
+
+  document
+  .getElementById(
+    "scBrMapModal"
+  )
+  .classList.remove(
+    "active"
+  );
+
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+function scBrPreviewImage(input){
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  if(!file){
+    return;
+  }
+
+
+  if(
+    file.size >
+    4 * 1024 * 1024
+  ){
+
+    alert(
+      "Image must be below 4 MB."
+    );
+
+    scBrRemoveImage();
+
+    return;
+
+  }
+
+
+  scBrImageName =
+    file.name;
+
+
+  scBrImageMimeType =
+    file.type;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(event){
+
+      const value =
+        String(
+          event.target.result || ""
+        );
+
+
+      scBrImageBase64 =
+
+        value.includes(
+          "base64,"
+        )
+
+        ? value.split(
+            "base64,"
+          )[1]
+
+        : value;
+
+
+      document.getElementById(
+        "scBrPreviewImage"
+      ).src =
+        value;
+
+
+      document.getElementById(
+        "scBrImageName"
+      ).textContent =
+        file.name;
+
+
+      document.getElementById(
+        "scBrImageSize"
+      ).textContent =
+
+        (
+          file.size /
+          1024 /
+          1024
+        ).toFixed(2) +
+
+        " MB";
+
+
+      document
+      .getElementById(
+        "scBrPreview"
+      )
+      .classList.add(
+        "active"
+      );
+
+    };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+function scBrRemoveImage(){
+
+  scBrImageBase64 =
+    "";
+
+  scBrImageName =
+    "";
+
+  scBrImageMimeType =
+    "";
+
+
+  document.getElementById(
+    "scBrImage"
+  ).value =
+    "";
+
+
+  document
+  .getElementById(
+    "scBrPreview"
+  )
+  .classList.remove(
+    "active"
+  );
+
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+document
+.getElementById(
+  "scBrForm"
+)
+.addEventListener(
+  "submit",
+  async function(event){
+
+    event.preventDefault();
+
+
+    const status =
+      document.getElementById(
+        "scBrStatus"
+      );
+
+
+    const submit =
+      document.getElementById(
+        "scBrSubmit"
+      );
+
+
+    const payload = {
+
+      action:
+        "registerBusiness",
+
+      businessName:
+        document
+        .getElementById(
+          "scBrBusinessName"
+        )
+        .value
+        .trim(),
+
+      owner:
+        document
+        .getElementById(
+          "scBrOwner"
+        )
+        .value
+        .trim(),
+
+      category:
+        document
+        .getElementById(
+          "scBrCategory"
+        )
+        .value,
+
+      phone:
+        document
+        .getElementById(
+          "scBrPhone"
+        )
+        .value
+        .trim(),
+
+      whatsapp:
+        document
+        .getElementById(
+          "scBrWhatsapp"
+        )
+        .value
+        .trim(),
+
+      ward:
+        document
+        .getElementById(
+          "scBrWard"
+        )
+        .value,
+
+      address:
+        document
+        .getElementById(
+          "scBrAddress"
+        )
+        .value
+        .trim(),
+
+      description:
+        document
+        .getElementById(
+          "scBrDescription"
+        )
+        .value
+        .trim(),
+
+      catalogue:
+        document
+        .getElementById(
+          "scBrCatalogue"
+        )
+        .value
+        .trim(),
+
+      website:
+        document
+        .getElementById(
+          "scBrWebsite"
+        )
+        .value
+        .trim(),
+
+      map:
+        document
+        .getElementById(
+          "scBrMap"
+        )
+        .value,
+
+      latitude:
+        document
+        .getElementById(
+          "scBrLatitude"
+        )
+        .value,
+
+      longitude:
+        document
+        .getElementById(
+          "scBrLongitude"
+        )
+        .value,
+
+      imageBase64:
+        scBrImageBase64,
+
+      imageName:
+        scBrImageName,
+
+      imageMimeType:
+        scBrImageMimeType,
+
+      status:
+        "Pending"
+
+    };
+
+
+    if(
+      !payload.category
+    ){
+
+      status.className =
+        "sc-br-status error";
+
+
+      status.textContent =
+        "Please select a business category.";
+
+
+      return;
+
+    }
+
+
+    if(
+      !scBrImageBase64
+    ){
+
+      status.className =
+        "sc-br-status error";
+
+
+      status.textContent =
+        "Please upload a business image.";
+
+
+      return;
+
+    }
+
+
+    status.className =
+      "sc-br-status loading";
+
+
+    status.textContent =
+      "Uploading image and submitting business...";
+
+
+    submit.disabled =
+      true;
+
+
+    try{
+
+
+      const response =
+        await fetch(
+          SC_BR_API,
+          {
+
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(
+                payload
+              )
+
+          }
+        );
+
+
+      const result =
+        await response.json();
+
+
+      if(
+        !result ||
+        !result.success
+      ){
+
+        throw new Error(
+
+          result &&
+          result.error
+
+          ? result.error
+
+          : "Submission failed."
+
+        );
+
+      }
+
+
+      status.className =
+        "sc-br-status ok";
+
+
+      status.textContent =
+        "✅ Shop / Business submitted successfully. It will appear after admin approval.";
+
+
+      document.getElementById(
+        "scBrForm"
+      ).reset();
+
+
+      scBrRemoveImage();
+
+
+      document.getElementById(
+        "scBrLocationResult"
+      ).className =
+        "sc-br-location-result";
+
+
+    }
+
+    catch(error){
+
+
+      status.className =
+        "sc-br-status error";
+
+
+      status.textContent =
+
+        "Unable to submit. " +
+
+        error.message;
+
+    }
+
+    finally{
+
+      submit.disabled =
+        false;
+
+    }
+
+  }
+);
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

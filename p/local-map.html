@@ -1,0 +1,922 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Local Map | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 17 — SURSAND LOCAL MAP
+     SURSAND CONNECT
+     FULL REPLACEMENT
+     SMART RELATED-PAGE REDIRECTION
+     ========================================================= -->
+
+<div id="sc-local-map-page">
+
+<style>
+
+#sc-local-map-page{
+  --green:#238b45;
+  --green-dark:#176b35;
+
+  --saffron:#f28c28;
+  --saffron-dark:#df7715;
+  --saffron-soft:#fff0dd;
+
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e5e9e7;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-local-map-page *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   SAFFRON HERO
+   ========================================================= */
+
+.sc-lm-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #f7a13f 0%,
+    #f28c28 50%,
+    #e97812 100%
+  );
+
+  color:#fff;
+
+  padding:40px 24px;
+
+  border-radius:22px;
+
+  margin-bottom:23px;
+
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(90,60,20,.16);
+}
+
+.sc-lm-hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  left:-75px;
+  top:-85px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.07);
+}
+
+.sc-lm-hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:210px;
+  height:210px;
+
+  right:-80px;
+  bottom:-105px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+}
+
+.sc-lm-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 10px;
+
+  color:#fff;
+
+  font-size:clamp(29px,5vw,42px);
+
+  font-weight:800;
+}
+
+.sc-lm-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:760px;
+
+  margin:auto;
+
+  color:rgba(255,255,255,.95);
+
+  font-size:14px;
+
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   MAP CARD
+   ========================================================= */
+
+.sc-lm-map-card{
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-top:5px solid var(--saffron);
+
+  border-radius:22px;
+
+  padding:20px;
+
+  box-shadow:
+    0 10px 30px rgba(31,55,42,.09);
+}
+
+
+/* =========================================================
+   MAP HEADER
+   ========================================================= */
+
+.sc-lm-map-head{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-bottom:17px;
+}
+
+.sc-lm-map-title{
+  display:flex;
+
+  align-items:center;
+
+  gap:13px;
+}
+
+.sc-lm-map-icon{
+  width:56px;
+  height:56px;
+
+  flex-shrink:0;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:16px;
+
+  background:var(--saffron-soft);
+
+  font-size:29px;
+}
+
+.sc-lm-map-text h2{
+  margin:0 0 4px;
+
+  color:var(--text);
+
+  font-size:22px;
+
+  font-weight:800;
+}
+
+.sc-lm-map-text p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.5;
+}
+
+
+/* =========================================================
+   OPEN MAP BUTTON
+   ========================================================= */
+
+.sc-lm-open-map{
+  min-height:44px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:10px 17px;
+
+  border-radius:10px;
+
+  background:var(--blue);
+
+  color:#fff !important;
+
+  text-decoration:none;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 5px 13px rgba(37,99,235,.20);
+
+  transition:.18s ease;
+}
+
+.sc-lm-open-map:hover{
+  background:var(--blue-dark);
+
+  transform:translateY(-1px);
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.sc-lm-map-wrap{
+  overflow:hidden;
+
+  border-radius:17px;
+
+  border:1px solid var(--border);
+
+  background:#f5f7f6;
+}
+
+.sc-lm-map{
+  display:block;
+
+  width:100%;
+
+  height:480px;
+
+  border:0;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.sc-lm-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:11px;
+
+  margin-top:17px;
+}
+
+.sc-lm-action{
+  min-height:68px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+  padding:12px 14px;
+
+  border:1px solid var(--border);
+
+  border-radius:14px;
+
+  text-decoration:none;
+
+  font-family:inherit;
+
+  text-align:left;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+button.sc-lm-action{
+  width:100%;
+}
+
+.sc-lm-action:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(31,55,42,.08);
+}
+
+.sc-lm-action-icon{
+  width:42px;
+  height:42px;
+
+  flex-shrink:0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:11px;
+
+  font-size:21px;
+}
+
+.sc-lm-action-text strong{
+  display:block;
+
+  margin-bottom:3px;
+
+  font-size:11px;
+}
+
+.sc-lm-action-text span{
+  display:block;
+
+  color:var(--muted);
+
+  font-size:9px;
+
+  line-height:1.35;
+}
+
+
+/* =========================================================
+   DIRECTIONS
+   ========================================================= */
+
+.sc-lm-directions{
+  background:#eef4ff;
+
+  color:var(--blue-dark);
+}
+
+.sc-lm-directions .sc-lm-action-icon{
+  background:#dbeafe;
+}
+
+
+/* =========================================================
+   IMPORTANT PLACES
+   ========================================================= */
+
+.sc-lm-places{
+  background:#fff7eb;
+
+  color:#a94f00;
+}
+
+.sc-lm-places .sc-lm-action-icon{
+  background:#ffe4bf;
+}
+
+
+/* =========================================================
+   GOVERNMENT OFFICES
+   ========================================================= */
+
+.sc-lm-government{
+  background:#eef9f1;
+
+  color:var(--green-dark);
+}
+
+.sc-lm-government .sc-lm-action-icon{
+  background:#dff3e4;
+}
+
+
+/* =========================================================
+   INFO NOTE
+   ========================================================= */
+
+.sc-lm-note{
+  margin-top:18px;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:11px;
+
+  padding:15px 16px;
+
+  background:#fff8e8;
+
+  border-left:5px solid var(--saffron);
+
+  border-radius:11px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.6;
+}
+
+.sc-lm-note-icon{
+  flex-shrink:0;
+
+  font-size:20px;
+}
+
+.sc-lm-note strong{
+  color:var(--text);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .sc-lm-actions{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+@media(max-width:560px){
+
+  #sc-local-map-page{
+    margin-top:18px;
+
+    padding-left:12px;
+
+    padding-right:12px;
+  }
+
+
+  .sc-lm-hero{
+    padding:29px 17px 31px;
+
+    border-radius:18px;
+  }
+
+
+  .sc-lm-hero p{
+    font-size:12px;
+  }
+
+
+  .sc-lm-map-card{
+    padding:14px;
+
+    border-radius:18px;
+  }
+
+
+  .sc-lm-map-head{
+    flex-direction:column;
+
+    align-items:stretch;
+  }
+
+
+  .sc-lm-map-title{
+    align-items:flex-start;
+  }
+
+
+  .sc-lm-open-map{
+    width:100%;
+  }
+
+
+  .sc-lm-map{
+    height:400px;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-lm-hero">
+
+  <h1>
+    🗺️ Sursand Local Map
+  </h1>
+
+  <p>
+    Explore Sursand on the map and quickly find
+    roads, neighbourhoods, landmarks and useful locations.
+  </p>
+
+</section>
+
+
+<!-- =========================================================
+     MAP CARD
+     ========================================================= -->
+
+<section class="sc-lm-map-card">
+
+
+  <!-- MAP HEADER -->
+
+  <div class="sc-lm-map-head">
+
+
+    <div class="sc-lm-map-title">
+
+
+      <div class="sc-lm-map-icon">
+
+        📍
+
+      </div>
+
+
+      <div class="sc-lm-map-text">
+
+        <h2>
+          Explore Sursand
+        </h2>
+
+        <p>
+          Navigate Sursand and surrounding areas using the interactive map.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <a
+      class="sc-lm-open-map"
+      href="https://www.google.com/maps/search/?api=1&query=Sursand%2C%20Bihar"
+      target="_blank"
+      rel="noopener noreferrer">
+
+      🗺️ Open in Google Maps
+
+    </a>
+
+
+  </div>
+
+
+  <!-- =====================================================
+       EMBEDDED GOOGLE MAP
+       ===================================================== -->
+
+  <div class="sc-lm-map-wrap">
+
+    <iframe
+      class="sc-lm-map"
+      src="https://www.google.com/maps?q=Sursand%2C%20Bihar&output=embed"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+
+  <!-- =====================================================
+       QUICK ACTIONS
+       ===================================================== -->
+
+  <div class="sc-lm-actions">
+
+
+    <!-- GET DIRECTIONS -->
+
+    <a
+      class="sc-lm-action sc-lm-directions"
+      href="https://www.google.com/maps/dir/?api=1&destination=Sursand%2C%20Bihar"
+      target="_blank"
+      rel="noopener noreferrer">
+
+
+      <div class="sc-lm-action-icon">
+
+        🧭
+
+      </div>
+
+
+      <div class="sc-lm-action-text">
+
+        <strong>
+          Get Directions
+        </strong>
+
+        <span>
+          Navigate to Sursand using Google Maps
+        </span>
+
+      </div>
+
+
+    </a>
+
+
+    <!-- IMPORTANT PLACES -->
+
+    <button
+      type="button"
+      class="sc-lm-action sc-lm-places"
+      onclick="scLmOpenRelatedPage('important places')">
+
+
+      <div class="sc-lm-action-icon">
+
+        📍
+
+      </div>
+
+
+      <div class="sc-lm-action-text">
+
+        <strong>
+          Important Places
+        </strong>
+
+        <span>
+          Explore landmarks and useful locations
+        </span>
+
+      </div>
+
+
+    </button>
+
+
+    <!-- GOVERNMENT OFFICES -->
+
+    <button
+      type="button"
+      class="sc-lm-action sc-lm-government"
+      onclick="scLmOpenRelatedPage('government offices')">
+
+
+      <div class="sc-lm-action-icon">
+
+        🏛️
+
+      </div>
+
+
+      <div class="sc-lm-action-text">
+
+        <strong>
+          Government Offices
+        </strong>
+
+        <span>
+          Find local government offices
+        </span>
+
+      </div>
+
+
+    </button>
+
+
+  </div>
+
+
+  <!-- =====================================================
+       NOTE
+       ===================================================== -->
+
+  <div class="sc-lm-note">
+
+
+    <div class="sc-lm-note-icon">
+
+      💡
+
+    </div>
+
+
+    <div>
+
+      <strong>
+        Looking for a specific place?
+      </strong>
+
+      Use the map above or open the Important Places
+      and Government Offices sections for more detailed information.
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   OPEN RELATED POST/PAGE
+   Uses the REAL link already present in your website menu.
+   ========================================================= */
+
+function scLmOpenRelatedPage(target){
+
+  const targetText =
+    String(
+      target || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  const links =
+    Array.from(
+      document.querySelectorAll(
+        "a[href]"
+      )
+    );
+
+
+  /* =====================================================
+     FIRST: SEARCH LINK BY VISIBLE MENU/PAGE NAME
+     ===================================================== */
+
+  const exactMatch =
+    links.find(
+      function(link){
+
+        const text =
+          String(
+            link.textContent || ""
+          )
+          .replace(/\s+/g," ")
+          .trim()
+          .toLowerCase();
+
+
+        return (
+          text === targetText
+        );
+
+      }
+    );
+
+
+  if(
+    exactMatch &&
+    exactMatch.href
+  ){
+
+    window.location.href =
+      exactMatch.href;
+
+    return;
+
+  }
+
+
+  /* =====================================================
+     SECOND: ALLOW MENU TEXT SUCH AS
+     "📍 Important Places"
+     ===================================================== */
+
+  const containsMatch =
+    links.find(
+      function(link){
+
+        const text =
+          String(
+            link.textContent || ""
+          )
+          .replace(/\s+/g," ")
+          .trim()
+          .toLowerCase();
+
+
+        return (
+          text.includes(
+            targetText
+          )
+        );
+
+      }
+    );
+
+
+  if(
+    containsMatch &&
+    containsMatch.href
+  ){
+
+    window.location.href =
+      containsMatch.href;
+
+    return;
+
+  }
+
+
+  /* =====================================================
+     THIRD: SEARCH EXISTING LINK URL
+     ===================================================== */
+
+  const words =
+    targetText
+    .split(/\s+/)
+    .filter(Boolean);
+
+
+  const urlMatch =
+    links.find(
+      function(link){
+
+        const href =
+          String(
+            link.href || ""
+          )
+          .toLowerCase();
+
+
+        return words.every(
+          function(word){
+
+            return href.includes(
+              word
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  if(
+    urlMatch &&
+    urlMatch.href
+  ){
+
+    window.location.href =
+      urlMatch.href;
+
+    return;
+
+  }
+
+
+  /* =====================================================
+     FALLBACK:
+     BLOGGER WEBSITE SEARCH
+     Prevents blank / 404 page.
+     ===================================================== */
+
+  window.location.href =
+
+    window.location.origin +
+
+    "/search?q=" +
+
+    encodeURIComponent(
+      target
+    );
+
+}
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

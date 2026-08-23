@@ -1,0 +1,2797 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Services | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 7 — BOOK LOCAL SERVICES
+     SURSAND CONNECT
+     FULL REPLACEMENT
+
+     FLOW
+     ---------------------------------------------------------
+     1. Show only colourful 3D service cards
+     2. User selects one service
+     3. Service cards/categories disappear
+     4. Only matching provider cards appear
+     5. Call / Message
+     6. Message opens request form
+     7. Send formatted request on WhatsApp
+     ========================================================= -->
+
+<div id="sc-local-services">
+
+<style>
+
+#sc-local-services{
+  --green:#238b45;
+  --green-dark:#176b35;
+  --green-soft:#eaf7ed;
+
+  --saffron:#f28c28;
+  --saffron-dark:#d86f0d;
+  --saffron-soft:#fff0dd;
+
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+
+  --whatsapp:#25d366;
+  --whatsapp-dark:#128c4a;
+
+  --purple:#7c3aed;
+  --pink:#db2777;
+  --cyan:#0891b2;
+  --yellow:#f4c430;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e4e9e6;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-local-services *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.sc-srv-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #f7a13f 0%,
+    #f28c28 50%,
+    #e97812 100%
+  );
+
+  color:#fff;
+  padding:40px 24px;
+  border-radius:22px;
+  margin-bottom:23px;
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(90,60,20,.16);
+}
+
+.sc-srv-hero::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  left:-75px;
+  top:-85px;
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+}
+
+.sc-srv-hero::after{
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  right:-80px;
+  bottom:-105px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.sc-srv-hero h1{
+  position:relative;
+  z-index:2;
+  margin:0 0 9px;
+  color:#fff;
+  font-size:clamp(29px,5vw,42px);
+  font-weight:800;
+}
+
+.sc-srv-hero p{
+  position:relative;
+  z-index:2;
+  max-width:800px;
+  margin:auto;
+  color:rgba(255,255,255,.95);
+  font-size:14px;
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+.sc-srv-search{
+  position:relative;
+  z-index:2;
+
+  max-width:700px;
+  margin:22px auto 0;
+
+  display:flex;
+  overflow:hidden;
+
+  background:#fff;
+  border-radius:30px;
+
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.13);
+}
+
+.sc-srv-search input{
+  flex:1;
+  min-width:0;
+  height:50px;
+  border:0;
+  outline:0;
+  padding:0 18px;
+  background:#fff;
+  font-size:13px;
+  border-radius:0;
+}
+
+.sc-srv-search button{
+  min-width:105px;
+  height:50px;
+  border:0;
+  border-radius:0;
+  background:var(--green);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   SERVICE VIEW
+   ========================================================= */
+
+#scSrvServiceView{
+  display:block;
+}
+
+#scSrvProviderView{
+  display:none;
+}
+
+
+/* =========================================================
+   CATEGORY SECTION
+   ========================================================= */
+
+.sc-srv-category-section{
+  margin-bottom:28px;
+}
+
+.sc-srv-cat-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  margin-bottom:12px;
+}
+
+.sc-srv-cat-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.sc-srv-cat-title-icon{
+  width:46px;
+  height:46px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  background:var(--saffron-soft);
+  font-size:23px;
+}
+
+.sc-srv-cat-title h2{
+  margin:0 0 2px;
+  color:var(--text);
+  font-size:18px;
+  font-weight:800;
+}
+
+.sc-srv-cat-title p{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+}
+
+
+/* =========================================================
+   SERVICE CARD GRID
+   ========================================================= */
+
+.sc-srv-service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+
+
+/* =========================================================
+   BEAUTIFUL 3D SERVICE CARD
+   ========================================================= */
+
+.sc-srv-service-card{
+  position:relative;
+  overflow:hidden;
+
+  min-height:138px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  padding:17px;
+
+  border:0;
+  border-radius:18px;
+
+  text-align:left;
+  cursor:pointer;
+
+  font-family:inherit;
+
+  box-shadow:
+    0 12px 22px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -2px 0 rgba(0,0,0,.06);
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease;
+}
+
+.sc-srv-service-card:hover{
+  transform:translateY(-5px) scale(1.01);
+
+  box-shadow:
+    0 18px 28px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.sc-srv-service-card::before{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  right:-34px;
+  top:-40px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+}
+
+.sc-srv-service-card::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  left:-25px;
+  bottom:-28px;
+  border-radius:50%;
+  background:rgba(255,255,255,.10);
+}
+
+.sc-srv-service-icon{
+  position:relative;
+  z-index:2;
+
+  width:50px;
+  height:50px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.28);
+
+  font-size:26px;
+
+  backdrop-filter:blur(5px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.sc-srv-service-name{
+  position:relative;
+  z-index:2;
+
+  margin-top:13px;
+
+  color:#fff;
+
+  font-size:12px;
+  font-weight:800;
+  line-height:1.35;
+}
+
+.sc-srv-service-sub{
+  position:relative;
+  z-index:2;
+
+  margin-top:4px;
+
+  color:rgba(255,255,255,.88);
+
+  font-size:8px;
+}
+
+
+/* =========================================================
+   CARD COLOUR VARIANTS
+   ========================================================= */
+
+.sc-srv-c1{
+  background:linear-gradient(145deg,#f59e0b,#ea580c);
+}
+
+.sc-srv-c2{
+  background:linear-gradient(145deg,#22c55e,#15803d);
+}
+
+.sc-srv-c3{
+  background:linear-gradient(145deg,#3b82f6,#1d4ed8);
+}
+
+.sc-srv-c4{
+  background:linear-gradient(145deg,#8b5cf6,#6d28d9);
+}
+
+.sc-srv-c5{
+  background:linear-gradient(145deg,#ec4899,#be185d);
+}
+
+.sc-srv-c6{
+  background:linear-gradient(145deg,#06b6d4,#0e7490);
+}
+
+.sc-srv-c7{
+  background:linear-gradient(145deg,#14b8a6,#0f766e);
+}
+
+.sc-srv-c8{
+  background:linear-gradient(145deg,#ef4444,#b91c1c);
+}
+
+
+/* =========================================================
+   PROVIDER PAGE HEADER
+   ========================================================= */
+
+.sc-srv-provider-head{
+  margin-bottom:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.sc-srv-provider-title{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.sc-srv-provider-title-icon{
+  width:52px;
+  height:52px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:var(--saffron-soft);
+
+  font-size:26px;
+}
+
+.sc-srv-provider-title h2{
+  margin:0 0 3px;
+  color:var(--text);
+  font-size:21px;
+}
+
+.sc-srv-provider-title p{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.sc-srv-back{
+  min-height:42px;
+
+  border:0;
+  border-radius:9px;
+
+  background:#eef4ff;
+  color:var(--blue-dark);
+
+  padding:9px 13px;
+
+  font-family:inherit;
+  font-size:10px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   PROVIDER COUNT
+   ========================================================= */
+
+.sc-srv-count{
+  margin-bottom:13px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+
+/* =========================================================
+   PROVIDER GRID
+   ========================================================= */
+
+.sc-srv-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+
+/* =========================================================
+   PROVIDER CARD
+   ========================================================= */
+
+.sc-srv-card{
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+
+  background:#fff;
+
+  padding:20px;
+
+  border:1px solid var(--border);
+  border-top:4px solid var(--saffron);
+
+  border-radius:19px;
+
+  box-shadow:
+    0 8px 25px rgba(31,55,42,.08);
+
+  transition:.2s ease;
+}
+
+.sc-srv-card:hover{
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 14px 30px rgba(31,55,42,.12);
+}
+
+.sc-srv-provider-icon{
+  width:55px;
+  height:55px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:15px;
+
+  background:var(--saffron-soft);
+
+  font-size:28px;
+
+  margin-bottom:11px;
+}
+
+.sc-srv-service-type{
+  display:inline-block;
+  align-self:flex-start;
+
+  margin-bottom:8px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
+  background:var(--saffron-soft);
+  color:#b85c00;
+
+  font-size:9px;
+  font-weight:800;
+}
+
+.sc-srv-card h3{
+  margin:0 0 9px;
+  color:var(--text);
+  font-size:18px;
+  font-weight:800;
+}
+
+.sc-srv-info{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.75;
+}
+
+.sc-srv-info strong{
+  color:var(--text);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.sc-srv-actions{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+
+  margin-top:auto;
+  padding-top:16px;
+}
+
+.sc-srv-actions a,
+.sc-srv-actions button{
+  min-height:43px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+
+  border:0;
+  border-radius:9px;
+
+  text-decoration:none;
+
+  font-family:inherit;
+  font-size:10px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+.sc-srv-call{
+  background:var(--green);
+  color:#fff !important;
+}
+
+.sc-srv-message{
+  background:var(--blue);
+  color:#fff;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.sc-srv-empty{
+  grid-column:1/-1;
+
+  padding:40px 15px;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+  border-top:4px solid var(--saffron);
+
+  border-radius:18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   MESSAGE MODAL
+   ========================================================= */
+
+.sc-srv-modal{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:16px;
+
+  background:rgba(20,30,25,.68);
+
+  backdrop-filter:blur(4px);
+}
+
+.sc-srv-modal.active{
+  display:flex;
+}
+
+.sc-srv-dialog{
+  width:min(680px,100%);
+  max-height:93vh;
+  overflow:auto;
+
+  background:#fff;
+
+  border-top:5px solid var(--saffron);
+
+  border-radius:20px;
+
+  box-shadow:
+    0 25px 65px rgba(0,0,0,.30);
+}
+
+.sc-srv-modal-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+
+  padding:18px;
+
+  border-bottom:1px solid #edf0ee;
+}
+
+.sc-srv-modal-head h2{
+  margin:0 0 4px;
+  font-size:19px;
+  color:var(--text);
+}
+
+.sc-srv-modal-head p{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.sc-srv-close{
+  width:36px;
+  height:36px;
+
+  border:0;
+  border-radius:50%;
+
+  background:#f1f3f2;
+
+  font-size:20px;
+
+  cursor:pointer;
+}
+
+.sc-srv-provider-summary{
+  margin:15px 18px 0;
+
+  padding:12px;
+
+  background:#fff8eb;
+
+  border-left:4px solid var(--saffron);
+
+  border-radius:9px;
+
+  color:var(--muted);
+
+  font-size:10px;
+  line-height:1.55;
+}
+
+
+/* =========================================================
+   REQUEST FORM
+   ========================================================= */
+
+.sc-srv-request-form{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+
+  padding:18px;
+}
+
+.sc-srv-field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.sc-srv-field.full{
+  grid-column:1/-1;
+}
+
+.sc-srv-field label{
+  color:var(--text);
+  font-size:10px;
+  font-weight:800;
+}
+
+.sc-srv-field input,
+.sc-srv-field textarea{
+  width:100%;
+
+  padding:11px 12px;
+
+  border:1px solid #dcdfe3;
+  border-radius:9px;
+
+  outline:0;
+
+  font-family:inherit;
+  font-size:11px;
+}
+
+.sc-srv-field textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+   ========================================================= */
+
+.sc-srv-upload{
+  position:relative;
+
+  padding:14px;
+
+  border:2px dashed #dfc2a0;
+
+  border-radius:12px;
+
+  background:#fffaf3;
+}
+
+.sc-srv-upload-label{
+  min-height:90px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  cursor:pointer;
+}
+
+.sc-srv-upload-label span{
+  font-size:28px;
+}
+
+.sc-srv-upload-label strong{
+  font-size:11px;
+  color:var(--text);
+}
+
+.sc-srv-upload-label small{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:8px;
+}
+
+#scSrvImage{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0;
+}
+
+.sc-srv-image-preview{
+  display:none;
+
+  align-items:center;
+  gap:10px;
+
+  margin-top:10px;
+  padding:9px;
+
+  background:#fff;
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+}
+
+.sc-srv-image-preview.active{
+  display:flex;
+}
+
+.sc-srv-image-preview img{
+  width:80px;
+  height:65px;
+
+  object-fit:cover;
+
+  border-radius:8px;
+}
+
+.sc-srv-image-info{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.sc-srv-image-info strong{
+  display:block;
+  margin-bottom:3px;
+  color:var(--text);
+}
+
+.sc-srv-remove-image{
+  margin-top:6px;
+
+  border:0;
+  border-radius:6px;
+
+  background:#fff0ee;
+  color:#b3261e;
+
+  padding:5px 8px;
+
+  font-size:8px;
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   SEND
+   ========================================================= */
+
+.sc-srv-send{
+  grid-column:1/-1;
+
+  min-height:48px;
+
+  border:0;
+  border-radius:10px;
+
+  background:var(--whatsapp);
+  color:#fff;
+
+  font-family:inherit;
+  font-size:11px;
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:950px){
+
+  .sc-srv-service-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .sc-srv-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:700px){
+
+  .sc-srv-service-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:600px){
+
+  #sc-local-services{
+    margin-top:18px;
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .sc-srv-hero{
+    padding:29px 17px 31px;
+    border-radius:18px;
+  }
+
+  .sc-srv-hero p{
+    font-size:12px;
+  }
+
+  .sc-srv-provider-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .sc-srv-back{
+    width:100%;
+  }
+
+  .sc-srv-grid{
+    grid-template-columns:1fr;
+  }
+
+  .sc-srv-request-form{
+    grid-template-columns:1fr;
+  }
+
+  .sc-srv-field.full,
+  .sc-srv-send{
+    grid-column:1;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .sc-srv-service-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .sc-srv-service-card{
+    min-height:126px;
+    padding:14px;
+  }
+
+  .sc-srv-service-icon{
+    width:45px;
+    height:45px;
+    font-size:23px;
+  }
+
+  .sc-srv-service-name{
+    font-size:10px;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-srv-hero">
+
+  <h1>
+    🛠️ Book Local Services
+  </h1>
+
+  <p>
+    Select the service you need and view only the
+    available service providers for that service.
+  </p>
+
+
+  <div class="sc-srv-search">
+
+    <input
+      id="scSrvSearch"
+      type="search"
+      placeholder="Search plumber, milkman, cleaner, mechanic..."
+      oninput="scSrvSearchService()">
+
+    <button
+      type="button"
+      onclick="scSrvSearchService()">
+
+      🔍 Search
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICE SELECTION VIEW
+     ========================================================= -->
+
+<div id="scSrvServiceView">
+
+  <div
+    id="scSrvServiceSections">
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROVIDERS VIEW
+     ========================================================= -->
+
+<div id="scSrvProviderView">
+
+
+  <div class="sc-srv-provider-head">
+
+
+    <div class="sc-srv-provider-title">
+
+
+      <div
+        class="sc-srv-provider-title-icon"
+        id="scSrvProviderTitleIcon">
+
+        🛠️
+
+      </div>
+
+
+      <div>
+
+        <h2 id="scSrvProviderTitle">
+
+          Service Providers
+
+        </h2>
+
+        <p>
+          Available providers for the selected service
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <button
+      type="button"
+      class="sc-srv-back"
+      onclick="scSrvBackToServices()">
+
+      ← Back to Services
+
+    </button>
+
+
+  </div>
+
+
+  <div
+    class="sc-srv-count"
+    id="scSrvCount">
+  </div>
+
+
+  <div
+    class="sc-srv-grid"
+    id="scSrvGrid">
+  </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     MESSAGE MODAL
+     ========================================================= -->
+
+<div
+  class="sc-srv-modal"
+  id="scSrvModal">
+
+
+  <div class="sc-srv-dialog">
+
+
+    <div class="sc-srv-modal-head">
+
+
+      <div>
+
+        <h2>
+          💬 Send Service Request
+        </h2>
+
+        <p>
+          Send your work requirement directly to the service provider.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="sc-srv-close"
+        onclick="scSrvCloseRequest()">
+
+        ×
+
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="sc-srv-provider-summary"
+      id="scSrvProviderSummary">
+    </div>
+
+
+    <form
+      class="sc-srv-request-form"
+      id="scSrvRequestForm">
+
+
+      <div class="sc-srv-field">
+
+        <label>
+          Your Name *
+        </label>
+
+        <input
+          id="scSrvCustomerName"
+          type="text"
+          required>
+
+      </div>
+
+
+      <div class="sc-srv-field">
+
+        <label>
+          Mobile Number *
+        </label>
+
+        <input
+          id="scSrvCustomerPhone"
+          type="tel"
+          required>
+
+      </div>
+
+
+      <div class="sc-srv-field full">
+
+        <label>
+          Address *
+        </label>
+
+        <input
+          id="scSrvCustomerAddress"
+          type="text"
+          placeholder="House / Ward / Area"
+          required>
+
+      </div>
+
+
+      <div class="sc-srv-field full">
+
+        <label>
+          Issue / Work Required *
+        </label>
+
+        <input
+          id="scSrvIssue"
+          type="text"
+          required>
+
+      </div>
+
+
+      <div class="sc-srv-field full">
+
+        <label>
+          Description
+        </label>
+
+        <textarea
+          id="scSrvDescription"
+          placeholder="Describe your requirement..."></textarea>
+
+      </div>
+
+
+      <div class="sc-srv-field full">
+
+        <label>
+          Upload Issue Image
+        </label>
+
+
+        <div class="sc-srv-upload">
+
+
+          <label
+            class="sc-srv-upload-label"
+            for="scSrvImage">
+
+            <span>
+              📷
+            </span>
+
+            <strong>
+              Upload Photo
+            </strong>
+
+            <small>
+              Optional — add a photo related to the issue
+            </small>
+
+          </label>
+
+
+          <input
+            id="scSrvImage"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onchange="scSrvPreviewImage(this)">
+
+
+          <div
+            class="sc-srv-image-preview"
+            id="scSrvImagePreview">
+
+
+            <img
+              id="scSrvImagePreviewImg"
+              alt="Issue preview">
+
+
+            <div class="sc-srv-image-info">
+
+              <strong
+                id="scSrvImageName">
+              </strong>
+
+              <span
+                id="scSrvImageSize">
+              </span>
+
+              <br>
+
+              <button
+                type="button"
+                class="sc-srv-remove-image"
+                onclick="scSrvRemoveImage()">
+
+                ✕ Remove
+
+              </button>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="sc-srv-send">
+
+        💬 Send on WhatsApp
+
+      </button>
+
+
+    </form>
+
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_SRV_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scSrvData = [];
+
+let scSrvSelectedService =
+  "";
+
+let scSrvSelectedProvider =
+  null;
+
+
+/* =========================================================
+   SERVICE GROUPS
+   ========================================================= */
+
+const SC_SRV_CATEGORIES = [
+
+
+  {
+    name:"Construction & Home Repair",
+    icon:"🏠",
+
+    services:[
+      "Mason",
+      "Construction Labour",
+      "Carpenter",
+      "Plumber",
+      "Electrician",
+      "Welder",
+      "Painter",
+      "Tile / Marble Fitter",
+      "POP / False Ceiling Worker",
+      "Aluminium / Glass Worker",
+      "Borewell / Water Pump Mechanic",
+      "Key Maker / Locksmith"
+    ]
+  },
+
+
+  {
+    name:"Cleaning & Home Services",
+    icon:"🧹",
+
+    services:[
+      "Septic Tank / Toilet Tank Cleaner",
+      "Drain / Sewer Cleaner",
+      "House Cleaner",
+      "Pest Control Service",
+      "Gardener / Mali",
+      "Tree Cutting / Trimming Service",
+      "Domestic Help / Maid"
+    ]
+  },
+
+
+  {
+    name:"Appliance & Technical Services",
+    icon:"🔧",
+
+    services:[
+      "CCTV Technician",
+      "AC Technician",
+      "Refrigerator Technician",
+      "Washing Machine Technician",
+      "Cooler Technician",
+      "RO / Water Purifier Technician",
+      "TV Technician",
+      "Mobile Repair Technician",
+      "Computer / Laptop Technician",
+      "Printer / Photocopier Technician",
+      "Internet / Wi-Fi Technician",
+      "DTH / Dish TV Technician"
+    ]
+  },
+
+
+  {
+    name:"Vehicle & Transport Services",
+    icon:"🚗",
+
+    services:[
+      "Bike Mechanic",
+      "Car Mechanic",
+      "Auto / E-rickshaw Mechanic",
+      "Tractor Mechanic",
+      "Tyre / Puncture Repair",
+      "Driver",
+      "Cycle Repair",
+      "Rickshaw / Cart Service"
+    ]
+  },
+
+
+  {
+    name:"Delivery & Moving Services",
+    icon:"🚚",
+
+    services:[
+      "Loader / Goods Labour",
+      "Packers & Movers",
+      "Local Goods Delivery",
+      "Milkman / Milk Delivery",
+      "Newspaper Delivery",
+      "Drinking Water / Water Jar Delivery",
+      "LPG / Gas Delivery Contact"
+    ]
+  },
+
+
+  {
+    name:"Food & Event Services",
+    icon:"🍽️",
+
+    services:[
+      "Cook",
+      "Caterer",
+      "Waiter / Event Helper",
+      "Tent House Service",
+      "Decoration Service",
+      "Lighting Decoration",
+      "DJ / Sound Service",
+      "Band / Music Service"
+    ]
+  },
+
+
+  {
+    name:"Personal & Creative Services",
+    icon:"📸",
+
+    services:[
+      "Photographer",
+      "Videographer",
+      "Makeup Artist",
+      "Mehndi Artist",
+      "Tailor",
+      "Laundry / Dhobi",
+      "Barber / Home Haircut"
+    ]
+  },
+
+
+  {
+    name:"Education Services",
+    icon:"📚",
+
+    services:[
+      "Private Tutor / Home Tutor"
+    ]
+  },
+
+
+  {
+    name:"Farm Machinery Services",
+    icon:"🌾",
+
+    services:[
+      "Tractor / Rotavator Service",
+      "Harvester / Farm Machinery Service"
+    ]
+  },
+
+  {
+    name:"Religious & Ritual Services",
+    icon:"🙏",
+
+    services:[
+      "Pandit Ji / Purohit"
+    ]
+  }
+
+];
+
+
+/* =========================================================
+   CREATE SERVICE CARDS
+   ========================================================= */
+
+function scSrvCreateServiceCards(){
+
+  const holder =
+    document.getElementById(
+      "scSrvServiceSections"
+    );
+
+
+  let cardIndex =
+    0;
+
+
+  holder.innerHTML =
+    SC_SRV_CATEGORIES
+
+    .map(
+      function(category){
+
+
+        const cards =
+          category.services
+
+          .map(
+            function(service){
+
+
+              const colourClass =
+                "sc-srv-c" +
+                (
+                  (
+                    cardIndex % 8
+                  ) + 1
+                );
+
+
+              cardIndex++;
+
+
+              return `
+
+                <button
+                  type="button"
+                  class="sc-srv-service-card ${colourClass}"
+                  data-service="${scSrvEsc(service)}"
+                  onclick="scSrvSelectService('${scSrvJs(service)}')">
+
+
+                  <div class="sc-srv-service-icon">
+
+                    ${scSrvServiceIcon(service)}
+
+                  </div>
+
+
+                  <div>
+
+                    <div class="sc-srv-service-name">
+
+                      ${scSrvEsc(service)}
+
+                    </div>
+
+
+                    <div class="sc-srv-service-sub">
+
+                      View service providers →
+
+                    </div>
+
+                  </div>
+
+
+                </button>
+
+              `;
+
+            }
+          )
+
+          .join("");
+
+
+        return `
+
+          <section class="sc-srv-category-section">
+
+
+            <div class="sc-srv-cat-head">
+
+
+              <div class="sc-srv-cat-title">
+
+
+                <div class="sc-srv-cat-title-icon">
+
+                  ${category.icon}
+
+                </div>
+
+
+                <div>
+
+                  <h2>
+
+                    ${scSrvEsc(category.name)}
+
+                  </h2>
+
+
+                  <p>
+
+                    ${category.services.length}
+                    services
+
+                  </p>
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+            <div class="sc-srv-service-grid">
+
+              ${cards}
+
+            </div>
+
+
+          </section>
+
+        `;
+
+      }
+    )
+
+    .join("");
+
+}
+
+
+/* =========================================================
+   SELECT SERVICE
+   ========================================================= */
+
+function scSrvSelectService(service){
+
+  scSrvSelectedService =
+    service;
+
+
+  document.getElementById(
+    "scSrvServiceView"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "scSrvProviderView"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "scSrvProviderTitle"
+  ).textContent =
+    service;
+
+
+  document.getElementById(
+    "scSrvProviderTitleIcon"
+  ).textContent =
+    scSrvServiceIcon(
+      service
+    );
+
+
+  scSrvRenderProviders();
+
+
+  document.getElementById(
+    "sc-local-services"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   BACK
+   ========================================================= */
+
+function scSrvBackToServices(){
+
+  scSrvSelectedService =
+    "";
+
+
+  document.getElementById(
+    "scSrvProviderView"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "scSrvServiceView"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "scSrvSearch"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "sc-local-services"
+  ).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   SEARCH SERVICE
+   ========================================================= */
+
+function scSrvSearchService(){
+
+  const value =
+    document
+    .getElementById(
+      "scSrvSearch"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const cards =
+    document.querySelectorAll(
+      ".sc-srv-service-card"
+    );
+
+
+  cards.forEach(
+    function(card){
+
+      const service =
+        String(
+          card.getAttribute(
+            "data-service"
+          ) || ""
+        )
+        .toLowerCase();
+
+
+      card.style.display =
+
+        !value ||
+        service.includes(value)
+
+        ? ""
+
+        : "none";
+
+    }
+  );
+
+
+  document
+  .querySelectorAll(
+    ".sc-srv-category-section"
+  )
+  .forEach(
+    function(section){
+
+      const visible =
+        Array.from(
+          section.querySelectorAll(
+            ".sc-srv-service-card"
+          )
+        )
+        .some(
+          function(card){
+
+            return (
+              card.style.display !==
+              "none"
+            );
+
+          }
+        );
+
+
+      section.style.display =
+        visible
+        ? ""
+        : "none";
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOAD PROVIDERS
+   ========================================================= */
+
+async function scSrvLoad(){
+
+  try{
+
+    const response =
+      await fetch(
+        SC_SRV_API +
+        "?action=all"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        "API data unavailable"
+      );
+
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    scSrvData =
+
+      data.localServices ||
+
+      data.servicePersons ||
+
+      data.serviceProviders ||
+
+      data.services ||
+
+      data.workers ||
+
+      [];
+
+
+    if(
+      !Array.isArray(
+        scSrvData
+      )
+    ){
+
+      scSrvData =
+        [];
+
+    }
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Book Local Services:",
+      error
+    );
+
+
+    scSrvData =
+      [];
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER ONLY SELECTED SERVICE PROVIDERS
+   ========================================================= */
+
+function scSrvRenderProviders(){
+
+  const grid =
+    document.getElementById(
+      "scSrvGrid"
+    );
+
+
+  const count =
+    document.getElementById(
+      "scSrvCount"
+    );
+
+
+  const selected =
+    scSrvSelectedService
+    .trim()
+    .toLowerCase();
+
+
+  const filtered =
+    scSrvData.filter(
+      function(item){
+
+
+        const service =
+          String(
+
+            item[
+              "Service Type"
+            ] ||
+
+            item.Service ||
+
+            item.Trade ||
+
+            ""
+
+          )
+          .trim()
+          .toLowerCase();
+
+
+        const status =
+          String(
+
+            item.Status ||
+
+            item.status ||
+
+            ""
+
+          )
+          .trim()
+          .toLowerCase();
+
+
+        const active =
+
+          !status
+
+          ||
+
+          status === "active"
+
+          ||
+
+          status === "approved"
+
+          ||
+
+          status === "yes";
+
+
+        return (
+
+          active
+
+          &&
+
+          service === selected
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+
+    filtered.length +
+
+    (
+      filtered.length === 1
+
+      ? " provider found"
+
+      : " providers found"
+    );
+
+
+  if(
+    !filtered.length
+  ){
+
+    grid.innerHTML = `
+
+      <div class="sc-srv-empty">
+
+        No provider has been added yet for
+
+        <strong>
+          ${scSrvEsc(scSrvSelectedService)}
+        </strong>.
+
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    filtered
+
+    .map(
+      function(item){
+
+
+        const name =
+
+          item[
+            "Service Person Name"
+          ] ||
+
+          item[
+            "Provider Name"
+          ] ||
+
+          item.Name ||
+
+          "Service Provider";
+
+
+        const area =
+
+          item.Area ||
+
+          item.Address ||
+
+          item.Location ||
+
+          "";
+
+
+        const experience =
+
+          item.Experience ||
+
+          item[
+            "Years of Experience"
+          ] ||
+
+          "";
+
+
+        const description =
+
+          item.Description ||
+
+          item[
+            "Work Description"
+          ] ||
+
+          "";
+
+
+        const availability =
+
+          item.Availability ||
+
+          item.Timing ||
+
+          "";
+
+
+        const phone =
+
+          item.Phone ||
+
+          item.Mobile ||
+
+          item[
+            "Contact Number"
+          ] ||
+
+          "";
+
+
+        const whatsapp =
+
+          item.WhatsApp ||
+
+          item[
+            "WhatsApp Number"
+          ] ||
+
+          item[
+            "Whatsapp Number"
+          ] ||
+
+          phone ||
+
+          "";
+
+
+        const dataIndex =
+          scSrvData.indexOf(
+            item
+          );
+
+
+        return `
+
+          <article class="sc-srv-card">
+
+
+            <div class="sc-srv-provider-icon">
+
+              ${scSrvServiceIcon(
+                scSrvSelectedService
+              )}
+
+            </div>
+
+
+            <span class="sc-srv-service-type">
+
+              ${scSrvEsc(
+                scSrvSelectedService
+              )}
+
+            </span>
+
+
+            <h3>
+
+              ${scSrvEsc(name)}
+
+            </h3>
+
+
+            <div class="sc-srv-info">
+
+
+              ${
+                area
+                ? `
+                  📍
+                  <strong>Area:</strong>
+                  ${scSrvEsc(area)}
+                  <br>
+                `
+                : ""
+              }
+
+
+              ${
+                experience
+                ? `
+                  🧰
+                  <strong>Experience:</strong>
+                  ${scSrvEsc(experience)}
+                  <br>
+                `
+                : ""
+              }
+
+
+              ${
+                description
+                ? `
+                  🔧
+                  <strong>Work:</strong>
+                  ${scSrvEsc(description)}
+                  <br>
+                `
+                : ""
+              }
+
+
+              ${
+                availability
+                ? `
+                  🕒
+                  <strong>Availability:</strong>
+                  ${scSrvEsc(availability)}
+                `
+                : ""
+              }
+
+
+            </div>
+
+
+            <div class="sc-srv-actions">
+
+
+              <a
+                class="sc-srv-call"
+                href="${
+                  phone
+                  ? "tel:" + scSrvPhone(phone)
+                  : "#"
+                }">
+
+                📞 Call
+
+              </a>
+
+
+              <button
+                type="button"
+                class="sc-srv-message"
+                onclick="scSrvOpenRequest(${dataIndex})">
+
+                💬 Message
+
+              </button>
+
+
+            </div>
+
+
+          </article>
+
+        `;
+
+      }
+    )
+
+    .join("");
+
+}
+
+
+/* =========================================================
+   OPEN MESSAGE
+   ========================================================= */
+
+function scSrvOpenRequest(index){
+
+  const provider =
+    scSrvData[index];
+
+
+  if(
+    !provider
+  ){
+    return;
+  }
+
+
+  const name =
+
+    provider[
+      "Service Person Name"
+    ] ||
+
+    provider[
+      "Provider Name"
+    ] ||
+
+    provider.Name ||
+
+    "Service Provider";
+
+
+  const whatsapp =
+
+    provider.WhatsApp ||
+
+    provider[
+      "WhatsApp Number"
+    ] ||
+
+    provider[
+      "Whatsapp Number"
+    ] ||
+
+    provider.Phone ||
+
+    provider.Mobile ||
+
+    provider[
+      "Contact Number"
+    ] ||
+
+    "";
+
+
+  provider.__displayName =
+    name;
+
+
+  provider.__service =
+    scSrvSelectedService;
+
+
+  provider.__whatsapp =
+    scSrvWhatsApp(
+      whatsapp
+    );
+
+
+  scSrvSelectedProvider =
+    provider;
+
+
+  document.getElementById(
+    "scSrvProviderSummary"
+  ).innerHTML = `
+
+    <strong>Service:</strong>
+    ${scSrvEsc(scSrvSelectedService)}
+
+    <br>
+
+    <strong>Service Provider:</strong>
+    ${scSrvEsc(name)}
+
+  `;
+
+
+  document
+  .getElementById(
+    "scSrvModal"
+  )
+  .classList.add(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* =========================================================
+   CLOSE MESSAGE
+   ========================================================= */
+
+function scSrvCloseRequest(){
+
+  document
+  .getElementById(
+    "scSrvModal"
+  )
+  .classList.remove(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================================
+   IMAGE PREVIEW
+   ========================================================= */
+
+function scSrvPreviewImage(input){
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  if(
+    !file
+  ){
+    return;
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(event){
+
+      document.getElementById(
+        "scSrvImagePreviewImg"
+      ).src =
+        event.target.result;
+
+
+      document.getElementById(
+        "scSrvImageName"
+      ).textContent =
+        file.name;
+
+
+      document.getElementById(
+        "scSrvImageSize"
+      ).textContent =
+        (
+          file.size /
+          1024 /
+          1024
+        )
+        .toFixed(2) +
+        " MB";
+
+
+      document
+      .getElementById(
+        "scSrvImagePreview"
+      )
+      .classList.add(
+        "active"
+      );
+
+    };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+/* =========================================================
+   REMOVE IMAGE
+   ========================================================= */
+
+function scSrvRemoveImage(){
+
+  document.getElementById(
+    "scSrvImage"
+  ).value =
+    "";
+
+
+  document
+  .getElementById(
+    "scSrvImagePreview"
+  )
+  .classList.remove(
+    "active"
+  );
+
+}
+
+
+/* =========================================================
+   SEND WHATSAPP
+   ========================================================= */
+
+document
+.getElementById(
+  "scSrvRequestForm"
+)
+.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    if(
+      !scSrvSelectedProvider
+    ){
+      return;
+    }
+
+
+    const whatsapp =
+      scSrvSelectedProvider
+      .__whatsapp;
+
+
+    if(
+      !whatsapp
+    ){
+
+      alert(
+        "WhatsApp number is unavailable for this provider."
+      );
+
+      return;
+
+    }
+
+
+    const name =
+      document
+      .getElementById(
+        "scSrvCustomerName"
+      )
+      .value
+      .trim();
+
+
+    const phone =
+      document
+      .getElementById(
+        "scSrvCustomerPhone"
+      )
+      .value
+      .trim();
+
+
+    const address =
+      document
+      .getElementById(
+        "scSrvCustomerAddress"
+      )
+      .value
+      .trim();
+
+
+    const issue =
+      document
+      .getElementById(
+        "scSrvIssue"
+      )
+      .value
+      .trim();
+
+
+    const description =
+      document
+      .getElementById(
+        "scSrvDescription"
+      )
+      .value
+      .trim();
+
+
+    let message =
+
+      "SURSAND CONNECT - SERVICE REQUEST" +
+
+      "\n" +
+      "--------------------------------" +
+
+      "\n\nService: " +
+      scSrvSelectedProvider.__service +
+
+      "\nService Provider: " +
+      scSrvSelectedProvider.__displayName +
+
+      "\n\nCustomer Name: " +
+      name +
+
+      "\nMobile: " +
+      phone +
+
+      "\nAddress: " +
+      address +
+
+      "\n\nIssue / Work Required:" +
+
+      "\n" +
+      issue;
+
+
+    if(
+      description
+    ){
+
+      message +=
+        "\n\nDescription:\n" +
+        description;
+
+    }
+
+
+    if(
+      document.getElementById(
+        "scSrvImage"
+      ).files.length
+    ){
+
+      message +=
+
+        "\n\nIssue Photo: Selected. I will attach it in this WhatsApp chat.";
+
+    }
+
+
+    message +=
+
+      "\n\n--------------------------------" +
+
+      "\nRequest sent through Sursand Connect";
+
+
+    window.open(
+
+      "https://wa.me/" +
+
+      whatsapp +
+
+      "?text=" +
+
+      encodeURIComponent(
+        message
+      ),
+
+      "_blank"
+
+    );
+
+  }
+);
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+function scSrvServiceIcon(service){
+
+  const v =
+    String(service || "")
+    .toLowerCase();
+
+
+  if(v.includes("mason")) return "🧱";
+  if(v.includes("labour")) return "👷";
+  if(v.includes("carpenter")) return "🪚";
+  if(v.includes("plumber")) return "🔧";
+  if(v.includes("electric")) return "⚡";
+  if(v.includes("welder")) return "🔥";
+  if(v.includes("painter")) return "🎨";
+  if(v.includes("tile")) return "⬜";
+  if(v.includes("tank")) return "🚽";
+  if(v.includes("sewer")) return "🧹";
+  if(v.includes("clean")) return "🧹";
+  if(v.includes("pest")) return "🐜";
+  if(v.includes("gardener")) return "🌿";
+  if(v.includes("tree")) return "🌳";
+  if(v.includes("cctv")) return "📹";
+  if(v.includes("ac")) return "❄️";
+  if(v.includes("refrigerator")) return "🧊";
+  if(v.includes("washing")) return "🧺";
+  if(v.includes("cooler")) return "💨";
+  if(v.includes("purifier")) return "💧";
+  if(v.includes("tv")) return "📺";
+  if(v.includes("mobile")) return "📱";
+  if(v.includes("computer")) return "💻";
+  if(v.includes("printer")) return "🖨️";
+  if(v.includes("wi-fi")) return "📶";
+  if(v.includes("dth")) return "📡";
+  if(v.includes("bike")) return "🏍️";
+  if(v.includes("car")) return "🚗";
+  if(v.includes("rickshaw")) return "🛺";
+  if(v.includes("tractor")) return "🚜";
+  if(v.includes("puncture")) return "🛞";
+  if(v.includes("driver")) return "🚘";
+  if(v.includes("cycle")) return "🚲";
+  if(v.includes("packers")) return "📦";
+  if(v.includes("goods")) return "🚚";
+  if(v.includes("milk")) return "🥛";
+  if(v.includes("newspaper")) return "📰";
+  if(v.includes("water jar")) return "🚰";
+  if(v.includes("gas")) return "🔥";
+  if(v.includes("cook")) return "👨‍🍳";
+  if(v.includes("caterer")) return "🍽️";
+  if(v.includes("waiter")) return "🍴";
+  if(v.includes("tent")) return "⛺";
+  if(v.includes("decoration")) return "🎊";
+  if(v.includes("lighting")) return "💡";
+  if(v.includes("dj")) return "🎧";
+  if(v.includes("band")) return "🎺";
+  if(v.includes("photographer")) return "📷";
+  if(v.includes("videographer")) return "🎥";
+  if(v.includes("makeup")) return "💄";
+  if(v.includes("mehndi")) return "🖐️";
+  if(v.includes("tailor")) return "🧵";
+  if(v.includes("laundry")) return "👕";
+  if(v.includes("barber")) return "✂️";
+  if(v.includes("tutor")) return "📚";
+  if(v.includes("harvester")) return "🌾";
+  if(v.includes("locksmith")) return "🔑";
+  if(v.includes("glass")) return "🪟";
+  if(v.includes("borewell")) return "💧";
+
+  return "🛠️";
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function scSrvPhone(value){
+
+  return String(value || "")
+    .replace(/[^0-9+]/g,"");
+
+}
+
+
+function scSrvWhatsApp(value){
+
+  let number =
+    String(value || "")
+    .replace(/\D/g,"");
+
+
+  if(
+    number.length === 10
+  ){
+    number =
+      "91" + number;
+  }
+
+
+  return number;
+
+}
+
+
+function scSrvEsc(value){
+
+  return String(value == null ? "" : value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function scSrvJs(value){
+
+  return String(value || "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/\r/g," ")
+    .replace(/\n/g," ");
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+scSrvCreateServiceCards();
+
+scSrvLoad();
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>

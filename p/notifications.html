@@ -1,0 +1,2162 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e97712"><title>Notifications | Sursand Connect</title><link rel="manifest" href="/manifest.webmanifest">
+<style>
+html,body{margin:0;background:#f8fafc;color:#263238}body{padding-top:66px;padding-bottom:68px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 4px 16px rgba(15,23,42,.07);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999;font-family:Arial,sans-serif}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238;min-width:0}.sc-appbar-brand img{width:42px;height:42px;object-fit:contain;border-radius:11px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.1}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions button{width:36px;height:36px;border-radius:11px;border:1px solid #f0d7bd;background:#fff7ed;color:#c86508;font-weight:900;font-size:18px;cursor:pointer}.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:58px;background:#fff;border-top:1px solid #e6e9ec;display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -4px 16px rgba(15,23,42,.05);font-family:Arial,sans-serif}.sc-bottom a{text-decoration:none;color:#475569;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:700}.sc-bottom a:active{color:#f28c28}@media(min-width:900px){body{padding-bottom:0}.sc-bottom{display:none}}
+</style>
+<script>
+function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:location.origin||location.href};if(navigator.share){navigator.share(data).catch(()=>{});}else{const u='https://wa.me/?text='+encodeURIComponent(data.text+' '+data.url);window.open(u,'_blank');}}
+</script>
+</head><body>
+<div class="sc-appbar"><a href="/" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png" alt="Sursand Connect"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a><div class="sc-appbar-actions"><button onclick="history.length>1?history.back():location.href='/'" aria-label="Back">←</button><button onclick="shareApp()" aria-label="Share App">↗</button></div></div>
+<main><!-- =========================================================
+     POST 18 — NOTIFICATIONS & UPDATES
+     SURSAND CONNECT
+     FULL REPLACEMENT
+     ========================================================= -->
+
+<div id="sc-notifications-page">
+
+<style>
+
+#sc-notifications-page{
+  --green:#238b45;
+  --green-dark:#176b35;
+
+  --saffron:#f28c28;
+  --saffron-dark:#e97812;
+  --saffron-soft:#fff0dd;
+
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+
+  --red:#d93025;
+
+  --text:#263238;
+  --muted:#667085;
+  --border:#e6ebe7;
+
+  max-width:1150px;
+  margin:26px auto;
+  padding:0 16px 50px;
+
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+}
+
+#sc-notifications-page *{
+  box-sizing:border-box;
+}
+
+
+/* =========================================================
+   HERO — SAFFRON ONLY
+   ========================================================= */
+
+.sc-nt-hero{
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7a13f 0%,
+      #f28c28 48%,
+      #e97812 100%
+    );
+
+  color:#fff;
+
+  padding:38px 24px 40px;
+
+  border-radius:22px;
+
+  margin-bottom:22px;
+
+  text-align:center;
+
+  box-shadow:
+    0 14px 34px rgba(39,77,52,.16);
+}
+
+
+.sc-nt-hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  right:-65px;
+  bottom:-85px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+
+.sc-nt-hero h1{
+  position:relative;
+  z-index:2;
+
+  margin:0 0 10px;
+
+  color:#fff;
+
+  font-size:
+    clamp(29px,5vw,42px);
+
+  line-height:1.18;
+
+  font-weight:800;
+}
+
+
+.sc-nt-hero p{
+  position:relative;
+  z-index:2;
+
+  max-width:760px;
+
+  margin:0 auto;
+
+  color:
+    rgba(255,255,255,.92);
+
+  font-size:14px;
+
+  line-height:1.65;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.sc-nt-search{
+  position:relative;
+  z-index:2;
+
+  max-width:680px;
+
+  margin:23px auto 0;
+
+  display:flex;
+  align-items:center;
+
+  padding:6px;
+
+  background:#fff;
+
+  border-radius:40px;
+
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.12);
+}
+
+
+.sc-nt-search input{
+  flex:1;
+
+  min-width:0;
+
+  border:0;
+
+  outline:0;
+
+  padding:13px 16px;
+
+  background:transparent;
+
+  color:var(--text);
+
+  font-size:14px;
+}
+
+
+.sc-nt-search button{
+  min-width:105px;
+  min-height:42px;
+
+  padding:0 17px;
+
+  border:0;
+
+  border-radius:35px;
+
+  background:var(--green);
+
+  color:#fff;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  cursor:pointer;
+}
+
+
+.sc-nt-search button:hover{
+  background:var(--green-dark);
+}
+
+
+/* =========================================================
+   FILTER
+   ========================================================= */
+
+.sc-nt-filter{
+  display:flex;
+
+  gap:8px;
+
+  overflow-x:auto;
+
+  padding:4px 0 18px;
+
+  scrollbar-width:none;
+}
+
+
+.sc-nt-filter::-webkit-scrollbar{
+  display:none;
+}
+
+
+.sc-nt-filter button{
+  flex-shrink:0;
+
+  border:
+    1px solid var(--border);
+
+  background:#fff;
+
+  color:var(--green-dark);
+
+  padding:9px 15px;
+
+  border-radius:25px;
+
+  white-space:nowrap;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+.sc-nt-filter button:hover{
+  border-color:var(--saffron);
+
+  color:var(--saffron-dark);
+}
+
+
+.sc-nt-filter button.active{
+  background:var(--saffron);
+
+  border-color:var(--saffron);
+
+  color:#fff;
+
+  box-shadow:
+    0 5px 14px rgba(242,140,40,.22);
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.sc-nt-toolbar{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:14px;
+}
+
+
+.sc-nt-count{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+.sc-nt-clear{
+  border:0;
+
+  background:#f4f5f4;
+
+  color:#555;
+
+  padding:8px 13px;
+
+  border-radius:8px;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+
+.sc-nt-clear:hover{
+  background:#eceeed;
+
+  color:var(--red);
+}
+
+
+/* =========================================================
+   LIST
+   ========================================================= */
+
+.sc-nt-list{
+  display:grid;
+
+  gap:14px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.sc-nt-card{
+  position:relative;
+
+  background:#fff;
+
+  padding:18px;
+
+  border:
+    1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:17px;
+
+  box-shadow:
+    0 7px 22px rgba(31,55,42,.07);
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.sc-nt-card:hover{
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(31,55,42,.11);
+}
+
+
+/* URGENT */
+
+.sc-nt-card.urgent{
+  border-top-color:var(--red);
+}
+
+
+/* =========================================================
+   TOP
+   ========================================================= */
+
+.sc-nt-top{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:14px;
+}
+
+
+.sc-nt-badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:5px;
+
+  margin-bottom:8px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
+  background:var(--saffron-soft);
+
+  color:#b85c00;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+
+.sc-nt-card.urgent
+.sc-nt-badge{
+  background:#fdeceb;
+
+  color:#b3261e;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.sc-nt-card h3{
+  margin:0 0 7px;
+
+  color:var(--text);
+
+  font-size:18px;
+
+  font-weight:800;
+
+  line-height:1.4;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.sc-nt-date{
+  color:var(--muted);
+
+  font-size:11px;
+
+  white-space:nowrap;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.sc-nt-desc{
+  color:var(--muted);
+
+  font-size:13px;
+
+  line-height:1.7;
+}
+
+
+/* CLICK HINT */
+
+.sc-nt-open-hint{
+  margin-top:11px;
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.sc-nt-actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:14px;
+}
+
+
+.sc-nt-actions a{
+  min-height:38px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:5px;
+
+  padding:8px 12px;
+
+  border-radius:9px;
+
+  text-decoration:none;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+
+/* CALL */
+
+.sc-nt-call{
+  background:#eaf7ed;
+
+  color:var(--green-dark);
+}
+
+
+/* DETAILS */
+
+.sc-nt-link{
+  background:#eef4ff;
+
+  color:var(--blue-dark);
+}
+
+
+/* MAP */
+
+.sc-nt-map{
+  background:var(--blue);
+
+  color:#fff !important;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.sc-nt-empty{
+  background:#fff;
+
+  padding:42px 15px;
+
+  border:
+    1px solid var(--border);
+
+  border-top:
+    4px solid var(--saffron);
+
+  border-radius:18px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:560px){
+
+  #sc-notifications-page{
+    margin-top:18px;
+
+    padding-left:12px;
+
+    padding-right:12px;
+  }
+
+
+  .sc-nt-hero{
+    padding:29px 17px 31px;
+
+    border-radius:18px;
+  }
+
+
+  .sc-nt-hero p{
+    font-size:12px;
+  }
+
+
+  .sc-nt-search{
+    flex-direction:column;
+
+    gap:5px;
+
+    border-radius:14px;
+  }
+
+
+  .sc-nt-search input{
+    width:100%;
+  }
+
+
+  .sc-nt-search button{
+    width:100%;
+
+    padding:11px;
+
+    border-radius:10px;
+  }
+
+
+  .sc-nt-top{
+    flex-direction:column;
+
+    gap:4px;
+  }
+
+
+  .sc-nt-date{
+    white-space:normal;
+  }
+
+
+  .sc-nt-toolbar{
+    align-items:center;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="sc-nt-hero">
+
+  <h1>
+    🔔 Notifications &amp; Updates
+  </h1>
+
+  <p>
+    Stay informed about important local notices,
+    service updates, public alerts and community information.
+  </p>
+
+
+  <div class="sc-nt-search">
+
+    <input
+      id="scNtSearch"
+      type="search"
+      placeholder="Search notification or update..."
+      oninput="scNtRender()">
+
+
+    <button
+      type="button"
+      onclick="scNtRender()">
+
+      🔍 Search
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FILTER
+     ========================================================= -->
+
+<div
+  class="sc-nt-filter"
+  id="scNtCategories">
+</div>
+
+
+<!-- =========================================================
+     COUNT + CLEAR
+     ========================================================= -->
+
+<div class="sc-nt-toolbar">
+
+  <div
+    class="sc-nt-count"
+    id="scNtCount">
+
+    Loading notifications...
+
+  </div>
+
+
+  <button
+    class="sc-nt-clear"
+    id="scNtClearButton"
+    type="button"
+    onclick="scNtClearAll()">
+
+    🧹 Clear All
+
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     LIST
+     ========================================================= -->
+
+<div
+  class="sc-nt-list"
+  id="scNtList">
+
+  <div class="sc-nt-empty">
+
+    Loading notifications and updates...
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   API
+   ========================================================= */
+
+const SC_NT_API =
+"https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
+
+
+let scNtData = [];
+
+let scNtCategory =
+  "All";
+
+
+let scNtPostMap =
+  {};
+
+
+/* =========================================================
+   LOAD CLEARED IDs
+   ========================================================= */
+
+function scNtGetCleared(){
+
+  try{
+
+    const value =
+      localStorage.getItem(
+        "SC_CLEARED_NOTIFICATIONS"
+      );
+
+
+    if(!value){
+      return [];
+    }
+
+
+    const parsed =
+      JSON.parse(value);
+
+
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
+
+  }
+
+  catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE CLEARED IDs
+   ========================================================= */
+
+function scNtSaveCleared(ids){
+
+  localStorage.setItem(
+
+    "SC_CLEARED_NOTIFICATIONS",
+
+    JSON.stringify(ids)
+
+  );
+
+}
+
+
+/* =========================================================
+   RECORD KEY
+   ========================================================= */
+
+function scNtKey(item){
+
+  if(item.ID){
+    return String(item.ID);
+  }
+
+
+  const title =
+
+    item.Title ||
+
+    item["Notification Title"] ||
+
+    item["Update Title"] ||
+
+    item.Name ||
+
+    "";
+
+
+  const date =
+
+    item.Date ||
+
+    item["Published Date"] ||
+
+    item["Update Date"] ||
+
+    "";
+
+
+  return (
+    String(title) +
+    "|" +
+    String(date)
+  );
+
+}
+
+
+/* =========================================================
+   LOAD BLOGGER POST URL MAP
+   ========================================================= */
+
+async function scNtLoadPostMap(){
+
+  try{
+
+    const response =
+      await fetch(
+
+        "/feeds/posts/default?alt=json&max-results=500",
+
+        {
+          cache:"no-store"
+        }
+
+      );
+
+
+    const result =
+      await response.json();
+
+
+    const entries =
+
+      result &&
+      result.feed &&
+      result.feed.entry
+
+        ? result.feed.entry
+
+        : [];
+
+
+    entries.forEach(
+      function(entry){
+
+        const title =
+
+          entry.title &&
+          entry.title.$t
+
+            ? String(
+                entry.title.$t
+              ).trim()
+
+            : "";
+
+
+        const links =
+          entry.link || [];
+
+
+        const alternate =
+          links.find(
+            function(link){
+
+              return (
+                link.rel ===
+                "alternate"
+              );
+
+            }
+          );
+
+
+        if(
+          title &&
+          alternate &&
+          alternate.href
+        ){
+
+          scNtPostMap[
+            title.toLowerCase()
+          ] =
+            alternate.href;
+
+        }
+
+      }
+    );
+
+  }
+
+  catch(error){
+
+    console.warn(
+      "Notification page map:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD NOTIFICATIONS
+   ========================================================= */
+
+async function scNtLoad(){
+
+  try{
+
+    await scNtLoadPostMap();
+
+
+    const response =
+      await fetch(
+        SC_NT_API +
+        "?action=all"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        "API data unavailable"
+      );
+
+    }
+
+
+    const data =
+      result.data || {};
+
+
+    scNtData =
+
+      data.notifications ||
+
+      data.updates ||
+
+      data.notificationsUpdates ||
+
+      data.localUpdates ||
+
+      [];
+
+
+    if(
+      !Array.isArray(
+        scNtData
+      )
+    ){
+
+      scNtData = [];
+
+    }
+
+
+    scNtCreateCategories();
+
+    scNtRender();
+
+  }
+
+  catch(error){
+
+    console.error(
+
+      "Notifications & Updates:",
+
+      error
+
+    );
+
+
+    document.getElementById(
+      "scNtList"
+    ).innerHTML = `
+
+      <div class="sc-nt-empty">
+
+        Unable to load notifications.
+
+      </div>
+
+    `;
+
+
+    document.getElementById(
+      "scNtCount"
+    ).textContent =
+      "Unable to load data.";
+
+  }
+
+}
+
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+function scNtCreateCategories(){
+
+  const holder =
+    document.getElementById(
+      "scNtCategories"
+    );
+
+
+  const categories = [
+
+    "All",
+
+    ...new Set(
+
+      scNtData
+
+        .map(function(item){
+
+          return (
+
+            item.Category ||
+
+            item.category ||
+
+            item.Type ||
+
+            item[
+              "Notification Type"
+            ] ||
+
+            ""
+
+          );
+
+        })
+
+        .filter(Boolean)
+
+    )
+
+  ];
+
+
+  holder.innerHTML =
+    "";
+
+
+  categories.forEach(
+    function(category){
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.textContent =
+        category;
+
+
+      if(
+        category === "All"
+      ){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      button.addEventListener(
+
+        "click",
+
+        function(){
+
+          holder
+
+            .querySelectorAll(
+              "button"
+            )
+
+            .forEach(
+              function(btn){
+
+                btn.classList.remove(
+                  "active"
+                );
+
+              }
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+
+          scNtCategory =
+            category;
+
+
+          scNtRender();
+
+        }
+
+      );
+
+
+      holder.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   GET RELATED TARGET
+   ========================================================= */
+
+function scNtTarget(item){
+
+  /* -----------------------------------------
+     DIRECT RELATED URL
+     ----------------------------------------- */
+
+  const directUrl =
+
+    item["Related URL"] ||
+
+    item["Target URL"] ||
+
+    item["Page URL"] ||
+
+    item["Post URL"] ||
+
+    item["More Info Link"] ||
+
+    item.Link ||
+
+    item.URL ||
+
+    "";
+
+
+  if(
+    scNtValidUrl(
+      directUrl
+    )
+  ){
+
+    return String(
+      directUrl
+    ).trim();
+
+  }
+
+
+  /* -----------------------------------------
+     RELATED BLOGGER PAGE/POST TITLE
+     ----------------------------------------- */
+
+  const pageTitle =
+
+    item["Related Page"] ||
+
+    item["Related Post"] ||
+
+    item["Target Page"] ||
+
+    item["Page Title"] ||
+
+    "";
+
+
+  if(pageTitle){
+
+    const key =
+      String(pageTitle)
+        .trim()
+        .toLowerCase();
+
+
+    if(
+      scNtPostMap[key]
+    ){
+
+      return scNtPostMap[key];
+
+    }
+
+
+    /*
+     * Fallback if exact Blogger post
+     * has not yet been resolved.
+     */
+
+    return (
+
+      "/search?q=" +
+
+      encodeURIComponent(
+        pageTitle
+      )
+
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================================================
+   CARD CLICK
+   ========================================================= */
+
+function scNtOpenItem(index){
+
+  const item =
+    scNtData[index];
+
+
+  if(!item){
+    return;
+  }
+
+
+  const target =
+    scNtTarget(item);
+
+
+  if(target){
+
+    window.location.href =
+      target;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function scNtRender(){
+
+  const list =
+    document.getElementById(
+      "scNtList"
+    );
+
+
+  const count =
+    document.getElementById(
+      "scNtCount"
+    );
+
+
+  const cleared =
+    scNtGetCleared();
+
+
+  const search =
+    document
+
+      .getElementById(
+        "scNtSearch"
+      )
+
+      .value
+
+      .trim()
+
+      .toLowerCase();
+
+
+  const filtered =
+    scNtData.filter(
+      function(item){
+
+        /* CLEARED */
+
+        if(
+          cleared.includes(
+            scNtKey(item)
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        /* CATEGORY */
+
+        const category =
+          String(
+
+            item.Category ||
+
+            item.category ||
+
+            item.Type ||
+
+            item[
+              "Notification Type"
+            ] ||
+
+            ""
+
+          );
+
+
+        /* SEARCH */
+
+        const searchable =
+
+          Object.values(item)
+
+            .join(" ")
+
+            .toLowerCase();
+
+
+        return (
+
+          (
+            scNtCategory ===
+              "All"
+
+            ||
+
+            category ===
+              scNtCategory
+          )
+
+          &&
+
+          (
+            !search
+
+            ||
+
+            searchable.includes(
+              search
+            )
+          )
+
+        );
+
+      }
+    );
+
+
+  count.textContent =
+
+    filtered.length +
+
+    (
+      filtered.length === 1
+
+        ? " update"
+
+        : " updates"
+    );
+
+
+  if(
+    !filtered.length
+  ){
+
+    list.innerHTML = `
+
+      <div class="sc-nt-empty">
+
+        No notifications or updates.
+
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    "";
+
+
+  filtered.forEach(
+    function(item){
+
+      const actualIndex =
+        scNtData.indexOf(item);
+
+
+      list.appendChild(
+
+        scNtCreateCard(
+          item,
+          actualIndex
+        )
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CREATE CARD
+   ========================================================= */
+
+function scNtCreateCard(
+  item,
+  index
+){
+
+  const title =
+
+    item.Title ||
+
+    item["Notification Title"] ||
+
+    item["Update Title"] ||
+
+    item.Name ||
+
+    "Local Update";
+
+
+  const category =
+
+    item.Category ||
+
+    item.category ||
+
+    item.Type ||
+
+    item["Notification Type"] ||
+
+    "Update";
+
+
+  const date =
+
+    item.Date ||
+
+    item["Published Date"] ||
+
+    item["Update Date"] ||
+
+    "";
+
+
+  const description =
+
+    item.Description ||
+
+    item.Message ||
+
+    item.Details ||
+
+    "";
+
+
+  const priority =
+    String(
+
+      item.Priority ||
+
+      item.Urgency ||
+
+      ""
+
+    ).toLowerCase();
+
+
+  const phone =
+
+    item.Phone ||
+
+    item["Contact Number"] ||
+
+    "";
+
+
+  const detailsLink =
+
+    item["More Info Link"] ||
+
+    item.Link ||
+
+    item.URL ||
+
+    "";
+
+
+  const map =
+
+    item["Google Map Link"] ||
+
+    item["Google Maps Link"] ||
+
+    item["Map URL"] ||
+
+    item.Map ||
+
+    "";
+
+
+  const urgent =
+
+    priority.includes(
+      "urgent"
+    )
+
+    ||
+
+    priority.includes(
+      "high"
+    )
+
+    ||
+
+    String(category)
+
+      .toLowerCase()
+
+      .includes(
+        "emergency"
+      );
+
+
+  const target =
+    scNtTarget(item);
+
+
+  const article =
+    document.createElement(
+      "article"
+    );
+
+
+  article.className =
+    "sc-nt-card" +
+    (
+      urgent
+        ? " urgent"
+        : ""
+    );
+
+
+  if(target){
+
+    article.setAttribute(
+      "role",
+      "link"
+    );
+
+
+    article.setAttribute(
+      "tabindex",
+      "0"
+    );
+
+
+    article.addEventListener(
+      "click",
+      function(){
+
+        scNtOpenItem(
+          index
+        );
+
+      }
+    );
+
+
+    article.addEventListener(
+      "keydown",
+      function(event){
+
+        if(
+          event.key ===
+            "Enter"
+
+          ||
+
+          event.key ===
+            " "
+        ){
+
+          event.preventDefault();
+
+          scNtOpenItem(
+            index
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  const top =
+    document.createElement(
+      "div"
+    );
+
+
+  top.className =
+    "sc-nt-top";
+
+
+  const left =
+    document.createElement(
+      "div"
+    );
+
+
+  const badge =
+    document.createElement(
+      "span"
+    );
+
+
+  badge.className =
+    "sc-nt-badge";
+
+
+  badge.textContent =
+    urgent
+      ? "⚠️ " + category
+      : "🔔 " + category;
+
+
+  left.appendChild(
+    badge
+  );
+
+
+  const heading =
+    document.createElement(
+      "h3"
+    );
+
+
+  heading.textContent =
+    title;
+
+
+  left.appendChild(
+    heading
+  );
+
+
+  top.appendChild(
+    left
+  );
+
+
+  if(date){
+
+    const dateElement =
+      document.createElement(
+        "div"
+      );
+
+
+    dateElement.className =
+      "sc-nt-date";
+
+
+    dateElement.textContent =
+      "📅 " + date;
+
+
+    top.appendChild(
+      dateElement
+    );
+
+  }
+
+
+  article.appendChild(
+    top
+  );
+
+
+  /* DESCRIPTION */
+
+  if(description){
+
+    const desc =
+      document.createElement(
+        "div"
+      );
+
+
+    desc.className =
+      "sc-nt-desc";
+
+
+    desc.textContent =
+      description;
+
+
+    article.appendChild(
+      desc
+    );
+
+  }
+
+
+  /* CARD REDIRECTION HINT */
+
+  if(target){
+
+    const hint =
+      document.createElement(
+        "div"
+      );
+
+
+    hint.className =
+      "sc-nt-open-hint";
+
+
+    hint.textContent =
+      "Tap to open related page →";
+
+
+    article.appendChild(
+      hint
+    );
+
+  }
+
+
+  /* ACTIONS */
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "sc-nt-actions";
+
+
+  /* CALL */
+
+  if(phone){
+
+    const call =
+      document.createElement(
+        "a"
+      );
+
+
+    call.className =
+      "sc-nt-call";
+
+
+    call.href =
+      "tel:" +
+      scNtPhone(phone);
+
+
+    call.textContent =
+      "📞 Call";
+
+
+    call.addEventListener(
+      "click",
+      function(event){
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    actions.appendChild(
+      call
+    );
+
+  }
+
+
+  /* MORE DETAILS */
+
+  if(
+    scNtValidUrl(
+      detailsLink
+    )
+  ){
+
+    const details =
+      document.createElement(
+        "a"
+      );
+
+
+    details.className =
+      "sc-nt-link";
+
+
+    details.href =
+      String(
+        detailsLink
+      ).trim();
+
+
+    details.target =
+      "_blank";
+
+
+    details.rel =
+      "noopener";
+
+
+    details.textContent =
+      "🔗 More Details";
+
+
+    details.addEventListener(
+      "click",
+      function(event){
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    actions.appendChild(
+      details
+    );
+
+  }
+
+
+  /* DIRECTIONS */
+
+  if(
+    scNtValidUrl(
+      map
+    )
+  ){
+
+    const directions =
+      document.createElement(
+        "a"
+      );
+
+
+    directions.className =
+      "sc-nt-map";
+
+
+    directions.href =
+      String(map).trim();
+
+
+    directions.target =
+      "_blank";
+
+
+    directions.rel =
+      "noopener";
+
+
+    directions.textContent =
+      "🧭 Get Directions";
+
+
+    directions.addEventListener(
+      "click",
+      function(event){
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    actions.appendChild(
+      directions
+    );
+
+  }
+
+
+  if(
+    actions.children.length
+  ){
+
+    article.appendChild(
+      actions
+    );
+
+  }
+
+
+  return article;
+
+}
+
+
+/* =========================================================
+   CLEAR ALL
+   ========================================================= */
+
+function scNtClearAll(){
+
+  const visible =
+    scNtData.filter(
+      function(item){
+
+        const category =
+          String(
+
+            item.Category ||
+
+            item.category ||
+
+            item.Type ||
+
+            item[
+              "Notification Type"
+            ] ||
+
+            ""
+
+          );
+
+
+        return (
+
+          scNtCategory === "All"
+
+          ||
+
+          category ===
+            scNtCategory
+
+        );
+
+      }
+    );
+
+
+  if(
+    !visible.length
+  ){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    window.confirm(
+
+      "Clear all notifications from this device?"
+
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  const cleared =
+    scNtGetCleared();
+
+
+  visible.forEach(
+    function(item){
+
+      const key =
+        scNtKey(item);
+
+
+      if(
+        !cleared.includes(
+          key
+        )
+      ){
+
+        cleared.push(
+          key
+        );
+
+      }
+
+    }
+  );
+
+
+  scNtSaveCleared(
+    cleared
+  );
+
+
+  scNtRender();
+
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+function scNtPhone(value){
+
+  return String(
+    value || ""
+  )
+    .replace(
+      /[^0-9+]/g,
+      ""
+    );
+
+}
+
+
+/* =========================================================
+   VALID URL
+   ========================================================= */
+
+function scNtValidUrl(value){
+
+  const url =
+    String(
+      value || ""
+    )
+      .trim();
+
+
+  return (
+
+    url.startsWith(
+      "https://"
+    )
+
+    ||
+
+    url.startsWith(
+      "http://"
+    )
+
+  );
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+if(
+  document.readyState ===
+    "loading"
+){
+
+  document.addEventListener(
+
+    "DOMContentLoaded",
+
+    scNtLoad
+
+  );
+
+}
+
+else{
+
+  scNtLoad();
+
+}
+
+</script>
+
+</div></main><nav class="sc-bottom"><a href="/">⌂<span>Home</span></a><a href="/p/businesses.html">🏪<span>Business</span></a><a href="/p/services.html">🛠️<span>Services</span></a><a href="/p/events.html">📅<span>Events</span></a><a href="/p/city-connect.html">💬<span>Connect</span></a></nav><script>if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script></body></html>
