@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e97712">
+<title>Complaints | Sursand Connect</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<style>
+:root{--s:#f28c28;--sd:#d86f0d;--g:#238b45;--gd:#176b35;--wa:#25d366;--blue:#2563eb;--red:#dc2626;--text:#263238;--muted:#667085;--border:#e6ebe7}
+*{box-sizing:border-box}html,body{margin:0;background:#f8fafc;color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{padding-top:66px;padding-bottom:118px}.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:rgba(255,255,255,.98);border-bottom:1px solid #eceff1;box-shadow:0 5px 18px rgba(15,23,42,.08);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999}.sc-appbar-left{display:flex;align-items:center;gap:8px}.sc-appbar-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238}.sc-appbar-brand img{width:41px;height:41px;object-fit:contain;border-radius:12px}.sc-appbar-brand span{display:flex;flex-direction:column;line-height:1.08}.sc-appbar-brand b{font-size:14px}.sc-appbar-brand small{font-size:9px;color:#667085;margin-top:3px}.sc-appbar-actions{display:flex;gap:7px}.sc-appbar-actions a,.sc-appbar-actions button{width:38px;height:38px;border-radius:14px;border:1px solid #f0d7bd;background:linear-gradient(145deg,#fff8f0,#fff0dd);color:#c86508;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;position:relative}.sc-bell-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:#dc2626;border:2px solid #fff;border-radius:50%}
+.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -5px 18px rgba(15,23,42,.10)}.sc-bottom a{text-decoration:none;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;gap:1px}.sc-bottom a span{font-size:8px;font-weight:800}.sc-bottom a:active{background:rgba(255,255,255,.12)}
+.wrap{max-width:900px;margin:20px auto;padding:0 14px 40px}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#f7a13f,#f28c28 50%,#e97812);color:#fff;border-radius:22px;padding:34px 20px;text-align:center;box-shadow:0 14px 34px rgba(90,60,20,.16)}.hero:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-70px;bottom:-95px;background:rgba(255,255,255,.08)}.hero h1{position:relative;margin:0 0 8px;color:#fff;font-size:30px}.hero p{position:relative;margin:auto;max-width:650px;font-size:12px;line-height:1.65;color:rgba(255,255,255,.94)}
+.card{background:#fff;border:1px solid var(--border);border-top:4px solid var(--s);border-radius:19px;padding:17px;margin-top:18px;box-shadow:0 8px 25px rgba(31,55,42,.08)}.card h2{font-size:17px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#475569}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5e1;border-radius:11px;padding:11px 12px;font:inherit;font-size:12px;background:#fff;outline:none}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#f28c28;box-shadow:0 0 0 3px rgba(242,140,40,.12)}
+.locrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px}.mini{border:0;border-radius:10px;padding:10px;font-size:10px;font-weight:800;cursor:pointer}.gps{background:#eaf7ed;color:#176b35}.maps{background:#eef4ff;color:#1d4ed8}.preview{display:none;width:100%;max-height:260px;object-fit:cover;border-radius:14px;border:1px solid #e5e7eb;margin-top:8px}.submit{grid-column:1/-1;border:0;border-radius:12px;padding:13px;background:linear-gradient(135deg,#f7a13f,#f28c28,#e97812);color:#fff;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 8px 18px rgba(242,140,40,.22)}
+.note{margin-top:12px;background:#fff8e8;border-left:4px solid #f28c28;padding:12px;border-radius:10px;font-size:10px;line-height:1.6;color:#667085}
+.result{display:none}.result.active{display:block}.summary{background:#f8faf8;border-radius:13px;padding:13px;font-size:11px;line-height:1.7}.recipients{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.recipient{border:1px solid var(--border);border-radius:15px;padding:12px;background:#fff;box-shadow:0 5px 14px rgba(15,23,42,.06)}.recipient b{display:block;font-size:11px}.recipient small{display:block;color:#667085;font-size:9px;margin:3px 0 9px}.recipient button{width:100%;border:0;border-radius:10px;background:#25d366;color:#fff;padding:10px 6px;font-size:9px;font-weight:900}.recipient.sent{border-color:#86d9a0;background:#f0fff5}.recipient.sent button{background:#176b35}
+.result-image{display:none;width:100%;max-height:300px;object-fit:cover;border-radius:14px;margin-top:12px;border:1px solid #e5e7eb}.img-help{font-size:9px;color:#667085;line-height:1.5;margin-top:7px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.field.full,.submit{grid-column:1}.recipients{grid-template-columns:1fr}.hero{padding:28px 17px}.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="sc-appbar">
+ <div class="sc-appbar-left"><a href="../" class="sc-appbar-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a></div>
+ <div class="sc-appbar-actions"><a href="notifications.html">🔔<i class="sc-bell-dot"></i></a><button onclick="history.length>1?history.back():location.href='../'">←</button></div>
+</div>
+
+<main class="wrap">
+<section class="hero"><h1>📣 Citizen Complaint</h1><p>Report a local civic issue with location and photo. Sursand Connect will prepare the same complaint for your Ward Councillor, Chairman and Vice Chairman.</p></section>
+
+<section class="card" id="formCard">
+<h2>📝 Book a Complaint</h2>
+<form class="grid" onsubmit="return buildComplaint(event)">
+ <div class="field"><label>Your Name *</label><input id="cName" required></div>
+ <div class="field"><label>Mobile Number *</label><input id="cPhone" inputmode="tel" required></div>
+ <div class="field"><label>Ward *</label><select id="cWard" required><option value="">Select Ward</option></select></div>
+ <div class="field"><label>Issue Category *</label><select id="cCategory" required><option value="">Select issue</option><option>Road / Pothole</option><option>Drainage / Waterlogging</option><option>Garbage / Sanitation</option><option>Street Light</option><option>Drinking Water</option><option>Public Toilet</option><option>Encroachment</option><option>Stray Animals</option><option>Public Safety</option><option>Other Civic Issue</option></select></div>
+ <div class="field full"><label>Address *</label><textarea id="cAddress" required></textarea></div>
+ <div class="field"><label>Landmark</label><input id="cLandmark"></div>
+ <div class="field"><label>Priority</label><select id="cPriority"><option>Normal</option><option>Urgent</option><option>Very Urgent</option></select></div>
+ <div class="field full"><label>Issue / Subject *</label><input id="cIssue" required placeholder="Short title of the problem"></div>
+ <div class="field full"><label>Description *</label><textarea id="cDescription" required placeholder="Explain the issue clearly..."></textarea></div>
+ <div class="field full"><label>Location</label><input id="cLocation" placeholder="Use Current Location or paste Google Maps link"><div class="locrow"><button type="button" class="mini gps" onclick="getLocation()">📍 Use Current Location</button><button type="button" class="mini maps" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div>
+ <div class="field full"><label>Upload Issue Image</label><input id="cImage" type="file" accept="image/*" onchange="previewImage(this)"><img id="preview" class="preview" alt="Complaint image preview"></div>
+ <button class="submit" type="submit">📣 Book Complaint</button>
+</form>
+<div class="note"><strong>Photo:</strong> The selected image is shown in the app. A normal WhatsApp pre-filled message cannot silently attach a local image, so when WhatsApp opens, attach the same selected photo before sending.</div>
+</section>
+
+<section class="card result" id="resultCard">
+<h2>✅ Complaint Prepared</h2>
+<div class="summary" id="summary"></div>
+<img id="resultImage" class="result-image" alt="Selected complaint image">
+<div class="img-help">The uploaded image is displayed here for confirmation. Send the same image with the prepared WhatsApp message.</div>
+<div class="recipients" id="recipients"></div>
+</section>
+</main>
+
+<nav class="sc-bottom"><a href="../">⌂<span>Home</span></a><a href="businesses.html">🏪<span>Shop</span></a><a href="services.html">🛠️<span>Services</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
+
+<script>
+const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+let reps=[], selectedImageData='';
+for(let i=1;i<=18;i++){const o=document.createElement('option');o.value=String(i);o.textContent='Ward '+i;document.getElementById('cWard').appendChild(o)}
+fetch(API+'?action=all').then(r=>r.json()).then(result=>{
+ const d=result&&result.data?result.data:{};
+ reps=d.representatives||d.wardRepresentatives||d.councillors||d.localRepresentatives||[];
+ if(!Array.isArray(reps))reps=[];
+}).catch(()=>{reps=[]});
+
+function val(o,keys){for(const k of keys){if(o&&o[k]!=null&&String(o[k]).trim())return String(o[k]).trim()}return''}
+function digits(v){let n=String(v||'').replace(/\D/g,'');if(n.length===10)n='91'+n;return n}
+function norm(v){return String(v||'').trim().toLowerCase()}
+function getLocation(){
+ const el=document.getElementById('cLocation');
+ if(!navigator.geolocation){alert('Location is not supported on this device.');return}
+ el.value='Getting location...';
+ navigator.geolocation.getCurrentPosition(p=>{
+   el.value='https://maps.google.com/?q='+p.coords.latitude+','+p.coords.longitude;
+ },()=>{el.value='';alert('Unable to access location. Please allow location permission or paste a Maps link.')},{enableHighAccuracy:true,timeout:12000});
+}
+function previewImage(input){
+ const f=input.files&&input.files[0]; if(!f)return;
+ const reader=new FileReader(); reader.onload=e=>{
+   selectedImageData=e.target.result;
+   const img=document.getElementById('preview');img.src=selectedImageData;img.style.display='block';
+ }; reader.readAsDataURL(f);
+}
+function findRecipient(roleType,ward){
+ const wanted=norm(roleType);
+ return reps.find(r=>{
+   const role=norm(val(r,['Role','role','Representative Role']));
+   const rw=val(r,['Ward','ward','Ward Number']).replace(/\D/g,'');
+   if(wanted==='ward') return (role.includes('ward')||role.includes('councillor')) && rw===String(ward);
+   if(wanted==='chairman') return role.includes('chairman')&&!role.includes('vice');
+   if(wanted==='vice') return role.includes('vice')&&role.includes('chairman');
+   return false;
+ });
+}
+function complaintNo(){
+ const d=new Date();
+ const yy=String(d.getFullYear()).slice(-2), ny=String((d.getFullYear()+1)).slice(-2);
+ return 'SC/CMP/'+yy+ny+'/'+String(Date.now()).slice(-4);
+}
+function buildComplaint(e){
+ e.preventDefault();
+ const data={
+  no:complaintNo(),date:new Date().toLocaleString('en-IN'),
+  name:cName.value.trim(),phone:cPhone.value.trim(),ward:cWard.value,address:cAddress.value.trim(),landmark:cLandmark.value.trim(),
+  category:cCategory.value,priority:cPriority.value,issue:cIssue.value.trim(),description:cDescription.value.trim(),location:cLocation.value.trim()
+ };
+ const msg=`*SURSAND CONNECT - CITIZEN COMPLAINT*
+
+*Complaint No.:* ${data.no}
+*Date:* ${data.date}
+
+*Citizen Details*
+Name: ${data.name}
+Mobile: ${data.phone}
+Ward: Ward ${data.ward}
+Address: ${data.address}
+Landmark: ${data.landmark||'-'}
+
+*Complaint Details*
+Category: ${data.category}
+Issue: ${data.issue}
+Priority: ${data.priority}
+Description: ${data.description}
+
+*Location*
+${data.location||'Not provided'}
+
+${selectedImageData?'*Photo:* Selected in Sursand Connect. Please attach the same complaint photo before sending.':''}
+
+Submitted through Sursand Connect`;
+
+ const ward=findRecipient('ward',data.ward), chairman=findRecipient('chairman'), vice=findRecipient('vice');
+ const people=[
+   {label:'Ward '+data.ward+' Councillor',r:ward},
+   {label:'Chairman',r:chairman},
+   {label:'Vice Chairman',r:vice}
+ ];
+ summary.innerHTML=`<strong>${data.no}</strong><br>Ward ${data.ward} • ${data.category}<br>${data.issue}<br><span style="color:#667085">${data.address}</span>`;
+ const ri=document.getElementById('resultImage'); if(selectedImageData){ri.src=selectedImageData;ri.style.display='block'}else{ri.style.display='none'}
+ recipients.innerHTML=people.map((p,i)=>{
+   const name=p.r?val(p.r,['Name','name','Representative Name']):'Representative';
+   const phone=p.r?digits(val(p.r,['WhatsApp','WhatsApp Number','Whatsapp Number','Phone','Mobile','Contact Number'])):'';
+   return `<div class="recipient" id="rec${i}"><b>${p.label}</b><small>${name}</small><button type="button" ${phone?`onclick="sendTo(${i},'${phone}',${JSON.stringify(msg)})"`:'disabled style="background:#94a3b8"'}>${phone?'💬 Send Complaint':'Contact unavailable'}</button></div>`;
+ }).join('');
+ resultCard.classList.add('active');
+ resultCard.scrollIntoView({behavior:'smooth'});
+ return false;
+}
+function sendTo(i,phone,msg){
+ window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank');
+ document.getElementById('rec'+i).classList.add('sent');
+}
+</script>
+</body></html>
