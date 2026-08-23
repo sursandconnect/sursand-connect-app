@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e97712">
+<title>Admin Panel | Sursand Connect</title>
+<style>
+:root{--s:#f28c28;--sd:#d86f0d;--g:#238b45;--gd:#176b35;--text:#263238;--muted:#667085;--border:#e6ebe7;--bg:#f8fafc}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}body{padding-top:66px;padding-bottom:126px}.bar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 5px 18px rgba(15,23,42,.08);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:99}.brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238}.brand img{width:41px;height:41px;border-radius:12px;object-fit:contain}.brand span{display:flex;flex-direction:column;line-height:1.08}.brand b{font-size:14px}.brand small{font-size:9px;color:#667085;margin-top:3px}.back{width:40px;height:40px;border-radius:14px;border:1px solid #f2d1ac;background:linear-gradient(145deg,#fffaf5,#fff0dd);color:#c86508;display:flex;align-items:center;justify-content:center}
+.wrap{max-width:1100px;margin:18px auto;padding:0 14px 50px}.hero{background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);color:#fff;border-radius:22px;padding:31px 18px;text-align:center;box-shadow:0 14px 32px rgba(90,60,20,.16)}.hero h1{margin:0 0 8px;color:#fff;font-size:28px}.hero p{margin:0 auto;font-size:11px;line-height:1.6;max-width:650px}.login{max-width:480px;margin:16px auto 0;background:#fff;border:1px solid var(--border);border-top:4px solid var(--s);border-radius:19px;padding:17px;box-shadow:0 8px 24px rgba(31,55,42,.08)}.login h2{font-size:16px;margin:0 0 5px}.login p{font-size:9px;color:#667085;line-height:1.5}.field{display:flex;flex-direction:column;gap:5px;margin-top:9px}label{font-size:9px;font-weight:800}input{border:1px solid #dfe5e1;border-radius:11px;padding:11px 12px;font-size:11px;outline:none}.btn{width:100%;border:0;border-radius:11px;padding:12px;background:#238b45;color:#fff;font-size:10px;font-weight:900;margin-top:11px}.status{font-size:9px;margin-top:9px;line-height:1.5}.dashboard{display:none}.top{display:flex;justify-content:space-between;align-items:center;margin-top:17px}.top h2{font-size:16px;margin:0}.logout{border:0;border-radius:10px;padding:9px 12px;background:#fff1f1;color:#b91c1c;font-size:9px;font-weight:900}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:13px;box-shadow:0 7px 19px rgba(15,23,42,.07);cursor:pointer}.card i{font-style:normal;font-size:23px}.card b{display:block;font-size:10px;margin-top:7px}.card span{display:block;font-size:8px;color:#667085;margin-top:3px}.panel{display:none;background:#fff;border:1px solid var(--border);border-top:4px solid var(--s);border-radius:17px;margin-top:15px;overflow:hidden}.panel.active{display:block}.panelhead{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #edf0ee}.panelhead h3{font-size:12px;margin:0}.panelhead button{border:0;border-radius:9px;background:#fff0dd;color:#c86508;padding:8px;font-size:9px;font-weight:900}.tablewrap{overflow:auto;max-height:65vh}table{width:100%;border-collapse:collapse;font-size:8px}th,td{padding:8px;border-bottom:1px solid #edf0ee;text-align:left;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}th{position:sticky;top:0;background:#f8faf8;z-index:1}.actions{display:flex;gap:5px}.actions button{border:0;border-radius:7px;padding:6px 7px;font-size:7px;font-weight:900}.approve{background:#eaf7ed;color:#176b35}.reject{background:#fff1f1;color:#b91c1c}.empty{padding:25px;text-align:center;color:#667085;font-size:10px}.bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);display:grid;grid-template-columns:repeat(5,1fr);z-index:99}.bottom a{color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px}.bottom span{font-size:8px;font-weight:800}
+@media(max-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header class="bar"><a class="brand" href="../"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Administrator Control Centre</small></span></a><button class="back" onclick="history.length>1?history.back():location.href='../'">‹</button></header>
+<main class="wrap">
+<section class="hero"><h1>⚙️ Admin Panel</h1><p>Secure management centre for Sursand Connect registrations, listings, community data and public updates.</p></section>
+
+<section class="dashboard" id="dashboard">
+<div class="top"><h2>Management</h2><button class="logout" onclick="adminLogout()">Logout</button></div>
+<div class="cards">
+<div class="card" onclick="openSection('businesses')"><i>🏪</i><b>Business Registrations</b><span>Review and approve businesses</span></div>
+<div class="card" onclick="openSection('services')"><i>🛠️</i><b>Local Services</b><span>Manage service providers</span></div>
+<div class="card" onclick="openSection('events')"><i>📅</i><b>Events</b><span>Manage events and updates</span></div>
+<div class="card" onclick="openSection('representatives')"><i>👥</i><b>Representatives</b><span>Manage representatives</span></div>
+<div class="card" onclick="openSection('volunteers')"><i>✨</i><b>Change Makers</b><span>Review registrations</span></div>
+<div class="card" onclick="openSection('contacts')"><i>✉️</i><b>Contact Messages</b><span>Read contact messages</span></div>
+</div>
+<div class="panel" id="panel"><div class="panelhead"><h3 id="panelTitle">Management</h3><button onclick="refreshSection()">↻ Refresh</button></div><div id="panelContent" class="empty">Select a management section.</div></div>
+</section>
+</main>
+<nav class="bottom"><a href="../">⌂<span>Home</span></a><a href="businesses.html">🏪<span>Shop</span></a><a href="services.html">🛠️<span>Services</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
+<script>
+const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';let token=sessionStorage.getItem('scAdminSessionToken')||'';let current='';
+function post(p){return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(p),redirect:'follow'}).then(r=>r.text()).then(t=>{let x;try{x=JSON.parse(t)}catch(e){throw new Error('Invalid server response.')}if(!x||x.success!==true)throw new Error(x&&x.error?x.error:'Request failed.');return x;})}
+function adminLogout(){
+ sessionStorage.removeItem('scAdminSessionToken');
+ token='';
+ current='';
+ window.location.href='account.html';
+}
+const titles={businesses:'Business Registrations',services:'Local Services',events:'Events',representatives:'Representatives',volunteers:'Change Makers',contacts:'Contact Messages'};
+function openSection(s){if(!token)return;current=s;panel.classList.add('active');panelTitle.textContent=titles[s]||'Management';panelContent.className='empty';panelContent.textContent='Loading data...';post({action:'adminData',section:s,token})
+    .then(r=>renderRows(s,Array.isArray(r.data)?r.data:[]))
+    .catch(e=>{
+      const msg=String(e.message||'');
+      if(/unauthor|session|login|token/i.test(msg)){
+        sessionStorage.removeItem('scAdminSessionToken');
+        window.location.href='account.html';
+        return;
+      }
+      panelContent.className='empty';
+      panelContent.textContent=msg||'Unable to load data.';
+    })}
+function refreshSection(){if(current)openSection(current)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function recordId(row){return row.ID||row.Id||row.id||row['Business ID']||row['Registration ID']||''}
+function renderRows(s,rows){if(!rows.length){panelContent.className='empty';panelContent.textContent='No records found.';return}const cols=Object.keys(rows[0]);let html='<div class="tablewrap"><table><thead><tr>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'<th>Actions</th></tr></thead><tbody>';rows.forEach(row=>{const id=recordId(row);html+='<tr>'+cols.map(c=>'<td title="'+esc(row[c])+'">'+esc(row[c])+'</td>').join('')+'<td><div class="actions">'+(id?'<button class="approve" onclick="act(\''+esc(id)+'\',\'approve\')">Approve</button><button class="reject" onclick="act(\''+esc(id)+'\',\'reject\')">Reject</button>':'')+'</div></td></tr>'});html+='</tbody></table></div>';panelContent.className='';panelContent.innerHTML=html}
+function act(id,op){if(!confirm((op==='approve'?'Approve':'Reject')+' this record?'))return;post({action:'adminUpdate',section:current,operation:op,id,token}).then(()=>refreshSection()).catch(e=>alert(e.message))}
+
+function startAdminPanel(){
+ if(!token){
+   window.location.replace('account.html');
+   return;
+ }
+ dashboard.style.display='block';
+}
+document.addEventListener('DOMContentLoaded',startAdminPanel);
+
+</script>
+<script src="../app-i18n.js"></script><script src="../app-i18n-extra.js"></script>
+<script src="../account-admin-i18n.js"></script>
+<script src="../app-account.js"></script>
+</body></html>

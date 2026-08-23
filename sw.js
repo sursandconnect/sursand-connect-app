@@ -1,5 +1,5 @@
 
-const APP_CACHE = 'sursand-connect-app-v7';
+const APP_CACHE = 'sursand-connect-app-v82';
 const DATA_CACHE = 'sursand-connect-data-v1';
 
 const API_BASE =
@@ -12,6 +12,7 @@ const CORE_ASSETS = [
   './app-i18n.js',
   './app-i18n-extra.js',
   './offline-data.js',
+  './app-account.js',
   './p/businesses.html',
   './p/services.html',
   './p/healthcare.html',
@@ -33,7 +34,10 @@ const CORE_ASSETS = [
   './p/notifications.html',
   './p/about.html',
   './p/contact.html',
-  './p/settings.html'
+  './p/settings.html',
+  './p/account.html',
+  './p/admin.html',
+  './account-admin-i18n.js'
 ];
 
 self.addEventListener('install', event => {

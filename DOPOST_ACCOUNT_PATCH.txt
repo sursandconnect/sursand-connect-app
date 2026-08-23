@@ -1,0 +1,33 @@
+ADD THESE FOUR CASES INSIDE YOUR EXISTING doPost(e) switch(action)
+BEFORE the "default:" case.
+
+      /* ==============================
+         USER ACCOUNTS
+         ============================== */
+
+      case "userSignup":
+
+        return userSignupApi(
+          data
+        );
+
+
+      case "userLogin":
+
+        return userLoginApi(
+          data
+        );
+
+
+      case "userMe":
+
+        return userMeApi(
+          data
+        );
+
+
+      case "userLogout":
+
+        return userLogoutApi(
+          data
+        );

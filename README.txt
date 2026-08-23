@@ -1,28 +1,43 @@
-SURSAND CONNECT APP v7
+SURSAND CONNECT APP v8.2
 
-FULL CATEGORY/SERVICE HINDI FIX
+CHANGES
+-------
+1. Header Account Button
+- Login button appears immediately to the right of the Notifications icon.
+- After citizen login/signup it automatically becomes a circular profile icon with the user's initials.
+- Tapping it opens My Account.
+- Admin Panel still remains hidden from public menus.
 
-This version specifically adds Hindi mappings for:
-- Every one of the 50 Business Directory category cards.
-- Every Book Local Services group.
-- Every service card, including Pandit Ji / Purohit.
-- Dynamic business counts and service-provider count labels.
-- Common Events categories.
-- Healthcare categories and buttons.
-- Education categories.
-- Transport labels.
-- Government/Important Places labels.
-- Weather labels.
-- Jobs labels.
-- Charity and Complaint categories.
-- Change Makers interest categories.
-- Common dynamic UI labels rendered after Apps Script data arrives.
+2. Automatic Form Filling
+After citizen login, Sursand Connect stores the returned public profile on the device.
+The app automatically fills matching fields in forms:
+- Name
+- Mobile / Phone / WhatsApp number
+- Email
+- Ward
+- Address
+- Landmark
+It also watches forms/modals added later by page scripts and fills them when they appear.
+It NEVER auto-fills passwords, uploaded files, issue descriptions or other private request-specific fields.
 
-The v5 offline data cache and v6 broader page translation remain active.
+3. Expanded User Profile
+Signup/profile now includes:
+- Name
+- Mobile
+- Email
+- Ward
+- Address
+- Landmark
 
-IMPORTANT:
-Data typed by administrators/users into Google Sheets (proper names, custom descriptions,
-addresses etc.) remains exactly as entered unless Hindi versions of those records exist.
-All fixed app interface/category/service text is now mapped for English/Hindi.
+4. Hero Buttons
+- Shop Now = GREEN
+- Book Services = YELLOW
+- Complaints = RED
+- All three remain equal size with WHITE borders.
 
-Upload ALL files to repository root and replace old files.
+BACKEND
+-------
+AccountAuth.gs.txt has been updated for Address + Landmark.
+Use this v8.2 AccountAuth.gs version (not the older v8/v8.1 copy).
+
+Do not upload the app until the AccountAuth backend setup is completed.

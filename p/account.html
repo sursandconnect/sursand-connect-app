@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e97712">
+<title>Account | Sursand Connect</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<style>
+:root{--s:#f28c28;--sd:#d86f0d;--g:#238b45;--gd:#176b35;--text:#263238;--muted:#667085;--border:#e6ebe7;--bg:#f8fafc}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}body{padding-top:66px;padding-bottom:126px}
+.sc-appbar{position:fixed;top:0;left:0;right:0;height:58px;background:#fff;border-bottom:1px solid #eceff1;box-shadow:0 5px 18px rgba(15,23,42,.08);display:flex;align-items:center;justify-content:space-between;padding:4px 12px;z-index:999999}
+.sc-brand{display:flex;gap:9px;align-items:center;text-decoration:none;color:#263238}.sc-brand img{width:41px;height:41px;object-fit:contain;border-radius:12px}.sc-brand span{display:flex;flex-direction:column;line-height:1.08}.sc-brand b{font-size:14px}.sc-brand small{font-size:9px;color:#667085;margin-top:3px}
+.sc-actions{display:flex;gap:7px}.sc-actions a,.sc-actions button{width:40px;height:40px;border-radius:14px;border:1px solid #f2d1ac;background:linear-gradient(145deg,#fffaf5,#fff0dd);color:#c86508;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;box-shadow:0 5px 14px rgba(200,101,8,.12)}
+.wrap{max-width:780px;margin:18px auto;padding:0 14px 44px}.hero{background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);color:#fff;border-radius:22px;padding:31px 18px;text-align:center;box-shadow:0 14px 32px rgba(90,60,20,.16);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;bottom:-90px;background:rgba(255,255,255,.08)}.hero h1{position:relative;margin:0 0 8px;color:#fff;font-size:28px}.hero p{position:relative;margin:0 auto;max-width:590px;font-size:11px;line-height:1.6;color:rgba(255,255,255,.92)}
+.card{background:#fff;border:1px solid var(--border);border-top:4px solid var(--s);border-radius:19px;padding:16px;margin-top:16px;box-shadow:0 8px 24px rgba(31,55,42,.08)}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;background:#f4f6f5;border-radius:13px;padding:5px;margin-bottom:14px}.tab{border:0;border-radius:10px;padding:10px;font-size:10px;font-weight:900;background:transparent;color:#64748b;cursor:pointer}.tab.active{background:#fff;color:#c86508;box-shadow:0 4px 12px rgba(15,23,42,.08)}
+.form{display:none}.form.active{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:9px;font-weight:800;color:#475569}input,select{width:100%;border:1px solid #dfe5e1;border-radius:11px;padding:11px 12px;font:inherit;font-size:11px;outline:none;background:#fff}input:focus,select:focus{border-color:var(--s);box-shadow:0 0 0 3px rgba(242,140,40,.12)}
+.submit{grid-column:1/-1;border:0;border-radius:12px;padding:12px;background:linear-gradient(135deg,#f7a13f,#f28c28,#e97812);color:#fff;font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 7px 17px rgba(242,140,40,.22)}.secondary{background:#238b45}.status{display:none;margin-top:10px;padding:10px;border-radius:10px;font-size:9px;line-height:1.5}.status.show{display:block}.status.ok{background:#eaf7ed;color:#176b35}.status.error{background:#fff1f1;color:#b91c1c}.status.loading{background:#fff8e8;color:#9a5b00}
+.profile{display:none}.profile.active{display:block}.profile-top{display:flex;align-items:center;gap:12px}.avatar{width:58px;height:58px;border-radius:18px;background:linear-gradient(145deg,#f7a13f,#e97812);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}.profile-name{font-size:16px;font-weight:900}.profile-meta{font-size:9px;color:#667085;margin-top:3px}.profile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}.info{background:#f8faf8;border:1px solid #edf0ee;border-radius:12px;padding:10px}.info small{display:block;font-size:8px;color:#667085}.info b{display:block;font-size:10px;margin-top:3px}.profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.profile-actions button,.profile-actions a{border:0;border-radius:11px;padding:11px;text-decoration:none;text-align:center;font-size:9px;font-weight:900}.logout{background:#fff1f1;color:#b91c1c}.homebtn{background:#eaf7ed;color:#176b35}
+.note{margin-top:13px;padding:11px;background:#fff8e8;border-left:4px solid var(--s);border-radius:10px;color:#667085;font-size:9px;line-height:1.55}
+.sc-bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);display:grid;grid-template-columns:repeat(5,1fr);z-index:999999;box-shadow:0 -5px 18px rgba(15,23,42,.10)}.sc-bottom a{color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;gap:1px}.sc-bottom span{font-size:8px;font-weight:800}
+@media(max-width:600px){.form.active{grid-template-columns:1fr}.field.full,.submit{grid-column:1}}
+</style>
+</head>
+<body>
+<header class="sc-appbar">
+<a href="../" class="sc-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a>
+<div class="sc-actions"><a href="notifications.html">🔔</a><button onclick="history.length>1?history.back():location.href='../'" aria-label="Back"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+</header>
+
+<main class="wrap">
+<section class="hero"><h1>👤 My Account</h1><p>Create a Sursand Connect account or sign in to access your profile and personalised services.</p></section>
+
+<section class="card" id="authCard">
+<div class="tabs"><button class="tab active" id="loginTab" onclick="showTab('login')">🔐 Login</button><button class="tab" id="signupTab" onclick="showTab('signup')">✨ Sign Up</button></div>
+
+<form class="form active" id="loginForm" onsubmit="return loginUser(event)">
+<div class="field full"><label>Mobile Number or Email *</label><input id="loginId" required autocomplete="username" placeholder="Enter mobile number or email"></div>
+<div class="field full"><label>Password *</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></div>
+<button class="submit" id="loginButton" type="submit">🔐 Login</button>
+</form>
+
+<form class="form" id="signupForm" onsubmit="return signupUser(event)">
+<div class="field"><label>Full Name *</label><input id="signupName" required></div>
+<div class="field"><label>Mobile Number *</label><input id="signupMobile" inputmode="tel" required></div>
+<div class="field"><label>Email</label><input id="signupEmail" type="email"></div>
+<div class="field"><label>Address</label><input id="signupAddress"></div>
+<div class="field"><label>Landmark</label><input id="signupLandmark"></div>
+<div class="field"><label>Ward *</label><select id="signupWard" required><option value="">Select Ward</option></select></div>
+<div class="field"><label>Password *</label><input id="signupPassword" type="password" minlength="6" required autocomplete="new-password"></div>
+<div class="field"><label>Confirm Password *</label><input id="signupConfirm" type="password" minlength="6" required autocomplete="new-password"></div>
+<button class="submit secondary" id="signupButton" type="submit">✨ Create Account</button>
+</form>
+<div class="status" id="authStatus"></div>
+<div class="note"><strong>Account privacy:</strong> Passwords are not stored in this app. Account authentication is handled by the Sursand Connect Apps Script backend. Your login session token is stored only on this device.</div>
+</section>
+
+<section class="card profile" id="profileCard">
+<div class="profile-top"><div class="avatar" id="profileAvatar">SC</div><div><div class="profile-name" id="profileName">User</div><div class="profile-meta" id="profileStatus">Sursand Connect Account</div></div></div>
+<div class="profile-grid">
+<div class="info"><small>Mobile</small><b id="profileMobile">—</b></div>
+<div class="info"><small>Email</small><b id="profileEmail">—</b></div>
+<div class="info"><small>Ward</small><b id="profileWard">—</b></div>
+<div class="info"><small>Address</small><b id="profileAddress">—</b></div>
+<div class="info"><small>Landmark</small><b id="profileLandmark">—</b></div>
+<div class="info"><small>Member Since</small><b id="profileCreated">—</b></div>
+</div>
+<div class="profile-actions"><a href="../" class="homebtn">⌂ Home</a><button class="logout" onclick="logoutUser()">Logout</button></div>
+</section>
+</main>
+
+<nav class="sc-bottom"><a href="../">⌂<span>Home</span></a><a href="businesses.html">🏪<span>Shop</span></a><a href="services.html">🛠️<span>Services</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
+
+<script>
+const SC_ACCOUNT_API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+const TOKEN_KEY='scUserSessionToken';
+for(let i=1;i<=18;i++){const o=document.createElement('option');o.value=String(i);o.textContent='Ward '+i;signupWard.appendChild(o)}
+
+function post(payload){
+ return fetch(SC_ACCOUNT_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow'})
+ .then(r=>r.text()).then(t=>{let x;try{x=JSON.parse(t)}catch(e){throw new Error('Invalid server response.')}if(!x||x.success!==true)throw new Error(x&&x.error?x.error:'Request failed.');return x;});
+}
+function status(text,type){authStatus.className='status show '+type;authStatus.textContent=text}
+function showTab(tab){loginTab.classList.toggle('active',tab==='login');signupTab.classList.toggle('active',tab==='signup');loginForm.classList.toggle('active',tab==='login');signupForm.classList.toggle('active',tab==='signup');authStatus.className='status'}
+function loginUser(e){
+ e.preventDefault();
+ const login=loginId.value.trim();
+ const password=loginPassword.value;
+ status('Checking account...','loading');
+ loginButton.disabled=true;
+
+ /* First check whether these are authorised administrator credentials.
+    Admin access is never shown as a public menu option. */
+ post({action:'adminLogin',user:login,password:password})
+ .then(r=>{
+   const adminToken=r.data&&r.data.token?r.data.token:'';
+   if(!adminToken) throw new Error('NO_ADMIN_TOKEN');
+   sessionStorage.setItem('scAdminSessionToken',adminToken);
+   loginPassword.value='';
+   window.location.href='admin.html';
+ })
+ .catch(()=>{
+   /* Not an admin login: continue with normal citizen account login. */
+   return post({action:'userLogin',login:login,password:password})
+   .then(r=>{
+     localStorage.setItem(TOKEN_KEY,r.data.token);
+     localStorage.setItem('scUserProfile',JSON.stringify(r.data.user||{}));
+     showProfile(r.data.user);
+     if(window.SCAccountUI)window.SCAccountUI.refresh();
+   });
+ })
+ .catch(e=>status(e.message||'Invalid login details.','error'))
+ .finally(()=>loginButton.disabled=false);
+
+ return false;
+}
+function signupUser(e){e.preventDefault();if(signupPassword.value!==signupConfirm.value){status('Passwords do not match.','error');return false}status('Creating account...','loading');signupButton.disabled=true;post({action:'userSignup',name:signupName.value.trim(),mobile:signupMobile.value.trim(),email:signupEmail.value.trim(),ward:signupWard.value,address:signupAddress.value.trim(),landmark:signupLandmark.value.trim(),password:signupPassword.value}).then(r=>{localStorage.setItem(TOKEN_KEY,r.data.token);localStorage.setItem('scUserProfile',JSON.stringify(r.data.user||{}));showProfile(r.data.user);if(window.SCAccountUI)window.SCAccountUI.refresh();}).catch(e=>status(e.message,'error')).finally(()=>signupButton.disabled=false);return false}
+function showProfile(u){authCard.style.display='none';profileCard.classList.add('active');profileName.textContent=u.name||'Sursand Connect User';profileMobile.textContent=u.mobile||'—';profileEmail.textContent=u.email||'—';profileWard.textContent=u.ward?('Ward '+u.ward):'—';profileAddress.textContent=u.address||'—';profileLandmark.textContent=u.landmark||'—';profileCreated.textContent=u.createdAt||'—';localStorage.setItem('scUserProfile',JSON.stringify(u||{}));profileAvatar.textContent=(u.name||'SC').split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();}
+function logoutUser(){const token=localStorage.getItem(TOKEN_KEY)||'';localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('scUserProfile');if(token)post({action:'userLogout',token}).catch(()=>{});location.reload()}
+function checkSession(){const token=localStorage.getItem(TOKEN_KEY)||'';if(!token)return;post({action:'userMe',token}).then(r=>{localStorage.setItem('scUserProfile',JSON.stringify(r.data||{}));showProfile(r.data);if(window.SCAccountUI)window.SCAccountUI.refresh();}).catch(()=>{localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('scUserProfile')})}
+document.addEventListener('DOMContentLoaded',checkSession);
+</script>
+<script src="../app-i18n.js"></script><script src="../app-i18n-extra.js"></script><script src="../offline-data.js"></script>
+<script src="../account-admin-i18n.js"></script>
+<script src="../app-account.js"></script>
+</body>
+</html>
