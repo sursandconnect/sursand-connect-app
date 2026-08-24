@@ -1,5 +1,5 @@
 
-const APP_CACHE = 'sursand-connect-app-v105';
+const APP_CACHE = 'sursand-connect-app-v107';
 const DATA_CACHE = 'sursand-connect-data-v1';
 
 const API_BASE =
