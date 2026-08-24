@@ -1528,6 +1528,44 @@ main{padding-bottom:54px!important}
     </article>
 
 
+    <!-- WARD 19 -->
+
+    <article class="sc-cc-card" id="scCcWard19">
+
+      <div class="sc-cc-card-top">
+
+        <div class="sc-cc-number">
+          W19
+        </div>
+
+        <div class="sc-cc-card-title">
+
+          <h3>Ward 19</h3>
+
+          <span>City Connect S19</span>
+
+        </div>
+
+      </div>
+
+      <div class="sc-cc-description">
+        Join the City Connect WhatsApp group for Ward 19.
+      </div>
+
+      <a
+        class="sc-cc-join"
+        id="scCcWard19Link"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        💬 Join Ward 19 Group
+
+      </a>
+
+    </article>
+
+
   </div>
 
 
@@ -1550,6 +1588,83 @@ main{padding-bottom:54px!important}
 </div></main>
 <nav class="sc-bottom"><a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a><a href="emergency.html">🚨<span>Emergency</span></a><a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span>City Connect</span></a><a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a><a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a></nav>
 <div class="sc-menu-sheet" id="scMenuSheet" onclick="if(event.target===this)scCloseMenu()"><div class="sc-menu-panel"><div class="sc-menu-handle"></div><div class="sc-menu-head"><h3>☰ App Menu & Settings</h3><button class="sc-menu-close" onclick="scCloseMenu()">×</button></div><div class="sc-menu-grid"><a class="sc-menu-card" href="settings.html"><span>⚙️</span>All Settings</a><a class="sc-menu-card" href="notifications.html"><span>🔔</span>Notifications</a><a class="sc-menu-card" href="about.html"><span>ℹ️</span>About Sursand Connect</a><a class="sc-menu-card" href="contact.html"><span>✉️</span>Contact Us</a><button class="sc-menu-card sc-menu-full" onclick="scShareApp()"><span>↗️</span>Share Sursand Connect App</button></div><div class="sc-setting-row"><label>Language</label><select id="scLanguageSelect" onchange="scSetLanguage(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select></div><div class="sc-setting-row"><label>Theme</label><select id="scThemeSelect" onchange="scSetTheme(this.value)"><option value="light">Light</option><option value="dark">Dark</option></select></div><button class="sc-login-btn" onclick="scAccountInfo()">👤 Login / Sign Up</button></div></div>
+
+<script>
+(function(){
+  const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+
+  function getLink(item){
+    return String(
+      (item && (
+        item["WhatsApp Group Link"] ||
+        item.URL ||
+        item.url ||
+        item.Link ||
+        item.link
+      )) || ''
+    ).trim();
+  }
+
+  function wardNo(item){
+    const raw=String(
+      (item && (
+        item.Ward ||
+        item.ward ||
+        item["Ward Number"] ||
+        item.ID ||
+        item.id ||
+        ''
+      )) || ''
+    );
+    const m=raw.match(/(\d{1,2})/);
+    return m ? Number(m[1]) : 0;
+  }
+
+  async function refreshWard19(){
+    try{
+      const response=await fetch(API+'?action=all&_='+Date.now(),{cache:'no-store'});
+      const json=await response.json();
+      if(!json || json.success!==true)return;
+
+      const data=json.data||{};
+      const groups=
+        data.cityConnect ||
+        data.wardGroups ||
+        data.whatsappCommunity ||
+        [];
+
+      const row=(Array.isArray(groups)?groups:[]).find(function(item){
+        return wardNo(item)===19;
+      });
+
+      const link=getLink(row);
+      const a=document.getElementById('scCcWard19Link');
+      if(!a)return;
+
+      if(link){
+        a.href=link;
+        a.style.opacity='1';
+        a.style.pointerEvents='auto';
+        a.removeAttribute('aria-disabled');
+      }else{
+        a.href='javascript:void(0)';
+        a.style.opacity='.55';
+        a.style.pointerEvents='none';
+        a.setAttribute('aria-disabled','true');
+      }
+    }catch(e){}
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',refreshWard19);
+  }else{
+    refreshWard19();
+  }
+
+  window.addEventListener('online',refreshWard19);
+})();
+</script>
+
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script><script src="../offline-data.js"></script>
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
