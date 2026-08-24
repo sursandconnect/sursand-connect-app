@@ -23,6 +23,15 @@
  function key(o,type){
    return SEEN+type+':'+first(o,['ID','Id','id','Title','Event Title','Notification Title','Name'])+':'+stamp(o);
  }
+ function hasPopupContent(item,type){
+   if(!item)return false;
+   const title=first(item,['Title','Event Title','Notification Title','Ad Title','Name']);
+   const desc=first(item,['Description','Details','Message','Content','Summary','Ad Description']);
+   const image=first(item,['Image URL','Image','Event Image','Ad Image','Photo URL','Photo']);
+   const link=relatedUrl(item,type);
+   return !!(title||desc||image||link);
+ }
+
  function closePopup(){
    const x=document.getElementById('scCenterPopup');
    if(x)x.remove();
@@ -38,6 +47,7 @@
  }
 
  function showPopup(item,type,autoClose){
+   if(!hasPopupContent(item,type))return;
    closePopup();
 
    const isWelcome=type==='welcome';
@@ -107,6 +117,7 @@
      // 1) Welcome banner — once per published welcome.
      const welcomes=(Array.isArray(d.notifications)?d.notifications:[])
        .filter(n=>String(first(n,['Category','Notification Type','Type'])).toLowerCase()==='change maker welcome')
+       .filter(n=>hasPopupContent(n,'welcome'))
        .sort((a,b)=>stamp(b)-stamp(a));
      const unseenWelcome=welcomes.find(n=>!localStorage.getItem(key(n,'welcome')));
      if(unseenWelcome){
@@ -116,8 +127,8 @@
      }
 
      // 2) Event / Announcement — latest unseen. Does NOT auto-close.
-     const events=(Array.isArray(d.events)?d.events:[]).map(x=>({x,type:'event'}));
-     const announcements=(Array.isArray(d.announcements)?d.announcements:[]).map(x=>({x,type:'announcement'}));
+     const events=(Array.isArray(d.events)?d.events:[]).filter(x=>hasPopupContent(x,'event')).map(x=>({x,type:'event'}));
+     const announcements=(Array.isArray(d.announcements)?d.announcements:[]).filter(x=>hasPopupContent(x,'announcement')).map(x=>({x,type:'announcement'}));
      const updates=events.concat(announcements).sort((a,b)=>stamp(b.x)-stamp(a.x));
      const unseenUpdate=updates.find(u=>!localStorage.getItem(key(u.x,u.type)));
      if(unseenUpdate){
@@ -131,7 +142,8 @@
        .filter(n=>{
          const cat=String(first(n,['Category','Notification Type','Type'])).toLowerCase();
          return cat!=='change maker welcome' &&
-           !['no','false','inactive','disabled','rejected'].includes(String(first(n,['Active','Status'])||'active').toLowerCase());
+           !['no','false','inactive','disabled','rejected'].includes(String(first(n,['Active','Status'])||'active').toLowerCase()) &&
+           hasPopupContent(n,'notification');
        })
        .sort((a,b)=>stamp(b)-stamp(a));
      const unseenNotice=notices.find(n=>!localStorage.getItem(key(n,'notification')));
@@ -143,7 +155,8 @@
 
      // 4) Advertisement — rotate one at a time between visits/reloads.
      const ads=(Array.isArray(d.localAds)?d.localAds:[])
-       .filter(a=>!['no','false','inactive','disabled','rejected'].includes(String(first(a,['Active','Status'])||'yes').toLowerCase()));
+       .filter(a=>!['no','false','inactive','disabled','rejected'].includes(String(first(a,['Active','Status'])||'yes').toLowerCase()))
+       .filter(a=>hasPopupContent(a,'ad'));
      if(ads.length){
        let i=Number(localStorage.getItem(AD_INDEX)||0);
        if(!Number.isFinite(i)||i<0)i=0;
