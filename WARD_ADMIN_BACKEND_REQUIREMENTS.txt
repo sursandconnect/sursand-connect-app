@@ -1,0 +1,17 @@
+WARD ADMIN BACKEND — DEFERRED UNTIL FINAL APPS SCRIPT UPDATE
+
+Do NOT change Apps Script for this package yet if you want to consolidate backend changes later.
+
+Required final backend rules:
+1. Every Staff Admin must have exactly one assigned Ward (1-18).
+2. staffAdminLogin returns the assigned ward in the admin profile.
+3. staffAdminData must filter Business/Service requests and Healthcare/Education/Event/Announcement data to the logged-in admin's ward.
+4. staffAdminRequestAction must verify the request belongs to that admin's ward before approve/reject.
+5. staffAdminSave must force the logged-in admin's ward on every new record and reject edits to records belonging to another ward.
+6. Staff Admin can never change the Ward field to another ward.
+7. Super Admin remains unrestricted across all wards.
+8. Events/Announcements created by Ward Admin should carry Ward. Super Admin may create town-wide records with Ward = All Sursand.
+9. Healthcare and Education records created/edited by Ward Admin must belong to their assigned ward.
+10. Backend enforcement is mandatory; frontend filtering alone is not a security boundary.
+
+The v10.2 frontend already reads the Staff Admin ward and visually limits displayed/submitted data, ready for the final backend enforcement.

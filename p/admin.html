@@ -17,7 +17,7 @@
 </style></head><body>
 <header class="bar"><a class="brand" href="../"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Staff Administration</small></span></a><button class="back" onclick="location.href='../'">‹</button></header>
 <main class="wrap">
-<section class="hero"><h1>🛡️ Admin</h1><p>Approve business and service requests and manage events, announcements, healthcare and education content.</p></section>
+<section class="hero"><h1>🛡️ Ward Admin</h1><p id="wardAdminDesc">Manage permitted Sursand Connect content for your assigned ward.</p></section>
 <div class="top"><h2 id="adminName">Admin</h2><div class="actions"><button class="small orange" onclick="passBox.classList.toggle('active')">🔑 Password</button><button class="small red" onclick="logoutAdmin()">Logout</button></div></div>
 <div class="passbox" id="passBox"><div class="pwgrid"><div class="pw"><input id="curPw" type="password" placeholder="Current password"><button onclick="togglePw('curPw',this)">Show</button></div><div class="pw"><input id="newPw" type="password" placeholder="New password"><button onclick="togglePw('newPw',this)">Show</button></div><div class="pw"><input id="confirmPw" type="password" placeholder="Confirm password"><button onclick="togglePw('confirmPw',this)">Show</button></div></div><button class="small green" style="margin-top:8px" onclick="changePassword()">Update Password</button></div>
 <div class="modules" id="modules">
@@ -31,13 +31,32 @@
 <div class="modal" id="editorModal"><div class="dialog"><div class="dialoghead"><h3 id="editorTitle">Add Record</h3><button class="close" onclick="editorModal.classList.remove('active')">×</button></div><form id="editorForm" class="editor" onsubmit="return saveRecord(event)"></form></div></div>
 <script>
 const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec',TOKEN_KEY='scAdminSessionToken',EXP_KEY='scAdminSessionExpiresAt';
-let token=localStorage.getItem(TOKEN_KEY)||'',section='',rows=[],editing=null;
+let token=localStorage.getItem(TOKEN_KEY)||'',section='',rows=[],editing=null,adminWard='';
 function post(p){return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(p)}).then(r=>r.text()).then(t=>{let x;try{x=JSON.parse(t)}catch(e){throw Error('Invalid server response.')}if(!x||x.success!==true)throw Error(x&&x.error?x.error:'Request failed.');return x})}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function guard(){const exp=Number(localStorage.getItem(EXP_KEY)||0);if(!token||(exp&&Date.now()>exp)||localStorage.getItem('scAdminRole')!=='staff'){localStorage.removeItem(TOKEN_KEY);location.replace('account.html');return false}return true}
-function init(){if(!guard())return;try{const p=JSON.parse(localStorage.getItem('scAdminProfile')||'{}');adminName.textContent=p.name||'Admin'}catch(e){}}
+function init(){
+ if(!guard())return;
+ try{
+   const p=JSON.parse(localStorage.getItem('scAdminProfile')||'{}');
+   adminName.textContent=p.name||'Admin';
+   adminWard=String(p.ward||'').replace(/^Ward\s*/i,'').trim();
+   wardAdminDesc.textContent=adminWard
+     ? 'Ward '+adminWard+' administration — requests and content for this ward only.'
+     : 'Manage permitted Sursand Connect content for your assigned ward.';
+ }catch(e){}
+}
 function showModules(){panel.classList.remove('active');modules.style.display='grid';section=''}
-function openSection(s){if(!guard())return;section=s;modules.style.display='none';panel.classList.add('active');panelTitle.textContent={requests:'Business / Service Requests',events:'Events & Announcements',healthcare:'Healthcare',education:'Education'}[s];addBtn.style.display=s==='requests'?'none':'inline-block';panelContent.className='empty';panelContent.textContent='Loading...';post({action:'staffAdminData',section:s,token}).then(r=>{rows=Array.isArray(r.data)?r.data:[];render()}).catch(err=>panelContent.textContent=err.message)}
+function openSection(s){if(!guard())return;section=s;modules.style.display='none';panel.classList.add('active');panelTitle.textContent={requests:'Business / Service Requests',events:'Events & Announcements',healthcare:'Healthcare',education:'Education'}[s];addBtn.style.display=s==='requests'?'none':'inline-block';panelContent.className='empty';panelContent.textContent='Loading...';post({action:'staffAdminData',section:s,token}).then(r=>{
+ rows=Array.isArray(r.data)?r.data:[];
+ if(adminWard){
+   rows=rows.filter(function(x){
+     const w=String(x.Ward||x['Ward Number']||x.ward||'').replace(/^Ward\s*/i,'').trim();
+     return !w || w===adminWard;
+   });
+ }
+ render()
+}).catch(err=>panelContent.textContent=err.message)}
 function render(){if(!rows.length){panelContent.className='empty';panelContent.textContent='No records found.';return}const cols=[...new Set(rows.flatMap(r=>Object.keys(r)))].filter(c=>!String(c).startsWith('_'));let h='<div class="tablewrap"><table><thead><tr>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'<th>Actions</th></tr></thead><tbody>';rows.forEach((r,i)=>{h+='<tr>'+cols.map(c=>'<td title="'+esc(r[c])+'">'+esc(r[c])+'</td>').join('')+'<td><div class="rowactions">'+(section==='requests'?'<button class="green" onclick="requestAction('+i+',\'approve\')">Approve</button><button class="red" onclick="requestAction('+i+',\'reject\')">Reject</button>':'<button class="green" onclick="openEditor('+i+')">Edit</button>')+'</div></td></tr>'});h+='</tbody></table></div>';panelContent.className='';panelContent.innerHTML=h}
 async function requestAction(i,op){if(!confirm((op==='approve'?'Approve':'Reject')+' this request?'))return;const r=rows[i];post({action:'staffAdminRequestAction',token,operation:op,requestType:r._requestType,id:r.ID}).then(()=>openSection('requests')).catch(e=>alert(e.message))}
 const schemas={
@@ -47,7 +66,12 @@ const schemas={
 };
 function openEditor(i){editing=i===null?null:rows[i];const schema=schemas[section]||[];editorTitle.textContent=editing?'Edit Record':'Add Record';editorForm.innerHTML=schema.map(([k,t])=>{const v=editing?(editing[k]||''):'';if(t==='textarea')return `<div class="field full"><label>${k}</label><textarea name="${k}">${esc(v)}</textarea></div>`;if(t.startsWith('select:'))return `<div class="field"><label>${k}</label><select name="${k}">${t.slice(7).split('|').map(o=>`<option ${v===o?'selected':''}>${o}</option>`).join('')}</select></div>`;if(t==='file')return `<div class="field full"><label>${k}</label><input name="${k}" type="file" accept="image/*" capture="environment"></div>`;return `<div class="field"><label>${k}</label><input name="${k}" type="${t}" value="${esc(v)}"></div>`}).join('')+'<button class="save" type="submit">'+(editing?'Save Changes':'Add Record')+'</button>';editorModal.classList.add('active')}
 function fileData(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
-async function saveRecord(e){e.preventDefault();if(!confirm(editing?'Save these changes?':'Add this content?'))return false;const fd=new FormData(editorForm),data={};for(const [k,v] of fd.entries()){if(v instanceof File){if(v.size){data.imageBase64=await fileData(v);data.imageName=v.name;data.imageMimeType=v.type}}else data[k]=v}post({action:'staffAdminSave',token,section,operation:editing?'edit':'add',id:editing?(editing.ID||''):'',data}).then(()=>{editorModal.classList.remove('active');openSection(section)}).catch(e=>alert(e.message));return false}
+async function saveRecord(e){e.preventDefault();if(!confirm(editing?'Save these changes?':'Add this content?'))return false;const fd=new FormData(editorForm),data={};for(const [k,v] of fd.entries()){if(v instanceof File){if(v.size){data.imageBase64=await fileData(v);data.imageName=v.name;data.imageMimeType=v.type}}else data[k]=v}
+ if(adminWard){
+   if(!data.Ward)data.Ward='Ward '+adminWard;
+   if(!data['Ward Number'])data['Ward Number']='Ward '+adminWard;
+ }
+ post({action:'staffAdminSave',token,section,operation:editing?'edit':'add',id:editing?(editing.ID||''):'',data}).then(()=>{editorModal.classList.remove('active');openSection(section)}).catch(e=>alert(e.message));return false}
 function togglePw(id,b){const e=document.getElementById(id),show=e.type==='password';e.type=show?'text':'password';b.textContent=show?'Hide':'Show'}
 function changePassword(){if(!curPw.value||!newPw.value||!confirmPw.value){alert('Complete all password fields.');return}if(newPw.value!==confirmPw.value){alert('New passwords do not match.');return}if(!confirm('Change your admin password?'))return;post({action:'staffAdminChangePassword',token,currentPassword:curPw.value,newPassword:newPw.value}).then(()=>{curPw.value=newPw.value=confirmPw.value='';passBox.classList.remove('active');alert('Password updated.')}).catch(e=>alert(e.message))}
 function logoutAdmin(){localStorage.removeItem(TOKEN_KEY);localStorage.removeItem(EXP_KEY);localStorage.removeItem('scAdminRole');localStorage.removeItem('scAdminProfile');location.href='account.html'}
