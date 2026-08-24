@@ -1,11 +1,25 @@
-SURSAND CONNECT APP v10.3
+SURSAND CONNECT APP v10.5
 
-Changes:
-- "Become a Change Maker" card changed from saffron to green.
-- Area of Interest in Join Community is now multi-select using checkboxes.
-- User can select multiple interests; they are submitted together separated by " | ".
-- Home popup is created only when there is real content (title, description, image, or related link).
-- Blank advertisement/update/notification rows no longer generate an empty popup.
-- Existing popup timing rules from v10.2 remain unchanged.
+BUSINESS / SERVICE
+- Add Business / Service page first shows only two large buttons:
+  Add Shop / Business and Add Service.
+- Business keeps the detailed shop/business form.
+- Service uses a separate limited form with ONLY:
+  Service Provider Name, Service Category, Mobile, WhatsApp,
+  Service Description, Experience dropdown, mandatory Profile Image.
+- Service form has no Business Category, Ward, Address/Location, Business Name,
+  Social/Website, WhatsApp Catalogue, Google Maps, or other business-only fields.
 
-No Apps Script change is required for these frontend changes.
+CLEANUP
+- Rebuilt the registration page cleanly to remove raw TXT/code-like content below the form.
+- Removed visible development placeholder/dummy wording where found.
+- Removed privacy-description wording from the Login page.
+
+NEWS
+- The homepage no longer stays on "Loading latest update".
+- Because Facebook does not provide a reliable direct public feed for a static GitHub Pages app,
+  the news area falls back to a clean Sursand Today card linking to:
+  https://www.facebook.com/sursandtoday
+- This avoids an endless loading state while keeping the correct news source available.
+
+No Apps Script change is required for this frontend update.
