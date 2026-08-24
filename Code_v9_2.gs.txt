@@ -5877,11 +5877,11 @@ function adminSaveCityConnect(
 
     if (
       number < 1 ||
-      number > 19
+      number > 18
     ) {
 
       throw new Error(
-        "Select Ward 1 to Ward 19."
+        "Select Ward 1 to Ward 18."
       );
 
     }

@@ -15,18 +15,7 @@
 .formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:9px;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5e1;border-radius:10px;padding:10px;background:#fff;color:#263238;font:inherit;font-size:10px}.field textarea{min-height:74px;resize:vertical}.submit{grid-column:1/-1;border:0;border-radius:11px;padding:12px;background:linear-gradient(145deg,#34a853,#238b45);color:#fff;font-size:10px;font-weight:900}.status{grid-column:1/-1;font-size:9px;line-height:1.45;min-height:14px}.status.ok{color:#176b35}.status.err{color:#b91c1c}
 .bottom{position:fixed;bottom:0;left:0;right:0;height:64px;background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35);display:grid;grid-template-columns:repeat(5,1fr);z-index:99}.bottom a{color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px}.bottom span{font-size:8px;font-weight:800}
 @media(max-width:600px){.formgrid{grid-template-columns:1fr}.field.full,.submit{grid-column:1}.choice{grid-template-columns:1fr}}
-</style>
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
-</head><body>
+</style></head><body>
 <header class="bar"><a class="brand" href="../"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Add Business / Service</small></span></a><button class="back" onclick="history.length>1?history.back():location.href='../'">‹</button></header>
 <main class="wrap">
 <section class="hero"><h1>Add Business / Service</h1><p>Choose what you want to register.</p></section>
@@ -44,7 +33,7 @@
     <div class="field"><label>Owner / Contact Person</label><input id="bOwner"></div>
     <div class="field"><label>Mobile Number *</label><input id="bPhone" inputmode="numeric" required></div>
     <div class="field"><label>WhatsApp Number</label><input id="bWhatsapp" inputmode="numeric"></div>
-    <div class="field"><label>Ward</label><select id="bWard"><option value="">Select Ward</option><option>Ward 1</option><option>Ward 2</option><option>Ward 3</option><option>Ward 4</option><option>Ward 5</option><option>Ward 6</option><option>Ward 7</option><option>Ward 8</option><option>Ward 9</option><option>Ward 10</option><option>Ward 11</option><option>Ward 12</option><option>Ward 13</option><option>Ward 14</option><option>Ward 15</option><option>Ward 16</option><option>Ward 17</option><option>Ward 18</option><option>Ward 19</option></select></div>
+    <div class="field"><label>Ward</label><select id="bWard"><option value="">Select Ward</option><option>Ward 1</option><option>Ward 2</option><option>Ward 3</option><option>Ward 4</option><option>Ward 5</option><option>Ward 6</option><option>Ward 7</option><option>Ward 8</option><option>Ward 9</option><option>Ward 10</option><option>Ward 11</option><option>Ward 12</option><option>Ward 13</option><option>Ward 14</option><option>Ward 15</option><option>Ward 16</option><option>Ward 17</option><option>Ward 18</option></select></div>
     <div class="field full"><label>Address</label><textarea id="bAddress"></textarea></div>
     <div class="field full"><label>Business Description</label><textarea id="bDescription"></textarea></div>
     <div class="field"><label>WhatsApp Catalogue Link</label><input id="bCatalogue"></div>
@@ -70,7 +59,7 @@
   </form>
 </section>
 </main>
-<nav class="bottom"><a href="../">⌂<span>Home</span></a><a href="emergency.html">🚨<span>Emergency</span></a><a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span>City Connect</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
+<nav class="bottom"><a href="../">⌂<span>Home</span></a><a href="businesses.html">🏪<span>Shop</span></a><a href="services.html">🛠️<span>Services</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
 <script>
 const API="https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
 function fileData(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}

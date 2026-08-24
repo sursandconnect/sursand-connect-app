@@ -22,17 +22,6 @@
 /* v10.4 green bottom */
 .sc-bottom{background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35)!important}
 </style>
-
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
 </head>
 <body>
 <header class="sc-appbar">
@@ -46,8 +35,52 @@
 <h1><span data-k="hero1">Sursand,</span><br><span data-k="hero2">Connected in One Place.</span></h1>
 <p data-k="heroDesc">Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.</p>
 <div class="hero-actions">
-<a class="hero-btn hero-shop" href="p/emergency.html" data-k="shopNow">🚨<span>Emergency</span></a>
-<a href="p/city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span>City Connect</span></a>
+<a class="hero-btn hero-shop" href="p/businesses.html" data-k="shopNow">🛍️ Shop Now</a>
+<a class="hero-btn hero-service" href="p/services.html" data-k="bookServices">🛠️ Book Services</a>
+<a class="hero-btn hero-complaint" href="p/complaints.html" data-k="complaints">📣 Complaints</a>
+</div>
+</section>
+
+<form class="search" onsubmit="return doSearch(event)"><input id="homeSearch" data-ph="search" placeholder="Search businesses, services, events..."><button>🔍</button></form>
+
+<section>
+<h2 class="section-title" data-k="quickTitle">Quick Services</h2>
+<p class="section-sub" data-k="quickSub">Useful services for everyday life in Sursand</p>
+<div class="quick">
+<a class="qcard q1" href="p/change-makers.html"><div class="qicon">✨</div><div class="qtext"><b data-k="join">Join Community</b><span data-k="joinD">Become a Change Maker for Sursand</span></div></a>
+<a class="qcard q2" href="p/business-registration.html"><div class="qicon">➕</div><div class="qtext"><b data-k="addBiz">Add Business / Service</b><span data-k="addBizD">Register a local business or service</span></div></a>
+<a class="qcard q3" href="p/charity.html"><div class="qicon">❤️</div><div class="qtext"><b data-k="charity">Charity</b><span data-k="charityD">Donate money or request goods pickup</span></div></a>
+<a class="qcard q4" href="p/businesses.html"><div class="qicon">🏪</div><div class="qtext"><b data-k="businesses">Businesses</b><span data-k="businessesD">Find local shops and businesses</span></div></a>
+<a class="qcard q5" href="p/events.html"><div class="qicon">📅</div><div class="qtext"><b data-k="events">Events</b><span data-k="eventsD">Local events, notices and announcements</span></div></a>
+<a class="qcard q6" href="p/emergency.html"><div class="qicon">🚨</div><div class="qtext"><b data-k="emergency">Emergency</b><span data-k="emergencyD">Important emergency helplines</span></div></a>
+</div>
+</section>
+
+<section class="small-grid">
+<a class="small-card" href="p/healthcare.html"><div class="sicon">🏥</div><div><b data-k="health">Healthcare</b><span data-k="healthD">Doctors, labs & medicine</span></div></a>
+<a class="small-card" href="p/education.html"><div class="sicon">🎓</div><div><b data-k="education">Education</b><span data-k="educationD">Schools & learning</span></div></a>
+<a class="small-card" href="p/representatives.html"><div class="sicon">👥</div><div><b data-k="representatives">Representatives</b><span data-k="repD">Chairman, Vice Chairman & wards</span></div></a>
+<a class="small-card" href="p/important-places.html"><div class="sicon">📍</div><div><b data-k="places">Important Places</b><span data-k="placesD">Important local locations</span></div></a>
+<a class="small-card" href="p/transport.html"><div class="sicon">🚌</div><div><b data-k="transport">Transport</b><span data-k="transportD">Routes, timings & fares</span></div></a>
+<a class="small-card" href="p/government-offices.html"><div class="sicon">🏛️</div><div><b data-k="govt">Government Offices</b><span data-k="govtD">Public offices & directions</span></div></a>
+<a class="small-card" href="p/useful-websites.html"><div class="sicon">🌐</div><div><b data-k="websites">Useful Websites</b><span data-k="websitesD">Government & useful links</span></div></a>
+<a class="small-card" href="p/jobs.html"><div class="sicon">💼</div><div><b data-k="jobs">Jobs</b><span data-k="jobsD">Local & employment updates</span></div></a>
+<a class="small-card" href="p/weather.html"><div class="sicon">🌦️</div><div><b data-k="weather">Weather & Forecast</b><span data-k="weatherD">Weather and local information</span></div></a>
+</section>
+
+<section class="news">
+<div class="news-shell">
+ <div class="news-head"><h3 data-k="news">📰 News & Updates</h3><a class="fb-chip" href="https://www.facebook.com/sursandtoday" target="_blank" rel="noopener" style="text-decoration:none">Facebook • Sursand Today</a></div>
+ <div id="slider" class="slider"><div class="slide active"><b data-k="loading">Latest Sursand Updates</b><p data-k="newsFallback">Local news and community updates will appear here.</p></div></div>
+ <div id="dots" class="dots"></div>
+</div>
+</section>
+</main>
+
+<nav class="sc-bottom">
+<a href="./">⌂<span data-k="home">Home</span></a>
+<a href="p/businesses.html">🏪<span data-k="shop">Shop</span></a>
+<a href="p/services.html">🛠️<span data-k="services">Services</span></a>
 <a href="p/events.html">📅<span data-k="events">Events</span></a>
 <a href="javascript:void(0)" onclick="openMenu()">☰<span data-k="menu">Menu</span></a>
 </nav>
