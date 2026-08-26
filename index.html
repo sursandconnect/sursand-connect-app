@@ -21,20 +21,6 @@
 @media(min-width:900px){body{padding-bottom:20px}.sc-bottom{display:none}}
 /* v10.4 green bottom */
 .sc-bottom{background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35)!important}
-
-.sc-facebook-feed{padding:10px;background:#fff;text-align:center}
-.sc-fb-fallback{padding:8px 0 2px}
-.sc-fb-fallback a{font-size:9px;font-weight:800;color:#1877f2;text-decoration:none}
-</style>
-<style>
-.sc-wa-nav-icon{
- width:22px;height:22px;border-radius:50%;
- background:#25D366;color:#fff;
- display:flex;align-items:center;justify-content:center;
- font-size:12px;font-weight:900;line-height:1;
- box-shadow:0 2px 5px rgba(0,0,0,.18);
- margin-bottom:1px;
-}
 </style>
 </head>
 <body>
@@ -82,18 +68,18 @@
 <a class="small-card" href="p/weather.html"><div class="sicon">🌦️</div><div><b data-k="weather">Weather & Forecast</b><span data-k="weatherD">Weather and local information</span></div></a>
 </section>
 
-<section class="news" id="professionalNews">
-<div class="section-title"><div><h2>📰 News &amp; Updates</h2><p>Latest updates from Sursand</p></div></div>
-<div class="sc-news-slider" id="scNewsSlider"><div class="sc-news-loading">Loading latest news...</div></div>
+<section class="news" id="scNewsSection">
+<div class="section-title"><div><h2 data-k="news">📰 News &amp; Updates</h2><p>Latest local news from Sursand</p></div></div>
+<div id="scNewsSlider" class="sc-news-slider"><div class="sc-news-loading">Loading latest news...</div></div>
 </section>
 </main>
 
 <nav class="sc-bottom">
 <a href="./">⌂<span data-k="home">Home</span></a>
-<a href="p/emergency.html">🚨<span data-k="emergencyNav">Emergency</span></a>
-<a href="p/city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-k="cityConnectNav">City Connect</span></a>
+<a href="p/businesses.html">🏪<span data-k="shop">Shop</span></a>
+<a href="p/services.html">🛠️<span data-k="services">Services</span></a>
 <a href="p/events.html">📅<span data-k="events">Events</span></a>
-<a href="javascript:void(0)" onclick="openMenu()"><b class="sc-menu-lines">☰</b><span data-k="menu">Menu</span></a>
+<a href="javascript:void(0)" onclick="openMenu()">☰<span data-k="menu">Menu</span></a>
 </nav>
 
 <div class="menu-sheet" id="menuSheet" onclick="if(event.target===this)closeMenu()"><div class="menu"><div class="handle"></div><div class="menu-head"><h3 data-k="menuTitle">☰ App Menu & Settings</h3><button onclick="closeMenu()">×</button></div>
@@ -120,8 +106,8 @@
 const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
 const FB_PAGE_URL='https://www.facebook.com/sursandtoday'; // Add the official Sursand Connect Facebook Page URL here when available.
 const T={
- en:{welcome:'Welcome to Sursand',hero1:'Sursand,',hero2:'Connected in One Place.',heroDesc:'Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.',shopNow:'🛍️ Shop Now',bookServices:'🛠️ Book Services',complaints:'📣 Complaints',quickTitle:'Quick Services',quickSub:'Useful services for everyday life in Sursand',join:'Join Community',joinD:'Become a Change Maker for Sursand',addBiz:'Add Business / Service',addBizD:'Register a local business or service',charity:'Charity',charityD:'Donate money or request goods pickup',businesses:'Businesses',businessesD:'Find local shops and businesses',events:'Events',eventsD:'Local events, notices and announcements',emergency:'Emergency',emergencyD:'Important emergency helplines',health:'Healthcare',healthD:'Doctors, labs & medicine',education:'Education',educationD:'Schools & learning',representatives:'Representatives',repD:'Chairman, Vice Chairman & wards',places:'Important Places',placesD:'Important local locations',transport:'Transport',transportD:'Routes, timings & fares',govt:'Government Offices',govtD:'Public offices & directions',websites:'Useful Websites',websitesD:'Government & useful links',jobs:'Jobs',jobsD:'Local & employment updates',weather:'Weather & Forecast',weatherD:'Weather and local information',news:'📰 News & Updates',loading:'Latest Sursand Updates',newsFallback:'Local news and community updates will appear here.',home:'Home',emergencyNav:'Emergency',cityConnectNav:'City Connect',shop:'Shop',services:'Services',menu:'Menu',menuTitle:'☰ App Menu & Settings',settings:'Settings',notifications:'Notifications',about:'About Sursand Connect',contact:'Contact Us',share:'Share Sursand Connect App',language:'Language',theme:'Theme'},
- hi:{welcome:'सुरसंड में आपका स्वागत है',hero1:'सुरसंड,',hero2:'अब सब कुछ एक जगह।',heroDesc:'स्थानीय व्यवसाय, सेवाएं, कार्यक्रम, घोषणाएं, आपातकालीन संपर्क और समुदाय की उपयोगी जानकारी सुरसंड कनेक्ट पर पाएं।',shopNow:'🛍️ खरीदारी करें',bookServices:'🛠️ सेवा बुक करें',complaints:'📣 शिकायत',quickTitle:'त्वरित सेवाएं',quickSub:'सुरसंड में रोजमर्रा की उपयोगी सेवाएं',join:'समुदाय से जुड़ें',joinD:'सुरसंड के लिए चेंज मेकर बनें',addBiz:'व्यवसाय / सेवा जोड़ें',addBizD:'स्थानीय व्यवसाय या सेवा पंजीकृत करें',charity:'चैरिटी',charityD:'राशि दान करें या सामान पिकअप बुक करें',businesses:'व्यवसाय',businessesD:'स्थानीय दुकानें और व्यवसाय खोजें',events:'कार्यक्रम',eventsD:'स्थानीय कार्यक्रम, सूचना और घोषणाएं',emergency:'आपातकाल',emergencyD:'महत्वपूर्ण आपातकालीन हेल्पलाइन',health:'स्वास्थ्य सेवा',healthD:'डॉक्टर, जांच और दवा',education:'शिक्षा',educationD:'स्कूल और शिक्षण संस्थान',representatives:'प्रतिनिधि',repD:'चेयरमैन, वाइस चेयरमैन और वार्ड',places:'महत्वपूर्ण स्थान',placesD:'स्थानीय महत्वपूर्ण स्थान',transport:'परिवहन',transportD:'रूट, समय और किराया',govt:'सरकारी कार्यालय',govtD:'सरकारी कार्यालय और दिशा',websites:'उपयोगी वेबसाइटें',websitesD:'सरकारी व उपयोगी लिंक',jobs:'नौकरियां',jobsD:'स्थानीय व रोजगार अपडेट',weather:'मौसम व पूर्वानुमान',weatherD:'मौसम और स्थानीय जानकारी',news:'📰 समाचार व अपडेट',loading:'नवीनतम अपडेट लोड हो रहे हैं...',newsFallback:'स्थानीय समाचार और सामुदायिक अपडेट यहां दिखाई देंगे।',home:'होम',emergencyNav:'आपातकाल',cityConnectNav:'सिटी कनेक्ट',shop:'दुकान',services:'सेवाएं',menu:'मेनू',menuTitle:'☰ ऐप मेनू और सेटिंग्स',settings:'सेटिंग्स',notifications:'सूचनाएं',about:'सुरसंड कनेक्ट के बारे में',contact:'संपर्क करें',share:'सुरसंड कनेक्ट ऐप साझा करें',language:'भाषा',theme:'थीम'}
+ en:{welcome:'Welcome to Sursand',hero1:'Sursand,',hero2:'Connected in One Place.',heroDesc:'Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.',shopNow:'🛍️ Shop Now',bookServices:'🛠️ Book Services',complaints:'📣 Complaints',quickTitle:'Quick Services',quickSub:'Useful services for everyday life in Sursand',join:'Join Community',joinD:'Become a Change Maker for Sursand',addBiz:'Add Business / Service',addBizD:'Register a local business or service',charity:'Charity',charityD:'Donate money or request goods pickup',businesses:'Businesses',businessesD:'Find local shops and businesses',events:'Events',eventsD:'Local events, notices and announcements',emergency:'Emergency',emergencyD:'Important emergency helplines',health:'Healthcare',healthD:'Doctors, labs & medicine',education:'Education',educationD:'Schools & learning',representatives:'Representatives',repD:'Chairman, Vice Chairman & wards',places:'Important Places',placesD:'Important local locations',transport:'Transport',transportD:'Routes, timings & fares',govt:'Government Offices',govtD:'Public offices & directions',websites:'Useful Websites',websitesD:'Government & useful links',jobs:'Jobs',jobsD:'Local & employment updates',weather:'Weather & Forecast',weatherD:'Weather and local information',news:'📰 News & Updates',loading:'Latest Sursand Updates',newsFallback:'Local news and community updates will appear here.',home:'Home',shop:'Shop',services:'Services',menu:'Menu',menuTitle:'☰ App Menu & Settings',settings:'Settings',notifications:'Notifications',about:'About Sursand Connect',contact:'Contact Us',share:'Share Sursand Connect App',language:'Language',theme:'Theme'},
+ hi:{welcome:'सुरसंड में आपका स्वागत है',hero1:'सुरसंड,',hero2:'अब सब कुछ एक जगह।',heroDesc:'स्थानीय व्यवसाय, सेवाएं, कार्यक्रम, घोषणाएं, आपातकालीन संपर्क और समुदाय की उपयोगी जानकारी सुरसंड कनेक्ट पर पाएं।',shopNow:'🛍️ खरीदारी करें',bookServices:'🛠️ सेवा बुक करें',complaints:'📣 शिकायत',quickTitle:'त्वरित सेवाएं',quickSub:'सुरसंड में रोजमर्रा की उपयोगी सेवाएं',join:'समुदाय से जुड़ें',joinD:'सुरसंड के लिए चेंज मेकर बनें',addBiz:'व्यवसाय / सेवा जोड़ें',addBizD:'स्थानीय व्यवसाय या सेवा पंजीकृत करें',charity:'चैरिटी',charityD:'राशि दान करें या सामान पिकअप बुक करें',businesses:'व्यवसाय',businessesD:'स्थानीय दुकानें और व्यवसाय खोजें',events:'कार्यक्रम',eventsD:'स्थानीय कार्यक्रम, सूचना और घोषणाएं',emergency:'आपातकाल',emergencyD:'महत्वपूर्ण आपातकालीन हेल्पलाइन',health:'स्वास्थ्य सेवा',healthD:'डॉक्टर, जांच और दवा',education:'शिक्षा',educationD:'स्कूल और शिक्षण संस्थान',representatives:'प्रतिनिधि',repD:'चेयरमैन, वाइस चेयरमैन और वार्ड',places:'महत्वपूर्ण स्थान',placesD:'स्थानीय महत्वपूर्ण स्थान',transport:'परिवहन',transportD:'रूट, समय और किराया',govt:'सरकारी कार्यालय',govtD:'सरकारी कार्यालय और दिशा',websites:'उपयोगी वेबसाइटें',websitesD:'सरकारी व उपयोगी लिंक',jobs:'नौकरियां',jobsD:'स्थानीय व रोजगार अपडेट',weather:'मौसम व पूर्वानुमान',weatherD:'मौसम और स्थानीय जानकारी',news:'📰 समाचार व अपडेट',loading:'नवीनतम अपडेट लोड हो रहे हैं...',newsFallback:'स्थानीय समाचार और सामुदायिक अपडेट यहां दिखाई देंगे।',home:'होम',shop:'दुकान',services:'सेवाएं',menu:'मेनू',menuTitle:'☰ ऐप मेनू और सेटिंग्स',settings:'सेटिंग्स',notifications:'सूचनाएं',about:'सुरसंड कनेक्ट के बारे में',contact:'संपर्क करें',share:'सुरसंड कनेक्ट ऐप साझा करें',language:'भाषा',theme:'थीम'}
 };
 function applyPrefs(){const l=localStorage.getItem('scLanguage')||'en',th=localStorage.getItem('scTheme')||'light';document.documentElement.lang=l;document.documentElement.classList.toggle('dark',th==='dark');document.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k;if(T[l][k])el.textContent=T[l][k]});const ph=document.querySelector('[data-ph="search"]');if(ph)ph.placeholder=l==='hi'?'व्यवसाय, सेवाएं, कार्यक्रम खोजें...':'Search businesses, services, events...';lang.value=l;theme.value=th}
 function setLanguage(v){localStorage.setItem('scLanguage',v);applyPrefs()}
@@ -130,10 +116,7 @@ function openMenu(){menuSheet.classList.add('active')}function closeMenu(){menuS
 function doSearch(e){e.preventDefault();const q=homeSearch.value.trim();if(q)location.href='p/businesses.html?q='+encodeURIComponent(q);return false}
 function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:new URL('./',location.href).href};if(navigator.share)navigator.share(data).catch(()=>{});else window.open('https://wa.me/?text='+encodeURIComponent(data.text+'\n\n'+data.url),'_blank')}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function loadNews(){
- // Facebook timeline is embedded directly in the News & Updates section.
- return;
-}
+async function loadNews(){ return; }
 document.addEventListener('DOMContentLoaded',()=>{applyPrefs();loadNews()});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
@@ -146,43 +129,55 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 
 
 
-
+<script src="app-media.js"></script>
 <style>
-.sc-news-slider{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(82%,1fr);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px}
-.sc-news-card{scroll-snap-align:start;background:#fff;border-radius:17px;box-shadow:0 8px 22px rgba(15,23,42,.10);overflow:hidden;border:1px solid #eee}
-.sc-news-title{font-size:14px;font-weight:900;padding:12px 12px 8px}
-.sc-news-image{position:relative}.sc-news-image img{display:block;width:100%;height:180px;object-fit:cover}.sc-news-mark{position:absolute;right:7px;top:7px;background:rgba(0,0,0,.55);color:#fff;font-size:8px;padding:4px 7px;border-radius:9px}
-.sc-news-body{padding:10px 12px;font-size:11px;line-height:1.55}.sc-news-body details summary{font-weight:900;cursor:pointer;color:#176b35}
+.sc-news-slider{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 1px 12px;
+  scrollbar-width:none
+}
+.sc-news-slider::-webkit-scrollbar{display:none}
+.sc-news-card{
+  flex:0 0 min(86%,430px);scroll-snap-align:start;background:#fff;border:1px solid #e6ebe7;
+  border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10)
+}
+.sc-news-title{font-size:14px;font-weight:900;line-height:1.35;padding:12px}
+.sc-news-image{position:relative;background:#eef2f1}
+.sc-news-image img{width:100%;height:205px;object-fit:cover;display:block}
+.sc-news-watermark{
+  position:absolute;right:8px;top:8px;padding:4px 8px;border-radius:999px;
+  background:rgba(15,23,42,.68);color:#fff;font-size:8px;font-weight:900
+}
+.sc-news-body{padding:0 12px 13px;color:#475569;font-size:10px;line-height:1.6}
+.sc-news-body details summary{padding:9px 0;cursor:pointer;color:#176b35;font-weight:900}
+.sc-news-loading{padding:16px;font-size:10px;color:#667085}
 </style>
 <script>
 (async function(){
- const box=document.getElementById('scNewsSlider'); if(!box)return;
- const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
- const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- try{
-  const r=await fetch(API+'?action=news&_='+Date.now(),{cache:'no-store'}),j=await r.json();
-  const arr=(j&&j.success&&Array.isArray(j.data)?j.data:[]).slice(0,5);
-  if(!arr.length){box.innerHTML='<div class="sc-news-loading">No news available.</div>';return}
-  box.innerHTML=arr.map(n=>{
-    const title=n.Title||n.title||n['News Title']||'Sursand Update';
-    const img=n['Image URL']||n.imageUrl||n.Image||'';
-    const desc=n.Description||n.description||n.Content||n.content||'';
-    return '<article class="sc-news-card"><div class="sc-news-title">'+esc(title)+'</div>'+
-      (img?'<div class="sc-news-image"><img src="'+esc(img)+'" alt=""><span class="sc-news-mark">Sursand Today</span></div>':'')+
-      '<div class="sc-news-body"><details><summary>Read full news</summary><div>'+esc(desc)+'</div></details></div></article>';
-  }).join('');
- }catch(e){box.innerHTML='<div class="sc-news-loading">News is temporarily unavailable.</div>'}
+  const box=document.getElementById("scNewsSlider");
+  if(!box)return;
+  const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  try{
+    const res=await fetch("https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec?action=news&_="+Date.now(),{cache:"no-store"});
+    const json=await res.json();
+    const rows=(json&&json.success&&Array.isArray(json.data)?json.data:[]).slice(0,5);
+    if(!rows.length){
+      box.innerHTML='<div class="sc-news-loading">No current news is available.</div>';
+      return;
+    }
+    box.innerHTML=rows.map(function(n){
+      const title=n.Title||n["News Title"]||"Sursand Update";
+      const image=window.scRecordImage?window.scRecordImage(n):(n["Image URL"]||n.Image||"");
+      const desc=n.Description||n.Content||n.Message||"";
+      return '<article class="sc-news-card">'+
+        '<div class="sc-news-title">'+esc(title)+'</div>'+
+        (image?'<div class="sc-news-image"><img src="'+esc(image)+'" alt="'+esc(title)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+
+        '<div class="sc-news-body"><details><summary>Read full news</summary><div>'+esc(desc).replace(/\\n/g,"<br>")+'</div></details></div>'+
+      '</article>';
+    }).join("");
+  }catch(e){
+    box.innerHTML='<div class="sc-news-loading">News is temporarily unavailable.</div>';
+  }
 })();
 </script>
-<script src="app-media.js"></script><style>
-#scNewsSlider{display:flex!important;gap:12px!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;padding:4px 2px 12px!important}
-#scNewsSlider .sc-news-card{flex:0 0 min(86%,430px)!important;scroll-snap-align:start;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #e8ece9;box-shadow:0 9px 24px rgba(15,23,42,.10)}
-#scNewsSlider .sc-news-title{font-size:14px;font-weight:900;padding:12px}
-#scNewsSlider .sc-news-image{position:relative}
-#scNewsSlider .sc-news-image img{width:100%;height:205px;object-fit:cover;display:block}
-#scNewsSlider .sc-news-mark{position:absolute;right:8px;top:8px;background:rgba(15,23,42,.68);color:#fff;border-radius:999px;padding:4px 8px;font-size:8px;font-weight:800}
-#scNewsSlider .sc-news-body{padding:0 12px 13px;font-size:10px;line-height:1.6;color:#475569}
-#scNewsSlider details summary{cursor:pointer;color:#176b35;font-weight:900;padding:8px 0}
-</style>
-<script>(async function(){const box=document.getElementById('scNewsSlider');if(!box)return;const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));try{const r=await fetch(API+'?action=news&_='+Date.now(),{cache:'no-store'}),j=await r.json(),rows=(j&&j.success&&Array.isArray(j.data)?j.data:[]).slice(0,5);box.innerHTML=rows.length?rows.map(n=>{const title=n.Title||'Sursand Update',img=window.scMediaFirst?scMediaFirst(n):(n['Image URL']||''),desc=n.Description||n.Content||'';return '<article class="sc-news-card"><div class="sc-news-title">'+esc(title)+'</div>'+(img?'<div class="sc-news-image"><img src="'+esc(img)+'" alt=""><span class="sc-news-mark">Sursand Today</span></div>':'')+'<div class="sc-news-body"><details><summary>Read full news</summary><div>'+esc(desc)+'</div></details></div></article>'}).join(''):'<div class="sc-news-loading">No news available.</div>'}catch(e){box.innerHTML='<div class="sc-news-loading">News is temporarily unavailable.</div>'}})();</script></body>
+</body>
 </html>

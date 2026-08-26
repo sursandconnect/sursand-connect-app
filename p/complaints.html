@@ -37,17 +37,6 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
 </head>
 <body>
 <div class="sc-appbar">
@@ -70,7 +59,7 @@ main{padding-bottom:54px!important}
  <div class="field"><label>Priority</label><select id="cPriority"><option>Normal</option><option>Urgent</option><option>Very Urgent</option></select></div>
  <div class="field full"><label>Issue / Subject *</label><input id="cIssue" required placeholder="Short title of the problem"></div>
  <div class="field full"><label>Description *</label><textarea id="cDescription" required placeholder="Explain the issue clearly..."></textarea></div>
- <div class="field full"><label>Location</label><input id="cLocation" placeholder="Use Current Location or paste Google Maps link"><div class="locrow"><button type="button" class="mini gps" onclick="getLocation()">📍 Use Current Location</button><button type="button" class="mini maps" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div>
+ <div class="field full"><label>Location</label><input id="cLocation" placeholder="Use Detect Location or Select Location"><div class="locrow"><button type="button" class="mini gps" onclick="getLocation()">📍 Use Current Location</button><button type="button" class="mini maps" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div>
  <div class="field full"><label>Upload Issue Image</label><input id="cImage" type="file" accept="image/*" capture="environment" onchange="previewImage(this)"><img id="preview" class="preview" alt="Complaint image preview"></div>
  <button class="submit" type="submit">📣 Book Complaint</button>
 </form>
@@ -86,18 +75,12 @@ main{padding-bottom:54px!important}
 </section>
 </main>
 
-<nav class="sc-bottom">
-<a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a>
-<a href="emergency.html">🚨<span data-sc-nav data-en="Emergency" data-hi="आपातकाल">Emergency</span></a>
-<a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-sc-nav data-en="City Connect" data-hi="सिटी कनेक्ट">City Connect</span></a>
-<a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a>
-<a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a>
-</nav>
+<nav class="sc-bottom"><a href="../">⌂<span>Home</span></a><a href="businesses.html">🏪<span>Shop</span></a><a href="services.html">🛠️<span>Services</span></a><a href="events.html">📅<span>Events</span></a><a href="settings.html">☰<span>Menu</span></a></nav>
 
 <script>
 const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
 let reps=[], selectedImageData='';
-for(let i=1;i<=19;i++){const o=document.createElement('option');o.value=String(i);o.textContent='Ward '+i;document.getElementById('cWard').appendChild(o)}
+for(let i=1;i<=18;i++){const o=document.createElement('option');o.value=String(i);o.textContent='Ward '+i;document.getElementById('cWard').appendChild(o)}
 fetch(API+'?action=all').then(r=>r.json()).then(result=>{
  const d=result&&result.data?result.data:{};
  reps=d.representatives||d.wardRepresentatives||d.councillors||d.localRepresentatives||[];
@@ -113,7 +96,7 @@ function getLocation(){
  el.value='Getting location...';
  navigator.geolocation.getCurrentPosition(p=>{
    el.value='https://maps.google.com/?q='+p.coords.latitude+','+p.coords.longitude;
- },()=>{el.value='';alert('Unable to access location. Please allow location permission or paste a Maps link.')},{enableHighAccuracy:true,timeout:12000});
+ },()=>{el.value='';alert('Unable to access location. Please allow location permission and try again.')},{enableHighAccuracy:true,timeout:12000});
 }
 function previewImage(input){
  const f=input.files&&input.files[0]; if(!f)return;
@@ -197,4 +180,5 @@ function sendTo(i,phone,msg){
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-<script src="../app-media.js"></script></body></html>
+<script src="../app-media.js"></script>
+</body></html>

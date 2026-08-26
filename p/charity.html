@@ -42,17 +42,6 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
 </head><body><div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -69,7 +58,7 @@ main{padding-bottom:54px!important}
 </div><main style="padding-bottom:44px">
 <style>
 #sc-charity-page{--green:#238b45;--green-dark:#176b35;--saffron:#f28c28;--orange:#e97812;--wa:#25d366;--text:#263238;--muted:#667085;max-width:980px;margin:24px auto;padding:0 14px 48px;font-family:Arial,sans-serif;color:var(--text)}#sc-charity-page *{box-sizing:border-box}.sc-ch-hero{background:linear-gradient(135deg,#f7a13f,#f28c28 52%,#e97812);color:#fff;padding:36px 22px;border-radius:22px;text-align:center;box-shadow:0 14px 32px rgba(90,60,20,.16);position:relative;overflow:hidden}.sc-ch-hero h1{color:#fff;margin:0 0 8px;font-size:30px}.sc-ch-hero p{margin:0 auto;max-width:680px;font-size:12px;line-height:1.65}.sc-ch-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.sc-ch-action{border:0;border-radius:18px;padding:18px;text-align:left;color:#fff;box-shadow:0 9px 0 rgba(0,0,0,.13),0 16px 24px rgba(15,23,42,.12);cursor:pointer}.sc-ch-action b{display:block;font-size:15px;margin-bottom:4px}.sc-ch-action span{font-size:10px;opacity:.92}.sc-ch-money{background:linear-gradient(145deg,#43a965,#238b45)}.sc-ch-goods{background:linear-gradient(145deg,#6c8cff,#4f46e5)}.sc-ch-card{background:#fff;border:1px solid #e6ebe7;border-radius:18px;padding:17px;box-shadow:0 8px 22px rgba(15,23,42,.07);margin-top:16px}.sc-ch-card h2{margin:0 0 5px;font-size:18px}.sc-ch-card p{margin:0 0 14px;font-size:10px;color:var(--muted);line-height:1.6}.sc-ch-form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.sc-ch-field{display:flex;flex-direction:column;gap:5px}.sc-ch-field.full{grid-column:1/-1}.sc-ch-field label{font-size:10px;font-weight:800;color:#475569}.sc-ch-field input,.sc-ch-field select,.sc-ch-field textarea{width:100%;border:1px solid #dfe5e1;border-radius:11px;padding:11px;font:inherit;font-size:11px;outline:none;background:#fff}.sc-ch-field textarea{min-height:88px;resize:vertical}.sc-ch-location-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sc-ch-mini{border:0;border-radius:10px;padding:10px;font-size:10px;font-weight:800;cursor:pointer}.sc-ch-gps{background:#eaf7ed;color:#176b35}.sc-ch-map{background:#eef4ff;color:#1d4ed8}.sc-ch-preview{display:none;margin-top:8px;width:100%;max-height:210px;object-fit:cover;border-radius:12px}.sc-ch-submit{grid-column:1/-1;border:0;border-radius:12px;background:#25d366;color:#fff;padding:13px;font-weight:900;font-size:12px;cursor:pointer}.sc-ch-note{margin-top:12px;background:#fff8e8;border-left:5px solid #f28c28;border-radius:11px;padding:12px;font-size:9px;line-height:1.6;color:#667085}@media(max-width:600px){.sc-ch-actions,.sc-ch-form{grid-template-columns:1fr}.sc-ch-field.full,.sc-ch-submit{grid-column:1}.sc-ch-hero{padding:30px 18px}.sc-ch-hero h1{font-size:25px}}
-</style><div id="sc-charity-page"><section class="sc-ch-hero"><h1>❤️ Charity & Donations</h1><p>Support charitable activities through Sewangan Charitable Trust or request doorstep collection of useful goods for donation.</p></section><div class="sc-ch-actions"><button class="sc-ch-action sc-ch-money" onclick="scOpenDonateUs()"><b>💚 Donate Us</b><span>Make a monetary donation through the official donation page.</span></button><button class="sc-ch-action sc-ch-goods" onclick="document.getElementById('scGoodsForm').scrollIntoView({behavior:'smooth'})"><b>📦 Donate Goods</b><span>Request doorstep collection of clothes, books, utensils and other useful goods.</span></button></div><section class="sc-ch-card" id="scGoodsForm"><h2>🚚 Doorstep Goods Collection</h2><p>Fill in the details below. After submission, your formatted pickup request will open in WhatsApp for Sewangan Charitable Trust.</p><form class="sc-ch-form" onsubmit="return scSendGoods(event)"><div class="sc-ch-field"><label>Your Name *</label><input id="chName" required></div><div class="sc-ch-field"><label>Mobile Number *</label><input id="chPhone" inputmode="tel" required></div><div class="sc-ch-field full"><label>Pickup Address *</label><textarea id="chAddress" required></textarea></div><div class="sc-ch-field"><label>Landmark</label><input id="chLandmark"></div><div class="sc-ch-field"><label>Goods Category *</label><select id="chCategory" required><option value="">Select</option><option>Clothes</option><option>Books / Stationery</option><option>Utensils</option><option>Furniture</option><option>Toys</option><option>Electronics</option><option>Food / Grocery</option><option>Mixed Household Goods</option><option>Other Useful Goods</option></select></div><div class="sc-ch-field"><label>Approx. Quantity</label><input id="chQty" placeholder="e.g. 2 bags / 1 box"></div><div class="sc-ch-field"><label>Preferred Pickup Date</label><input id="chDate" type="date"></div><div class="sc-ch-field"><label>Preferred Time</label><input id="chTime" type="time"></div><div class="sc-ch-field full"><label>Pickup Location *</label><input id="chLocation" required readonly placeholder="Use Current Location"><div class="sc-ch-location-actions"><button type="button" class="sc-ch-mini sc-ch-gps" onclick="scGetLocation()">📍 Use Current Location</button><button type="button" class="sc-ch-mini sc-ch-map" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div><div class="sc-ch-field full"><label>Goods Description</label><textarea id="chDescription" placeholder="Describe the items and condition..."></textarea></div><div class="sc-ch-field full"><label>Upload Goods Image</label><input id="chImage" type="file" accept="image/*" capture="environment" onchange="scPreviewGoods(this)"><img id="chPreview" class="sc-ch-preview" alt="Goods preview"></div><button class="sc-ch-submit" type="submit">💬 Send Pickup Request on WhatsApp</button></form><div class="sc-ch-note"><strong>Image note:</strong> The selected image is previewed here. Your selected goods image is uploaded with the donation request before WhatsApp opens.</div></section></div><script>
+</style><div id="sc-charity-page"><section class="sc-ch-hero"><h1>❤️ Charity & Donations</h1><p>Support charitable activities through Sewangan Charitable Trust or request doorstep collection of useful goods for donation.</p></section><div class="sc-ch-actions"><button class="sc-ch-action sc-ch-money" onclick="scOpenDonateUs()"><b>💚 Donate Us</b><span>Make a monetary donation through the official donation page.</span></button><button class="sc-ch-action sc-ch-goods" onclick="document.getElementById('scGoodsForm').scrollIntoView({behavior:'smooth'})"><b>📦 Donate Goods</b><span>Request doorstep collection of clothes, books, utensils and other useful goods.</span></button></div><section class="sc-ch-card" id="scGoodsForm"><h2>🚚 Doorstep Goods Collection</h2><p>Fill in the details below. After submission, your formatted pickup request will open in WhatsApp for Sewangan Charitable Trust.</p><form class="sc-ch-form" onsubmit="return scSendGoods(event)"><div class="sc-ch-field"><label>Your Name *</label><input id="chName" required></div><div class="sc-ch-field"><label>Mobile Number *</label><input id="chPhone" inputmode="tel" required></div><div class="sc-ch-field full"><label>Pickup Address *</label><textarea id="chAddress" required></textarea></div><div class="sc-ch-field"><label>Landmark</label><input id="chLandmark"></div><div class="sc-ch-field"><label>Goods Category *</label><select id="chCategory" required><option value="">Select</option><option>Clothes</option><option>Books / Stationery</option><option>Utensils</option><option>Furniture</option><option>Toys</option><option>Electronics</option><option>Food / Grocery</option><option>Mixed Household Goods</option><option>Other Useful Goods</option></select></div><div class="sc-ch-field"><label>Approx. Quantity</label><input id="chQty" placeholder="e.g. 2 bags / 1 box"></div><div class="sc-ch-field"><label>Preferred Pickup Date</label><input id="chDate" type="date"></div><div class="sc-ch-field"><label>Preferred Time</label><input id="chTime" type="time"></div><div class="sc-ch-field full"><label>Pickup Location *</label><input id="chLocation" required readonly placeholder="Use Current Location"><div class="sc-ch-location-actions"><button type="button" class="sc-ch-mini sc-ch-gps" onclick="scGetLocation()">📍 Use Current Location</button><button type="button" class="sc-ch-mini sc-ch-map" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div><div class="sc-ch-field full"><label>Goods Description</label><textarea id="chDescription" placeholder="Describe the items and condition..."></textarea></div><div class="sc-ch-field full"><label>Upload Goods Image</label><input id="chImage" type="file" accept="image/*" capture="environment" onchange="scPreviewGoods(this)"><img id="chPreview" class="sc-ch-preview" alt="Goods preview"></div><button class="sc-ch-submit" type="submit">💬 Send Pickup Request on WhatsApp</button></form><div class="sc-ch-note"><strong>Image note:</strong> The selected image is previewed here. Your selected goods image is uploaded with the request before WhatsApp opens.</div></section></div><script>
 const SC_DONATE_US_URL='https://www.sewangan.in/p/donate-us.html'; // Add official Donate Us URL here when available
 const SC_CHARITY_WHATSAPP='919955570166';
 function scOpenDonateUs(){if(SC_DONATE_US_URL){location.href=SC_DONATE_US_URL}else{alert('The official Donate Us link has not been added yet. Please add it to SC_DONATE_US_URL in charity.html.')}}
@@ -94,30 +83,59 @@ function scSendGoods(e){e.preventDefault();const get=id=>document.getElementById
 Pickup requested through Sursand Connect
 Sewangan Charitable Trust`;window.open('https://wa.me/'+SC_CHARITY_WHATSAPP+'?text='+encodeURIComponent(msg),'_blank');return false}
 </script>
-</main><nav class="sc-bottom">
-<a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a>
-<a href="emergency.html">🚨<span data-sc-nav data-en="Emergency" data-hi="आपातकाल">Emergency</span></a>
-<a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-sc-nav data-en="City Connect" data-hi="सिटी कनेक्ट">City Connect</span></a>
-<a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a>
-<a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a>
-</nav>
+</main><nav class="sc-bottom"><a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a><a href="businesses.html">🏪<span data-sc-nav data-en="Shop" data-hi="दुकान">Shop</span></a><a href="services.html">🛠️<span data-sc-nav data-en="Services" data-hi="सेवाएं">Services</span></a><a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a><a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a></nav>
 <div class="sc-menu-sheet" id="scMenuSheet" onclick="if(event.target===this)scCloseMenu()"><div class="sc-menu-panel"><div class="sc-menu-handle"></div><div class="sc-menu-head"><h3>☰ App Menu & Settings</h3><button class="sc-menu-close" onclick="scCloseMenu()">×</button></div><div class="sc-menu-grid"><a class="sc-menu-card" href="settings.html"><span>⚙️</span>All Settings</a><a class="sc-menu-card" href="notifications.html"><span>🔔</span>Notifications</a><a class="sc-menu-card" href="about.html"><span>ℹ️</span>About Sursand Connect</a><a class="sc-menu-card" href="contact.html"><span>✉️</span>Contact Us</a><button class="sc-menu-card sc-menu-full" onclick="scShareApp()"><span>↗️</span>Share Sursand Connect App</button></div><div class="sc-setting-row"><label>Language</label><select id="scLanguageSelect" onchange="scSetLanguage(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select></div><div class="sc-setting-row"><label>Theme</label><select id="scThemeSelect" onchange="scSetTheme(this.value)"><option value="light">Light</option><option value="dark">Dark</option></select></div><button class="sc-login-btn" onclick="scAccountInfo()">👤 Login / Sign Up</button></div></div>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script><script src="../offline-data.js"></script>
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-<script src="../app-media.js"></script><script>
-async function scGoodsFileData(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
-window.scSendGoods=async function(e){
- e.preventDefault();const btn=e.target.querySelector('.sc-ch-submit');if(btn){btn.disabled=true;btn.textContent='Submitting Request...'}
- try{
-  const f=chImage.files[0],d={action:'goodsDonation',name:chName.value.trim(),mobile:chPhone.value.trim(),address:chAddress.value.trim(),landmark:chLandmark.value.trim(),category:chCategory.value,quantity:chQty.value.trim(),preferredDate:chDate.value,preferredTime:chTime.value,location:chLocation.value,description:chDescription.value.trim()};
-  if(f){d.imageBase64=await scGoodsFileData(f);d.imageName=f.name;d.imageMimeType=f.type}
-  const r=await fetch(SC_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)}),j=await r.json();
-  if(!j||!j.success)throw Error(j&&j.error?j.error:'Unable to submit goods donation request.');
-  const x=j.data||{},msg='Goods Donation Pickup Request\nRequest ID: '+(x.id||'')+'\nName: '+d.name+'\nMobile: '+d.mobile+'\nAddress: '+d.address+'\nGoods: '+d.category+' '+d.quantity+'\nDescription: '+d.description+(x.imageUrl?'\nGoods Image: '+x.imageUrl:'');
-  window.open('https://wa.me/919955570166?text='+encodeURIComponent(msg),'_blank');e.target.reset();if(window.chPreview)chPreview.style.display='none';
- }catch(err){alert(err.message)}finally{if(btn){btn.disabled=false;btn.textContent='💬 Send Pickup Request on WhatsApp'}}return false;
+<script src="../app-media.js"></script>
+<script>
+async function scGoodsFileDataV12(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);
+  });
+}
+window.scSendGoodsV12=async function(e){
+  e.preventDefault();
+  const btn=e.target.querySelector(".sc-ch-submit");
+  if(btn){btn.disabled=true;btn.textContent="Submitting Request..."}
+  try{
+    const file=document.getElementById("chImage")?.files?.[0] || null;
+    const data={
+      action:"goodsDonation",
+      name:document.getElementById("chName")?.value.trim()||"",
+      mobile:document.getElementById("chPhone")?.value.trim()||"",
+      address:document.getElementById("chAddress")?.value.trim()||"",
+      landmark:document.getElementById("chLandmark")?.value.trim()||"",
+      category:document.getElementById("chCategory")?.value||"",
+      quantity:document.getElementById("chQty")?.value.trim()||"",
+      preferredDate:document.getElementById("chDate")?.value||"",
+      preferredTime:document.getElementById("chTime")?.value||"",
+      location:document.getElementById("chLocation")?.value||"",
+      description:document.getElementById("chDescription")?.value.trim()||""
+    };
+    if(file){
+      data.imageBase64=await scGoodsFileDataV12(file);
+      data.imageName=file.name;data.imageMimeType=file.type;
+    }
+    const res=await fetch("https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec",{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+    const json=await res.json();
+    if(!json||!json.success)throw new Error(json&&json.error?json.error:"Unable to submit goods donation request.");
+    const out=json.data||{};
+    const message="Goods Donation Pickup Request\nRequest ID: "+(out.id||"")+"\nName: "+data.name+"\nMobile: "+data.mobile+"\nAddress: "+data.address+"\nGoods: "+data.category+" "+data.quantity+"\nDescription: "+data.description+(out.imageUrl?"\nGoods Image: "+out.imageUrl:"");
+    window.open("https://wa.me/919955570166?text="+encodeURIComponent(message),"_blank");
+    e.target.reset();
+    const preview=document.getElementById("chPreview");if(preview)preview.style.display="none";
+  }catch(err){alert(err.message)}finally{
+    if(btn){btn.disabled=false;btn.textContent="💬 Send Pickup Request on WhatsApp"}
+  }
+  return false;
 };
-</script></body></html>
+document.addEventListener("DOMContentLoaded",function(){
+  const form=document.querySelector('form[onsubmit*="scSendGoods"]');
+  if(form) form.onsubmit=window.scSendGoodsV12;
+});
+</script>
+</body></html>

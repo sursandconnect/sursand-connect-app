@@ -42,17 +42,6 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
 </head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
@@ -1299,17 +1288,12 @@ else{
 </script>
 
 </div></main>
-<nav class="sc-bottom">
-<a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a>
-<a href="emergency.html">🚨<span data-sc-nav data-en="Emergency" data-hi="आपातकाल">Emergency</span></a>
-<a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-sc-nav data-en="City Connect" data-hi="सिटी कनेक्ट">City Connect</span></a>
-<a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a>
-<a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a>
-</nav>
+<nav class="sc-bottom"><a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a><a href="businesses.html">🏪<span data-sc-nav data-en="Shop" data-hi="दुकान">Shop</span></a><a href="services.html">🛠️<span data-sc-nav data-en="Services" data-hi="सेवाएं">Services</span></a><a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a><a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a></nav>
 <div class="sc-menu-sheet" id="scMenuSheet" onclick="if(event.target===this)scCloseMenu()"><div class="sc-menu-panel"><div class="sc-menu-handle"></div><div class="sc-menu-head"><h3>☰ App Menu & Settings</h3><button class="sc-menu-close" onclick="scCloseMenu()">×</button></div><div class="sc-menu-grid"><a class="sc-menu-card" href="settings.html"><span>⚙️</span>All Settings</a><a class="sc-menu-card" href="notifications.html"><span>🔔</span>Notifications</a><a class="sc-menu-card" href="about.html"><span>ℹ️</span>About Sursand Connect</a><a class="sc-menu-card" href="contact.html"><span>✉️</span>Contact Us</a><button class="sc-menu-card sc-menu-full" onclick="scShareApp()"><span>↗️</span>Share Sursand Connect App</button></div><div class="sc-setting-row"><label>Language</label><select id="scLanguageSelect" onchange="scSetLanguage(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select></div><div class="sc-setting-row"><label>Theme</label><select id="scThemeSelect" onchange="scSetTheme(this.value)"><option value="light">Light</option><option value="dark">Dark</option></select></div><button class="sc-login-btn" onclick="scAccountInfo()">👤 Login / Sign Up</button></div></div>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script><script src="../offline-data.js"></script>
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-<script src="../app-media.js"></script></body></html>
+<script src="../app-media.js"></script>
+</body></html>

@@ -42,17 +42,6 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-
-<style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
-}
-</style>
-
 </head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
@@ -2342,8 +2331,7 @@ function scTrCreateCard(item){
   }
 
 
-  call.innerHTML =
-    "📞 Call";
+  call.innerHTML = isBus ? "📞 Call" : "📞 Call for Booking / Fare Enquiry";
 
 
   actions.appendChild(
@@ -2502,17 +2490,44 @@ function scTrOpenFare(item){
     name;
 
 
-  /* ROUTE / PROFILE INFO */
-  const profileImage = window.scMediaFirst ? window.scMediaFirst(item) : (item["Image URL"] || item.Image || "");
-  const driverName = item["Driver / Owner Name"] || item["Driver Name"] || item["Owner Name"] || "";
-  const address = item.Address || "";
-  const experience = item["Years of Experience"] || item.Experience || "";
+  /* ROUTE / NON-BUS PROFILE INFO */
+
+  const profileImage =
+    window.scRecordImage ? window.scRecordImage(item) :
+    (item["Image URL"] || item.Image || item.image || "");
+
+  const driverName =
+    item["Driver / Owner Name"] ||
+    item["Driver Name"] ||
+    item["Owner Name"] ||
+    item["Transport Name"] ||
+    "";
+
+  const address =
+    item.Address ||
+    item.address ||
+    "";
+
+  const experience =
+    item["Years of Experience"] ||
+    item["Driving Experience"] ||
+    item.Experience ||
+    "";
+
   let routeHtml = isBus
-    ? ("📍 <strong>Route:</strong> " + scTrEsc(route || from || "Route information"))
-    : ((profileImage ? '<img src="'+scTrEsc(profileImage)+'" alt="" style="width:90px;height:90px;object-fit:cover;border-radius:18px;margin-bottom:9px">' : '') +
-       (driverName ? '<br><strong>Name:</strong> '+scTrEsc(driverName) : '') +
-       (address ? '<br>📍 <strong>Address:</strong> '+scTrEsc(address) : '') +
-       (experience ? '<br>🧰 <strong>Driving Experience:</strong> '+scTrEsc(experience)+' years' : ''));
+    ? (
+        "📍 <strong>Route:</strong> " +
+        scTrEsc(route || from || "Route information")
+      )
+    : (
+        (profileImage
+          ? '<img src="'+scTrEsc(profileImage)+'" alt="" style="width:92px;height:92px;object-fit:cover;border-radius:18px;margin:0 0 10px">'
+          : ''
+        ) +
+        (driverName ? '<br><strong>Name:</strong> '+scTrEsc(driverName) : '') +
+        (address ? '<br>📍 <strong>Address:</strong> '+scTrEsc(address) : '') +
+        (experience ? '<br>🧰 <strong>Driving Experience:</strong> '+scTrEsc(experience)+' years' : '')
+      );
 
 
   /*
@@ -2528,7 +2543,7 @@ function scTrOpenFare(item){
 
       "<br>🕒 <strong>Departure from Sursand:</strong> " +
 
-      scTrEsc(window.scTrTime12 ? window.scTrTime12(departure) : departure);
+      scTrEsc(window.scTransportTime12 ? window.scTransportTime12(departure) : departure);
 
   }
 
@@ -2614,7 +2629,7 @@ function scTrOpenFare(item){
                       <td>
                         ${
                           scTrEsc(
-                            (window.scTrTime12 ? window.scTrTime12(stop.arrival) : stop.arrival) ||
+                            (window.scTransportTime12 ? window.scTransportTime12(stop.arrival) : stop.arrival) ||
                             "—"
                           )
                         }
@@ -3019,40 +3034,32 @@ else{
 </script>
 
 </div></main>
-<nav class="sc-bottom">
-<a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a>
-<a href="emergency.html">🚨<span data-sc-nav data-en="Emergency" data-hi="आपातकाल">Emergency</span></a>
-<a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-sc-nav data-en="City Connect" data-hi="सिटी कनेक्ट">City Connect</span></a>
-<a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a>
-<a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a>
-</nav>
+<nav class="sc-bottom"><a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a><a href="businesses.html">🏪<span data-sc-nav data-en="Shop" data-hi="दुकान">Shop</span></a><a href="services.html">🛠️<span data-sc-nav data-en="Services" data-hi="सेवाएं">Services</span></a><a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a><a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a></nav>
 <div class="sc-menu-sheet" id="scMenuSheet" onclick="if(event.target===this)scCloseMenu()"><div class="sc-menu-panel"><div class="sc-menu-handle"></div><div class="sc-menu-head"><h3>☰ App Menu & Settings</h3><button class="sc-menu-close" onclick="scCloseMenu()">×</button></div><div class="sc-menu-grid"><a class="sc-menu-card" href="settings.html"><span>⚙️</span>All Settings</a><a class="sc-menu-card" href="notifications.html"><span>🔔</span>Notifications</a><a class="sc-menu-card" href="about.html"><span>ℹ️</span>About Sursand Connect</a><a class="sc-menu-card" href="contact.html"><span>✉️</span>Contact Us</a><button class="sc-menu-card sc-menu-full" onclick="scShareApp()"><span>↗️</span>Share Sursand Connect App</button></div><div class="sc-setting-row"><label>Language</label><select id="scLanguageSelect" onchange="scSetLanguage(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select></div><div class="sc-setting-row"><label>Theme</label><select id="scThemeSelect" onchange="scSetTheme(this.value)"><option value="light">Light</option><option value="dark">Dark</option></select></div><button class="sc-login-btn" onclick="scAccountInfo()">👤 Login / Sign Up</button></div></div>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script><script src="../offline-data.js"></script>
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-
+<script src="../app-media.js"></script>
 <script>
 (function(){
- function fmtTime(v){
-   if(v===null||v===undefined||v==='')return '';
-   let s=String(v).trim().toUpperCase().replace(/\./g,'');
-   let m=s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
-   if(m){let h=Math.max(1,Math.min(12,+m[1]));return String(h).padStart(2,'0')+':'+m[2]+' '+m[3];}
-   m=s.match(/^(\d{1,2}):(\d{2})$/);
-   if(m){let h=+m[1], ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+ap;}
-   return s;
- }
- window.scFormatTransportTime=fmtTime;
- function rewriteTimes(root=document){
-   root.querySelectorAll('td,span,div,p').forEach(el=>{
-     if(el.children.length)return;
-     el.textContent=el.textContent.replace(/\b(\d{1,2}):(\d{2})\s*(am|pm)\b/ig,(x,h,m,a)=>String(+h).padStart(2,'0')+':'+m+' '+a.toUpperCase());
-   });
- }
- document.addEventListener('DOMContentLoaded',()=>rewriteTimes());
- new MutationObserver(()=>rewriteTimes()).observe(document.documentElement,{childList:true,subtree:true});
+  function time12(v){
+    let s=String(v||"").trim().toUpperCase();
+    let m=s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+    if(m){
+      let h=Math.max(1,Math.min(12,parseInt(m[1],10)));
+      return String(h).padStart(2,"0")+":"+m[2]+" "+m[3];
+    }
+    m=s.match(/^(\d{1,2}):(\d{2})$/);
+    if(m){
+      let h=parseInt(m[1],10), ap=h>=12?"PM":"AM";
+      h=h%12||12;
+      return String(h).padStart(2,"0")+":"+m[2]+" "+ap;
+    }
+    return s;
+  }
+  window.scTransportTime12=time12;
 })();
 </script>
-<script src="../app-media.js"></script><script>(function(){function f(v){let s=String(v||'').trim().toUpperCase(),m=s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);if(m)return String(+m[1]).padStart(2,'0')+':'+m[2]+' '+m[3];m=s.match(/^(\d{1,2}):(\d{2})$/);if(m){let h=+m[1],a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+a}return s}window.scTrTime12=f})();</script></body></html>
+</body></html>

@@ -47,11 +47,6 @@ html,body{margin:0;background:var(--sc-bg);color:var(--sc-text)}body{padding-top
 }
 /* v10.4 green bottom */
 .sc-bottom{background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35)!important}
-
-.sc-cm-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
-.sc-cm-card{min-width:0!important;padding:9px!important}
-.sc-cm-card img,.sc-change-maker-card img{width:68px!important;height:68px!important;object-fit:cover!important;border-radius:50%!important}
-@media(max-width:390px){.sc-cm-grid{gap:6px!important}.sc-cm-card{padding:7px!important}}
 </style>
 <div id="scCmInterestModal"
      style="display:none;position:fixed;inset:0;z-index:2300000;background:rgba(15,23,42,.58);align-items:center;justify-content:center;padding:16px">
@@ -172,16 +167,17 @@ main{padding-bottom:54px!important}
 
 
 <style>
-.sc-wa-nav-icon{
-  width:22px;height:22px;border-radius:50%;
-  background:#25D366;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:900;line-height:1;
-  margin-bottom:1px;
+.sc-cm-makers-grid,#scCmGrid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
 }
+.sc-cm-maker{min-width:0!important;padding:8px!important;text-align:center!important}
+.sc-cm-maker img{width:64px!important;height:64px!important;object-fit:cover!important;margin:0 auto 7px!important}
+.sc-cm-maker h4{font-size:10px!important;line-height:1.25!important;margin:4px 0!important}
+.sc-cm-maker p,.sc-cm-maker small{font-size:7.5px!important}
 </style>
-
-<style>#scChangeMakersGrid,.sc-cm-grid,.change-makers-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.sc-change-maker-card,.sc-cm-card{min-width:0!important;padding:8px!important;text-align:center}.sc-change-maker-card img,.sc-cm-card img{width:72px!important;height:72px!important;object-fit:cover!important;border-radius:50%!important;margin:0 auto 6px!important}</style></head><body>
+</head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -1471,7 +1467,7 @@ main{padding-bottom:54px!important}
         <option>Ward 15</option>
         <option>Ward 16</option>
         <option>Ward 17</option>
-        <option>Ward 18</option><option>Ward 19</option>
+        <option>Ward 18</option>
 
       </select>
 
@@ -1967,13 +1963,13 @@ function scCmRender(){
 
         const name =
 
+          item["Full Name"] ||
+
           item.Name ||
 
           item.name ||
 
-          item[
-            "Full Name"
-          ] ||
+          item.fullName ||
 
           "Change Maker";
 
@@ -2021,10 +2017,12 @@ function scCmRender(){
 
             ${
               (
-                item["Image URL"] ||
-                item.Image ||
-                item.image ||
-                item.Photo
+                (window.scRecordImage ? window.scRecordImage(item) : (
+                  item["Image URL"] ||
+                  item.Image ||
+                  item.image ||
+                  item.Photo
+                ))
               )
 
               ? `
@@ -2446,30 +2444,12 @@ else{
 </script>
 
 </div></main>
-<nav class="sc-bottom">
-<a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a>
-<a href="emergency.html">🚨<span data-sc-nav data-en="Emergency" data-hi="आपातकाल">Emergency</span></a>
-<a href="city-connect.html"><span class="sc-wa-nav-icon" aria-hidden="true">☎</span><span data-sc-nav data-en="City Connect" data-hi="सिटी कनेक्ट">City Connect</span></a>
-<a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a>
-<a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a>
-</nav>
+<nav class="sc-bottom"><a href="../">⌂<span data-sc-nav data-en="Home" data-hi="होम">Home</span></a><a href="businesses.html">🏪<span data-sc-nav data-en="Shop" data-hi="दुकान">Shop</span></a><a href="services.html">🛠️<span data-sc-nav data-en="Services" data-hi="सेवाएं">Services</span></a><a href="events.html">📅<span data-sc-nav data-en="Events" data-hi="कार्यक्रम">Events</span></a><a href="javascript:void(0)" onclick="scOpenMenu()"><b class="sc-menu-lines">☰</b><span data-sc-nav data-en="Menu" data-hi="मेनू">Menu</span></a></nav>
 <div class="sc-menu-sheet" id="scMenuSheet" onclick="if(event.target===this)scCloseMenu()"><div class="sc-menu-panel"><div class="sc-menu-handle"></div><div class="sc-menu-head"><h3>☰ App Menu & Settings</h3><button class="sc-menu-close" onclick="scCloseMenu()">×</button></div><div class="sc-menu-grid"><a class="sc-menu-card" href="settings.html"><span>⚙️</span>All Settings</a><a class="sc-menu-card" href="notifications.html"><span>🔔</span>Notifications</a><a class="sc-menu-card" href="about.html"><span>ℹ️</span>About Sursand Connect</a><a class="sc-menu-card" href="contact.html"><span>✉️</span>Contact Us</a><button class="sc-menu-card sc-menu-full" onclick="scShareApp()"><span>↗️</span>Share Sursand Connect App</button></div><div class="sc-setting-row"><label>Language</label><select id="scLanguageSelect" onchange="scSetLanguage(this.value)"><option value="en">English</option><option value="hi">हिन्दी</option></select></div><div class="sc-setting-row"><label>Theme</label><select id="scThemeSelect" onchange="scSetTheme(this.value)"><option value="light">Light</option><option value="dark">Dark</option></select></div><button class="sc-login-btn" onclick="scAccountInfo()">👤 Login / Sign Up</button></div></div>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{});</script><script src="../offline-data.js"></script>
 <script src="../app-i18n.js"></script>
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-
-<script>
-(function(){
- function fixCards(){
-  document.querySelectorAll('[data-change-maker],.sc-cm-card,.sc-change-maker-card').forEach((card,i)=>{
-   const img=card.querySelector('img');
-   if(img && (!img.getAttribute('src') || /undefined|null/i.test(img.getAttribute('src')))) img.style.display='none';
-  });
- }
- document.addEventListener('DOMContentLoaded',fixCards);
- const mo=new MutationObserver(fixCards); mo.observe(document.documentElement,{subtree:true,childList:true});
-})();
-</script>
-<script src="../app-media.js"></script></body></html>
+<script src="../app-media.js"></script>
+</body></html>
