@@ -2565,4 +2565,18 @@ else{
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
+
+<script>
+(function(){
+ function driveImg(u){
+   if(!u)return '';
+   let s=String(u).trim(),m=s.match(/\/d\/([A-Za-z0-9_-]+)/)||s.match(/[?&]id=([A-Za-z0-9_-]+)/);
+   return m?'https://drive.google.com/uc?export=view&id='+m[1]:s;
+ }
+ function fix(){
+   document.querySelectorAll('img').forEach(img=>{const s=img.getAttribute('src');if(s)img.src=driveImg(s)});
+ }
+ document.addEventListener('DOMContentLoaded',fix);new MutationObserver(fix).observe(document.documentElement,{subtree:true,childList:true});
+})();
+</script>
 </body></html>

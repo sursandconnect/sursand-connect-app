@@ -47,6 +47,11 @@ html,body{margin:0;background:var(--sc-bg);color:var(--sc-text)}body{padding-top
 }
 /* v10.4 green bottom */
 .sc-bottom{background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35)!important}
+
+.sc-cm-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+.sc-cm-card{min-width:0!important;padding:9px!important}
+.sc-cm-card img,.sc-change-maker-card img{width:68px!important;height:68px!important;object-fit:cover!important;border-radius:50%!important}
+@media(max-width:390px){.sc-cm-grid{gap:6px!important}.sc-cm-card{padding:7px!important}}
 </style>
 <div id="scCmInterestModal"
      style="display:none;position:fixed;inset:0;z-index:2300000;background:rgba(15,23,42,.58);align-items:center;justify-content:center;padding:16px">
@@ -2454,4 +2459,17 @@ else{
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
+
+<script>
+(function(){
+ function fixCards(){
+  document.querySelectorAll('[data-change-maker],.sc-cm-card,.sc-change-maker-card').forEach((card,i)=>{
+   const img=card.querySelector('img');
+   if(img && (!img.getAttribute('src') || /undefined|null/i.test(img.getAttribute('src')))) img.style.display='none';
+  });
+ }
+ document.addEventListener('DOMContentLoaded',fixCards);
+ const mo=new MutationObserver(fixCards); mo.observe(document.documentElement,{subtree:true,childList:true});
+})();
+</script>
 </body></html>

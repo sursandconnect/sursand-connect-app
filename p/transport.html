@@ -3034,4 +3034,27 @@ else{
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
+
+<script>
+(function(){
+ function fmtTime(v){
+   if(v===null||v===undefined||v==='')return '';
+   let s=String(v).trim().toUpperCase().replace(/\./g,'');
+   let m=s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+   if(m){let h=Math.max(1,Math.min(12,+m[1]));return String(h).padStart(2,'0')+':'+m[2]+' '+m[3];}
+   m=s.match(/^(\d{1,2}):(\d{2})$/);
+   if(m){let h=+m[1], ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+ap;}
+   return s;
+ }
+ window.scFormatTransportTime=fmtTime;
+ function rewriteTimes(root=document){
+   root.querySelectorAll('td,span,div,p').forEach(el=>{
+     if(el.children.length)return;
+     el.textContent=el.textContent.replace(/\b(\d{1,2}):(\d{2})\s*(am|pm)\b/ig,(x,h,m,a)=>String(+h).padStart(2,'0')+':'+m+' '+a.toUpperCase());
+   });
+ }
+ document.addEventListener('DOMContentLoaded',()=>rewriteTimes());
+ new MutationObserver(()=>rewriteTimes()).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body></html>

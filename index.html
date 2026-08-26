@@ -82,30 +82,9 @@
 <a class="small-card" href="p/weather.html"><div class="sicon">🌦️</div><div><b data-k="weather">Weather & Forecast</b><span data-k="weatherD">Weather and local information</span></div></a>
 </section>
 
-<section class="news">
-<div class="section-title"><div><h2 data-k="news">📰 News &amp; Updates</h2><p>Latest posts from Sursand Today</p></div></div>
-<div class="news-shell">
- <div class="news-head">
-   <h3>Latest from Facebook</h3>
-   <a class="fb-chip" href="https://www.facebook.com/sursandtoday" target="_blank" rel="noopener" style="text-decoration:none">Facebook • Sursand Today</a>
- </div>
- <div class="sc-facebook-feed">
-   <iframe
-     title="Sursand Today Facebook Updates"
-     src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsursandtoday&tabs=timeline&width=500&height=340&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
-     width="500"
-     height="340"
-     style="border:none;overflow:hidden;width:100%;max-width:500px;display:block;margin:0 auto;background:#fff"
-     scrolling="no"
-     frameborder="0"
-     allowfullscreen="true"
-     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-   </iframe>
-   <div class="sc-fb-fallback">
-     <a href="https://www.facebook.com/sursandtoday" target="_blank" rel="noopener">Open Sursand Today on Facebook</a>
-   </div>
- </div>
-</div>
+<section class="news" id="professionalNews">
+<div class="section-title"><div><h2>📰 News &amp; Updates</h2><p>Latest updates from Sursand</p></div></div>
+<div class="sc-news-slider" id="scNewsSlider"><div class="sc-news-loading">Loading latest news...</div></div>
 </section>
 </main>
 
@@ -167,5 +146,33 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 
 
 
+
+<style>
+.sc-news-slider{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(82%,1fr);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px}
+.sc-news-card{scroll-snap-align:start;background:#fff;border-radius:17px;box-shadow:0 8px 22px rgba(15,23,42,.10);overflow:hidden;border:1px solid #eee}
+.sc-news-title{font-size:14px;font-weight:900;padding:12px 12px 8px}
+.sc-news-image{position:relative}.sc-news-image img{display:block;width:100%;height:180px;object-fit:cover}.sc-news-mark{position:absolute;right:7px;top:7px;background:rgba(0,0,0,.55);color:#fff;font-size:8px;padding:4px 7px;border-radius:9px}
+.sc-news-body{padding:10px 12px;font-size:11px;line-height:1.55}.sc-news-body details summary{font-weight:900;cursor:pointer;color:#176b35}
+</style>
+<script>
+(async function(){
+ const box=document.getElementById('scNewsSlider'); if(!box)return;
+ const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+ const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ try{
+  const r=await fetch(API+'?action=news&_='+Date.now(),{cache:'no-store'}),j=await r.json();
+  const arr=(j&&j.success&&Array.isArray(j.data)?j.data:[]).slice(0,5);
+  if(!arr.length){box.innerHTML='<div class="sc-news-loading">No news available.</div>';return}
+  box.innerHTML=arr.map(n=>{
+    const title=n.Title||n.title||n['News Title']||'Sursand Update';
+    const img=n['Image URL']||n.imageUrl||n.Image||'';
+    const desc=n.Description||n.description||n.Content||n.content||'';
+    return '<article class="sc-news-card"><div class="sc-news-title">'+esc(title)+'</div>'+
+      (img?'<div class="sc-news-image"><img src="'+esc(img)+'" alt=""><span class="sc-news-mark">Sursand Today</span></div>':'')+
+      '<div class="sc-news-body"><details><summary>Read full news</summary><div>'+esc(desc)+'</div></details></div></article>';
+  }).join('');
+ }catch(e){box.innerHTML='<div class="sc-news-loading">News is temporarily unavailable.</div>'}
+})();
+</script>
 </body>
 </html>

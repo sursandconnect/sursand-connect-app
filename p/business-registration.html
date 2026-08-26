@@ -48,7 +48,7 @@
     <div class="field full"><label>Address</label><textarea id="bAddress"></textarea></div>
     <div class="field full"><label>Business Description</label><textarea id="bDescription"></textarea></div>
     <div class="field"><label>WhatsApp Catalogue Link</label><input id="bCatalogue"></div>
-    <div class="field"><label>Google Maps Link</label><input id="bMap"></div>
+    <div class="field"><label>Location</label><input id="bMap" type="hidden"><div id="bLocationActions"></div></div>
     <div class="field full"><label>Business Image</label><input id="bImage" type="file" accept="image/*" capture="environment"></div>
     <button class="submit" type="submit">Submit Business Registration</button>
     <div id="bStatus" class="status"></div>
@@ -82,4 +82,16 @@ businessForm.addEventListener('submit',async e=>{e.preventDefault();bStatus.clas
 serviceForm.addEventListener('submit',async e=>{e.preventDefault();sStatus.className='status';sStatus.textContent='Submitting...';try{const img=sImage.files[0];if(!img)throw Error('Please upload profile image.');const d={action:'registerService',servicePersonName:sName.value.trim(),businessName:sName.value.trim(),category:sCategory.value,serviceType:sCategory.value,phone:sPhone.value.trim(),whatsapp:sWhatsapp.value.trim(),description:sDescription.value.trim(),experience:sExperience.value,imageBase64:await fileData(img),imageName:img.name,imageMimeType:img.type};const x=await post(d);sStatus.className='status ok';sStatus.textContent=(x.data&&x.data.message)||'Service registration submitted successfully.';serviceForm.reset()}catch(err){sStatus.className='status err';sStatus.textContent=err.message}});
 </script>
 <script src="../app-account.js"></script>
+
+<script>
+(function(){
+ const host=document.getElementById('bLocationActions'), input=document.getElementById('bMap');
+ if(!host||!input)return;
+ host.innerHTML='<button type="button" class="locBtn" id="detectBusinessLocation">📍 Detect Location</button><button type="button" class="locBtn" id="selectBusinessLocation">🗺️ Select Location</button><small id="businessLocationStatus"></small>';
+ const st=document.getElementById('businessLocationStatus');
+ function setLoc(lat,lng){input.value=lat+','+lng;st.textContent='Selected: '+Number(lat).toFixed(5)+', '+Number(lng).toFixed(5);}
+ document.getElementById('detectBusinessLocation').onclick=()=>navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>setLoc(p.coords.latitude,p.coords.longitude),()=>st.textContent='Unable to detect location.',{enableHighAccuracy:true,timeout:10000}):st.textContent='Location not supported.';
+ document.getElementById('selectBusinessLocation').onclick=()=>{const v=prompt('Enter latitude,longitude');if(v){const a=v.split(',');if(a.length===2)setLoc(a[0].trim(),a[1].trim())}};
+})();
+</script><style>.locBtn{border:0;border-radius:10px;padding:9px;margin:3px;background:#176b35;color:#fff;font-weight:800}#businessLocationStatus{display:block;font-size:9px;margin-top:5px}</style>
 </body></html>
