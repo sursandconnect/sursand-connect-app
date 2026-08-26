@@ -2502,17 +2502,17 @@ function scTrOpenFare(item){
     name;
 
 
-  /* ROUTE INFO */
-
-  let routeHtml =
-
-    "📍 <strong>Route:</strong> " +
-
-    scTrEsc(
-      route ||
-      from ||
-      "Route information"
-    );
+  /* ROUTE / PROFILE INFO */
+  const profileImage = window.scMediaFirst ? window.scMediaFirst(item) : (item["Image URL"] || item.Image || "");
+  const driverName = item["Driver / Owner Name"] || item["Driver Name"] || item["Owner Name"] || "";
+  const address = item.Address || "";
+  const experience = item["Years of Experience"] || item.Experience || "";
+  let routeHtml = isBus
+    ? ("📍 <strong>Route:</strong> " + scTrEsc(route || from || "Route information"))
+    : ((profileImage ? '<img src="'+scTrEsc(profileImage)+'" alt="" style="width:90px;height:90px;object-fit:cover;border-radius:18px;margin-bottom:9px">' : '') +
+       (driverName ? '<br><strong>Name:</strong> '+scTrEsc(driverName) : '') +
+       (address ? '<br>📍 <strong>Address:</strong> '+scTrEsc(address) : '') +
+       (experience ? '<br>🧰 <strong>Driving Experience:</strong> '+scTrEsc(experience)+' years' : ''));
 
 
   /*
@@ -2528,9 +2528,7 @@ function scTrOpenFare(item){
 
       "<br>🕒 <strong>Departure from Sursand:</strong> " +
 
-      scTrEsc(
-        departure
-      );
+      scTrEsc(window.scTrTime12 ? window.scTrTime12(departure) : departure);
 
   }
 
@@ -2616,7 +2614,7 @@ function scTrOpenFare(item){
                       <td>
                         ${
                           scTrEsc(
-                            stop.arrival ||
+                            (window.scTrTime12 ? window.scTrTime12(stop.arrival) : stop.arrival) ||
                             "—"
                           )
                         }
@@ -3057,4 +3055,4 @@ else{
  new MutationObserver(()=>rewriteTimes()).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
-</body></html>
+<script src="../app-media.js"></script><script>(function(){function f(v){let s=String(v||'').trim().toUpperCase(),m=s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);if(m)return String(+m[1]).padStart(2,'0')+':'+m[2]+' '+m[3];m=s.match(/^(\d{1,2}):(\d{2})$/);if(m){let h=+m[1],a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+a}return s}window.scTrTime12=f})();</script></body></html>

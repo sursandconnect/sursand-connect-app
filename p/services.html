@@ -2206,6 +2206,8 @@ function scSrvRenderProviders(){
           "";
 
 
+        const image = window.scMediaFirst ? window.scMediaFirst(item) : (item["Image URL"] || item.imageUrl || item.Image || "");
+
         const dataIndex =
           scSrvData.indexOf(
             item
@@ -2215,15 +2217,7 @@ function scSrvRenderProviders(){
         return `
 
           <article class="sc-srv-card">
-
-
-            <div class="sc-srv-provider-icon">
-
-              ${scSrvServiceIcon(
-                scSrvSelectedService
-              )}
-
-            </div>
+            ${image ? `<img src="${scSrvEsc(image)}" alt="${scSrvEsc(name)}" style="width:86px;height:86px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 9px;border:3px solid #fff;box-shadow:0 5px 16px rgba(15,23,42,.15)">` : `<div class="sc-srv-provider-icon">${scSrvServiceIcon(scSrvSelectedService)}</div>`}
 
 
             <span class="sc-srv-service-type">
@@ -2873,4 +2867,4 @@ window.SC_EXTRA_SERVICE={group:'Religious & Ritual Services',service:'Pandit Ji 
 <script src="../app-i18n-extra.js"></script>
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
-</body></html>
+<script src="../app-media.js"></script></body></html>
