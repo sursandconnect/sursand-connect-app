@@ -41,7 +41,7 @@
 </div>
 </section>
 
-<form class="search" onsubmit="return doSearch(event)"><input id="homeSearch" data-ph="search" placeholder="Search businesses, services, events..."><button>🔍</button></form>
+<form class="search" onsubmit="return doSearch(event)"><input id="homeSearch" data-ph="search" placeholder="Search anything in Sursand Connect..."><button>🔍</button></form>
 
 <section>
 <h2 class="section-title" data-k="quickTitle">Quick Services</h2>
@@ -70,7 +70,7 @@
 
 <section class="news" id="scNewsSection">
 <div class="section-title"><div><h2 data-k="news">📰 News &amp; Updates</h2><p>Latest local news from Sursand</p></div></div>
-<div id="scNewsSlider" class="sc-news-slider"><div class="sc-news-loading">Loading latest news...</div></div>
+<div id="scNewsSlider" class="sc-news-slider"></div>
 </section>
 </main>
 
@@ -113,7 +113,7 @@ function applyPrefs(){const l=localStorage.getItem('scLanguage')||'en',th=localS
 function setLanguage(v){localStorage.setItem('scLanguage',v);applyPrefs()}
 function setTheme(v){localStorage.setItem('scTheme',v);applyPrefs()}
 function openMenu(){menuSheet.classList.add('active')}function closeMenu(){menuSheet.classList.remove('active')}
-function doSearch(e){e.preventDefault();const q=homeSearch.value.trim();if(q)location.href='p/businesses.html?q='+encodeURIComponent(q);return false}
+function doSearch(e){e.preventDefault();const q=homeSearch.value.trim();if(q)location.href='p/search.html?q='+encodeURIComponent(q);return false}
 function shareApp(){const data={title:'Sursand Connect',text:'Sursand Connect - Your local digital community for Sursand.',url:new URL('./',location.href).href};if(navigator.share)navigator.share(data).catch(()=>{});else window.open('https://wa.me/?text='+encodeURIComponent(data.text+'\n\n'+data.url),'_blank')}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 async function loadNews(){ return; }
@@ -161,8 +161,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
     const json=await res.json();
     const rows=(json&&json.success&&Array.isArray(json.data)?json.data:[]).slice(0,5);
     if(!rows.length){
-      box.innerHTML='<div class="sc-news-loading">No current news is available.</div>';
-      return;
+      document.getElementById('scNewsSection').style.display='none'; return;
     }
     box.innerHTML=rows.map(function(n){
       const title=n.Title||n["News Title"]||"Sursand Update";
@@ -175,7 +174,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
       '</article>';
     }).join("");
   }catch(e){
-    box.innerHTML='<div class="sc-news-loading">News is temporarily unavailable.</div>';
+    document.getElementById('scNewsSection').style.display='none';
   }
 })();
 </script>

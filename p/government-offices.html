@@ -1237,18 +1237,10 @@ function scGoRender(){
    CREATE CARD
    ========================================================= */
 
-function scGoCreateCard(item){
+function scGoHindiOfficeName(name,item){if((localStorage.getItem('scLanguage')||'en')!=='hi')return name;const z=scGoValue(item,["Office Name Hindi","Hindi Name","Name Hindi"],"");if(z)return z;let x=String(name||"");[[/Nagar Panchayat/gi,"नगर पंचायत"],[/Nagar Parishad/gi,"नगर परिषद"],[/Block Development Office/gi,"प्रखंड विकास कार्यालय"],[/Block Office/gi,"प्रखंड कार्यालय"],[/Circle Office/gi,"अंचल कार्यालय"],[/Police Station/gi,"पुलिस थाना"],[/Post Office/gi,"डाकघर"],[/Registry Office/gi,"निबंधन कार्यालय"],[/Registration Office/gi,"निबंधन कार्यालय"],[/Electricity Office/gi,"विद्युत कार्यालय"],[/Primary Health Centre/gi,"प्राथमिक स्वास्थ्य केंद्र"],[/Community Health Centre/gi,"सामुदायिक स्वास्थ्य केंद्र"],[/Government Hospital/gi,"सरकारी अस्पताल"],[/Fire Station/gi,"अग्निशमन केंद्र"],[/Railway Station/gi,"रेलवे स्टेशन"],[/Municipal Office/gi,"नगर निकाय कार्यालय"],[/Revenue Office/gi,"राजस्व कार्यालय"],[/Agriculture Office/gi,"कृषि कार्यालय"],[/Education Office/gi,"शिक्षा कार्यालय"],[/Department/gi,"विभाग"],[/Office/gi,"कार्यालय"],[/Sursand/gi,"सुरसंड"]].forEach(p=>x=x.replace(p[0],p[1]));return x}\nfunction scGoCreateCard(item){
 
-  const name =
-    scGoValue(
-      item,
-      [
-        "Office Name",
-        "Name",
-        "Title"
-      ],
-      "Government Office"
-    );
+  const rawName=scGoValue(item,["Office Name","Name","Title"],"Government Office");
+  const name=scGoHindiOfficeName(rawName,item);
 
 
   const type =
@@ -1549,16 +1541,8 @@ function scGoCreateCard(item){
 
 function scGoViewInfo(item){
 
-  const name =
-    scGoValue(
-      item,
-      [
-        "Office Name",
-        "Name",
-        "Title"
-      ],
-      "Government Office"
-    );
+  const rawName=scGoValue(item,["Office Name","Name","Title"],"Government Office");
+  const name=scGoHindiOfficeName(rawName,item);
 
 
   const type =
@@ -2145,4 +2129,4 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-</body></html>
+</body></html><script>(function(){const M={'Block Office':'प्रखंड कार्यालय','Police Station':'पुलिस थाना','Post Office':'डाकघर','Primary Health Centre':'प्राथमिक स्वास्थ्य केंद्र','Community Health Centre':'सामुदायिक स्वास्थ्य केंद्र','Nagar Panchayat':'नगर पंचायत','Nagar Parishad':'नगर परिषद','Circle Office':'अंचल कार्यालय','Registry Office':'निबंधन कार्यालय','Electricity Office':'विद्युत कार्यालय','Government Hospital':'सरकारी अस्पताल','Fire Station':'अग्निशमन केंद्र','Railway Station':'रेलवे स्टेशन'};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('h1,h2,h3,h4,.sc-go-name,.sc-go-title').forEach(e=>{let x=(e.textContent||'').trim();if(M[x])e.textContent=M[x]})}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,1200);setTimeout(tr,3000)});})();</script>

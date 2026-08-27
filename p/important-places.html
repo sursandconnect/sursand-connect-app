@@ -1414,7 +1414,7 @@ function scIpCreateCard(item){
 
   const image =
 
-    (window.scRecordImage ? window.scRecordImage(item) : item["Image URL"]) ||
+    (window.scRecordImage ? window.scRecordImage(item) : (item["Image URL"]||item.Image||item.Photo||"")) ||
 
     item.imageUrl ||
 

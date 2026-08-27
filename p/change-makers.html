@@ -177,7 +177,7 @@ main{padding-bottom:54px!important}
 .sc-cm-maker h4{font-size:10px!important;line-height:1.25!important;margin:4px 0!important}
 .sc-cm-maker p,.sc-cm-maker small{font-size:7.5px!important}
 </style>
-</head><body>
+<style id="sc-v15-change">#scCmGrid,.sc-cm-makers-grid,.sc-cm-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.sc-cm-maker,.sc-cm-card{min-width:0!important;text-align:center!important}.sc-cm-maker img,.sc-cm-card img{width:68px!important;height:68px!important;object-fit:cover!important;border-radius:50%!important;margin:0 auto 6px!important;display:block!important}</style></head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -2028,12 +2028,7 @@ function scCmRender(){
               ? `
 
                 <img
-                  src="${scCmEsc(
-                    item["Image URL"] ||
-                    item.Image ||
-                    item.image ||
-                    item.Photo
-                  )}"
+                  src="${scCmEsc(window.scRecordImage ? window.scRecordImage(item) : (item["Image URL"]||item.Image||item.image||item.Photo||""))}"
                   alt="${scCmEsc(name)}"
                   style="width:64px;height:64px;border-radius:18px;object-fit:cover;border:3px solid #fff;box-shadow:0 0 0 1px #e6ebe7,0 6px 15px rgba(15,23,42,.12);margin-bottom:8px">
 

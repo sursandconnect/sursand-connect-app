@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-</head><body>
+<style>.sc-v15-rep-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;min-height:82px}.sc-v15-rep-head h3{margin:0;flex:1}.sc-v15-rep-head img{width:64px;height:80px;object-fit:cover;border-radius:10px;background:#f4f6f5;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)}</style></head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -1084,11 +1084,7 @@ function scWrRenderLeaders(){
             </span>
 
 
-            <h3>
-
-              ${scWrEsc(name)}
-
-            </h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:62px;height:78px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
 
 
             <div class="sc-wr-featured-info">
@@ -1347,11 +1343,7 @@ function scWrRenderWardCouncillors(){
             </span>
 
 
-            <h3>
-
-              ${scWrEsc(name)}
-
-            </h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:62px;height:78px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
 
 
             <div class="sc-wr-info">
@@ -1388,7 +1380,7 @@ function scWrRenderWardCouncillors(){
                   👤
 
                   <strong>
-                    Representative Name:
+                    Representative:
                   </strong>
 
                   ${scWrEsc(

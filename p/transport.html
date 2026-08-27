@@ -3062,4 +3062,4 @@ else{
   window.scTransportTime12=time12;
 })();
 </script>
-</body></html>
+<script>window.scTransportTime12=function(v){if(v==null||v==='')return '';let q=String(v).trim(),m=q.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);if(m){let h=Math.max(1,Math.min(12,+m[1]));return String(h).padStart(2,'0')+':'+m[2]+' '+m[3].toUpperCase()}m=q.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||q.match(/^(\d{1,2}):(\d{2})/);if(m){let h=+m[1],a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+a}let d=new Date(q);if(!isNaN(d)){let h=d.getHours(),a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' '+a}return q.replace(/^\d{4}-\d{2}-\d{2}[ T]*/,'')};</script></body></html><script>window.scTransportTime12=function(v){if(!v)return '';let s=String(v),m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||s.match(/^(\d{1,2}):(\d{2})/);if(!m)return s.replace(/^.*?(\d{1,2}:\d{2}\s*(?:AM|PM)).*$/i,'$1');let h=+m[1],mm=m[2],ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+mm+' '+ap};</script>

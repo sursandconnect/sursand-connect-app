@@ -24,7 +24,7 @@
 <div class="module" onclick="openSection('requests')"><i>✅</i><b>Business / Service Requests</b><span>Approve or reject new registration requests.</span></div>
 <div class="module" onclick="openSection('events')"><i>📅</i><b>Events & Announcements</b><span>Add and manage public events and announcements.</span></div>
 <div class="module" onclick="openSection('healthcare')"><i>🏥</i><b>Healthcare</b><span>Add healthcare listings and doctors.</span></div>
-<div class="module" onclick="openSection('education')"><i>🎓</i><b>Education</b><span>Add schools and educational institutions.</span></div>
+<div class="module" onclick="openSection('education')"><i>🎓</i><b>Education</b><span>Add schools and educational institutions.</span></div><div class="module" onclick="openSection('news')"><i>📰</i><b>News Publisher</b><span>Publish local news with title, image and full description.</span></div>
 </div>
 <section class="panel" id="panel"><div class="panelhead"><h3 id="panelTitle">Management</h3><div class="tools"><button class="small green" id="addBtn" onclick="openEditor(null)">＋ Add</button><button class="small orange" onclick="showModules()">← Modules</button></div></div><div id="panelContent" class="empty">Select a module.</div></section>
 </main>
@@ -47,7 +47,7 @@ function init(){
  }catch(e){}
 }
 function showModules(){panel.classList.remove('active');modules.style.display='grid';section=''}
-function openSection(s){if(!guard())return;section=s;modules.style.display='none';panel.classList.add('active');panelTitle.textContent={requests:'Business / Service Requests',events:'Events & Announcements',healthcare:'Healthcare',education:'Education'}[s];addBtn.style.display=s==='requests'?'none':'inline-block';panelContent.className='empty';panelContent.textContent='Loading...';post({action:'staffAdminData',section:s,token}).then(r=>{
+function openSection(s){if(!guard())return;section=s;modules.style.display='none';panel.classList.add('active');panelTitle.textContent={requests:'Business / Service Requests',events:'Events & Announcements',healthcare:'Healthcare',education:'Education',news:'News Publisher'}[s];addBtn.style.display=s==='requests'?'none':'inline-block';panelContent.className='empty';panelContent.textContent='Loading...';post({action:'staffAdminData',section:s,token}).then(r=>{
  rows=Array.isArray(r.data)?r.data:[];
  if(adminWard){
    rows=rows.filter(function(x){
@@ -62,7 +62,8 @@ async function requestAction(i,op){if(!confirm((op==='approve'?'Approve':'Reject
 const schemas={
  events:[['Record Type','select:Event|Announcement'],['Title','text'],['Description','textarea'],['Date','date'],['Time','time'],['Venue','text'],['Image','file']],
  healthcare:[['Record Type','select:Healthcare|Doctor'],['Name','text'],['Category','text'],['Phone','text'],['Ward','text'],['Address','textarea'],['Qualification','text'],['Speciality','text'],['Availability','text'],['Image','file']],
- education:[['Institution Name','text'],['Category','text'],['Phone','text'],['Ward','text'],['Address','textarea'],['Description','textarea'],['Image','file']]
+ education:[['Institution Name','text'],['Category','text'],['Phone','text'],['Ward','text'],['Address','textarea'],['Description','textarea'],['Image','file']],
+ news:[['Title','text'],['Description','textarea'],['Published At','datetime-local'],['Start Date','date'],['End Date','date'],['Source','text'],['Image','file'],['Status','select:Active|Draft|Inactive'],['Active','select:Yes|No']]
 };
 function openEditor(i){editing=i===null?null:rows[i];const schema=schemas[section]||[];editorTitle.textContent=editing?'Edit Record':'Add Record';editorForm.innerHTML=schema.map(([k,t])=>{const v=editing?(editing[k]||''):'';if(t==='textarea')return `<div class="field full"><label>${k}</label><textarea name="${k}">${esc(v)}</textarea></div>`;if(t.startsWith('select:'))return `<div class="field"><label>${k}</label><select name="${k}">${t.slice(7).split('|').map(o=>`<option ${v===o?'selected':''}>${o}</option>`).join('')}</select></div>`;if(t==='file')return `<div class="field full"><label>${k}</label><input name="${k}" type="file" accept="image/*" capture="environment"></div>`;return `<div class="field"><label>${k}</label><input name="${k}" type="${t}" value="${esc(v)}"></div>`}).join('')+'<button class="save" type="submit">'+(editing?'Save Changes':'Add Record')+'</button>';editorModal.classList.add('active')}
 function fileData(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
