@@ -53,3 +53,4 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);
   else start();
 })();
+\nwindow.scLocalizedRecordValue=function(item,keys){item=item||{};const hi=(localStorage.getItem('scLanguage')||'en')==='hi';for(const k of keys||[]){if(hi&&item[k+' Hindi']!=null&&String(item[k+' Hindi']).trim())return String(item[k+' Hindi']).trim();if(item[k]!=null&&String(item[k]).trim())return String(item[k]).trim()}return''};\n

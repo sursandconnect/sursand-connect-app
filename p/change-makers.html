@@ -137,7 +137,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href='account.html'}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -177,15 +177,7 @@ main{padding-bottom:54px!important}
 .sc-cm-maker h4{font-size:10px!important;line-height:1.25!important;margin:4px 0!important}
 .sc-cm-maker p,.sc-cm-maker small{font-size:7.5px!important}
 </style>
-<style id="sc-v15-change">#scCmGrid,.sc-cm-makers-grid,.sc-cm-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.sc-cm-maker,.sc-cm-card{min-width:0!important;text-align:center!important}.sc-cm-maker img,.sc-cm-card img{width:68px!important;height:68px!important;object-fit:cover!important;border-radius:50%!important;margin:0 auto 6px!important;display:block!important}</style><script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script><style id="sc-v16-person-ratio">.sc-cm-maker img,.sc-cm-card img,[class*="profile"] img{aspect-ratio:2/3!important;object-fit:cover!important;width:72px!important;height:108px!important;border-radius:12px!important}</style>
-<style id="sc-v17-person-photo">
-.sc-v17-person-photo,.sc-rep-photo,.sc-cm-photo,.sc-doc-photo,.sc-service-photo,
-[class*="representative"] img,[class*="rep-"] img,[class*="change-maker"] img,[class*="cm-"] img,
-[class*="doctor"] img,[class*="service-person"] img{
-  aspect-ratio:2/3!important;object-fit:cover!important;height:auto!important;max-height:180px!important;
-}
-</style>
-</head><body>
+<style id="sc-v15-change">#scCmGrid,.sc-cm-makers-grid,.sc-cm-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.sc-cm-maker,.sc-cm-card{min-width:0!important;text-align:center!important}.sc-cm-maker img,.sc-cm-card img{width:68px!important;height:68px!important;object-fit:cover!important;border-radius:50%!important;margin:0 auto 6px!important;display:block!important}</style></head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -1126,6 +1118,73 @@ main{padding-bottom:54px!important}
 </div>
 
 <!-- =========================================================
+     CHANGE MAKERS LIST
+     ========================================================= -->
+
+<section class="sc-cm-makers">
+
+
+  <div class="sc-cm-makers-head">
+
+
+    <div class="sc-cm-makers-title">
+
+
+      <div class="sc-cm-makers-icon">
+
+        🌟
+
+      </div>
+
+
+      <div>
+
+        <h2>
+          Change Makers of Sursand
+        </h2>
+
+        <p>
+          People contributing towards the positive transformation of Sursand.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <div
+      class="sc-cm-count"
+      id="scCmCount">
+
+      Loading...
+
+    </div>
+
+
+  </div>
+
+
+  <div
+    class="sc-cm-makers-grid"
+    id="scCmGrid">
+
+
+    <div class="sc-cm-empty">
+
+      Loading Change Makers...
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
      VISION
      ========================================================= -->
 
@@ -1291,71 +1350,6 @@ main{padding-bottom:54px!important}
 
 </div>
 
-
-<!-- =========================================================
-     CHANGE MAKERS LIST
-     ========================================================= -->
-
-<section class="sc-cm-makers">
-
-
-  <div class="sc-cm-makers-head">
-
-
-    <div class="sc-cm-makers-title">
-
-
-      <div class="sc-cm-makers-icon">
-
-        🌟
-
-      </div>
-
-
-      <div>
-
-        <h2>
-          Change Makers of Sursand
-        </h2>
-
-        <p>
-          People contributing towards the positive transformation of Sursand.
-        </p>
-
-      </div>
-
-
-    </div>
-
-
-    <div
-      class="sc-cm-count"
-      id="scCmCount">
-
-      Loading...
-
-    </div>
-
-
-  </div>
-
-
-  <div
-    class="sc-cm-makers-grid"
-    id="scCmGrid">
-
-
-    <div class="sc-cm-empty">
-
-      Loading Change Makers...
-
-    </div>
-
-
-  </div>
-
-
-</section>
 
 
 <!-- =========================================================
@@ -1971,6 +1965,7 @@ function scCmRender(){
 
         const name =
 
+          ((localStorage.getItem('scLanguage')||'en')==='hi' && (item["Full Name Hindi"]||item["Name Hindi"])) ||
           item["Full Name"] ||
 
           item.Name ||
@@ -2455,4 +2450,4 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-</body></html>
+<script>function scV16Loc(o,ks){const hi=(localStorage.getItem('scLanguage')||'en')==='hi';for(const k of ks){if(hi&&o&&o[k+' Hindi']&&String(o[k+' Hindi']).trim())return String(o[k+' Hindi']).trim();if(o&&o[k]&&String(o[k]).trim())return String(o[k]).trim()}return''}</script></body></html>

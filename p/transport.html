@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href='account.html'}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script></head><body>
+</head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -2264,7 +2264,8 @@ function scTrCreateCard(item){
     time.textContent =
 
       "🕒 Departure from Sursand: " +
-      (window.scTransportTime12 ? window.scTransportTime12(departure) : departure);
+
+      departure;
 
 
     card.appendChild(
@@ -3061,20 +3062,4 @@ else{
   window.scTransportTime12=time12;
 })();
 </script>
-<script>window.scTransportTime12=function(v){if(v==null||v==='')return '';let q=String(v).trim(),m=q.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);if(m){let h=Math.max(1,Math.min(12,+m[1]));return String(h).padStart(2,'0')+':'+m[2]+' '+m[3].toUpperCase()}m=q.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||q.match(/^(\d{1,2}):(\d{2})/);if(m){let h=+m[1],a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+a}let d=new Date(q);if(!isNaN(d)){let h=d.getHours(),a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' '+a}return q.replace(/^\d{4}-\d{2}-\d{2}[ T]*/,'')};</script><script id="sc-v16-time">window.scTransportTime12=function(v){if(v==null||v==='')return'';let s=String(v).trim(),m=s.match(/(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?/i);if(m){let h=+m[1],mi=m[2],ap=m[3]?m[3].toUpperCase():(h>=12?'PM':'AM');if(!m[3])h=h%12||12;return String(h).padStart(2,'0')+':'+mi+' '+ap}let d=new Date(s);if(!isNaN(d)){let h=d.getHours(),ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' '+ap}return s.replace(/^\d{4}-\d{2}-\d{2}[ T]*/,'')};</script>
-<script id="sc-v17-transport-time">
-window.scTransportTime12=function(v){
- if(v==null||v==='')return '';
- let s=String(v).trim(),m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?/i);
- if(!m)m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?/i);
- if(!m)return '';
- let h=+m[1],mi=m[2],ap=m[3]?m[3].toUpperCase():(h>=12?'PM':'AM');
- if(!m[3])h=h%12||12; else h=h%12||12;
- return String(h).padStart(2,'0')+':'+mi+' '+ap;
-};
-setTimeout(()=>document.querySelectorAll('.sc-tr-time').forEach(el=>{
- const m=(el.textContent||'').match(/(\d{1,2}:\d{2}(?::\d{2})?(?:\s*(?:AM|PM))?)/i);
- if(m)el.textContent='🕒 Departure from Sursand: '+window.scTransportTime12(m[1]);
-}),350);
-</script>
-</body></html><script>window.scTransportTime12=function(v){if(!v)return '';let s=String(v),m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||s.match(/^(\d{1,2}):(\d{2})/);if(!m)return s.replace(/^.*?(\d{1,2}:\d{2}\s*(?:AM|PM)).*$/i,'$1');let h=+m[1],mm=m[2],ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+mm+' '+ap};</script>
+<script>window.scTransportTime12=function(v){if(v==null||v==='')return '';let q=String(v).trim(),m=q.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);if(m){let h=Math.max(1,Math.min(12,+m[1]));return String(h).padStart(2,'0')+':'+m[2]+' '+m[3].toUpperCase()}m=q.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||q.match(/^(\d{1,2}):(\d{2})/);if(m){let h=+m[1],a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+m[2]+' '+a}let d=new Date(q);if(!isNaN(d)){let h=d.getHours(),a=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' '+a}return q.replace(/^\d{4}-\d{2}-\d{2}[ T]*/,'')};</script><script>function scV16Loc(o,ks){const hi=(localStorage.getItem('scLanguage')||'en')==='hi';for(const k of ks){if(hi&&o&&o[k+' Hindi']&&String(o[k+' Hindi']).trim())return String(o[k+' Hindi']).trim();if(o&&o[k]&&String(o[k]).trim())return String(o[k]).trim()}return''}</script></body></html><script>window.scTransportTime12=function(v){if(!v)return '';let s=String(v),m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})/)||s.match(/^(\d{1,2}):(\d{2})/);if(!m)return s.replace(/^.*?(\d{1,2}:\d{2}\s*(?:AM|PM)).*$/i,'$1');let h=+m[1],mm=m[2],ap=h>=12?'PM':'AM';h=h%12||12;return String(h).padStart(2,'0')+':'+mm+' '+ap};</script>

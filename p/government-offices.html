@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href='account.html'}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script></head><body>
+</head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -2129,4 +2129,4 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-</body></html><script>(function(){const M={'Block Office':'प्रखंड कार्यालय','Police Station':'पुलिस थाना','Post Office':'डाकघर','Primary Health Centre':'प्राथमिक स्वास्थ्य केंद्र','Community Health Centre':'सामुदायिक स्वास्थ्य केंद्र','Nagar Panchayat':'नगर पंचायत','Nagar Parishad':'नगर परिषद','Circle Office':'अंचल कार्यालय','Registry Office':'निबंधन कार्यालय','Electricity Office':'विद्युत कार्यालय','Government Hospital':'सरकारी अस्पताल','Fire Station':'अग्निशमन केंद्र','Railway Station':'रेलवे स्टेशन'};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('h1,h2,h3,h4,.sc-go-name,.sc-go-title').forEach(e=>{let x=(e.textContent||'').trim();if(M[x])e.textContent=M[x]})}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,1200);setTimeout(tr,3000)});})();</script>
+<script>function scV16Loc(o,ks){const hi=(localStorage.getItem('scLanguage')||'en')==='hi';for(const k of ks){if(hi&&o&&o[k+' Hindi']&&String(o[k+' Hindi']).trim())return String(o[k+' Hindi']).trim();if(o&&o[k]&&String(o[k]).trim())return String(o[k]).trim()}return''}</script></body></html><script>(function(){const M={'Block Office':'प्रखंड कार्यालय','Police Station':'पुलिस थाना','Post Office':'डाकघर','Primary Health Centre':'प्राथमिक स्वास्थ्य केंद्र','Community Health Centre':'सामुदायिक स्वास्थ्य केंद्र','Nagar Panchayat':'नगर पंचायत','Nagar Parishad':'नगर परिषद','Circle Office':'अंचल कार्यालय','Registry Office':'निबंधन कार्यालय','Electricity Office':'विद्युत कार्यालय','Government Hospital':'सरकारी अस्पताल','Fire Station':'अग्निशमन केंद्र','Railway Station':'रेलवे स्टेशन'};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('h1,h2,h3,h4,.sc-go-name,.sc-go-title').forEach(e=>{let x=(e.textContent||'').trim();if(M[x])e.textContent=M[x]})}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,1200);setTimeout(tr,3000)});})();</script>

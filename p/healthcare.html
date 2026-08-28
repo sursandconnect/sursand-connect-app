@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href='account.html'}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 
 function scHcGetDoorLocation(targetId){
@@ -51,14 +51,6 @@ function scHcGetDoorLocation(targetId){
 body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
-</style>
-<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script><style>.sc-person-photo,[class*="doctor"] img,[class*="profile"] img{aspect-ratio:2/3!important;object-fit:cover!important}</style>
-<style id="sc-v17-person-photo">
-.sc-v17-person-photo,.sc-rep-photo,.sc-cm-photo,.sc-doc-photo,.sc-service-photo,
-[class*="representative"] img,[class*="rep-"] img,[class*="change-maker"] img,[class*="cm-"] img,
-[class*="doctor"] img,[class*="service-person"] img{
-  aspect-ratio:2/3!important;object-fit:cover!important;height:auto!important;max-height:180px!important;
-}
 </style>
 </head><body>
 <div class="sc-appbar">
@@ -2043,11 +2035,14 @@ const SC_HC_API =
    Replace these values later when final tie-up numbers are ready.
    ========================================================= */
 
-let SC_HC_PATHOLOGIST_PHONE="";
-let SC_HC_PATHOLOGIST_WHATSAPP="";
-let SC_HC_MEDICAL_STORE_WHATSAPP="";
-async function scHcLoadServiceContacts(){try{const r=await fetch(SC_HC_API+"?action=settings&_="+Date.now()),j=await r.json(),x=j&&j.success?j.data:{};SC_HC_PATHOLOGIST_PHONE=String(x.PATHOLOGY_PHONE||x.PATHOLOGY_LAB_WHATSAPP||x.PATHOLOGY_WHATSAPP||"").split(",")[0].replace(/\D/g,"");SC_HC_PATHOLOGIST_WHATSAPP=String(x.PATHOLOGY_LAB_WHATSAPP||x.PATHOLOGY_WHATSAPP||x.PATHOLOGY_PHONE||"").split(",")[0].replace(/\D/g,"");SC_HC_MEDICAL_STORE_WHATSAPP=String(x.MEDICAL_STORE_WHATSAPP||x.MEDICAL_STORE_PHONE||"").split(",")[0].replace(/\D/g,"")}catch(e){}}
-scHcLoadServiceContacts();
+const SC_HC_PATHOLOGIST_PHONE =
+"6203302027";
+
+const SC_HC_PATHOLOGIST_WHATSAPP =
+"916203302027";
+
+const SC_HC_MEDICAL_STORE_WHATSAPP =
+"916203302027";
 
 
 
@@ -3728,7 +3723,7 @@ document
 )
 .addEventListener(
   "submit",
-  async function(event){
+  function(event){
 
     event.preventDefault();
 
@@ -3863,12 +3858,10 @@ document
       "\nBooking sent through Sursand Connect";
 
 
-    try{
-      await fetch(SC_HC_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"pathologyRequest",data:{"Patient Name":name,"Mobile":mobile,"Address":address,"Test Requirement":test,"Preferred Date":date,"Preferred Time":time,"Remarks":remarks}})});
-    }catch(_){}
-    if(!SC_HC_PATHOLOGIST_WHATSAPP){status.className="sc-hc-status bad";status.textContent="Pathology WhatsApp contact is not configured in Settings.";return;}
     const url =
+
       "https://wa.me/" +
+
       SC_HC_PATHOLOGIST_WHATSAPP +
 
       "?text=" +
@@ -3906,7 +3899,7 @@ document
 )
 .addEventListener(
   "submit",
-  async function(event){
+  function(event){
 
     event.preventDefault();
 
@@ -4052,12 +4045,10 @@ document
       "\nOrder sent through Sursand Connect";
 
 
-    try{
-      await fetch(SC_HC_API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"medicineOrder",data:{"Customer Name":name,"Mobile":mobile,"Delivery Address":address,"Medicine Names":medicineNames,"Remarks":remarks}})});
-    }catch(_){}
-    if(!SC_HC_MEDICAL_STORE_WHATSAPP){status.className="sc-hc-status bad";status.textContent="Medical store WhatsApp contact is not configured in Settings.";return;}
     const url =
+
       "https://wa.me/" +
+
       SC_HC_MEDICAL_STORE_WHATSAPP +
 
       "?text=" +
