@@ -1346,7 +1346,7 @@ function scWrRenderWardCouncillors(){
 
             <span class="sc-wr-role">
 
-              Ward Councillor
+              ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद':'Ward Councillor'}
 
             </span>
 
@@ -1772,4 +1772,16 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
+
+<script id="sc-v18-representative-hindi">
+function scV18RoleLabel(role){
+ const hi=(localStorage.getItem('scLanguage')||localStorage.getItem('scLang')||'en')==='hi';
+ if(!hi)return role;
+ const r=String(role||'').toLowerCase();
+ if(r.includes('vice')&&r.includes('chair'))return 'उपमुख्य पार्षद';
+ if(r.includes('chair'))return 'मुख्य पार्षद';
+ if(r.includes('councillor')||r.includes('councilor'))return 'वार्ड पार्षद';
+ return role;
+}
+</script>
 </body></html>

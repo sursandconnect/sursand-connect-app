@@ -1,8 +1,73 @@
 (function(){
- const map={'Home':'होम','Menu':'मेनू','Login':'लॉगिन','Search':'खोजें','News':'समाचार','Updates':'अपडेट','Jobs':'नौकरियां','Transport':'परिवहन','Representative':'प्रतिनिधि','Representatives':'प्रतिनिधि','Ward':'वार्ड','Call':'कॉल करें','Address':'पता','Name':'नाम','Contact':'संपर्क','Details':'विवरण','Description':'विवरण','Status':'स्थिति','Active':'सक्रिय','Other':'अन्य','All':'सभी','View Full Details':'पूरा विवरण देखें','Read full news':'पूरा समाचार पढ़ें','Departure from Sursand':'सुरसंड से प्रस्थान','Vehicle Type':'वाहन प्रकार','Passenger':'यात्री','Government Offices':'सरकारी कार्यालय','Important Places':'महत्वपूर्ण स्थान','Weather & Forecast':'मौसम व पूर्वानुमान','Events & Announcements':'कार्यक्रम एवं घोषणाएं','Change Makers':'चेंज मेकर्स','City Connect':'सिटी कनेक्ट','Social Media':'सोशल मीडिया','Follow Sursand Connect':'सुरसंड कनेक्ट को फॉलो करें'};
- const cons={b:'ब',c:'क',d:'द',f:'फ',g:'ग',h:'ह',j:'ज',k:'क',l:'ल',m:'म',n:'न',p:'प',q:'क',r:'र',s:'स',t:'त',v:'व',w:'व',x:'क्स',y:'य',z:'ज'};
- function translitWord(w){if(!/^[A-Za-z][A-Za-z.'-]*$/.test(w))return w;let x=w.toLowerCase(),o='',i=0;const pairs=[['ch','च'],['sh','श'],['th','थ'],['dh','ध'],['ph','फ'],['bh','भ'],['kh','ख'],['gh','घ'],['jh','झ'],['tr','त्र'],['bh','भ'],['kr','क्र'],['pr','प्र'],['br','ब्र'],['dr','द्र'],['gr','ग्र'],['vr','व्र']];while(i<x.length){let p=pairs.find(a=>x.startsWith(a[0],i));if(p){o+=p[1];i+=p[0].length;continue}let c=x[i],n=x[i+1]||'';if('aeiou'.includes(c)){o+=({a:'अ',e:'े',i:'ि',o:'ो',u:'ु'})[c];i++;continue}let cc=cons[c];if(cc){o+=cc;if(n==='a'){o+='ा';i+=2}else if(n==='i'){o+='ि';i+=2}else if(n==='e'){o+='े';i+=2}else if(n==='o'){o+='ो';i+=2}else if(n==='u'){o+='ु';i+=2}else i++;continue}o+=c;i++}return o||w}
- function conv(t){let s=t;Object.keys(map).sort((a,b)=>b.length-a.length).forEach(k=>s=s.replace(new RegExp('\\b'+k.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')+'\\b','gi'),map[k]));s=s.replace(/\b[A-Za-z][A-Za-z.'-]{2,}\b/g,w=>translitWord(w));return s}
- function apply(){if((localStorage.getItem('scLanguage')||localStorage.getItem('scLang')||'en')!=='hi')return;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.parentElement||/^(SCRIPT|STYLE|TEXTAREA)$/i.test(n.parentElement.tagName)||n.parentElement.closest('code,pre'))continue;if(/[A-Za-z]{2}/.test(n.nodeValue))n.nodeValue=conv(n.nodeValue)}document.querySelectorAll('input[placeholder]').forEach(x=>{if(/[A-Za-z]/.test(x.placeholder))x.placeholder=conv(x.placeholder)})}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,350));else setTimeout(apply,350);new MutationObserver(()=>setTimeout(apply,50)).observe(document.documentElement,{childList:true,subtree:true});window.scHindiName=translitWord;
+  /* V18: meaningful Hindi only. No automatic person/name transliteration. */
+  const MAP={
+    'Chairman':'मुख्य पार्षद',
+    'Vice Chairman':'उपमुख्य पार्षद',
+    'Ward Councillor':'वार्ड पार्षद',
+    'Ward Councillors':'वार्ड पार्षद',
+    'Chairman & Vice Chairman':'मुख्य पार्षद एवं उपमुख्य पार्षद',
+    'Municipal Leadership':'नगर नेतृत्व',
+    'Representative':'प्रतिनिधि',
+    'Representatives':'प्रतिनिधि',
+    'Representative Name':'प्रतिनिधि का नाम',
+    'Representative Role':'पद',
+    'Name in Hindi':'हिंदी में नाम',
+    'Ward':'वार्ड',
+    'Ward Number':'वार्ड संख्या',
+    'Contact Number':'संपर्क नंबर',
+    'WhatsApp Number':'व्हाट्सऐप नंबर',
+    'Address':'पता',
+    'Status':'स्थिति',
+    'Active':'सक्रिय',
+    'Home':'होम',
+    'Menu':'मेनू',
+    'Search':'खोजें',
+    'News':'समाचार',
+    'News & Updates':'समाचार व अपडेट',
+    'Jobs':'नौकरियां',
+    'Transport':'परिवहन',
+    'Government Offices':'सरकारी कार्यालय',
+    'Important Places':'महत्वपूर्ण स्थान',
+    'Weather & Forecast':'मौसम व पूर्वानुमान',
+    'Events & Announcements':'कार्यक्रम एवं घोषणाएं',
+    'Notifications':'सूचनाएं',
+    'View Full Details':'पूरा विवरण देखें',
+    'Call':'कॉल करें',
+    'Message':'संदेश',
+    'Directions':'दिशा',
+    'Other':'अन्य',
+    'All':'सभी',
+    'Description':'विवरण',
+    'Details':'विवरण',
+    'Category':'श्रेणी',
+    'Time':'समय',
+    'Departure from Sursand':'सुरसंड से प्रस्थान'
+  };
+  function lang(){return (localStorage.getItem('scLanguage')||localStorage.getItem('scLang')||'en').toLowerCase()}
+  function translateText(t){
+    let s=String(t||'');
+    if(!s.trim()||lang()!=='hi')return s;
+    // Brand must always remain exactly Sursand Connect.
+    const BRAND='__SC_BRAND__';
+    s=s.replace(/Sursand Connect/gi,BRAND).replace(/सुरसंड\s*कनेक्ट/g,BRAND);
+    Object.keys(MAP).sort((a,b)=>b.length-a.length).forEach(k=>{
+      const re=new RegExp('\\b'+k.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&')+'\\b','g');
+      s=s.replace(re,MAP[k]);
+    });
+    return s.replace(new RegExp(BRAND,'g'),'Sursand Connect');
+  }
+  function apply(){
+    if(lang()!=='hi')return;
+    const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+    while(n=w.nextNode()){
+      if(!n.parentElement||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/i.test(n.parentElement.tagName)||n.parentElement.closest('code,pre'))continue;
+      const x=translateText(n.nodeValue);if(x!==n.nodeValue)n.nodeValue=x;
+    }
+    document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(x=>{x.placeholder=translateText(x.placeholder)});
+    document.querySelectorAll('option').forEach(x=>{x.textContent=translateText(x.textContent)});
+  }
+  window.scMeaningfulHindi=translateText;
+  window.scHindiName=function(name,hindiName){return lang()==='hi'&&String(hindiName||'').trim()?String(hindiName).trim():String(name||'')};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,200));else setTimeout(apply,200);
+  new MutationObserver(()=>setTimeout(apply,80)).observe(document.documentElement,{childList:true,subtree:true});
 })();
