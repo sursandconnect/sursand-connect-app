@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
+function scAccountInfo(){location.href='account.html'}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-<style id="sc-v15-no-local-info">#scWtLocalInfo,.sc-wt-local-info,[id*="LocalInfo"],[class*="local-info"],[class*="localInformation"]{display:none!important}</style></head><body>
+<style id="sc-v15-no-local-info">#scWtLocalInfo,.sc-wt-local-info,[id*="LocalInfo"],[class*="local-info"],[class*="localInformation"]{display:none!important}</style><script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script><style id='sc-v17-weather-clean'>[id*='LocalInfo'],[class*='local-info'],[class*='localInformation'],[id*='LocalSearch']{display:none!important}</style></head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -58,7 +58,7 @@ main{padding-bottom:54px!important}
 </div>
 </div>
 <main style="padding-bottom:44px"><!-- =========================================================
-     POST 16 — WEATHER & LOCAL INFORMATION
+     POST 16 — Weather & Forecast
      SURSAND CONNECT
      FULL REPLACEMENT
      WEATHER DASHBOARD + GRAPHS
@@ -1103,7 +1103,7 @@ main{padding-bottom:54px!important}
 
 
 /* =========================================================
-   LOCAL INFORMATION GRID
+   weather forecast GRID
    ========================================================= */
 
 .sc-wt-grid{
@@ -1590,20 +1590,10 @@ main{padding-bottom:54px!important}
 
 
 <!-- =========================================================
-     LOCAL INFORMATION
+     weather forecast
      ========================================================= -->
 
-<section class="sc-wt-section-title">
 
-  <h2>
-    📍 Local Information
-  </h2>
-
-  <p>
-    Useful local facilities and information for Sursand residents.
-  </p>
-
-</section>
 
 
 <!-- =========================================================
@@ -1615,7 +1605,7 @@ main{padding-bottom:54px!important}
   <input
     id="scWtSearch"
     type="search"
-    placeholder="Search local information..."
+    placeholder="Search ..."
     oninput="scWtRenderLocal()">
 
 
@@ -1644,7 +1634,7 @@ main{padding-bottom:54px!important}
   class="sc-wt-count"
   id="scWtCount">
 
-  Loading local information...
+  Loading ...
 
 </div>
 
@@ -1658,7 +1648,7 @@ main{padding-bottom:54px!important}
   id="scWtGrid">
 
   <div class="sc-wt-empty">
-    Loading local information...
+    Loading ...
   </div>
 
 </div>
@@ -1674,7 +1664,7 @@ const SC_WT_API =
 "https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec";
 
 
-let scWtLocalData = [];
+let scWtLocalData=[];
 
 let scWtCategory =
   "All";
@@ -2810,7 +2800,7 @@ function scWtDayName(value){
 
 
 /* =========================================================
-   LOCAL INFORMATION LOAD
+   weather forecast LOAD
    ========================================================= */
 
 async function scWtLoadLocal(){
@@ -2844,17 +2834,7 @@ async function scWtLoadLocal(){
       result.data || {};
 
 
-    scWtLocalData =
-
-      data.localInformation ||
-
-      data.localInfo ||
-
-      data.weatherLocalInfo ||
-
-      data.usefulLocalInfo ||
-
-      [];
+    scWtLocalData=[];
 
 
     if(
@@ -2863,8 +2843,7 @@ async function scWtLoadLocal(){
       )
     ){
 
-      scWtLocalData =
-        [];
+      scWtLocalData=[];
 
     }
 
@@ -2878,7 +2857,7 @@ async function scWtLoadLocal(){
   catch(error){
 
     console.error(
-      "Local Information:",
+      ":",
       error
     );
 
@@ -2889,7 +2868,7 @@ async function scWtLoadLocal(){
 
       <div class="sc-wt-empty">
 
-        Unable to load local information.
+        Unable to load .
 
       </div>
 
@@ -3130,7 +3109,7 @@ function scWtRenderLocal(){
 
       <div class="sc-wt-empty">
 
-        No local information found.
+        No  found.
 
       </div>
 
@@ -3160,7 +3139,7 @@ function scWtRenderLocal(){
 
           item.Title ||
 
-          "Local Information";
+          "";
 
 
         const category =
@@ -3171,7 +3150,7 @@ function scWtRenderLocal(){
 
           item.Type ||
 
-          "Local Information";
+          "";
 
 
         const description =
@@ -3658,4 +3637,4 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-</body></html><style>#scWtLocalInfo,.sc-wt-local-info,[id*=LocalInfo],[class*=local-info]{display:none!important}</style><script>document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('h1,h2,h3,h4').forEach(h=>{if(/Local Information/i.test(h.textContent)){let x=h.closest('section')||h.parentElement;if(x)x.style.display='none'}}));</script>
+</body></html><style>#scWtLocalInfo,.sc-wt-local-info,[id*=LocalInfo],[class*=local-info]{display:none!important}</style><script>document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('h1,h2,h3,h4').forEach(h=>{if(//i.test(h.textContent)){let x=h.closest('section')||h.parentElement;if(x)x.style.display='none'}}));</script>

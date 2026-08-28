@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
+function scAccountInfo(){location.href='account.html'}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-</head><body>
+<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script></head><body>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -1078,17 +1078,12 @@ async function scNtLoad(){
       result.data || {};
 
 
-    scNtData =
-
-      data.notifications ||
-
-      data.updates ||
-
-      data.notificationsUpdates ||
-
-      data.localUpdates ||
-
-      [];
+    scNtData = [];
+    (data.notifications||[]).forEach(function(x){scNtData.push(x)});
+    (data.events||[]).forEach(function(x){x=Object.assign({},x,{"Notification Type":"Event","Notification Title":x["Event Title"]||x.Title});scNtData.push(x)});
+    (data.announcements||[]).forEach(function(x){x=Object.assign({},x,{"Notification Type":"Announcement","Notification Title":x["Announcement Title"]||x.Title});scNtData.push(x)});
+    (data.news||[]).forEach(function(x){x=Object.assign({},x,{"Notification Type":"News","Notification Title":x.Title});scNtData.push(x)});
+    (data.jobs||[]).forEach(function(x){x=Object.assign({},x,{"Notification Type":"Job","Notification Title":x["Job Title"]||x.Title,"Description":x["Job Description"]||x.Description});scNtData.push(x)});
 
 
     if(
@@ -2156,7 +2151,7 @@ function scNtCreateCard(
    CLEAR ALL
    ========================================================= */
 
-function scNtClearAll(){
+async function scNtClearAll(){
 
   const visible =
     scNtData.filter(
@@ -2204,12 +2199,7 @@ function scNtClearAll(){
   }
 
 
-  const confirmed =
-    window.confirm(
-
-      "Clear all notifications from this device?"
-
-    );
+  const confirmed = await scConfirm("Clear all notifications from this device?");
 
 
   if(!confirmed){

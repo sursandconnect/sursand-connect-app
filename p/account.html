@@ -27,7 +27,7 @@
 /* v10.4 green bottom */
 .sc-bottom{background:linear-gradient(135deg,#34a853,#238b45 52%,#176b35)!important}
 </style>
-</head>
+<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script><style>.sc-person-photo,[class*="doctor"] img,[class*="profile"] img{aspect-ratio:2/3!important;object-fit:cover!important}</style></head>
 <body>
 <header class="sc-appbar">
 <a href="../" class="sc-brand"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM6ePTCVaqvhVtE9SqPzEyzrYrHjo0MlxUbzHS1D8ORCNX_at01YJcY6a7ltTxA2AaYEuojBw-VotVudZXLNUHVSs6xQvLX6zbNBh-bVnm0v6gURU0yStk_fObHB9rGNwbkf2v_GTyAmcwAG0m8srp0at1riLJSCvOLU3kFneNoNlX-C1XLbioi4RtmDfU/s1600/IMG_20260820_101456.png"><span><b>Sursand Connect</b><small>Your Local Digital Community</small></span></a>
@@ -145,12 +145,12 @@ async function updateProfilePhoto(){
    alert('Profile picture updated.');
  }catch(e){alert(e.message||'Unable to update profile picture.')}
 }
-function changeUserPassword(){
+async function changeUserPassword(){
  const token=localStorage.getItem(TOKEN_KEY)||'',cur=currentPassword.value,nw=newPassword.value,cf=confirmNewPassword.value;
  if(!cur||!nw||!cf){alert('Complete all password fields.');return}
  if(nw.length<6){alert('New password must contain at least 6 characters.');return}
  if(nw!==cf){alert('New passwords do not match.');return}
- if(!confirm('Update your account password?'))return;
+ if(!await scConfirm('Update your account password?'))return;
  post({action:'userChangePassword',token,currentPassword:cur,newPassword:nw}).then(()=>{currentPassword.value='';newPassword.value='';confirmNewPassword.value='';changePass.classList.remove('active');alert('Password updated successfully.')}).catch(e=>alert(e.message||'Unable to update password.'));
 }
 

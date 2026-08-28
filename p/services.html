@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
+function scAccountInfo(){location.href='account.html'}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded',scApplyPrefs);
 body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
+</style>
+<script src="../app-ui.js"></script><script src="../app-data-cache.js"></script><script src="../app-full-hi.js"></script>
+<style id="sc-v17-person-photo">
+.sc-v17-person-photo,.sc-rep-photo,.sc-cm-photo,.sc-doc-photo,.sc-service-photo,
+[class*="representative"] img,[class*="rep-"] img,[class*="change-maker"] img,[class*="cm-"] img,
+[class*="doctor"] img,[class*="service-person"] img{
+  aspect-ratio:2/3!important;object-fit:cover!important;height:auto!important;max-height:180px!important;
+}
 </style>
 </head><body>
 <div class="sc-appbar">
