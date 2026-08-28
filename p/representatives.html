@@ -677,14 +677,9 @@ main{padding-bottom:54px!important}
 
 <section class="sc-wr-hero">
 
-  <h1>
-    🏛️ Ward Representatives
-  </h1>
+  <h1 id="scWrPageTitle">🏛️ Representatives</h1>
 
-  <p>
-    Find and contact the Mukhya Ward Parshad, Upmukhya Ward Parshad
-    and all Ward Councillors of Sursand.
-  </p>
+  <p id="scWrHeroText">Find and contact the Chairman, Vice Chairman and all Ward Councillors of Nagar Panchayat Sursand.</p>
 
 </section>
 
@@ -695,13 +690,9 @@ main{padding-bottom:54px!important}
 
 <div class="sc-wr-section">
 
-  <h2>
-    🏛️ Mukhya Ward Parshad &amp; Upmukhya Ward Parshad
-  </h2>
+  <h2 id="scWrLeaderTitle">🏛️ Chairman &amp; Vice Chairman</h2>
 
-  <span>
-    Municipal Leadership
-  </span>
+  <span id="scWrLeaderSub">Nagar Panchayat Sursand Leadership</span>
 
 </div>
 
@@ -711,7 +702,7 @@ main{padding-bottom:54px!important}
   id="scWrLeaders">
 
   <div class="sc-wr-empty">
-    Loading Mukhya Ward Parshad and Upmukhya Ward Parshad...
+    Loading Chairman and Vice Chairman...
   </div>
 
 </div>
@@ -723,9 +714,7 @@ main{padding-bottom:54px!important}
 
 <div class="sc-wr-section">
 
-  <h2>
-    🏘️ Ward Councillors
-  </h2>
+  <h2 id="scWrWardTitle">🏘️ Ward Councillors</h2>
 
   <span id="scWrCount">
     Loading...
@@ -814,7 +803,7 @@ async function scWrLoad(){
 
       <div class="sc-wr-empty">
 
-        Unable to load Mukhya Ward Parshad and Upmukhya Ward Parshad.
+        Unable to load Chairman and Vice Chairman.
 
       </div>
 
@@ -958,10 +947,10 @@ function scWrRenderLeaders(){
 
     leaders.push({
       item:chairman,
-      role:"Mukhya Ward Parshad",
-      roleHi:"नगर पंचायत सुरसंड के मुख्य वार्ड पार्षद",
+      role:"Chairman of Nagar Panchayat Sursand",
+      roleHi:"सुरसंड नगर पंचायत के मुख्य पार्षद",
       description:
-        "Mukhya Ward Parshad of Nagar Panchayat Sursand."
+        "Chairman of Nagar Panchayat Sursand."
     });
 
   }
@@ -971,10 +960,10 @@ function scWrRenderLeaders(){
 
     leaders.push({
       item:viceChairman,
-      role:"Upmukhya Ward Parshad",
-      roleHi:"नगर पंचायत सुरसंड के उपमुख्य वार्ड पार्षद",
+      role:"Vice Chairman of Nagar Panchayat Sursand",
+      roleHi:"सुरसंड नगर पंचायत के उपमुख्य पार्षद",
       description:
-        "Upmukhya Ward Parshad of Nagar Panchayat Sursand."
+        "Vice Chairman of Nagar Panchayat Sursand."
     });
 
   }
@@ -988,8 +977,7 @@ function scWrRenderLeaders(){
 
       <div class="sc-wr-empty">
 
-        Mukhya Ward Parshad and Upmukhya Ward Parshad information
-        has not been added yet.
+        Chairman and Vice Chairman information has not been added yet.
 
       </div>
 
@@ -1038,14 +1026,12 @@ function scWrRenderLeaders(){
 
             <span class="sc-wr-featured-role">
 
-              ${scWrEsc(
-                leader.role
-              )}
+              ${scWrEsc((localStorage.getItem('scLanguage')||'en')==='hi'?leader.roleHi:leader.role)}
 
             </span>
 
 
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:62px;height:78px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:92px;height:116px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
 
 
             <div class="sc-wr-featured-info">
@@ -1178,13 +1164,9 @@ function scWrRenderWardCouncillors(){
     "scWrCount"
   ).textContent =
 
-    data.length +
-
-    (
-      data.length === 1
-        ? " Councillor"
-        : " Councillors"
-    );
+    data.length + ((localStorage.getItem('scLanguage')||'en')==='hi'
+      ? " वार्ड पार्षद"
+      : (data.length===1?" Ward Councillor":" Ward Councillors"));
 
 
   if(
@@ -1298,13 +1280,11 @@ function scWrRenderWardCouncillors(){
 
 
             <span class="sc-wr-role">
-
-              Ward Councillor
-
+              ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद':'Ward Councillor'}
             </span>
 
 
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:62px;height:78px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:82px;height:104px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
 
 
             <div class="sc-wr-info">
@@ -1341,7 +1321,7 @@ function scWrRenderWardCouncillors(){
                   👤
 
                   <strong>
-                    Representative:
+                    ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद प्रतिनिधि:':'Ward Councillor Representative:'}
                   </strong>
 
                   ${scWrEsc(
@@ -1446,17 +1426,11 @@ function scWrLocalizedName(item){const hi=(localStorage.getItem('scLanguage')||'
 function scWrName(item){
 
   return (
-
+    item["Representative Name"] ||
     item.Name ||
-
     item.name ||
-
-    item[
-      "Councillor Name"
-    ] ||
-
+    item["Councillor Name"] ||
     "Representative"
-
   );
 
 }
@@ -1504,14 +1478,7 @@ function scWrWardNumber(item){
     );
 
 
-  if(
-    number < 1 ||
-    number > 18
-  ){
-
-    return 0;
-
-  }
+  if(number < 1){ return 0; }
 
 
   return number;
@@ -1712,7 +1679,22 @@ if(
 
 else{
 
-  scWrLoad();
+  
+function scWrApplyLanguage(){
+  const hi=(localStorage.getItem('scLanguage')||'en')==='hi';
+  document.title=(hi?'प्रतिनिधि':'Representatives')+' | Sursand Connect';
+  const set=(id,en,hn)=>{const x=document.getElementById(id);if(x)x.textContent=hi?hn:en};
+  set('scWrPageTitle','🏛️ Representatives','🏛️ प्रतिनिधि');
+  set('scWrHeroText','Find and contact the Chairman, Vice Chairman and all Ward Councillors of Nagar Panchayat Sursand.','नगर पंचायत सुरसंड के मुख्य पार्षद, उपमुख्य पार्षद और सभी वार्ड पार्षदों से संपर्क करें।');
+  set('scWrLeaderTitle','🏛️ Chairman & Vice Chairman','🏛️ मुख्य पार्षद एवं उपमुख्य पार्षद');
+  set('scWrLeaderSub','Nagar Panchayat Sursand Leadership','नगर पंचायत सुरसंड का नेतृत्व');
+  set('scWrWardTitle','🏘️ Ward Councillors','🏘️ वार्ड पार्षद');
+  if(scWrData.length){scWrRenderLeaders();scWrRenderWardCouncillors()}
+}
+window.addEventListener('scLanguageChanged',scWrApplyLanguage);
+
+scWrApplyLanguage();
+scWrLoad();
 
 }
 
