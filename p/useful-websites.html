@@ -10,7 +10,7 @@ function scGoBack(){if(history.length>1){history.back()}else{location.href='../'
 function scOpenMenu(){document.getElementById('scMenuSheet').classList.add('active')}
 function scCloseMenu(){document.getElementById('scMenuSheet').classList.remove('active')}
 function scSetTheme(v){localStorage.setItem('scTheme',v);scApplyPrefs()}
-function scSetLanguage(v){localStorage.setItem('scLanguage',v);scApplyPrefs();window.dispatchEvent(new Event('scLanguageChanged'))}
+function scSetLanguage(v){localStorage.setItem('scLanguage',v);scApplyPrefs()}
 function scApplyPrefs(){
  const theme=localStorage.getItem('scTheme')||'light';
  document.documentElement.classList.toggle('sc-dark',theme==='dark');
@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href=(location.pathname.includes('/p/')?'account.html':'p/account.html');}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -42,7 +42,7 @@ body{padding-bottom:126px!important}
 main{padding-bottom:54px!important}
 @media(min-width:900px){body{padding-bottom:30px!important}}
 </style>
-</head><body>
+</head><body><section id="scTravelTop" style="max-width:900px;margin:14px auto;padding:14px;background:#fff;border-radius:18px"><h2 data-en="Ticket Booking & Railway" data-hi="टिकट बुकिंग और रेलवे">Ticket Booking & Railway</h2><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px"><a href="https://www.makemytrip.com/" target="_blank">✈️ MakeMyTrip</a><a href="https://www.irctc.co.in/" target="_blank">🚆 IRCTC Railway Ticket Booking</a><a href="https://www.railyatri.in/" target="_blank">🚉 RailYatri Train Status</a><a href="https://enquiry.indianrail.gov.in/" target="_blank">📍 Indian Railways Enquiry</a></div></section>
 <div class="sc-appbar">
 <div class="sc-appbar-left">
   <a href="../" class="sc-appbar-brand">
@@ -70,7 +70,7 @@ main{padding-bottom:54px!important}
      5. Additional Sheet/Admin Links
      ========================================================= -->
 
-<div id="sc-useful-links"><section class="sc-v18-travel" style="margin:10px 0 20px;padding:16px;border-radius:18px;background:#fff;border:1px solid #e6ebe7"><h2 data-en="🎫 Ticket Booking & Railway Tools" data-hi="🎫 टिकट बुकिंग और रेलवे सेवाएं">🎫 Ticket Booking & Railway Tools</h2><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><a class="sc-menu-card" target="_blank" href="https://www.makemytrip.com/">✈️ MakeMyTrip</a><a class="sc-menu-card" target="_blank" href="https://www.irctc.co.in/nget/train-search">🚆 IRCTC टिकट बुकिंग</a><a class="sc-menu-card" target="_blank" href="https://www.railyatri.in/">🚉 RailYatri</a><a class="sc-menu-card" target="_blank" href="https://www.railyatri.in/live-train-status">📍 लाइव ट्रेन स्थिति</a></div></section>
+<div id="sc-useful-links">
 
 <style>
 
@@ -855,9 +855,15 @@ main{padding-bottom:54px!important}
 
 <section class="sc-ul-hero">
 
-  <h1 data-en="🔗 Useful Websites" data-hi="🔗 उपयोगी वेबसाइटें">🔗 Useful Websites</h1>
+  <h1>
+    🔗 Useful Websites
+  </h1>
 
-  <p data-en="Quick access to Bihar Government services, national citizen portals, charitable resources and popular online shopping websites." data-hi="बिहार सरकार की सेवाओं, राष्ट्रीय नागरिक पोर्टल, सामाजिक संसाधनों और लोकप्रिय ऑनलाइन शॉपिंग वेबसाइटों तक त्वरित पहुंच।">Quick access to Bihar Government services, national citizen portals, charitable resources and popular online shopping websites.</p>
+  <p>
+    Quick access to Bihar Government services,
+    national citizen portals, charitable resources
+    and popular online shopping websites.
+  </p>
 
 
   <div class="sc-ul-search">
@@ -865,7 +871,7 @@ main{padding-bottom:54px!important}
     <input
       id="scUlSearch"
       type="search"
-      data-en="Search RTPS, Aadhaar, shopping, land, ration..." data-hi="आरटीपीएस, आधार, खरीदारी, भूमि, राशन खोजें..." placeholder="Search RTPS, Aadhaar, shopping, land, ration..."
+      placeholder="Search RTPS, Aadhaar, shopping, land, ration..."
       oninput="scUlRender()">
 
 
@@ -873,7 +879,7 @@ main{padding-bottom:54px!important}
       type="button"
       onclick="scUlRender()">
 
-      <span data-en="🔍 Search" data-hi="🔍 खोजें">🔍 Search</span>
+      🔍 Search
 
     </button>
 
@@ -888,9 +894,15 @@ main{padding-bottom:54px!important}
 
 <section class="sc-ul-intro">
 
-  <h2 data-en="🌐 Important Websites" data-hi="🌐 महत्वपूर्ण वेबसाइटें">🌐 Important Websites</h2>
+  <h2>
+    🌐 Important Websites
+  </h2>
 
-  <p data-en="Useful online resources for residents of Sursand, including Bihar Government services and popular shopping platforms." data-hi="सुरसंड निवासियों के लिए उपयोगी ऑनलाइन संसाधन, जिनमें बिहार सरकार की सेवाएं और लोकप्रिय शॉपिंग प्लेटफॉर्म शामिल हैं।">Useful online resources for residents of Sursand, including Bihar Government services and popular shopping platforms.</p>
+  <p>
+    Useful online resources for residents of Sursand,
+    including Bihar Government services and popular
+    shopping platforms.
+  </p>
 
 </section>
 
@@ -1636,38 +1648,6 @@ function scUlNormalizeUrl(value){
 }
 
 
-const scUlHindiCategories={
-  'All':'सभी','Charitable Trust':'चैरिटेबल ट्रस्ट','Bihar Government':'बिहार सरकार','Government of India':'भारत सरकार','Identity & Documents':'पहचान एवं दस्तावेज','Election':'निर्वाचन','Passport':'पासपोर्ट','Transport':'परिवहन','Jobs & Career':'नौकरी एवं करियर','Online Shopping':'ऑनलाइन खरीदारी','Resource':'संसाधन'
-};
-const scUlHindiTitles={
-  'Sewangan Charitable Trust':'सेवांगन चैरिटेबल ट्रस्ट','Bihar RTPS / ServicePlus':'बिहार आरटीपीएस / सर्विसप्लस','Bihar Government Portal':'बिहार सरकार पोर्टल','Bihar Bhumi':'बिहार भूमि','Bihar ePDS / Ration Card':'बिहार ई-पीडीएस / राशन कार्ड','Bihar Student Credit Card & 7 Nischay':'बिहार स्टूडेंट क्रेडिट कार्ड एवं 7 निश्चय','National Portal of India':'भारत का राष्ट्रीय पोर्टल','UIDAI — Aadhaar':'यूआईडीएआई — आधार','DigiLocker':'डिजीलॉकर','Voter Services Portal':'मतदाता सेवा पोर्टल','Passport Seva':'पासपोर्ट सेवा','Parivahan Sewa':'परिवहन सेवा','National Career Service':'राष्ट्रीय करियर सेवा','Integrated Government Online Directory':'एकीकृत सरकारी ऑनलाइन निर्देशिका','Amazon India':'अमेज़न इंडिया','Flipkart':'फ्लिपकार्ट','AJIO':'एजियो','Meesho':'मीशो','Myntra':'मिंत्रा','JioMart':'जियोमार्ट','Tata CLiQ':'टाटा क्लिक'
-};
-const scUlHindiDescriptions={
-  'Sewangan Charitable Trust':'सेवांगन चैरिटेबल ट्रस्ट की आधिकारिक वेबसाइट। इसके शिक्षा, स्वास्थ्य, जागरूकता, सामाजिक सेवा और जनकल्याण कार्यों की जानकारी प्राप्त करें।',
-  'Bihar RTPS / ServicePlus':'बिहार लोक सेवाओं का अधिकार तथा अन्य अधिसूचित नागरिक सेवाओं, प्रमाणपत्रों और विभागीय सेवाओं के लिए ऑनलाइन आवेदन करें।',
-  'Bihar Government Portal':'बिहार सरकार का आधिकारिक पोर्टल, जहां राज्य विभागों, सरकारी सूचनाओं, नोटिस, सेवाओं और जनसंसाधनों की जानकारी मिलती है।',
-  'Bihar Bhumi':'भूमि अभिलेख, जमाबंदी, दाखिल-खारिज, भूमि लगान, एलपीसी और अन्य भूमि संबंधी ऑनलाइन सेवाओं के लिए बिहार भूमि पोर्टल।',
-  'Bihar ePDS / Ration Card':'बिहार राशन कार्ड, राशन कार्ड सेवाओं और सार्वजनिक वितरण प्रणाली की जानकारी के लिए खाद्य एवं उपभोक्ता संरक्षण विभाग का पोर्टल।',
-  'Bihar Student Credit Card & 7 Nischay':'बिहार स्टूडेंट क्रेडिट कार्ड, मुख्यमंत्री निश्चय स्वयं सहायता भत्ता और कुशल युवा कार्यक्रम के आवेदन एवं जानकारी के लिए पोर्टल।',
-  'National Portal of India':'भारत सरकार की जानकारी, सार्वजनिक सेवाओं, योजनाओं, निर्देशिकाओं और नागरिक संसाधनों के लिए आधिकारिक राष्ट्रीय पोर्टल।',
-  'UIDAI — Aadhaar':'आधार संबंधी नागरिक सेवाओं, अपडेट, डाउनलोड और जानकारी के लिए आधिकारिक आधार पोर्टल।',
-  'DigiLocker':'प्रमाणित डिजिटल प्रमाणपत्रों और दस्तावेजों को प्राप्त, सुरक्षित रखने और साझा करने के लिए सरकारी डिजिटल दस्तावेज प्लेटफॉर्म।',
-  'Voter Services Portal':'मतदाता पंजीकरण, मतदाता सूची खोज, आवेदन स्थिति और अन्य मतदाता सेवाओं के लिए भारत निर्वाचन आयोग का पोर्टल।',
-  'Passport Seva':'पासपोर्ट आवेदन, अपॉइंटमेंट, पासपोर्ट स्थिति और विदेश मंत्रालय की संबंधित सेवाओं के लिए आधिकारिक पोर्टल।',
-  'Parivahan Sewa':'वाहन पंजीकरण, ड्राइविंग लाइसेंस और अन्य सड़क परिवहन संबंधी ऑनलाइन सेवाओं के लिए सरकारी पोर्टल।',
-  'National Career Service':'नौकरी खोज, करियर सेवाओं, परामर्श और रोजगार संसाधनों के लिए सरकारी रोजगार पोर्टल।',
-  'Integrated Government Online Directory':'भारत सरकार के मंत्रालयों, विभागों, राज्यों, जिलों और सरकारी वेबसाइटों की आधिकारिक ऑनलाइन निर्देशिका।',
-  'Amazon India':'इलेक्ट्रॉनिक्स, घरेलू सामान, फैशन, किताबें, उपकरण, दैनिक उपयोग की वस्तुओं और अन्य उत्पादों के लिए ऑनलाइन मार्केटप्लेस।',
-  'Flipkart':'मोबाइल, इलेक्ट्रॉनिक्स, उपकरण, फैशन, घरेलू उत्पाद, फर्नीचर, किराना और अन्य श्रेणियों के लिए ऑनलाइन शॉपिंग प्लेटफॉर्म।',
-  'AJIO':'कपड़े, जूते, एक्सेसरीज़, सौंदर्य और लाइफस्टाइल उत्पादों के लिए ऑनलाइन फैशन प्लेटफॉर्म।',
-  'Meesho':'फैशन, घर और रसोई, सौंदर्य, एक्सेसरीज़ तथा अन्य किफायती उत्पादों के लिए ऑनलाइन मार्केटप्लेस।',
-  'Myntra':'कपड़े, जूते, सौंदर्य, एक्सेसरीज़ और भारतीय व अंतरराष्ट्रीय ब्रांडों के लाइफस्टाइल उत्पादों के लिए ऑनलाइन स्टोर।',
-  'JioMart':'किराना, दैनिक जरूरतों, इलेक्ट्रॉनिक्स, फैशन और घरेलू उत्पादों के लिए ऑनलाइन शॉपिंग प्लेटफॉर्म।',
-  'Tata CLiQ':'फैशन, एक्सेसरीज़, जूते, इलेक्ट्रॉनिक्स और लाइफस्टाइल उत्पादों के लिए टाटा का ऑनलाइन शॉपिंग प्लेटफॉर्म।'
-};
-function scUlHi(){return (localStorage.getItem('scLanguage')||'en')==='hi'}
-
-
 /* =========================================================
    CREATE CATEGORIES
    ========================================================= */
@@ -1705,7 +1685,18 @@ function scUlCreateCategories(){
   ];
 
 
-  const existingCategories = scUlData.map(function(item){return item.Category||item.category||item.Type||'Resource';})
+  const existingCategories =
+    scUlData
+
+    .map(
+      function(item){
+
+        return scUlGetCategory(
+          item
+        );
+
+      }
+    )
 
     .filter(Boolean);
 
@@ -1754,7 +1745,8 @@ function scUlCreateCategories(){
         "button";
 
 
-      button.textContent = scUlHi()?(scUlHindiCategories[category]||category):category;
+      button.textContent =
+        category;
 
 
       if(
@@ -1849,7 +1841,10 @@ function scUlRender(){
     scUlData.filter(
       function(item){
 
-        const category = item.Category||item.category||item.Type||'Resource';
+        const category =
+          scUlGetCategory(
+            item
+          );
 
 
         const searchable =
@@ -1906,7 +1901,11 @@ function scUlRender(){
     filtered.length +
 
     (
-      scUlHi() ? ' वेबसाइट मिलीं' : (filtered.length === 1 ? ' website found' : ' websites found')
+      filtered.length === 1
+
+      ? " website found"
+
+      : " websites found"
     );
 
 
@@ -1918,7 +1917,7 @@ function scUlRender(){
 
       <div class="sc-ul-empty">
 
-        ${scUlHi()?'कोई उपयुक्त वेबसाइट नहीं मिली।':'No matching website found.'}
+        No matching website found.
 
       </div>
 
@@ -1942,8 +1941,10 @@ function scUlRender(){
           );
 
 
-        const rawCategory=item.Category||item.category||item.Type||'Resource';
-        const category=scUlGetCategory(item);
+        const category =
+          scUlGetCategory(
+            item
+          );
 
 
         const description =
@@ -1986,7 +1987,7 @@ function scUlRender(){
 
           ||
 
-          String(item.Category||item.category||item.Type||'') ===
+          category ===
           "Bihar Government";
 
 
@@ -1997,7 +1998,7 @@ function scUlRender(){
 
           ||
 
-          String(item.Category||item.category||item.Type||'') ===
+          category ===
           "Online Shopping";
 
 
@@ -2098,7 +2099,7 @@ function scUlRender(){
                     description
                   )
 
-                : (scUlHi()?'अधिक जानकारी और ऑनलाइन सेवाओं के लिए इस उपयोगी वेबसाइट पर जाएं।':'Visit this useful website for more information and online services.')
+                : "Visit this useful website for more information and online services."
               }
 
             </div>
@@ -2120,7 +2121,7 @@ function scUlRender(){
                     target="_blank"
                     rel="noopener noreferrer">
 
-                    🌐 ${scUlHi()?'वेबसाइट खोलें':'Visit Website'}
+                    🌐 Visit Website
 
                   </a>
 
@@ -2133,7 +2134,7 @@ function scUlRender(){
                     class="sc-ul-visit"
                     onclick="scUlUnavailable()">
 
-                    🌐 ${scUlHi()?'वेबसाइट खोलें':'Visit Website'}
+                    🌐 Visit Website
 
                   </button>
 
@@ -2161,9 +2162,25 @@ function scUlRender(){
    ========================================================= */
 
 function scUlGetTitle(item){
-  const en=item.Title||item['Link Title']||item.Name||item['Website Name']||'Useful Website';
-  if(scUlHi())return item['Title Hindi']||item['Link Title Hindi']||item['Name Hindi']||item['Website Name Hindi']||scUlHindiTitles[en]||en;
-  return en;
+
+  return (
+
+    item.Title ||
+
+    item[
+      "Link Title"
+    ] ||
+
+    item.Name ||
+
+    item[
+      "Website Name"
+    ] ||
+
+    "Useful Website"
+
+  );
+
 }
 
 
@@ -2172,9 +2189,19 @@ function scUlGetTitle(item){
    ========================================================= */
 
 function scUlGetCategory(item){
-  const en=item.Category||item.category||item.Type||'Resource';
-  if(scUlHi())return item['Category Hindi']||item['Type Hindi']||scUlHindiCategories[en]||en;
-  return en;
+
+  return (
+
+    item.Category ||
+
+    item.category ||
+
+    item.Type ||
+
+    "Resource"
+
+  );
+
 }
 
 
@@ -2183,10 +2210,17 @@ function scUlGetCategory(item){
    ========================================================= */
 
 function scUlGetDescription(item){
-  const en=item.Description||item.Details||'';
-  const titleEn=item.Title||item['Link Title']||item.Name||item['Website Name']||'';
-  if(scUlHi())return item['Description Hindi']||item['Details Hindi']||scUlHindiDescriptions[titleEn]||en;
-  return en;
+
+  return (
+
+    item.Description ||
+
+    item.Details ||
+
+    ""
+
+  );
+
 }
 
 
@@ -2533,6 +2567,5 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-<script id="scV18Common">(function(){const D={"Call":"कॉल","WhatsApp":"व्हाट्सऐप","Search":"खोजें","All":"सभी","Loading...":"लोड हो रहा है...","No records found.":"कोई रिकॉर्ड नहीं मिला।","No matching hospital, clinic or doctor found.":"कोई उपयुक्त अस्पताल, क्लिनिक या डॉक्टर नहीं मिला।","Doctor schedules are provided for local reference and may change. Please call the hospital or clinic before visiting. Doctors marked On Call or By Appointment may visit only when required. In an emergency, contact the appropriate emergency service immediately.":"डॉक्टरों का समय स्थानीय जानकारी के लिए है और बदल सकता है। जाने से पहले अस्पताल या क्लिनिक में कॉल करके पुष्टि करें। ऑन कॉल या अपॉइंटमेंट वाले डॉक्टर आवश्यकता के अनुसार उपलब्ध हो सकते हैं। आपात स्थिति में संबंधित आपातकालीन सेवा से तुरंत संपर्क करें।","Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के मुख्य पार्षद","Vice Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के उपमुख्य पार्षद","Ward Councillors":"वार्ड पार्षद","Chairman & Vice Chairman":"मुख्य पार्षद एवं उपमुख्य पार्षद","Nagar Panchayat Sursand Leadership":"सुरसंड नगर पंचायत नेतृत्व","Ward":"वार्ड","Qualification":"योग्यता","Experience":"अनुभव","Salary":"वेतन","Job Location":"नौकरी का स्थान","Address":"पता","Important":"महत्वपूर्ण","5-Day Forecast":"5-दिवसीय पूर्वानुमान","Today":"आज","Home":"होम","Emergency":"आपातकाल","Events":"कार्यक्रम","Menu":"मेनू","Login":"लॉग इन"};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('main *').forEach(e=>{if(e.children.length||['SCRIPT','STYLE','INPUT','TEXTAREA','SELECT','OPTION'].includes(e.tagName))return;let t=e.textContent.trim();if(D[t])e.textContent=e.textContent.replace(t,D[t]);});document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(e=>{let x=e.placeholder;if(x==='Search job, employer, category or location...')e.placeholder='नौकरी, नियोक्ता, श्रेणी या पता खोजें...';});}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,350)});window.addEventListener('scLanguageChanged',()=>setTimeout(tr,0));document.addEventListener('click',e=>{const a=e.target.closest('a,button');if(!a)return;if(a.tagName==='A'){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(?:void\(0\))?;?$/i.test(h)){e.preventDefault();e.stopPropagation();}}},true);const oa=window.alert;window.alert=function(m){if(/github|not available|unavailable|no link|not added/i.test(String(m||'')))return;return oa.call(window,m)};window.scAccountInfo=function(){};})();
-window.addEventListener('scLanguageChanged',function(){scApplyPrefs();scUlCreateCategories();scUlRender();});
-</script></body></html>
+</body></html><script>(function(){function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('[data-hi]').forEach(e=>e.textContent=e.dataset.hi);const D={'Useful Websites':'उपयोगी वेबसाइटें','Website':'वेबसाइट','Category':'श्रेणी','Description':'विवरण','Open Website':'वेबसाइट खोलें','Search':'खोजें','All':'सभी','Government':'सरकारी','Education':'शिक्षा','Health':'स्वास्थ्य','Travel':'यात्रा'};const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){let t=n.nodeValue.trim();if(D[t])n.nodeValue=n.nodeValue.replace(t,D[t])}}setTimeout(tr,0);setTimeout(tr,500)})();</script>
+<script id="scSafeEmptyLinksV18">document.addEventListener('click',function(e){const a=e.target.closest('a');if(a){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(alert|void)/i.test(h)){e.preventDefault();e.stopImmediatePropagation();return false}}},true);</script>

@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){location.href=(location.pathname.includes('/p/')?'account.html':'p/account.html');}
+function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -1589,6 +1589,81 @@ main{padding-bottom:54px!important}
 </section>
 
 
+<!-- =========================================================
+     LOCAL INFORMATION
+     ========================================================= -->
+
+<section class="sc-wt-section-title">
+
+  <h2>
+    📍 Local Information
+  </h2>
+
+  <p>
+    Useful local facilities and information for Sursand residents.
+  </p>
+
+</section>
+
+
+<!-- =========================================================
+     SEARCH
+     ========================================================= -->
+
+<div class="sc-wt-search">
+
+  <input
+    id="scWtSearch"
+    type="search"
+    placeholder="Search local information..."
+    oninput="scWtRenderLocal()">
+
+
+  <button
+    type="button"
+    onclick="scWtRenderLocal()">
+
+    🔍 Search
+
+  </button>
+
+</div>
+
+
+<!-- =========================================================
+     FILTER
+     ========================================================= -->
+
+<div
+  class="sc-wt-filter"
+  id="scWtCategories">
+</div>
+
+
+<div
+  class="sc-wt-count"
+  id="scWtCount">
+
+  Loading local information...
+
+</div>
+
+
+<!-- =========================================================
+     LOCAL GRID
+     ========================================================= -->
+
+<div
+  class="sc-wt-grid"
+  id="scWtGrid">
+
+  <div class="sc-wt-empty">
+    Loading local information...
+  </div>
+
+</div>
+
+
 <script>
 
 /* =========================================================
@@ -2796,7 +2871,7 @@ async function scWtLoadLocal(){
 
     scWtCreateCategories();
 
-    
+    scWtRenderLocal();
 
   }
 
@@ -2937,7 +3012,7 @@ function scWtCreateCategories(){
             category;
 
 
-          
+          scWtRenderLocal();
 
         };
 
@@ -3557,7 +3632,7 @@ if(
 
       scWtLoadWeather();
 
-      
+      scWtLoadLocal();
 
     }
   );
@@ -3568,7 +3643,7 @@ else{
 
   scWtLoadWeather();
 
-  
+  scWtLoadLocal();
 
 }
 
@@ -3583,5 +3658,6 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-<script id="scV18Common">(function(){const D={"Call":"कॉल","WhatsApp":"व्हाट्सऐप","Search":"खोजें","All":"सभी","Loading...":"लोड हो रहा है...","No records found.":"कोई रिकॉर्ड नहीं मिला।","No matching hospital, clinic or doctor found.":"कोई उपयुक्त अस्पताल, क्लिनिक या डॉक्टर नहीं मिला।","Doctor schedules are provided for local reference and may change. Please call the hospital or clinic before visiting. Doctors marked On Call or By Appointment may visit only when required. In an emergency, contact the appropriate emergency service immediately.":"डॉक्टरों का समय स्थानीय जानकारी के लिए है और बदल सकता है। जाने से पहले अस्पताल या क्लिनिक में कॉल करके पुष्टि करें। ऑन कॉल या अपॉइंटमेंट वाले डॉक्टर आवश्यकता के अनुसार उपलब्ध हो सकते हैं। आपात स्थिति में संबंधित आपातकालीन सेवा से तुरंत संपर्क करें।","Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के मुख्य पार्षद","Vice Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के उपमुख्य पार्षद","Ward Councillors":"वार्ड पार्षद","Chairman & Vice Chairman":"मुख्य पार्षद एवं उपमुख्य पार्षद","Nagar Panchayat Sursand Leadership":"सुरसंड नगर पंचायत नेतृत्व","Ward":"वार्ड","Qualification":"योग्यता","Experience":"अनुभव","Salary":"वेतन","Job Location":"नौकरी का स्थान","Address":"पता","Important":"महत्वपूर्ण","5-Day Forecast":"5-दिवसीय पूर्वानुमान","Today":"आज","Home":"होम","Emergency":"आपातकाल","Events":"कार्यक्रम","Menu":"मेनू","Login":"लॉग इन"};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('main *').forEach(e=>{if(e.children.length||['SCRIPT','STYLE','INPUT','TEXTAREA','SELECT','OPTION'].includes(e.tagName))return;let t=e.textContent.trim();if(D[t])e.textContent=e.textContent.replace(t,D[t]);});document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(e=>{let x=e.placeholder;if(x==='Search job, employer, category or location...')e.placeholder='नौकरी, नियोक्ता, श्रेणी या पता खोजें...';});}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,350)});window.addEventListener('scLanguageChanged',()=>setTimeout(tr,0));document.addEventListener('click',e=>{const a=e.target.closest('a,button');if(!a)return;if(a.tagName==='A'){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(?:void\(0\))?;?$/i.test(h)){e.preventDefault();e.stopPropagation();}}},true);const oa=window.alert;window.alert=function(m){if(/github|not available|unavailable|no link|not added/i.test(String(m||'')))return;return oa.call(window,m)};window.scAccountInfo=function(){};})();</script></body></html><style>#scWtLocalInfo,.sc-wt-local-info,[id*=LocalInfo],[class*=local-info]{display:none!important}</style><script>document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('h1,h2,h3,h4').forEach(h=>{if(/Local Information/i.test(h.textContent)){let x=h.closest('section')||h.parentElement;if(x)x.style.display='none'}}));</script>
-<style id='scV20RemoveLocal'>#scWtLocalInfo,.sc-wt-local-info,[id*='LocalInfo'],[class*='local-info']{display:none!important}</style><script>(function(){function x(){document.querySelectorAll('section,div').forEach(e=>{const t=(e.textContent||'').trim();if((/^(Local Information|स्थानीय जानकारी)/i.test(t)||/Search local information/i.test(t))&&e.querySelector('input,button'))e.style.display='none'})}document.addEventListener('DOMContentLoaded',x);setTimeout(x,400)})();</script>
+</body></html><style>#scWtLocalInfo,.sc-wt-local-info,[id*=LocalInfo],[class*=local-info]{display:none!important}</style><script>document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('h1,h2,h3,h4').forEach(h=>{if(/Local Information/i.test(h.textContent)){let x=h.closest('section')||h.parentElement;if(x)x.style.display='none'}}));</script>
+<style>#scWtLocalInfo,.sc-wt-local-info,[id*=LocalInfo],[class*=local-info]{display:none!important}</style><script>(function(){function rm(){document.querySelectorAll('h1,h2,h3,h4,p,div').forEach(e=>{if(e.children.length<5&&/Local Information|स्थानीय जानकारी|Search local information|items found|No local information/i.test(e.textContent||'')){let x=e.closest('section');if(x)x.style.display='none';else if(e.parentElement)e.style.display='none'}})};rm();new MutationObserver(rm).observe(document.body,{childList:true,subtree:true})})();</script>
+<script id="scSafeEmptyLinksV18">document.addEventListener('click',function(e){const a=e.target.closest('a');if(a){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(alert|void)/i.test(h)){e.preventDefault();e.stopImmediatePropagation();return false}}},true);</script>

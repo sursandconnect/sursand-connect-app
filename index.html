@@ -70,7 +70,7 @@
 
 <section class="news" id="scNewsSection">
 <div class="section-title"><div><h2 data-k="news">📰 News &amp; Updates</h2><p data-k="newsSub">Latest local news from Sursand</p></div></div>
-<div id="scNewsSlider" class="sc-news-slider"></div><div id="scNewsDots" class="sc-news-dots" aria-label="News slides"></div>
+<div id="scNewsSlider" class="sc-news-slider"></div><div id="scNewsDots" class="dots"></div><div id="scNewsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000000;padding:18px;overflow:auto"><div style="max-width:620px;margin:40px auto;background:#fff;border-radius:20px;padding:16px"><button id="scNewsClose" style="float:right;border:0;background:#eee;border-radius:10px;padding:8px 12px">✕</button><div id="scNewsFull"></div></div></div>
 </section>
 </main>
 
@@ -108,7 +108,7 @@ const T={
  en:{welcome:'Welcome to Sursand',hero1:'Sursand,',hero2:'Connected in One Place.',heroDesc:'Discover local businesses, services, events, announcements, emergency contacts and your local community — all from Sursand Connect.',shopNow:'🛍️ Shop Now',bookServices:'🛠️ Book Services',complaints:'📣 Complaints',quickTitle:'Quick Services',quickSub:'Useful services for everyday life in Sursand',join:'Join Community',joinD:'Become a Change Maker for Sursand',addBiz:'Add Business / Service',addBizD:'Register a local business or service',charity:'Charity',charityD:'Donate money or request goods pickup',businesses:'Businesses',businessesD:'Find local shops and businesses',events:'Events',eventsD:'Local events, notices and announcements',emergency:'Emergency',emergencyD:'Important emergency helplines',health:'Healthcare',healthD:'Doctors, labs & medicine',education:'Education',educationD:'Schools & learning',representatives:'Representatives',repD:'Chairman, Vice Chairman & Ward Councillors',places:'Important Places',placesD:'Important local locations',transport:'Transport',transportD:'Routes, timings & fares',govt:'Government Offices',govtD:'Public offices & directions',websites:'Useful Websites',websitesD:'Government & useful links',jobs:'Jobs',jobsD:'Local & employment updates',weather:'Weather & Forecast',weatherD:'Current weather and forecast',news:'📰 News & Updates',loading:'Latest Sursand Updates',newsSub:'Latest local news from Sursand',newsFallback:'Local news and community updates will appear here.',home:'Home',shop:'Shop',services:'Services',menu:'Menu',menuTitle:'☰ App Menu & Settings',settings:'Settings',notifications:'Notifications',about:'About Sursand Connect',contact:'Contact Us',share:'Share Sursand Connect App',language:'Language',theme:'Theme'},
  hi:{welcome:'सुरसंड में आपका स्वागत है',hero1:'सुरसंड,',hero2:'अब सब कुछ एक जगह।',heroDesc:'स्थानीय व्यवसाय, सेवाएं, कार्यक्रम, घोषणाएं, आपातकालीन संपर्क और समुदाय की उपयोगी जानकारी सुरसंड कनेक्ट पर पाएं।',shopNow:'🛍️ खरीदारी करें',bookServices:'🛠️ सेवा बुक करें',complaints:'📣 शिकायत',quickTitle:'त्वरित सेवाएं',quickSub:'सुरसंड में रोजमर्रा की उपयोगी सेवाएं',join:'समुदाय से जुड़ें',joinD:'सुरसंड के लिए चेंज मेकर बनें',addBiz:'व्यवसाय / सेवा जोड़ें',addBizD:'स्थानीय व्यवसाय या सेवा पंजीकृत करें',charity:'चैरिटी',charityD:'राशि दान करें या सामान पिकअप बुक करें',businesses:'व्यवसाय',businessesD:'स्थानीय दुकानें और व्यवसाय खोजें',events:'कार्यक्रम',eventsD:'स्थानीय कार्यक्रम, सूचना और घोषणाएं',emergency:'आपातकाल',emergencyD:'महत्वपूर्ण आपातकालीन हेल्पलाइन',health:'स्वास्थ्य सेवा',healthD:'डॉक्टर, जांच और दवा',education:'शिक्षा',educationD:'स्कूल और शिक्षण संस्थान',representatives:'प्रतिनिधि',repD:'मुख्य पार्षद, उपमुख्य पार्षद और वार्ड पार्षद',places:'महत्वपूर्ण स्थान',placesD:'स्थानीय महत्वपूर्ण स्थान',transport:'परिवहन',transportD:'रूट, समय और किराया',govt:'सरकारी कार्यालय',govtD:'सरकारी कार्यालय और दिशा',websites:'उपयोगी वेबसाइटें',websitesD:'सरकारी व उपयोगी लिंक',jobs:'नौकरियां',jobsD:'स्थानीय व रोजगार अपडेट',weather:'मौसम व पूर्वानुमान',weatherD:'वर्तमान मौसम और पूर्वानुमान',news:'📰 समाचार व अपडेट',loading:'नवीनतम अपडेट लोड हो रहे हैं...',newsSub:'सुरसंड के नवीनतम स्थानीय समाचार',newsFallback:'स्थानीय समाचार और सामुदायिक अपडेट यहां दिखाई देंगे।',home:'होम',shop:'दुकान',services:'सेवाएं',menu:'मेनू',menuTitle:'☰ ऐप मेनू और सेटिंग्स',settings:'सेटिंग्स',notifications:'सूचनाएं',about:'सुरसंड कनेक्ट के बारे में',contact:'संपर्क करें',share:'सुरसंड कनेक्ट ऐप साझा करें',language:'भाषा',theme:'थीम'}
 };
-function applyPrefs(){const l=localStorage.getItem('scLanguage')||'en',th=localStorage.getItem('scTheme')||'light';document.documentElement.lang=l;document.documentElement.classList.toggle('dark',th==='dark');document.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k;if(T[l][k])el.textContent=T[l][k]});const ph=document.querySelector('[data-ph="search"]');if(ph)ph.placeholder=l==='hi'?'पूरे सुरसंड कनेक्ट में कुछ भी खोजें...':'Search anything in Sursand Connect...';const lg=document.getElementById('lang'),tm=document.getElementById('theme');if(lg)lg.value=l;if(tm)tm.value=th}
+function applyPrefs(){const l=localStorage.getItem('scLanguage')||'en',th=localStorage.getItem('scTheme')||'light';document.documentElement.lang=l;document.documentElement.classList.toggle('dark',th==='dark');document.querySelectorAll('[data-k]').forEach(el=>{const k=el.dataset.k;if(T[l][k])el.textContent=T[l][k]});const ph=document.querySelector('[data-ph="search"]');if(ph)ph.placeholder=l==='hi'?'पूरे सुरसंड कनेक्ट में कुछ भी खोजें...':'Search anything across Sursand Connect...';const lg=document.getElementById('lang'),tm=document.getElementById('theme');if(lg)lg.value=l;if(tm)tm.value=th}
 function setLanguage(v){localStorage.setItem('scLanguage',v);applyPrefs();window.dispatchEvent(new Event('scLanguageChanged'))}
 function setTheme(v){localStorage.setItem('scTheme',v);applyPrefs()}
 function openMenu(){const x=document.getElementById('menuSheet');if(x)x.classList.add('active')}function closeMenu(){const x=document.getElementById('menuSheet');if(x)x.classList.remove('active')}
@@ -130,46 +130,50 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 
 <script src="app-media.js"></script>
 <style>
-.sc-news-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 1px 12px;scrollbar-width:none}
+.sc-news-slider{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 1px 12px;
+  scrollbar-width:none
+}
 .sc-news-slider::-webkit-scrollbar{display:none}
-.sc-news-card{flex:0 0 min(86%,430px);scroll-snap-align:start;background:#fff;border:1px solid #e6ebe7;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10)}
+.sc-news-card{
+  flex:0 0 min(86%,430px);scroll-snap-align:start;background:#fff;border:1px solid #e6ebe7;
+  border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10)
+}
 .sc-news-title{font-size:14px;font-weight:900;line-height:1.35;padding:12px}
 .sc-news-image{position:relative;background:#eef2f1}
 .sc-news-image img{width:100%;height:205px;object-fit:cover;display:block}
-.sc-news-watermark{position:absolute;right:8px;top:8px;padding:4px 8px;border-radius:999px;background:rgba(15,23,42,.68);color:#fff;font-size:8px;font-weight:900}
+.sc-news-watermark{
+  position:absolute;right:8px;top:8px;padding:4px 8px;border-radius:999px;
+  background:rgba(15,23,42,.68);color:#fff;font-size:8px;font-weight:900
+}
 .sc-news-body{padding:0 12px 13px;color:#475569;font-size:10px;line-height:1.6}
-.sc-news-body details summary{padding:9px 0;cursor:pointer;color:#176b35;font-weight:900}
+.sc-news-short{padding-top:10px;color:#475569}.sc-news-body details summary{padding:9px 0;cursor:pointer;color:#176b35;font-weight:900}
 .sc-news-loading{padding:16px;font-size:10px;color:#667085}
 </style>
-
-<script id="scV18HomeGuard">(function(){const oa=window.alert;window.alert=function(m){if(/github|not available|unavailable|no link|not added/i.test(String(m||'')))return;return oa.call(window,m)};window.scAccountInfo=function(){location.href='p/account.html';};})();</script>
-<style id="scV20HomeFixes">
-.sc-news-slider{display:block!important;overflow:hidden!important;padding:0!important}.sc-news-card{display:none!important;flex:none!important;width:100%!important}.sc-news-card.active{display:block!important}.sc-news-preview{padding:0 12px 8px;color:#475569;font-size:10px;line-height:1.55}.sc-news-open{display:inline-block;margin:0 12px 12px;color:#176b35;text-decoration:none;font-size:10px;font-weight:900}.sc-news-dots{text-align:center;padding:10px 0 2px}.sc-news-dot{width:7px;height:7px;border:0;border-radius:50%;background:#d4d9dc;margin:0 3px;padding:0}.sc-news-dot.active{background:#f28c28}
-</style>
-<script id="scV20HomeFixesScript">
+<script>
 (function(){
- const API='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+ const box=document.getElementById('scNewsSlider'),section=document.getElementById('scNewsSection');if(!box||!section)return;
  const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const hi=()=> (localStorage.getItem('scLanguage')||'en')==='hi';
- let timer=null,current=0,rows=[];
- function shortText(x){x=String(x||'').replace(/\s+/g,' ').trim();return x.length>150?x.slice(0,147)+'…':x}
- function show(i){const cards=[...document.querySelectorAll('#scNewsSlider .sc-news-card')],dots=[...document.querySelectorAll('#scNewsDots .sc-news-dot')];if(!cards.length)return;current=(i+cards.length)%cards.length;cards.forEach((c,n)=>c.classList.toggle('active',n===current));dots.forEach((d,n)=>d.classList.toggle('active',n===current));}
- function start(){clearInterval(timer);if(rows.length>1)timer=setInterval(()=>show(current+1),5200)}
- async function v20LoadNews(){
-   const box=document.getElementById('scNewsSlider'),dots=document.getElementById('scNewsDots'); if(!box)return;
-   try{const r=await fetch(API+'?action=news&_='+Date.now(),{cache:'no-store'}),j=await r.json(); rows=(j&&j.success&&Array.isArray(j.data)?j.data:[]).filter(n=>String(n.Active||'Yes').toLowerCase()!=='no'&&!/draft|inactive/i.test(String(n.Status||'Active'))).slice(0,5);
-   if(!rows.length){document.getElementById('scNewsSection').style.display='none';return}
-   box.innerHTML=rows.map((n,i)=>{const title=(hi()&&(n['Title Hindi']||n['News Title Hindi']))||n.Title||n['News Title']||'Sursand Update';const desc=(hi()&&n['Description Hindi'])||n.Description||n.Content||n.Message||'';const image=window.scRecordImage?window.scRecordImage(n):(n['Image URL']||n.Image||n['Media URL']||'');const id=encodeURIComponent(n.ID||n.Id||n.id||i);return '<article class="sc-news-card'+(i===0?' active':'')+'"><div class="sc-news-title">'+esc(title)+'</div>'+(image?'<div class="sc-news-image"><img loading="lazy" src="'+esc(image)+'" alt="'+esc(title)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+'<div class="sc-news-preview">'+esc(shortText(desc))+'</div><a class="sc-news-open" href="p/news.html?id='+id+'">'+(hi()?'पूरा समाचार पढ़ें':'Read full news')+' →</a></article>'}).join('');
-   dots.innerHTML=rows.map((_,i)=>'<button class="sc-news-dot'+(i===0?' active':'')+'" data-i="'+i+'" aria-label="News '+(i+1)+'"></button>').join('');dots.onclick=e=>{const b=e.target.closest('.sc-news-dot');if(b){show(Number(b.dataset.i));start()}};show(0);start();
-   }catch(e){/* keep existing content if available; never show browser-origin popup */}
- }
- window.v20LoadNews=v20LoadNews;
- window.openMenu=function(){const m=document.getElementById('menuSheet');if(m){m.classList.add('active');m.style.display='flex'}};
- window.closeMenu=function(){const m=document.getElementById('menuSheet');if(m){m.classList.remove('active');m.style.display=''}};
- document.addEventListener('click',function(e){const m=e.target.closest('[data-sc-home-menu],a[href="javascript:void(0)"]');if(m&&m.textContent.includes('☰')){e.preventDefault();openMenu()}},true);
- window.addEventListener('scLanguageChanged',()=>setTimeout(v20LoadNews,0));
- document.addEventListener('DOMContentLoaded',()=>setTimeout(v20LoadNews,0));
+ const lang=()=>localStorage.getItem('scLanguage')||'en';
+ const val=(n,en,hi)=>lang()==='hi'&&n[hi]?n[hi]:(n[en]||n[hi]||'');
+ function render(data){
+  const rows=(Array.isArray(data&&data.news)?data.news:[]).filter(n=>String(n.Active||'Yes').toLowerCase()!=='no'&&!/draft|inactive/i.test(String(n.Status||'Active'))).slice(0,5);
+  if(!rows.length){section.style.display='none';return}
+  section.style.display='block';
+  window._scNewsRows=rows;box.innerHTML=rows.map((n,idx)=>{
+    const title=val(n,'Title','Title Hindi')||'Sursand Update',desc=val(n,'Description','Description Hindi')||'',short=desc.length>150?desc.slice(0,150).trim()+'…':desc;
+    const image=window.scRecordImage?window.scRecordImage(n):(n['Image URL']||n.Image||n['Media URL']||'');
+    return '<article class="sc-news-card" data-news-index="'+idx+'"><div class="sc-news-title">'+esc(title)+'</div>'+
+      (image?'<div class="sc-news-image"><img loading="eager" src="'+esc(image)+'" alt="'+esc(title)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+
+      '<div class="sc-news-body">'+(short?'<div class="sc-news-short">'+esc(short).replace(/\n/g,'<br>')+'</div>':'')+
+      (desc.length>150?'<details><summary>'+(lang()==='hi'?'पूरा समाचार पढ़ें':'Read full news')+'</summary><div>'+esc(desc).replace(/\n/g,'<br>')+'</div></details>':'')+'</div></article>'
+  }).join('');const dots=document.getElementById('scNewsDots');if(dots)dots.innerHTML=rows.map((_,i)=>'<span class="dot '+(i===0?'active':'')+'"></span>').join('');box.onscroll=()=>{if(!dots)return;const cards=[...box.children],x=box.scrollLeft+box.clientWidth/2;let bi=0,bd=1e9;cards.forEach((c,i)=>{let d=Math.abs((c.offsetLeft+c.offsetWidth/2)-x);if(d<bd){bd=d;bi=i}});[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===bi))};box.onclick=e=>{const c=e.target.closest('.sc-news-card');if(!c)return;const n=rows[+c.dataset.newsIndex],title=val(n,'Title','Title Hindi')||'',desc=val(n,'Description','Description Hindi')||'',image=window.scRecordImage?window.scRecordImage(n):(n['Image URL']||n.Image||n['Media URL']||'');document.getElementById('scNewsFull').innerHTML='<h2>'+esc(title)+'</h2>'+(image?'<div class="sc-news-image"><img src="'+esc(image)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+'<p style="line-height:1.7">'+esc(desc).replace(/\n/g,'<br>')+'</p>';document.getElementById('scNewsModal').style.display='block'};document.getElementById('scNewsClose').onclick=()=>document.getElementById('scNewsModal').style.display='none';
+}
+ const cached=window.SCReadAllDataCache&&window.SCReadAllDataCache();if(cached)render(cached);
+ (window.SCGetAllData?window.SCGetAllData(true):fetch('https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec'+"?action=all",{cache:'no-store'}).then(r=>r.json()).then(j=>j.data||{})).then(render).catch(()=>{if(!cached)section.style.display='none'});
+ window.addEventListener('scLanguageChanged',()=>{const d=window.SCReadAllDataCache&&window.SCReadAllDataCache();if(d)render(d)});
 })();
 </script>
 </body>
 </html>
+<script id="scSafeEmptyLinksV18">document.addEventListener('click',function(e){const a=e.target.closest('a');if(a){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(alert|void)/i.test(h)){e.preventDefault();e.stopImmediatePropagation();return false}}},true);</script>
