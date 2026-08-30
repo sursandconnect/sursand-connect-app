@@ -60,7 +60,7 @@ main{padding-bottom:54px!important}
  <div class="field full"><label>Issue / Subject *</label><input id="cIssue" required placeholder="Short title of the problem"></div>
  <div class="field full"><label>Description *</label><textarea id="cDescription" required placeholder="Explain the issue clearly..."></textarea></div>
  <div class="field full"><label>Location</label><input id="cLocation" placeholder="Use Detect Location or Select Location"><div class="locrow"><button type="button" class="mini gps" onclick="getLocation()">📍 Use Current Location</button><button type="button" class="mini maps" onclick="window.open('https://maps.google.com','_blank')">🗺️ Open Maps</button></div></div>
- <div class="field full"><label>Upload Issue Image</label><input id="cImage" type="file" accept="image/*" capture="environment" onchange="previewImage(this)"><img id="preview" class="preview" alt="Complaint image preview"></div>
+ <div class="field full"><label>Upload Issue Image</label><input id="cImage" type="file" accept="image/*" onchange="previewImage(this)"><img id="preview" class="preview" alt="Complaint image preview"></div>
  <button class="submit" type="submit">📣 Book Complaint</button>
 </form>
 <div class="note"><strong>Photo:</strong> The selected image is shown in the app. A normal WhatsApp pre-filled message cannot silently attach a local image, so when WhatsApp opens, attach the same selected photo before sending.</div>

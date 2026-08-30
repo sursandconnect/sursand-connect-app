@@ -137,7 +137,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
+function scAccountInfo(){location.href=(location.pathname.includes('/p/')?'account.html':'p/account.html');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -1544,7 +1544,7 @@ main{padding-bottom:54px!important}
         type="file"
         id="scCmImage"
         accept="image/*"
-        capture="environment"
+       
         required>
 
       <small style="font-size:9px;color:#667085;line-height:1.4">

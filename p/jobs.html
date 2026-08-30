@@ -24,7 +24,7 @@ function scApplyPrefs(){
  const ts=document.getElementById('scThemeSelect');if(ts)ts.value=theme;
  const ls=document.getElementById('scLanguageSelect');if(ls)ls.value=lang;
 }
-function scAccountInfo(){alert('Login / Sign Up will be connected when the account system is added. All public Sursand Connect features remain available without login.');}
+function scAccountInfo(){location.href=(location.pathname.includes('/p/')?'account.html':'p/account.html');}
 document.addEventListener('DOMContentLoaded',scApplyPrefs);
 </script>
 <style>
@@ -1268,7 +1268,7 @@ function scJobCreateCard(item){
 
   const title =
 
-    item[
+    (((localStorage.getItem("scLanguage")||"en")==="hi") && item["Job Title Hindi"]) || item[
       "Job Title"
     ] ||
 
@@ -1283,7 +1283,7 @@ function scJobCreateCard(item){
 
   const company =
 
-    item[
+    (((localStorage.getItem("scLanguage")||"en")==="hi") && item["Employer Name Hindi"]) || item[
       "Employer Name"
     ] ||
 
@@ -1362,7 +1362,7 @@ function scJobCreateCard(item){
 
   const description =
 
-    item.Description ||
+    (((localStorage.getItem("scLanguage")||"en")==="hi") && item["Job Description Hindi"]) || item.Description ||
 
     item[
       "Job Description"
@@ -1566,7 +1566,7 @@ function scJobCreateCard(item){
 
     infoHtml +=
 
-      "🎓 <strong>Qualification:</strong> " +
+      "🎓 <strong>"+(((localStorage.getItem("scLanguage")||"en")==="hi")?"योग्यता:":"Qualification:")+"</strong> " +
 
       scJobEsc(
         qualification
@@ -1584,7 +1584,7 @@ function scJobCreateCard(item){
 
     infoHtml +=
 
-      "🧰 <strong>Experience:</strong> " +
+      "🧰 <strong>"+(((localStorage.getItem("scLanguage")||"en")==="hi")?"अनुभव:":"Experience:")+"</strong> " +
 
       scJobEsc(
         experience
@@ -1617,7 +1617,7 @@ function scJobCreateCard(item){
 
 
     salaryElement.textContent =
-      "💰 Salary: " +
+      "💰 "+(((localStorage.getItem("scLanguage")||"en")==="hi")?"वेतन: ":"Salary: ") +
       salary;
 
 
@@ -1687,7 +1687,7 @@ function scJobCreateCard(item){
 
 
     call.textContent =
-      "📞 Call";
+      "📞 "+(((localStorage.getItem("scLanguage")||"en")==="hi")?"कॉल":"Call");
 
 
     actions.appendChild(
@@ -1745,7 +1745,7 @@ function scJobCreateCard(item){
 
 
     wa.textContent =
-      "💬 WhatsApp";
+      "💬 "+(((localStorage.getItem("scLanguage")||"en")==="hi")?"व्हाट्सऐप":"WhatsApp");
 
 
     actions.appendChild(
@@ -1865,7 +1865,7 @@ function scJobCreateCard(item){
 
 
     locationButton.textContent =
-      "📍 Job Location";
+      "📍 "+(((localStorage.getItem("scLanguage")||"en")==="hi")?"नौकरी का स्थान":"Job Location");
 
 
     actions.appendChild(
