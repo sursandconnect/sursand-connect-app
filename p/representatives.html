@@ -10,7 +10,7 @@ function scGoBack(){if(history.length>1){history.back()}else{location.href='../'
 function scOpenMenu(){document.getElementById('scMenuSheet').classList.add('active')}
 function scCloseMenu(){document.getElementById('scMenuSheet').classList.remove('active')}
 function scSetTheme(v){localStorage.setItem('scTheme',v);scApplyPrefs()}
-function scSetLanguage(v){localStorage.setItem('scLanguage',v);scApplyPrefs()}
+function scSetLanguage(v){localStorage.setItem('scLanguage',v);scApplyPrefs();window.dispatchEvent(new Event('scLanguageChanged'))}
 function scApplyPrefs(){
  const theme=localStorage.getItem('scTheme')||'light';
  document.documentElement.classList.toggle('sc-dark',theme==='dark');
@@ -838,7 +838,21 @@ async function scWrLoad(){
    ========================================================= */
 
 function scWrDesignation(item){return String(item.Designation||item.designation||item.Role||item.role||item['Representative Role']||'').trim()}
-function scWrDesignation(item){return String(item.Designation||item.designation||item.Role||item.role||item['Representative Role']||'').trim()}
+function scWrHi(){return (localStorage.getItem('scLanguage')||'en')==='hi'}
+function scWrLocalizedDesignation(item){
+  const en=scWrDesignation(item);
+  if(scWrHi()){
+    const direct=String(item['Designation Hindi']||item['Representative Role Hindi']||item['Role Hindi']||'').trim();
+    if(direct)return direct;
+    const x=en.toLowerCase();
+    if(x.includes('vice chairman'))return 'सुरसंड नगर पंचायत के उपमुख्य पार्षद';
+    if(x.includes('chairman'))return 'सुरसंड नगर पंचायत के मुख्य पार्षद';
+    if(x.includes('representative'))return 'वार्ड पार्षद प्रतिनिधि';
+    if(x.includes('ward counc')||x==='councillor'||x==='councilor')return 'वार्ड पार्षद';
+  }
+  return en;
+}
+
 function scWrRole(item){
 
   return String(
@@ -931,204 +945,14 @@ function scWrIsWard(item){
    ========================================================= */
 
 function scWrRenderLeaders(){
-
-  const holder =
-    document.getElementById(
-      "scWrLeaders"
-    );
-
-
-  const chairman =
-    scWrData.find(
-      scWrIsChairman
-    );
-
-
-  const viceChairman =
-    scWrData.find(
-      scWrIsViceChairman
-    );
-
-
-  const leaders = [];
-
-
-  if(chairman){
-
-    leaders.push({
-      item:chairman,
-      role:"Chairman of Nagar Panchayat Sursand",
-      roleHi:"सुरसंड नगर पंचायत के मुख्य पार्षद",
-      description:
-        "Chairman of Nagar Panchayat Sursand."
-    });
-
-  }
-
-
-  if(viceChairman){
-
-    leaders.push({
-      item:viceChairman,
-      role:"Vice Chairman of Nagar Panchayat Sursand",
-      roleHi:"सुरसंड नगर पंचायत के उपमुख्य पार्षद",
-      description:
-        "Vice Chairman of Nagar Panchayat Sursand."
-    });
-
-  }
-
-
-  if(
-    !leaders.length
-  ){
-
-    holder.innerHTML = `
-
-      <div class="sc-wr-empty">
-
-        Chairman and Vice Chairman information has not been added yet.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  holder.innerHTML =
-    leaders.map(
-      function(leader){
-
-        const item =
-          leader.item;
-
-
-        const name =
-          scWrLocalizedName(item);
-
-
-        const phone =
-          scWrPhoneValue(
-            item
-          );
-
-
-        const whatsapp =
-          scWrWhatsAppValue(
-            item
-          );
-
-
-        return `
-
-          <article class="sc-wr-featured">
-
-
-            <div class="sc-wr-featured-icon">
-
-              🏛️
-
-            </div>
-
-
-            <span class="sc-wr-featured-role">
-
-              ${scWrEsc((localStorage.getItem('scLanguage')||'en')==='hi'?leader.roleHi:leader.role)}
-
-            </span>
-
-
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:112px;height:140px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
-
-
-            <div class="sc-wr-featured-info">
-
-              ${scWrEsc((localStorage.getItem('scLanguage')||'en')==='hi'?leader.roleHi:leader.description)}
-
-            </div>
-
-
-            <div class="sc-wr-actions">
-
-
-              ${
-                phone
-
-                ? `
-
-                  <a
-                    class="sc-wr-call"
-                    href="tel:${scWrPhone(phone)}">
-
-                    📞 Call
-
-                  </a>
-
-                `
-
-                : `
-
-                  <button
-                    type="button"
-                    class="sc-wr-call"
-                    onclick="scWrPhoneUnavailable()">
-
-                    📞 Call
-
-                  </button>
-
-                `
-              }
-
-
-              ${
-                whatsapp
-
-                ? `
-
-                  <a
-                    class="sc-wr-whatsapp"
-                    href="${scWrWhatsAppUrl(
-                      whatsapp
-                    )}"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    💬 WhatsApp
-
-                  </a>
-
-                `
-
-                : `
-
-                  <button
-                    type="button"
-                    class="sc-wr-whatsapp"
-                    onclick="scWrWhatsAppUnavailable()">
-
-                    💬 WhatsApp
-
-                  </button>
-
-                `
-              }
-
-
-            </div>
-
-
-          </article>
-
-        `;
-
-      }
-    )
-    .join("");
-
+  const holder=document.getElementById('scWrLeaders');
+  const leaders=scWrData.filter(item=>scWrIsChairman(item)||scWrIsViceChairman(item));
+  if(!leaders.length){holder.innerHTML='<div class="sc-wr-empty">'+(scWrHi()?'मुख्य पार्षद और उपमुख्य पार्षद की जानकारी अभी उपलब्ध नहीं है।':'Chairman and Vice Chairman information has not been added yet.')+'</div>';return;}
+  holder.innerHTML=leaders.map(function(item){
+    const name=scWrLocalizedName(item),phone=scWrPhoneValue(item),whatsapp=scWrWhatsAppValue(item),role=scWrLocalizedDesignation(item)|| (scWrIsViceChairman(item)?(scWrHi()?'सुरसंड नगर पंचायत के उपमुख्य पार्षद':'Vice Chairman of Nagar Panchayat Sursand'):(scWrHi()?'सुरसंड नगर पंचायत के मुख्य पार्षद':'Chairman of Nagar Panchayat Sursand'));
+    const u=window.scRecordImage?window.scRecordImage(item):(item['Image URL']||item.Image||item.Photo||'');
+    return '<article class="sc-wr-featured"><div class="sc-wr-featured-icon">🏛️</div><span class="sc-wr-featured-role">'+scWrEsc(role)+'</span><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">'+scWrEsc(name)+'</h3>'+(u?'<img src="'+scWrEsc(u)+'" alt="'+scWrEsc(name)+'" style="width:128px;height:160px;object-fit:cover;border-radius:12px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">':'')+'</div><div class="sc-wr-featured-info">'+scWrEsc(role)+'</div><div class="sc-wr-actions">'+(phone?'<a class="sc-wr-call" href="tel:'+scWrPhone(phone)+'">📞 '+(scWrHi()?'कॉल':'Call')+'</a>':'<button type="button" class="sc-wr-call">📞 '+(scWrHi()?'कॉल':'Call')+'</button>')+(whatsapp?'<a class="sc-wr-whatsapp" href="'+scWrWhatsAppUrl(whatsapp)+'" target="_blank" rel="noopener noreferrer">💬 '+(scWrHi()?'व्हाट्सऐप':'WhatsApp')+'</a>':'<button type="button" class="sc-wr-whatsapp">💬 '+(scWrHi()?'व्हाट्सऐप':'WhatsApp')+'</button>')+'</div></article>';
+  }).join('');
 }
 
 
@@ -1137,291 +961,16 @@ function scWrRenderLeaders(){
    ========================================================= */
 
 function scWrRenderWardCouncillors(){
-
-  const grid =
-    document.getElementById(
-      "scWrGrid"
-    );
-
-
-  const data =
-    scWrData
-
-    .filter(
-      scWrIsWard
-    )
-
-    .sort(
-      function(a,b){
-
-        return (
-
-          scWrWardNumber(a)
-
-          -
-
-          scWrWardNumber(b)
-
-        );
-
-      }
-    );
-
-
-  document.getElementById(
-    "scWrCount"
-  ).textContent =
-
-    data.length + ((localStorage.getItem('scLanguage')||'en')==='hi'
-      ? " वार्ड पार्षद"
-      : (data.length===1?" Ward Councillor":" Ward Councillors"));
-
-
-  if(
-    !data.length
-  ){
-
-    grid.innerHTML = `
-
-      <div class="sc-wr-empty">
-
-        No Ward Councillor information found.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  grid.innerHTML =
-    data.map(
-      function(item){
-
-        const name =
-          scWrLocalizedName(item);
-
-
-        const ward =
-          scWrWardNumber(
-            item
-          );
-
-
-        const phone =
-          scWrPhoneValue(
-            item
-          );
-
-
-        const whatsapp =
-          scWrWhatsAppValue(
-            item
-          );
-
-
-        const gender =
-          String(
-
-            item.Gender ||
-
-            item.gender ||
-
-            item.Sex ||
-
-            ""
-
-          )
-          .trim()
-          .toLowerCase();
-
-
-        /*
-         * Additional representative/contact name,
-         * only displayed for female councillors.
-         */
-
-        const representativeName =
-
-          item[
-            "Representative Name"
-          ] ||
-
-          item[
-            "Representative"
-          ] ||
-
-          item[
-            "Representative Person"
-          ] ||
-
-          "";
-
-
-        const isFemale =
-
-          gender === "female"
-
-          ||
-
-          gender === "f"
-
-          ||
-
-          gender.includes(
-            "woman"
-          );
-
-
-        return `
-
-          <article class="sc-wr-card">
-
-
-            <div class="sc-wr-icon">
-
-              🏘️
-
-            </div>
-
-
-            <span class="sc-wr-role">
-              ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद':'Ward Councillor'}
-            </span>
-
-
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:104px;height:130px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
-
-
-            <div class="sc-wr-info">
-
-              ${
-                ward
-
-                ? `
-
-                  📍
-
-                  <strong>
-                    Ward:
-                  </strong>
-
-                  ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड ':'Ward '}${scWrEsc(ward)}
-
-                `
-
-                : ""
-              }
-
-            </div>
-
-
-            ${
-              isFemale &&
-              representativeName
-
-              ? `
-
-                <div class="sc-wr-representative">
-
-                  👤
-
-                  <strong>
-                    ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद प्रतिनिधि:':'Ward Councillor Representative:'}
-                  </strong>
-
-                  ${scWrEsc(
-                    representativeName
-                  )}
-
-                </div>
-
-              `
-
-              : ""
-            }
-
-
-            <div class="sc-wr-actions">
-
-
-              ${
-                phone
-
-                ? `
-
-                  <a
-                    class="sc-wr-call"
-                    href="tel:${scWrPhone(phone)}">
-
-                    📞 Call
-
-                  </a>
-
-                `
-
-                : `
-
-                  <button
-                    type="button"
-                    class="sc-wr-call"
-                    onclick="scWrPhoneUnavailable()">
-
-                    📞 Call
-
-                  </button>
-
-                `
-              }
-
-
-              ${
-                whatsapp
-
-                ? `
-
-                  <a
-                    class="sc-wr-whatsapp"
-                    href="${scWrWhatsAppUrl(
-                      whatsapp
-                    )}"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    💬 WhatsApp
-
-                  </a>
-
-                `
-
-                : `
-
-                  <button
-                    type="button"
-                    class="sc-wr-whatsapp"
-                    onclick="scWrWhatsAppUnavailable()">
-
-                    💬 WhatsApp
-
-                  </button>
-
-                `
-              }
-
-
-            </div>
-
-
-          </article>
-
-        `;
-
-      }
-    )
-    .join("");
-
+  const grid=document.getElementById('scWrGrid');
+  const data=scWrData.filter(scWrIsWard).sort((a,b)=>scWrWardNumber(a)-scWrWardNumber(b));
+  document.getElementById('scWrCount').textContent=data.length+(scWrHi()?' वार्ड पार्षद':(data.length===1?' Ward Councillor':' Ward Councillors'));
+  if(!data.length){grid.innerHTML='<div class="sc-wr-empty">'+(scWrHi()?'वार्ड पार्षद की जानकारी उपलब्ध नहीं है।':'No Ward Councillor information found.')+'</div>';return;}
+  grid.innerHTML=data.map(function(item){
+    const name=scWrLocalizedName(item),ward=scWrWardNumber(item),phone=scWrPhoneValue(item),whatsapp=scWrWhatsAppValue(item),role=scWrLocalizedDesignation(item)||(scWrHi()?'वार्ड पार्षद':'Ward Councillor');
+    const u=window.scRecordImage?window.scRecordImage(item):(item['Image URL']||item.Image||item.Photo||'');
+    const representativeName=(scWrHi()&&(item['Representative Person Hindi']||item['Ward Councillor Representative Hindi']))||item['Representative Person']||item['Ward Councillor Representative']||'';
+    return '<article class="sc-wr-card"><div class="sc-wr-icon">🏘️</div><span class="sc-wr-role">'+scWrEsc(role)+'</span><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">'+scWrEsc(name)+'</h3>'+(u?'<img src="'+scWrEsc(u)+'" alt="'+scWrEsc(name)+'" style="width:116px;height:145px;object-fit:cover;border-radius:12px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">':'')+'</div><div class="sc-wr-info">'+(ward?'📍 <strong>'+(scWrHi()?'वार्ड:':'Ward:')+'</strong> '+(scWrHi()?'वार्ड ':'Ward ')+scWrEsc(ward):'')+'</div>'+(representativeName?'<div class="sc-wr-representative">👤 <strong>'+(scWrHi()?'वार्ड पार्षद प्रतिनिधि:':'Ward Councillor Representative:')+'</strong> '+scWrEsc(representativeName)+'</div>':'')+'<div class="sc-wr-actions">'+(phone?'<a class="sc-wr-call" href="tel:'+scWrPhone(phone)+'">📞 '+(scWrHi()?'कॉल':'Call')+'</a>':'<button type="button" class="sc-wr-call">📞 '+(scWrHi()?'कॉल':'Call')+'</button>')+(whatsapp?'<a class="sc-wr-whatsapp" href="'+scWrWhatsAppUrl(whatsapp)+'" target="_blank" rel="noopener noreferrer">💬 '+(scWrHi()?'व्हाट्सऐप':'WhatsApp')+'</a>':'<button type="button" class="sc-wr-whatsapp">💬 '+(scWrHi()?'व्हाट्सऐप':'WhatsApp')+'</button>')+'</div></article>';
+  }).join('');
 }
 
 
@@ -1689,15 +1238,15 @@ else{
 
   
 function scWrApplyLanguage(){
-  const hi=(localStorage.getItem('scLanguage')||'en')==='hi';
+  const hi=scWrHi();
   document.title=(hi?'प्रतिनिधि':'Representatives')+' | Sursand Connect';
-  const set=(id,en,hn)=>{const x=document.getElementById(id);if(x)x.textContent=hi?hn:en};
+  const set=(id,en,h)=>{const el=document.getElementById(id);if(el)el.textContent=hi?h:en};
   set('scWrPageTitle','🏛️ Representatives','🏛️ प्रतिनिधि');
-  set('scWrHeroText','Find and contact the Chairman, Vice Chairman and all Ward Councillors of Nagar Panchayat Sursand.','नगर पंचायत सुरसंड के मुख्य पार्षद, उपमुख्य पार्षद और सभी वार्ड पार्षदों से संपर्क करें।');
+  set('scWrHeroText','Find and contact the Chairman, Vice Chairman and all Ward Councillors of Nagar Panchayat Sursand.','सुरसंड नगर पंचायत के मुख्य पार्षद, उपमुख्य पार्षद और सभी वार्ड पार्षदों से संपर्क करें।');
   set('scWrLeaderTitle','🏛️ Chairman & Vice Chairman','🏛️ मुख्य पार्षद एवं उपमुख्य पार्षद');
   set('scWrLeaderSub','Nagar Panchayat Sursand Leadership','सुरसंड नगर पंचायत नेतृत्व');
   set('scWrWardTitle','🏘️ Ward Councillors','🏘️ वार्ड पार्षद');
-  if(scWrData.length){scWrRenderLeaders();scWrRenderWardCouncillors()}
+  if(scWrData&&scWrData.length){scWrRenderLeaders();scWrRenderWardCouncillors();}
 }
 window.addEventListener('scLanguageChanged',scWrApplyLanguage);
 

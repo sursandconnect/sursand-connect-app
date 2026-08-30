@@ -130,48 +130,51 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 
 <script src="app-media.js"></script>
 <style>
-.sc-news-slider{
-  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 1px 12px;
-  scrollbar-width:none
-}
+.sc-news-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 1px 12px;scrollbar-width:none}
 .sc-news-slider::-webkit-scrollbar{display:none}
-.sc-news-card{
-  flex:0 0 min(86%,430px);scroll-snap-align:start;background:#fff;border:1px solid #e6ebe7;
-  border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10)
-}
+.sc-news-card{flex:0 0 min(86%,430px);scroll-snap-align:start;background:#fff;border:1px solid #e6ebe7;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(15,23,42,.10)}
 .sc-news-title{font-size:14px;font-weight:900;line-height:1.35;padding:12px}
 .sc-news-image{position:relative;background:#eef2f1}
 .sc-news-image img{width:100%;height:205px;object-fit:cover;display:block}
-.sc-news-watermark{
-  position:absolute;right:8px;top:8px;padding:4px 8px;border-radius:999px;
-  background:rgba(15,23,42,.68);color:#fff;font-size:8px;font-weight:900
-}
+.sc-news-watermark{position:absolute;right:8px;top:8px;padding:4px 8px;border-radius:999px;background:rgba(15,23,42,.68);color:#fff;font-size:8px;font-weight:900}
 .sc-news-body{padding:0 12px 13px;color:#475569;font-size:10px;line-height:1.6}
-.sc-news-short{padding-top:10px;color:#475569}.sc-news-body details summary{padding:9px 0;cursor:pointer;color:#176b35;font-weight:900}
-.sc-news-loading{padding:16px;font-size:10px;color:#667085}.sc-news-dots{display:flex;justify-content:center;gap:6px;margin-top:9px}.sc-news-dot{width:7px;height:7px;border-radius:50%;background:#cbd5e1}.sc-news-dot.active{background:#238b45}
+.sc-news-body details summary{padding:9px 0;cursor:pointer;color:#176b35;font-weight:900}
+.sc-news-loading{padding:16px;font-size:10px;color:#667085}
 </style>
 <script>
 (function(){
- const box=document.getElementById('scNewsSlider'),section=document.getElementById('scNewsSection');if(!box||!section)return;
- const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const lang=()=>localStorage.getItem('scLanguage')||'en';
- const val=(n,en,hi)=>lang()==='hi'&&n[hi]?n[hi]:(n[en]||n[hi]||'');
- function render(data){
-  const rows=(Array.isArray(data&&data.news)?data.news:[]).filter(n=>String(n.Active||'Yes').toLowerCase()!=='no'&&!/draft|inactive/i.test(String(n.Status||'Active'))).slice(0,5);
-  if(!rows.length){section.style.display='none';return}
-  section.style.display='block';
-  box.innerHTML=rows.map((n,idx)=>{
-    const title=val(n,'Title','Title Hindi')||'Sursand Update',desc=val(n,'Description','Description Hindi')||'',short=desc.length>150?desc.slice(0,150).trim()+'…':desc;
-    const image=window.scRecordImage?window.scRecordImage(n):(n['Image URL']||n.Image||n['Media URL']||'');
-    return '<article class="sc-news-card" data-news-index="'+idx+'" onclick="location.href=\'p/news.html?id='+encodeURIComponent(n.ID||n.Id||n.id||idx)+'\'"><div class="sc-news-title">'+esc(title)+'</div>'+
-      (image?'<div class="sc-news-image"><img loading="eager" src="'+esc(image)+'" alt="'+esc(title)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+
-      '<div class="sc-news-body">'+(short?'<div class="sc-news-short">'+esc(short).replace(/\n/g,'<br>')+'</div>':'')+
-      (desc.length>150?'<details><summary>'+(lang()==='hi'?'पूरा समाचार पढ़ें':'Read full news')+'</summary><div>'+esc(desc).replace(/\n/g,'<br>')+'</div></details>':'')+'</div></article>'
-  }).join(''); let dots=document.getElementById('scNewsDots'); if(!dots){dots=document.createElement('div');dots.id='scNewsDots';dots.className='sc-news-dots';box.after(dots)} dots.innerHTML=rows.map((_,i)=>'<i class="sc-news-dot '+(i===0?'active':'')+'"></i>').join(''); box.onscroll=()=>{let i=Math.round(box.scrollLeft/Math.max(1,box.clientWidth*.82));dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('active',j===i))}
-}
- const cached=window.SCReadAllDataCache&&window.SCReadAllDataCache();if(cached)render(cached);
- (window.SCGetAllData?window.SCGetAllData(false):fetch('https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec'+"?action=all",{cache:'no-store'}).then(r=>r.json()).then(j=>j.data||{})).then(render).catch(()=>{if(!cached)section.style.display='none'});
- window.addEventListener('scLanguageChanged',()=>{const d=window.SCReadAllDataCache&&window.SCReadAllDataCache();if(d)render(d)});
+  const box=document.getElementById('scNewsSlider'),section=document.getElementById('scNewsSection');
+  if(!box||!section)return;
+  const API_NEWS='https://script.google.com/macros/s/AKfycbzrDLNOj56LEjyLuf4PJiBsH5s36RgRi6y55NjjVJtxvRjFPUMdcXLsOK4ojNUssdNX/exec';
+  const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const hi=()=> (localStorage.getItem('scLanguage')||'en')==='hi';
+  function updateHeading(){
+    const h=section.querySelector('.section-title h2'),sub=section.querySelector('.section-title p');
+    if(h)h.textContent=hi()?'📰 समाचार व अपडेट':'📰 News & Updates';
+    if(sub)sub.textContent=hi()?'सुरसंड के नवीनतम स्थानीय समाचार':'Latest local news from Sursand';
+  }
+  async function load(){
+    updateHeading();
+    try{
+      const res=await fetch(API_NEWS+'?action=news&_='+Date.now(),{cache:'no-store'});
+      const json=await res.json();
+      const rows=(json&&json.success&&Array.isArray(json.data)?json.data:[]).filter(n=>String(n.Active||'Yes').toLowerCase()!=='no'&&!/draft|inactive/i.test(String(n.Status||'Active'))).slice(0,5);
+      if(!rows.length){section.style.display='none';return}
+      section.style.display='block';
+      box.innerHTML=rows.map(function(n){
+        const title=(hi()&&(n['Title Hindi']||n['News Title Hindi']))||n.Title||n['News Title']||'Sursand Update';
+        const image=window.scRecordImage?window.scRecordImage(n):(n['Image URL']||n.Image||n['Media URL']||'');
+        const desc=(hi()&&n['Description Hindi'])||n.Description||n.Content||n.Message||'';
+        return '<article class="sc-news-card">'+
+          '<div class="sc-news-title">'+esc(title)+'</div>'+
+          (image?'<div class="sc-news-image"><img loading="eager" src="'+esc(image)+'" alt="'+esc(title)+'"><span class="sc-news-watermark">Sursand Today</span></div>':'')+
+          '<div class="sc-news-body"><details><summary>'+(hi()?'पूरा समाचार पढ़ें':'Read full news')+'</summary><div>'+esc(desc).replace(/\\n/g,'<br>')+'</div></details></div>'+
+        '</article>';
+      }).join('');
+    }catch(e){section.style.display='none'}
+  }
+  load();
+  window.addEventListener('scLanguageChanged',load);
 })();
 </script>
 <script id="scV18HomeGuard">(function(){const oa=window.alert;window.alert=function(m){if(/github|not available|unavailable|no link|not added/i.test(String(m||'')))return;return oa.call(window,m)};window.scAccountInfo=function(){};})();</script></body>
