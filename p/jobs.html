@@ -1317,15 +1317,8 @@ function scJobCreateCard(item){
     "Employment";
 
 
-  const location =
-
-    item.Location ||
-
-    item.Address ||
-
-    item.Area ||
-
-    "";
+  const address = item["Address Hindi"] && (localStorage.getItem("scLanguage")||"en")==="hi" ? item["Address Hindi"] : (item.Address||item.Area||"");
+  const location = item.Location || item["Google Map Link"] || item["Google Maps Link"] || "";
 
 
   const salary =
@@ -1561,15 +1554,7 @@ function scJobCreateCard(item){
     "";
 
 
-  if(location){
-
-    infoHtml +=
-
-      "📍 <strong>Location:</strong> " +
-
-      scJobEsc(location);
-
-  }
+  if(address){ infoHtml += "🏠 <strong>"+((localStorage.getItem("scLanguage")||"en")==="hi"?"पता:":"Address:")+"</strong> "+scJobEsc(address); }
 
 
   if(qualification){
@@ -1850,10 +1835,7 @@ function scJobCreateCard(item){
 
           +
 
-          (
-            location ||
-            "Sursand, Bihar"
-          )
+          (address || "Sursand, Bihar")
 
         );
 
@@ -1892,6 +1874,12 @@ function scJobCreateCard(item){
 
   }
 
+
+  /* MORE INFO */
+  const more=document.createElement("button"); more.type="button"; more.className="sc-job-apply"; more.textContent=(localStorage.getItem("scLanguage")||"en")==="hi"?"ℹ️ अधिक जानकारी":"ℹ️ More Info";
+  const moreBox=document.createElement("div"); moreBox.style.cssText="display:none;grid-column:1/-1;background:#f8faf8;border:1px solid #e6ebe7;border-radius:12px;padding:12px;line-height:1.65;font-size:12px";
+  let bits=[]; if(company)bits.push("🏢 <b>"+((localStorage.getItem("scLanguage")||"en")==="hi"?"नियोक्ता":"Job Provider")+":</b> "+scJobEsc(company)); if(description)bits.push("📋 <b>"+((localStorage.getItem("scLanguage")||"en")==="hi"?"नौकरी की जानकारी":"Job Information")+":</b> "+scJobEsc(description)); if(salary)bits.push("💰 <b>"+((localStorage.getItem("scLanguage")||"en")==="hi"?"वेतन":"Salary")+":</b> "+scJobEsc(salary)); if(address)bits.push("🏠 <b>"+((localStorage.getItem("scLanguage")||"en")==="hi"?"पता":"Address")+":</b> "+scJobEsc(address)); if(app&&scJobValidUrl(apply))bits.push('🌐 <b>'+((localStorage.getItem('scLanguage')||'en')==='hi'?'संबंधित वेबसाइट':'Related Website')+':</b> <a href=\"'+scJobEsc(apply)+'\" target=\"_blank\">'+((localStorage.getItem('scLanguage')||'en')==='hi'?'खोलें':'Open')+'</a>');
+  moreBox.innerHTML=bits.join("<br>"); more.onclick=()=>{moreBox.style.display=moreBox.style.display==="none"?"block":"none"}; actions.appendChild(more); card.appendChild(moreBox);
 
   /* =====================================================
      BUTTON COUNT COLOUR RULE
@@ -2197,4 +2185,4 @@ else{
 <script src="../app-account.js"></script>
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
-</body></html>
+<script id="scV18Common">(function(){const D={"Call":"कॉल","WhatsApp":"व्हाट्सऐप","Search":"खोजें","All":"सभी","Loading...":"लोड हो रहा है...","No records found.":"कोई रिकॉर्ड नहीं मिला।","No matching hospital, clinic or doctor found.":"कोई उपयुक्त अस्पताल, क्लिनिक या डॉक्टर नहीं मिला।","Doctor schedules are provided for local reference and may change. Please call the hospital or clinic before visiting. Doctors marked On Call or By Appointment may visit only when required. In an emergency, contact the appropriate emergency service immediately.":"डॉक्टरों का समय स्थानीय जानकारी के लिए है और बदल सकता है। जाने से पहले अस्पताल या क्लिनिक में कॉल करके पुष्टि करें। ऑन कॉल या अपॉइंटमेंट वाले डॉक्टर आवश्यकता के अनुसार उपलब्ध हो सकते हैं। आपात स्थिति में संबंधित आपातकालीन सेवा से तुरंत संपर्क करें।","Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के मुख्य पार्षद","Vice Chairman of Nagar Panchayat Sursand.":"सुरसंड नगर पंचायत के उपमुख्य पार्षद","Ward Councillors":"वार्ड पार्षद","Chairman & Vice Chairman":"मुख्य पार्षद एवं उपमुख्य पार्षद","Nagar Panchayat Sursand Leadership":"सुरसंड नगर पंचायत नेतृत्व","Ward":"वार्ड","Qualification":"योग्यता","Experience":"अनुभव","Salary":"वेतन","Job Location":"नौकरी का स्थान","Address":"पता","Important":"महत्वपूर्ण","5-Day Forecast":"5-दिवसीय पूर्वानुमान","Today":"आज","Home":"होम","Emergency":"आपातकाल","Events":"कार्यक्रम","Menu":"मेनू","Login":"लॉग इन"};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('main *').forEach(e=>{if(e.children.length||['SCRIPT','STYLE','INPUT','TEXTAREA','SELECT','OPTION'].includes(e.tagName))return;let t=e.textContent.trim();if(D[t])e.textContent=e.textContent.replace(t,D[t]);});document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(e=>{let x=e.placeholder;if(x==='Search job, employer, category or location...')e.placeholder='नौकरी, नियोक्ता, श्रेणी या पता खोजें...';});}document.addEventListener('DOMContentLoaded',()=>{tr();setTimeout(tr,350)});window.addEventListener('scLanguageChanged',()=>setTimeout(tr,0));document.addEventListener('click',e=>{const a=e.target.closest('a,button');if(!a)return;if(a.tagName==='A'){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(?:void\(0\))?;?$/i.test(h)){e.preventDefault();e.stopPropagation();}}},true);const oa=window.alert;window.alert=function(m){if(/github|not available|unavailable|no link|not added/i.test(String(m||'')))return;return oa.call(window,m)};window.scAccountInfo=function(){};})();</script></body></html>
