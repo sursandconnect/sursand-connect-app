@@ -841,13 +841,15 @@ function scWrRole(item){
 
   return String(
 
+    item.Designation ||
+
+    item.designation ||
+
+    item["Representative Role"] ||
+
     item.Role ||
 
     item.role ||
-
-    item[
-      "Representative Role"
-    ] ||
 
     ""
 
@@ -864,7 +866,7 @@ function scWrRole(item){
 function scWrIsChairman(item){
   const role=scWrRole(item).toLowerCase();
   if(role.includes("vice")||role.includes("upmukhya")||role.includes("उपमुख्य"))return false;
-  return role.includes("chairman")||role.includes("mukhya ward")||role.includes("मुख्य वार्ड");
+  return role.includes("chairman")||role.includes("mukhya")||role.includes("मुख्य पार्षद")||role.includes("मुख्य वार्ड");
 }
 
 
@@ -891,9 +893,7 @@ function scWrIsWard(item){
 
   return (
 
-    role.includes(
-      "ward councillor"
-    )
+    role.includes("ward councillor") || role.includes("ward parshad") || role.includes("वार्ड पार्षद")
 
     ||
 
@@ -947,7 +947,7 @@ function scWrRenderLeaders(){
 
     leaders.push({
       item:chairman,
-      role:scWrRole(chairman)||"Chairman of Nagar Panchayat Sursand",
+      role:"Chairman of Nagar Panchayat Sursand",
       roleHi:"सुरसंड नगर पंचायत के मुख्य पार्षद",
       description:
         "Chairman of Nagar Panchayat Sursand."
@@ -960,7 +960,7 @@ function scWrRenderLeaders(){
 
     leaders.push({
       item:viceChairman,
-      role:scWrRole(viceChairman)||"Vice Chairman of Nagar Panchayat Sursand",
+      role:"Vice Chairman of Nagar Panchayat Sursand",
       roleHi:"सुरसंड नगर पंचायत के उपमुख्य पार्षद",
       description:
         "Vice Chairman of Nagar Panchayat Sursand."
@@ -1280,11 +1280,11 @@ function scWrRenderWardCouncillors(){
 
 
             <span class="sc-wr-role">
-              ${(localStorage.getItem('scLanguage')||'en')==='hi'?(scWrRole(item).toLowerCase().includes('representative')?'वार्ड पार्षद प्रतिनिधि':'वार्ड पार्षद'):(scWrRole(item)||'Ward Councillor')}
+              ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड पार्षद':'Ward Councillor'}
             </span>
 
 
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:105px;height:132px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="margin-right:auto">${scWrEsc(name)}</h3>${(()=>{const u=window.scRecordImage?window.scRecordImage(item):(item["Image URL"]||item.Image||item.Photo||"");return u?`<img src="${scWrEsc(u)}" alt="${scWrEsc(name)}" style="width:104px;height:132px;object-fit:cover;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px #dfe7e2,0 5px 14px rgba(0,0,0,.12)">`:''})()}</div>
 
 
             <div class="sc-wr-info">
@@ -1296,7 +1296,7 @@ function scWrRenderWardCouncillors(){
 
                   📍
 
-                  <strong>${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड:':'Ward:'}</strong> ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड ': 'Ward '}${scWrEsc(ward)}
+                  <strong>${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड:':'Ward:'}</strong> ${(localStorage.getItem('scLanguage')||'en')==='hi'?'वार्ड ':'Ward '}${scWrEsc(ward)}
 
                 `
 
@@ -1706,5 +1706,3 @@ scWrLoad();
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
 </body></html>
-<script>(function(){const map={'Representatives':'प्रतिनिधि','Find and contact the Chairman, Vice Chairman and all Ward Councillors of Nagar Panchayat Sursand.':'नगर पंचायत सुरसंड के मुख्य पार्षद, उपमुख्य पार्षद और सभी वार्ड पार्षदों से संपर्क करें।','Chairman & Vice Chairman':'मुख्य पार्षद एवं उपमुख्य पार्षद','Nagar Panchayat Sursand Leadership':'नगर पंचायत सुरसंड नेतृत्व','Ward Councillors':'वार्ड पार्षद','Chairman of Nagar Panchayat Sursand.':'सुरसंड नगर पंचायत के मुख्य पार्षद','Vice Chairman of Nagar Panchayat Sursand.':'सुरसंड नगर पंचायत के उपमुख्य पार्षद','Call':'कॉल','WhatsApp':'व्हाट्सऐप'};function tr(){if((localStorage.getItem('scLanguage')||'en')!=='hi')return;document.querySelectorAll('h1,h2,h3,p,span,strong,a,button,div').forEach(e=>{if(e.children.length===0){let t=(e.textContent||'').trim();for(const [a,b] of Object.entries(map))if(t===a)e.textContent=b}})}setTimeout(tr,0);setTimeout(tr,500);new MutationObserver(tr).observe(document.body,{childList:true,subtree:true})})();</script>
-<script id="scSafeEmptyLinksV18">document.addEventListener('click',function(e){const a=e.target.closest('a');if(a){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(alert|void)/i.test(h)){e.preventDefault();e.stopImmediatePropagation();return false}}},true);</script>

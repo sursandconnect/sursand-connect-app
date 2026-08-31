@@ -1317,7 +1317,15 @@ function scJobCreateCard(item){
     "Employment";
 
 
-  const location = item.Address || item.Area || "";
+  const location =
+
+    item.Location ||
+
+    item.Address ||
+
+    item.Area ||
+
+    "";
 
 
   const salary =
@@ -1557,7 +1565,7 @@ function scJobCreateCard(item){
 
     infoHtml +=
 
-      "🏠 <strong>"+(((localStorage.getItem('scLanguage')||'en')==='hi')?'पता:':'Address:')+"</strong> " +
+      "📍 <strong>Location:</strong> " +
 
       scJobEsc(location);
 
@@ -2190,5 +2198,3 @@ else{
 <script src="../app-notifications.js"></script>
 <script src="../app-media.js"></script>
 </body></html>
-<style>.sc-job-info br~*,.sc-job-salary,.sc-job-description{display:none!important}.sc-job-more{background:#6d28d9!important;color:#fff!important}</style><script>(function(){function enhance(){document.querySelectorAll('.sc-job-card').forEach(card=>{if(card.querySelector('.sc-job-more'))return;const acts=card.querySelector('.sc-job-actions');if(!acts)return;const b=document.createElement('button');b.className='sc-job-more';b.textContent=(localStorage.getItem('scLanguage')||'en')==='hi'?'ℹ️ अधिक जानकारी':'ℹ️ More Info';b.onclick=()=>{const text=card.innerText;const links=[...card.querySelectorAll('a')];let html='<div style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000000;padding:20px;overflow:auto"><div style="max-width:560px;margin:50px auto;background:white;border-radius:20px;padding:18px"><button onclick="this.closest('[style*=fixed]').remove()" style="float:right">✕</button><h2>'+(localStorage.getItem('scLanguage')==='hi'?'नौकरी की जानकारी':'Job Information')+'</h2><div style="white-space:pre-line;line-height:1.7">'+text+'</div><div style="display:grid;gap:8px;margin-top:14px">'+links.map(a=>'<a href="'+a.href+'" target="_blank" style="padding:12px;background:#238b45;color:white;border-radius:12px;text-decoration:none">'+a.textContent+'</a>').join('')+'</div></div></div>';document.body.insertAdjacentHTML('beforeend',html)};acts.appendChild(b)})}setTimeout(enhance,300);new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true})})();</script>
-<script id="scSafeEmptyLinksV18">document.addEventListener('click',function(e){const a=e.target.closest('a');if(a){const h=(a.getAttribute('href')||'').trim();if(!h||h==='#'||/^javascript:\s*(alert|void)/i.test(h)){e.preventDefault();e.stopImmediatePropagation();return false}}},true);</script>
